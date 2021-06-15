@@ -157,22 +157,7 @@ def case02_verify():
                 },
                 'output': False,
             }
-
-            # Invalid public key -- wrong order not in G1
-            a = G1_to_pubkey(multiply(G1_wrong_order, PRIVKEYS[0]))
-            signature = bls.Sign(privkey, SAMPLE_MESSAGE)
-            identifier = f'{encode_hex(pubkey)}_{encode_hex(message)}'
-            assert not bls.Verify(pubkey, message, signature)
-            assert not milagro_bls.Verify(pubkey, message, signature)
-            yield f'verify_wrong_order_case_{(hash(bytes(identifier, "utf-8"))[:8]).hex()}', {
-                'input': {
-                    'pubkey': encode_hex(pubkey),
-                    'message': encode_hex(message),
-                    'signature': encode_hex(signature),
-                },
-                'output': False,
-            }
-
+            
     # Invalid pubkey and signature with the point at infinity
     assert not bls.Verify(Z1_PUBKEY, SAMPLE_MESSAGE, Z2_SIGNATURE)
     assert not milagro_bls.Verify(Z1_PUBKEY, SAMPLE_MESSAGE, Z2_SIGNATURE)
@@ -184,6 +169,23 @@ def case02_verify():
         },
         'output': False,
     }
+
+    # Invalid public key -- wrong order not in G1
+    privKey = hex_to_int('0x00000000000000000000000000000000263dbd792f5b1be47ed85f8938c0f29586af0d3ac7b977f21c278fe1462040e3')
+    pubkey = G1_to_pubkey(multiply(G1_wrong_order, privKey))
+    signature = bls.Sign(privkey, SAMPLE_MESSAGE)
+    identifier = f'{encode_hex(pubkey)}_{encode_hex(message)}'
+    assert not bls.Verify(pubkey, message, signature)
+    assert not milagro_bls.Verify(pubkey, message, signature)
+    yield f'verify_wrong_order_case_{(hash(bytes(identifier, "utf-8"))[:8]).hex()}', {
+        'input': {
+            'pubkey': encode_hex(pubkey),
+            'message': encode_hex(message),
+            'signature': encode_hex(signature),
+        },
+        'output': False,
+    }
+
 
 
 def case03_aggregate():
