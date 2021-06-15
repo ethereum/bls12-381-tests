@@ -14,6 +14,19 @@ import milagro_bls_binding as milagro_bls
 from eth2spec.utils import bls
 from eth2spec.test.helpers.constants import PHASE0
 from eth2spec.gen_helpers.gen_base import gen_runner, gen_typing
+from py_ecc.optimized_bls12_381 import (
+    FQ,
+    multiply
+)
+from py_ecc.bls.g2_primitives import (
+    G1_to_pubkey
+)
+
+# Generator for curve over FQ
+G1_wrong_order = (
+     FQ(175120027539531016442854006573889751122153014990298010045047409866982914293422983043097473453160715743839524736495),  # noqa: E501
+     FQ(3886161143382294459707944199964771025143673781268592314417728386394555910678469538674068117321209145872489588747338), 1 # noqa: E501
+)
 
 
 def to_bytes(i):
@@ -141,6 +154,21 @@ def case02_verify():
                     'pubkey': encode_hex(pubkey),
                     'message': encode_hex(message),
                     'signature': encode_hex(tampered_signature),
+                },
+                'output': False,
+            }
+
+            # Invalid public key -- wrong order not in G1
+            a = G1_to_pubkey(multiply(G1_wrong_order, PRIVKEYS[0]))
+            signature = bls.Sign(privkey, SAMPLE_MESSAGE)
+            identifier = f'{encode_hex(pubkey)}_{encode_hex(message)}'
+            assert not bls.Verify(pubkey, message, signature)
+            assert not milagro_bls.Verify(pubkey, message, signature)
+            yield f'verify_wrong_order_case_{(hash(bytes(identifier, "utf-8"))[:8]).hex()}', {
+                'input': {
+                    'pubkey': encode_hex(pubkey),
+                    'message': encode_hex(message),
+                    'signature': encode_hex(signature),
                 },
                 'output': False,
             }
