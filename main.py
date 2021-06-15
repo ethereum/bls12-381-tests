@@ -16,7 +16,8 @@ from eth2spec.test.helpers.constants import PHASE0
 from eth2spec.gen_helpers.gen_base import gen_runner, gen_typing
 from py_ecc.optimized_bls12_381 import (
     FQ,
-    multiply
+    multiply,
+    G1
 )
 from py_ecc.bls.g2_primitives import (
     G1_to_pubkey
@@ -173,11 +174,11 @@ def case02_verify():
 
     # Invalid public key -- wrong order not in G1
     privKey = int(1)
-    pubkey = G1_to_pubkey(multiply(G1_wrong_order, privKey))
+    pubkey = G1_to_pubkey(multiply(G1_wrong_order, privkey))
     signature = bls.Sign(privkey, SAMPLE_MESSAGE)
     identifier = f'{encode_hex(pubkey)}_{encode_hex(message)}'
-    assert not bls.Verify(pubkey, message, signature)
-    assert not milagro_bls.Verify(pubkey, message, signature)
+    assert not bls.Verify(pubkey, SAMPLE_MESSAGE, signature)
+    assert not milagro_bls.Verify(pubkey, SAMPLE_MESSAGE, signature)
     yield f'verify_wrong_order_case_{(hash(bytes(identifier, "utf-8"))[:8]).hex()}', {
         'input': {
             'pubkey': encode_hex(pubkey),
