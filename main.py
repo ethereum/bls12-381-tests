@@ -173,7 +173,7 @@ def case02_verify():
     }
 
     # Invalid public key -- wrong order not in G1
-    privKey = int(1)
+    privkey = 1
     pubkey = G1_to_pubkey(multiply(G1_wrong_order, privkey))
     signature = bls.Sign(privkey, SAMPLE_MESSAGE)
     identifier = f'{encode_hex(pubkey)}_{encode_hex(message)}'
