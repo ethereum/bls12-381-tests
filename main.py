@@ -172,8 +172,25 @@ def case02_verify():
         'output': False,
     }
 
-    # Invalid public key -- wrong order not in G1
+
     privkey = 1
+    
+    #Valid  Edge case: privkey == 1
+    pubkey = G1_to_pubkey(multiply(G1, privkey))
+    signature = bls.Sign(privkey, SAMPLE_MESSAGE)
+    identifier = f'{encode_hex(pubkey)}_{encode_hex(message)}'
+    assert bls.Verify(pubkey, SAMPLE_MESSAGE, signature)
+    assert milagro_bls.Verify(pubkey, SAMPLE_MESSAGE, signature)
+    yield f'verifycase_one_privkey_{(hash(bytes(identifier, "utf-8"))[:8]).hex()}', {
+        'input': {
+            'pubkey': encode_hex(pubkey),
+            'message': encode_hex(message),
+            'signature': encode_hex(signature),
+        },
+        'output': True,
+    }
+
+    # Invalid public key -- wrong order not in G1
     pubkey = G1_to_pubkey(multiply(G1_wrong_order, privkey))
     signature = bls.Sign(privkey, SAMPLE_MESSAGE)
     identifier = f'{encode_hex(pubkey)}_{encode_hex(message)}'
