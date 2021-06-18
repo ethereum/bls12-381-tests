@@ -234,6 +234,14 @@ def case03_aggregate():
         'output': encode_hex(aggregate_sig),
     }
 
+    # Valid to aggregating single signature
+    sig = bls.Sign(PRIVKEYS[0], MESSAGES[0])
+    aggregate_sig = bls.Aggregate([sig])
+    yield f'aggregate_single_signature', {
+        'input': [encode_hex(sig)],
+        'output': encode_hex(aggregate_sig),
+    }
+
 
 def case04_fast_aggregate_verify():
     for i, message in enumerate(MESSAGES):
@@ -432,9 +440,9 @@ def create_provider(handler_name: str,
 if __name__ == "__main__":
     bls.use_py_ecc()  # Py-ecc is chosen instead of Milagro, since the code is better understood to be correct.
     gen_runner.run_generator("bls", [
-        create_provider('sign', case01_sign),
-        create_provider('verify', case02_verify),
+        #create_provider('sign', case01_sign),
+        #create_provider('verify', case02_verify),
         create_provider('aggregate', case03_aggregate),
-        create_provider('fast_aggregate_verify', case04_fast_aggregate_verify),
-        create_provider('aggregate_verify', case05_aggregate_verify),
+        #create_provider('fast_aggregate_verify', case04_fast_aggregate_verify),
+        #create_provider('aggregate_verify', case05_aggregate_verify),
     ])
