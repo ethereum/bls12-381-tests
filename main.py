@@ -16,11 +16,15 @@ from eth2spec.test.helpers.constants import PHASE0
 from eth2spec.gen_helpers.gen_base import gen_runner, gen_typing
 from py_ecc.optimized_bls12_381 import (
     FQ,
+    FQ2,
     multiply,
-    G1
+    G1,
+    add
 )
 from py_ecc.bls.g2_primitives import (
-    G1_to_pubkey
+    G1_to_pubkey,
+    G2_to_signature,
+    signature_to_G2
 )
 
 # Wrong order generator for curve over FQ
@@ -29,6 +33,23 @@ G1_wrong_order = (
      FQ(3886161143382294459707944199964771025143673781268592314417728386394555910678469538674068117321209145872489588747338), 
      FQ(1)
 )
+
+# Wrong order generator for curve over FQ2
+G2_low_order = (
+    FQ2([
+        3922397287649913227621058437622997108794641953057758105879357683864299671651819357275859520733535654147680406731276,
+        3741137028670202333708729730342450399205516524855163427388600406129033394826520864962370018146369072778910602014330
+    ]),
+    FQ2([
+        2318861511113254089730073927932992301121994664766687670497054556026428871746827995944986621318870599424754598753423,
+        1139817624251523735913718360323397122746649955859850938514186251456988186435865415993431523202408255536265404879025
+    ]),
+    FQ2([
+        1,  # noqa: E501
+        0,  # noqa: E501
+    ])
+)
+
 
 
 def to_bytes(i):
@@ -237,11 +258,21 @@ def case03_aggregate():
     # Valid to aggregating single signature
     sig = bls.Sign(PRIVKEYS[0], MESSAGES[0])
     aggregate_sig = bls.Aggregate([sig])
+    assert aggregate_sig == milagro_bls.Aggregate([sig]) == sig
     yield f'aggregate_single_signature', {
         'input': [encode_hex(sig)],
         'output': encode_hex(aggregate_sig),
     }
 
+    sig1 = signature_to_G2(sig)
+    sig1add = add(sig1,G2_low_order)
+    sig = G2_to_signature(sig1add)
+    aggregate_sig = bls.Aggregate([sig])
+    assert aggregate_sig == milagro_bls.Aggregate([sig]) == sig
+    yield f'aggregate_single_signature', {
+        'input': [encode_hex(sig)],
+        'output': encode_hex(aggregate_sig),
+    }
 
 def case04_fast_aggregate_verify():
     for i, message in enumerate(MESSAGES):
