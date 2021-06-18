@@ -255,15 +255,16 @@ def case03_aggregate():
         'output': encode_hex(aggregate_sig),
     }
 
-    # Invalid single signature of wrong order
+    # Valid to aggregating single signature
     sig = bls.Sign(PRIVKEYS[0], MESSAGES[0])
     aggregate_sig = bls.Aggregate([sig])
     assert aggregate_sig == milagro_bls.Aggregate([sig]) == sig
-    yield f'aggregate_single_signature', {
+    yield f'aggregate_single_signature_wrong_order', {
         'input': [encode_hex(sig)],
         'output': encode_hex(aggregate_sig),
     }
 
+    # Invalid single signature of wrong order
     sig1 = signature_to_G2(sig)
     sig1add = add(sig1,G2_low_order)
     sig = G2_to_signature(sig1add)
@@ -271,7 +272,7 @@ def case03_aggregate():
     assert aggregate_sig == milagro_bls.Aggregate([sig]) == sig
     yield f'aggregate_single_signature', {
         'input': [encode_hex(sig)],
-        'output': encode_hex(aggregate_sig),
+        'output': None,
     }
 
 def case04_fast_aggregate_verify():
