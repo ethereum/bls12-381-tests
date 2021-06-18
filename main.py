@@ -255,7 +255,7 @@ def case03_aggregate():
         'output': encode_hex(aggregate_sig),
     }
 
-    # Valid to aggregating single signature
+    # Invalid single signature of wrong order
     sig = bls.Sign(PRIVKEYS[0], MESSAGES[0])
     aggregate_sig = bls.Aggregate([sig])
     assert aggregate_sig == milagro_bls.Aggregate([sig]) == sig
