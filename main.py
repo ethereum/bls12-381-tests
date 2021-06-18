@@ -271,7 +271,18 @@ def case03_aggregate():
     aggregate_sig = bls.Aggregate([sig_wrong_order])
     assert aggregate_sig == milagro_bls.Aggregate([sig_wrong_order]) == sig_wrong_order
     yield f'aggregate_single_signature_wrong_order', {
-        'input': [encode_hex(aggregate_sig)],
+        'input': [encode_hex(sig_wrong_order)],
+        'output': None,
+    }
+
+    # Invalid aggregate signature of wrong order
+    sig1 = signature_to_G2(sig)
+    sig1add = add(sig1,G2_low_order)
+    sig_wrong_order = G2_to_signature(sig1add)
+    aggregate_sig = bls.Aggregate([sig, sig_wrong_order])
+    #assert aggregate_sig == milagro_bls.Aggregate([sig_wrong_order]) == sig_wrong_order
+    yield f'aggregate_aggregated_signature_wrong_order', {
+        'input': [encode_hex(sig),encode_hex(sig_wrong_order)],
         'output': None,
     }
 
