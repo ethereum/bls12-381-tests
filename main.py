@@ -2,6 +2,7 @@
 BLS test vectors generator
 """
 
+import blst
 from hashlib import sha256
 from typing import Tuple, Iterable, Any, Callable, Dict
 
@@ -25,6 +26,15 @@ from py_ecc.bls.g2_primitives import (
     G1_to_pubkey,
     G2_to_signature,
     signature_to_G2
+)
+from py_ecc.bls.point_compression import (
+    decompress_G1
+)
+from py_ecc.bls.typing import (
+    G1Compressed
+)
+from py_ecc.bls.hash import (
+    os2ip,
 )
 
 # Wrong order generator for curve over FQ
@@ -454,6 +464,41 @@ def case05_aggregate_verify():
         'output': False,
     }
 
+def case06_serialization_G1():  
+    #succeedsWhenDeserializingACorrectPointDoesNotThrow
+    pk_for_wire = bytes.fromhex('a491d1b0ecd9bb917989f0e74f0dea0422eac4a873e5e2644f368dffb9a6e20fd6e10c1b77654d067c0618f6e5a7f79a')
+    assert decompress_G1(G1Compressed(os2ip(pk_for_wire)))
+    assert blst.P1_Affine(pk_for_wire)
+    
+    #succeedsWhenDeserializingAPointOnCurveButNotInG1ThrowsIllegalArgumentException TODO
+    pk_for_wire = bytes.fromhex('8123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef')
+    #assert not decompress_G1(G1Compressed(os2ip(pk_for_wire)))
+    #assert not blst.P1_Affine(pk_for_wire)
+    
+    #succeedsWhenDeserializingAnIncorrectPointThrowsIllegalArgumentException TODO
+    pk_for_wire = bytes.fromhex('a491d1b0ecd9bb917989f0e74f0dea0422eac4a873e5e2644f368dffb9a6e20fd6e10c1b77654d067c0618f6e5a7f79a')
+    #assert not decompress_G1(G1Compressed(os2ip(pk_for_wire)))
+    #assert not blst.P1_Affine(pk_for_wire)
+
+    #succeedsWhenDeserializeCompressedInfinityWithTrueBFlagCreatesPointAtInfinity 
+    pk_for_wire = bytes.fromhex('c00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000')
+    assert decompress_G1(G1Compressed(os2ip(pk_for_wire)))
+    assert blst.P1_Affine(pk_for_wire)
+    
+    #succeedsWhenDeserializeCompressedInfinityWithFalseBFlagDoesNotCreatePointAtInfinity
+    pk_for_wire = bytes.fromhex('800000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000')
+    p = G1Compressed(os2ip(pk_for_wire))
+    expect_exception(decompress_G1,p)
+    expect_exception(blst.P1_Affine,pk_for_wire)
+    
+    #TODO
+    yield f'aggregate_verify_infinity_pubkey', {
+        'input': {
+            'pubkeys': 'TODO'
+        },
+        'output': False,
+    }
+    
 
 def create_provider(handler_name: str,
                     test_case_fn: Callable[[], Iterable[Tuple[str, Dict[str, Any]]]]) -> gen_typing.TestProvider:
@@ -485,7 +530,8 @@ if __name__ == "__main__":
     gen_runner.run_generator("bls", [
         #create_provider('sign', case01_sign),
         #create_provider('verify', case02_verify),
-        create_provider('aggregate', case03_aggregate),
+        #create_provider('aggregate', case03_aggregate),
         #create_provider('fast_aggregate_verify', case04_fast_aggregate_verify),
         #create_provider('aggregate_verify', case05_aggregate_verify),
+        create_provider('serialization', case06_serialization_G1),
     ])
