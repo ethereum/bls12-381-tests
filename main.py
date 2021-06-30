@@ -28,10 +28,12 @@ from py_ecc.bls.g2_primitives import (
     signature_to_G2
 )
 from py_ecc.bls.point_compression import (
-    decompress_G1
+    decompress_G1,
+    decompress_G2
 )
 from py_ecc.bls.typing import (
-    G1Compressed
+    G1Compressed,
+    G2Compressed
 )
 from py_ecc.bls.hash import (
     os2ip,
@@ -494,11 +496,36 @@ def case06_serialization_G1():
     #TODO
     yield f'aggregate_verify_infinity_pubkey', {
         'input': {
-            'pubkeys': 'TODO'
+            'pubkeys': 'TODO0'
         },
         'output': False,
     }
     
+def case07_serialization_G2():
+    #succeedsWhenDeserializingACorrectPoint
+    sk_for_wire = bytes.fromhex('b2cc74bc9f089ed9764bbceac5edba416bef5e73701288977b9cac1ccb6964269d4ebf78b4e8aa7792ba09d3e49c8e6a1351bdf582971f796bbaf6320e81251c9d28f674d720cca07ed14596b96697cf18238e0e03ebd7fc1353d885a39407e0')
+    assert decompress_G2(G2Compressed((os2ip(sk_for_wire[:48]), os2ip(sk_for_wire[48:]))))
+    assert blst.P2_Affine(sk_for_wire)
+    
+    #succeedsWhenAttemptToDeserializeXReEqualToModulus
+    sk_for_wire = bytes.fromhex('8000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001a0111ea397fe69a4b1ba7b6434bacd764774b84f38512bf6730d2a0f6b0f6241eabfffeb153ffffb9feffffffffaaab')
+    p = G2Compressed((os2ip(sk_for_wire[:48]), os2ip(sk_for_wire[48:])))
+    expect_exception(decompress_G2,p)
+    expect_exception(blst.P2_Affine,sk_for_wire)
+
+    #succeedsWhenAttemptToDeserializeXReEqualToModulus
+    sk_for_wire = bytes.fromhex('9a0111ea397fe69a4b1ba7b6434bacd764774b84f38512bf6730d2a0f6b0f6241eabfffeb153ffffb9feffffffffaaab000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000')
+    p = G2Compressed((os2ip(sk_for_wire[:48]), os2ip(sk_for_wire[48:])))
+    expect_exception(decompress_G2,p)
+    expect_exception(blst.P2_Affine,sk_for_wire)
+
+    #TODO
+    yield f'aggregate_verify_infinity_pubkey', {
+        'input': {
+            'pubkeys': 'TODO'
+        },
+        'output': False,
+    }
 
 def create_provider(handler_name: str,
                     test_case_fn: Callable[[], Iterable[Tuple[str, Dict[str, Any]]]]) -> gen_typing.TestProvider:
@@ -534,4 +561,5 @@ if __name__ == "__main__":
         #create_provider('fast_aggregate_verify', case04_fast_aggregate_verify),
         #create_provider('aggregate_verify', case05_aggregate_verify),
         create_provider('serialization', case06_serialization_G1),
+        #create_provider('serialization', case07_serialization_G2),
     ])
