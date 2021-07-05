@@ -15,6 +15,14 @@ from eth2spec.utils import bls
 from eth2spec.test.helpers.constants import PHASE0
 from eth2spec.gen_helpers.gen_base import gen_runner, gen_typing
 
+from py_ecc.bls.g2_primitives import (
+    G1_to_pubkey,
+)
+
+from py_ecc.optimized_bls12_381 import (
+    multiply,
+    G1,
+)
 
 def to_bytes(i):
     return i.to_bytes(32, "big")
@@ -156,6 +164,24 @@ def case02_verify():
         },
         'output': False,
     }
+
+    privkey = 1
+    
+    #Valid  Edge case: privkey == 1
+    pubkey = G1_to_pubkey(multiply(G1, privkey))
+    signature = bls.Sign(privkey, SAMPLE_MESSAGE)
+    identifier = f'{encode_hex(pubkey)}_{encode_hex(message)}'
+    assert bls.Verify(pubkey, SAMPLE_MESSAGE, signature)
+    assert milagro_bls.Verify(pubkey, SAMPLE_MESSAGE, signature)
+    yield f'verifycase_one_privkey_{(hash(bytes(identifier, "utf-8"))[:8]).hex()}', {
+        'input': {
+            'pubkey': encode_hex(pubkey),
+            'message': encode_hex(SAMPLE_MESSAGE),
+            'signature': encode_hex(signature),
+        },
+        'output': True,
+    }
+
 
 
 def case03_aggregate():
