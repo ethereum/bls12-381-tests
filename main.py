@@ -211,6 +211,15 @@ def case03_aggregate():
         'output': encode_hex(aggregate_sig),
     }
 
+    # Valid to aggregate single signature
+    sig = bls.Sign(PRIVKEYS[0], MESSAGES[0])
+    aggregate_sig = bls.Aggregate([sig])
+    assert aggregate_sig == milagro_bls.Aggregate([sig]) == sig
+    yield f'aggregate_single_signature', {
+        'input': [encode_hex(sig)],
+        'output': encode_hex(aggregate_sig),
+    }
+
 
 def case04_fast_aggregate_verify():
     for i, message in enumerate(MESSAGES):
