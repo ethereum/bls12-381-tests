@@ -2,7 +2,6 @@
 BLS test vectors generator
 """
 
-import blst
 from hashlib import sha256
 from typing import Tuple, Iterable, Any, Callable, Dict
 
@@ -15,53 +14,6 @@ import milagro_bls_binding as milagro_bls
 from eth2spec.utils import bls
 from eth2spec.test.helpers.constants import PHASE0
 from eth2spec.gen_helpers.gen_base import gen_runner, gen_typing
-from py_ecc.optimized_bls12_381 import (
-    FQ,
-    FQ2,
-    multiply,
-    G1,
-    add
-)
-from py_ecc.bls.g2_primitives import (
-    G1_to_pubkey,
-    G2_to_signature,
-    signature_to_G2
-)
-from py_ecc.bls.point_compression import (
-    decompress_G1,
-    decompress_G2
-)
-from py_ecc.bls.typing import (
-    G1Compressed,
-    G2Compressed
-)
-from py_ecc.bls.hash import (
-    os2ip,
-)
-
-# Wrong order generator for curve over FQ
-G1_wrong_order = (
-     FQ(175120027539531016442854006573889751122153014990298010045047409866982914293422983043097473453160715743839524736495),
-     FQ(3886161143382294459707944199964771025143673781268592314417728386394555910678469538674068117321209145872489588747338), 
-     FQ(1)
-)
-
-# Wrong order generator for curve over FQ2
-G2_low_order = (
-    FQ2([
-        3922397287649913227621058437622997108794641953057758105879357683864299671651819357275859520733535654147680406731276,
-        3741137028670202333708729730342450399205516524855163427388600406129033394826520864962370018146369072778910602014330
-    ]),
-    FQ2([
-        2318861511113254089730073927932992301121994664766687670497054556026428871746827995944986621318870599424754598753423,
-        1139817624251523735913718360323397122746649955859850938514186251456988186435865415993431523202408255536265404879025
-    ]),
-    FQ2([
-        1,  # noqa: E501
-        0,  # noqa: E501
-    ])
-)
-
 
 
 def to_bytes(i):
@@ -192,7 +144,7 @@ def case02_verify():
                 },
                 'output': False,
             }
-            
+
     # Invalid pubkey and signature with the point at infinity
     assert not bls.Verify(Z1_PUBKEY, SAMPLE_MESSAGE, Z2_SIGNATURE)
     assert not milagro_bls.Verify(Z1_PUBKEY, SAMPLE_MESSAGE, Z2_SIGNATURE)
@@ -204,40 +156,6 @@ def case02_verify():
         },
         'output': False,
     }
-
-
-    privkey = 1
-    
-    #Valid  Edge case: privkey == 1
-    pubkey = G1_to_pubkey(multiply(G1, privkey))
-    signature = bls.Sign(privkey, SAMPLE_MESSAGE)
-    identifier = f'{encode_hex(pubkey)}_{encode_hex(message)}'
-    assert bls.Verify(pubkey, SAMPLE_MESSAGE, signature)
-    assert milagro_bls.Verify(pubkey, SAMPLE_MESSAGE, signature)
-    yield f'verifycase_one_privkey_{(hash(bytes(identifier, "utf-8"))[:8]).hex()}', {
-        'input': {
-            'pubkey': encode_hex(pubkey),
-            'message': encode_hex(message),
-            'signature': encode_hex(signature),
-        },
-        'output': True,
-    }
-
-    # Invalid public key -- wrong order not in G1
-    pubkey = G1_to_pubkey(multiply(G1_wrong_order, privkey))
-    signature = bls.Sign(privkey, SAMPLE_MESSAGE)
-    identifier = f'{encode_hex(pubkey)}_{encode_hex(message)}'
-    assert not bls.Verify(pubkey, SAMPLE_MESSAGE, signature)
-    assert not milagro_bls.Verify(pubkey, SAMPLE_MESSAGE, signature)
-    yield f'verify_wrong_order_case_{(hash(bytes(identifier, "utf-8"))[:8]).hex()}', {
-        'input': {
-            'pubkey': encode_hex(pubkey),
-            'message': encode_hex(message),
-            'signature': encode_hex(signature),
-        },
-        'output': False,
-    }
-
 
 
 def case03_aggregate():
@@ -267,36 +185,6 @@ def case03_aggregate():
         'output': encode_hex(aggregate_sig),
     }
 
-    # Valid to aggregating single signature
-    sig = bls.Sign(PRIVKEYS[0], MESSAGES[0])
-    aggregate_sig = bls.Aggregate([sig])
-    assert aggregate_sig == milagro_bls.Aggregate([sig]) == sig
-    yield f'aggregate_single_signature', {
-        'input': [encode_hex(sig)],
-        'output': encode_hex(aggregate_sig),
-    }
-    
-    # Invalid single signature of wrong order
-    sig1 = signature_to_G2(sig)
-    sig1add = add(sig1,G2_low_order)
-    sig_wrong_order = G2_to_signature(sig1add)
-    aggregate_sig = bls.Aggregate([sig_wrong_order])
-    assert aggregate_sig == milagro_bls.Aggregate([sig_wrong_order]) == sig_wrong_order
-    yield f'aggregate_single_signature_wrong_order', {
-        'input': [encode_hex(sig_wrong_order)],
-        'output': None,
-    }
-
-    # Invalid aggregate signature of wrong order
-    sig1 = signature_to_G2(sig)
-    sig1add = add(sig1,G2_low_order)
-    sig_wrong_order = G2_to_signature(sig1add)
-    aggregate_sig = bls.Aggregate([sig, sig_wrong_order])
-    #assert aggregate_sig == milagro_bls.Aggregate([sig_wrong_order]) == sig_wrong_order
-    yield f'aggregate_aggregated_signature_wrong_order', {
-        'input': [encode_hex(sig),encode_hex(sig_wrong_order)],
-        'output': None,
-    }
 
 def case04_fast_aggregate_verify():
     for i, message in enumerate(MESSAGES):
@@ -466,66 +354,6 @@ def case05_aggregate_verify():
         'output': False,
     }
 
-def case06_serialization_G1():  
-    #succeedsWhenDeserializingACorrectPointDoesNotThrow
-    pk_for_wire = bytes.fromhex('a491d1b0ecd9bb917989f0e74f0dea0422eac4a873e5e2644f368dffb9a6e20fd6e10c1b77654d067c0618f6e5a7f79a')
-    assert decompress_G1(G1Compressed(os2ip(pk_for_wire)))
-    assert blst.P1_Affine(pk_for_wire)
-    
-    #succeedsWhenDeserializingAPointOnCurveButNotInG1ThrowsIllegalArgumentException TODO
-    pk_for_wire = bytes.fromhex('8123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef')
-    #assert not decompress_G1(G1Compressed(os2ip(pk_for_wire)))
-    #assert not blst.P1_Affine(pk_for_wire)
-    
-    #succeedsWhenDeserializingAnIncorrectPointThrowsIllegalArgumentException TODO
-    pk_for_wire = bytes.fromhex('a491d1b0ecd9bb917989f0e74f0dea0422eac4a873e5e2644f368dffb9a6e20fd6e10c1b77654d067c0618f6e5a7f79a')
-    #assert not decompress_G1(G1Compressed(os2ip(pk_for_wire)))
-    #assert not blst.P1_Affine(pk_for_wire)
-
-    #succeedsWhenDeserializeCompressedInfinityWithTrueBFlagCreatesPointAtInfinity 
-    pk_for_wire = bytes.fromhex('c00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000')
-    assert decompress_G1(G1Compressed(os2ip(pk_for_wire)))
-    assert blst.P1_Affine(pk_for_wire)
-    
-    #succeedsWhenDeserializeCompressedInfinityWithFalseBFlagDoesNotCreatePointAtInfinity
-    pk_for_wire = bytes.fromhex('800000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000')
-    p = G1Compressed(os2ip(pk_for_wire))
-    expect_exception(decompress_G1,p)
-    expect_exception(blst.P1_Affine,pk_for_wire)
-    
-    #TODO
-    yield f'aggregate_verify_infinity_pubkey', {
-        'input': {
-            'pubkeys': 'TODO0'
-        },
-        'output': False,
-    }
-    
-def case07_serialization_G2():
-    #succeedsWhenDeserializingACorrectPoint
-    sk_for_wire = bytes.fromhex('b2cc74bc9f089ed9764bbceac5edba416bef5e73701288977b9cac1ccb6964269d4ebf78b4e8aa7792ba09d3e49c8e6a1351bdf582971f796bbaf6320e81251c9d28f674d720cca07ed14596b96697cf18238e0e03ebd7fc1353d885a39407e0')
-    assert decompress_G2(G2Compressed((os2ip(sk_for_wire[:48]), os2ip(sk_for_wire[48:]))))
-    assert blst.P2_Affine(sk_for_wire)
-    
-    #succeedsWhenAttemptToDeserializeXReEqualToModulus
-    sk_for_wire = bytes.fromhex('8000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001a0111ea397fe69a4b1ba7b6434bacd764774b84f38512bf6730d2a0f6b0f6241eabfffeb153ffffb9feffffffffaaab')
-    p = G2Compressed((os2ip(sk_for_wire[:48]), os2ip(sk_for_wire[48:])))
-    expect_exception(decompress_G2,p)
-    expect_exception(blst.P2_Affine,sk_for_wire)
-
-    #succeedsWhenAttemptToDeserializeXReEqualToModulus
-    sk_for_wire = bytes.fromhex('9a0111ea397fe69a4b1ba7b6434bacd764774b84f38512bf6730d2a0f6b0f6241eabfffeb153ffffb9feffffffffaaab000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000')
-    p = G2Compressed((os2ip(sk_for_wire[:48]), os2ip(sk_for_wire[48:])))
-    expect_exception(decompress_G2,p)
-    expect_exception(blst.P2_Affine,sk_for_wire)
-
-    #TODO
-    yield f'aggregate_verify_infinity_pubkey', {
-        'input': {
-            'pubkeys': 'TODO'
-        },
-        'output': False,
-    }
 
 def create_provider(handler_name: str,
                     test_case_fn: Callable[[], Iterable[Tuple[str, Dict[str, Any]]]]) -> gen_typing.TestProvider:
@@ -555,11 +383,9 @@ def create_provider(handler_name: str,
 if __name__ == "__main__":
     bls.use_py_ecc()  # Py-ecc is chosen instead of Milagro, since the code is better understood to be correct.
     gen_runner.run_generator("bls", [
-        #create_provider('sign', case01_sign),
-        #create_provider('verify', case02_verify),
-        #create_provider('aggregate', case03_aggregate),
-        #create_provider('fast_aggregate_verify', case04_fast_aggregate_verify),
-        #create_provider('aggregate_verify', case05_aggregate_verify),
-        create_provider('serialization', case06_serialization_G1),
-        #create_provider('serialization', case07_serialization_G2),
+        create_provider('sign', case01_sign),
+        create_provider('verify', case02_verify),
+        create_provider('aggregate', case03_aggregate),
+        create_provider('fast_aggregate_verify', case04_fast_aggregate_verify),
+        create_provider('aggregate_verify', case05_aggregate_verify),
     ])
