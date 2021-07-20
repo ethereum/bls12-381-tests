@@ -573,6 +573,89 @@ def case07_deserialization_G1():
         'output': False,
     }
 
+def case08_deserialization_G2():
+
+    sk = 'b2cc74bc9f089ed9764bbceac5edba416bef5e73701288977b9cac1ccb6964269d4ebf78b4e8aa7792ba09d3e49c8e6a1351bdf582971f796bbaf6320e81251c9d28f674d720cca07ed14596b96697cf18238e0e03ebd7fc1353d885a39407e0'
+    sk_for_wire = bytes.fromhex(sk)
+    assert decompress_G2(G2Compressed((os2ip(sk_for_wire[:48]), os2ip(sk_for_wire[48:]))))
+    yield f'deserialization_succeeds_correct_point', {
+        'input': {
+            'pubkey': sk
+        },
+        'output': True,
+    }
+    
+    # xRe is exactly the modulus, q, xIm is zero
+    sk = '8000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001a0111ea397fe69a4b1ba7b6434bacd764774b84f38512bf6730d2a0f6b0f6241eabfffeb153ffffb9feffffffffaaab'
+    sk_for_wire = bytes.fromhex(sk)
+    secretKey = G2Compressed((os2ip(sk_for_wire[:48]), os2ip(sk_for_wire[48:])))
+    expect_exception(decompress_G2, secretKey)
+    yield f'deserialization_fails_xre_equal_to_modulus', {
+        'input': {
+            'pubkey': sk
+        },
+        'output': False,
+    }
+
+    # xIm is exactly the modulus, q, xRe is zero
+    sk = '9a0111ea397fe69a4b1ba7b6434bacd764774b84f38512bf6730d2a0f6b0f6241eabfffeb153ffffb9feffffffffaaab000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000'
+    sk_for_wire = bytes.fromhex(sk)
+    secretKey = G2Compressed((os2ip(sk_for_wire[:48]), os2ip(sk_for_wire[48:])))
+    expect_exception(decompress_G2, secretKey)
+    yield f'deserialization_fails_xim_equal_to_modulus', {
+        'input': {
+            'pubkey': sk
+        },
+        'output': False,
+    }
+
+    # xRe is the modulus plus 1, xIm is zero
+    sk = '8000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001a0111ea397fe69a4b1ba7b6434bacd764774b84f38512bf6730d2a0f6b0f6241eabfffeb153ffffb9feffffffffaaac'    
+    sk_for_wire = bytes.fromhex(sk)
+    secretKey = G2Compressed((os2ip(sk_for_wire[:48]), os2ip(sk_for_wire[48:])))
+    expect_exception(decompress_G2, secretKey)
+    yield f'deserialization_fails_xre_greater_than_modulus', {
+        'input': {
+            'pubkey': sk
+        },
+        'output': False,
+    }
+
+    # xIm is the modulus plus 1, xRe is zero
+    sk = '9a0111ea397fe69a4b1ba7b6434bacd764774b84f38512bf6730d2a0f6b0f6241eabfffeb153ffffb9feffffffffaaac000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000'
+    sk_for_wire = bytes.fromhex(sk)
+    secretKey = G2Compressed((os2ip(sk_for_wire[:48]), os2ip(sk_for_wire[48:])))
+    # bug in py_ecc ?
+    # TODO
+    #expect_exception(decompress_G2, secretKey)
+    yield f'deserialization_fails_xim_greater_than_modulus', {
+        'input': {
+            'pubkey': sk
+        },
+        'output': False,
+    }
+
+    sk = '8123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef'
+    secretKey = G2Compressed((os2ip(sk_for_wire[:48]), os2ip(sk_for_wire[48:])))
+    # bug in py_ecc ?
+    # TODO
+    #expect_exception(decompress_G2, secretKey)
+    yield f'deserialization_fails_not_in_G2', {
+        'input': {
+            'pubkey': sk
+        },
+        'output': False,
+    }
+
+    sk = '8123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcde0'
+    secretKey = G2Compressed((os2ip(sk_for_wire[:48]), os2ip(sk_for_wire[48:])))
+    expect_exception(decompress_G2, secretKey)
+    yield f'deserialization_fails_not_in_curve', {
+        'input': {
+            'pubkey': sk
+        },
+        'output': False,
+    }
 
 def create_provider(handler_name: str,
                     test_case_fn: Callable[[], Iterable[Tuple[str, Dict[str, Any]]]]) -> gen_typing.TestProvider:
@@ -608,5 +691,6 @@ if __name__ == "__main__":
         #create_provider('fast_aggregate_verify', case04_fast_aggregate_verify),
         #create_provider('aggregate_verify', case05_aggregate_verify),
         #create_provider('hash_to_G2', case06_hash_to_G2),
-        create_provider('deserialization_G1', case07_deserialization_G1),
+        #create_provider('deserialization_G1', case07_deserialization_G1),
+        create_provider('deserialization_G2', case08_deserialization_G2),
     ])
