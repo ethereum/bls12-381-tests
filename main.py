@@ -636,6 +636,7 @@ def case08_deserialization_G2():
     }
 
     sk = '8123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef'
+    sk_for_wire = bytes.fromhex(sk)
     secretKey = G2Compressed((os2ip(sk_for_wire[:48]), os2ip(sk_for_wire[48:])))
     # bug in py_ecc ?
     # TODO
@@ -648,6 +649,7 @@ def case08_deserialization_G2():
     }
 
     sk = '8123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcde0'
+    sk_for_wire = bytes.fromhex(sk)
     secretKey = G2Compressed((os2ip(sk_for_wire[:48]), os2ip(sk_for_wire[48:])))
     expect_exception(decompress_G2, secretKey)
     yield f'deserialization_fails_not_in_curve', {
