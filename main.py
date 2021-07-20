@@ -27,6 +27,19 @@ from py_ecc.optimized_bls12_381 import (
 
 from py_ecc.bls.hash_to_curve import hash_to_G2
 
+from py_ecc.bls.hash import (
+    os2ip,
+)
+
+from py_ecc.bls.point_compression import (
+    decompress_G1,
+    decompress_G2
+)
+from py_ecc.bls.typing import (
+    G1Compressed,
+    G2Compressed
+)
+
 def to_bytes(i):
     return i.to_bytes(32, "big")
 
@@ -434,6 +447,133 @@ def case06_hash_to_G2():
             }
         }
 
+def case07_deserialization_G1():  
+
+    pk = 'a491d1b0ecd9bb917989f0e74f0dea0422eac4a873e5e2644f368dffb9a6e20fd6e10c1b77654d067c0618f6e5a7f79a'
+    pk_for_wire = bytes.fromhex(pk)
+    assert decompress_G1(G1Compressed(os2ip(pk_for_wire)))
+    yield f'deserialization_succeeds_correct_point', {
+        'input': {
+            'pubkey': pk
+        },
+        'output': True,
+    }
+
+    pk = '8123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef'
+    pk_for_wire = G1Compressed(os2ip(bytes.fromhex(pk)))
+    # bug in py_ecc ?
+    # TODO
+    #expect_exception(decompress_G1,pk_for_wire)
+    yield f'deserialization_fails_not_in_G1', {
+        'input': {
+            'pubkey': pk
+        },
+        'output': False,
+    }
+
+    pk = '8123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcde0'
+    pk_for_wire = G1Compressed(os2ip(bytes.fromhex(pk)))
+    expect_exception(decompress_G1,pk_for_wire)
+    yield f'deserialization_fails_not_in_curve', {
+        'input': {
+            'pubkey': pk
+        },
+        'output': False,
+    }
+
+    # Exactly the modulus, q
+    pk = '9a0111ea397fe69a4b1ba7b6434bacd764774b84f38512bf6730d2a0f6b0f6241eabfffeb153ffffb9feffffffffaaab'
+    pk_for_wire = G1Compressed(os2ip(bytes.fromhex(pk)))
+    expect_exception(decompress_G1,pk_for_wire)
+    yield f'deserialization_fails_x_equal_to_modulus', {
+        'input': {
+            'pubkey': pk
+        },
+        'output': False,
+    }
+
+    # One more than the modulus, q
+    pk = '9a0111ea397fe69a4b1ba7b6434bacd764774b84f38512bf6730d2a0f6b0f6241eabfffeb153ffffb9feffffffffaaac'
+    pk_for_wire = G1Compressed(os2ip(bytes.fromhex(pk)))
+    expect_exception(decompress_G1,pk_for_wire)
+    yield f'deserialization_fails_x_greater_than_modulus', {
+        'input': {
+            'pubkey': pk
+        },
+        'output': False,
+    }
+
+    pk = '9a0111ea397fe69a4b1ba7b6434bacd764774b84f38512bf6730d2a0f6b0f6241eabfffeb153ffffb9feffffffffaa'
+    pk_for_wire = G1Compressed(os2ip(bytes.fromhex(pk)))
+    expect_exception(decompress_G1,pk_for_wire)
+    yield f'deserialization_fails_too_few_bytes', {
+        'input': {
+            'pubkey': pk
+        },
+        'output': False,
+    }
+
+    pk = '9a0111ea397fe69a4b1ba7b6434bacd764774b84f38512bf6730d2a0f6b0f6241eabfffeb153ffffb9feffffffffaaa900'
+    pk_for_wire = G1Compressed(os2ip(bytes.fromhex(pk)))
+    expect_exception(decompress_G1,pk_for_wire)
+    yield f'deserialization_fails_too_many_bytes', {
+        'input': {
+            'pubkey': pk
+        },
+        'output': False,
+    }
+
+    pk = 'c00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000'
+    pk_for_wire = bytes.fromhex(pk)
+    assert decompress_G1(G1Compressed(os2ip(pk_for_wire)))
+    yield f'deserialization_succeeds_infinity_with_true_b_flag', {
+        'input': {
+            'pubkey': pk
+        },
+        'output': True,
+    }
+
+    pk = '800000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000'
+    pk_for_wire = G1Compressed(os2ip(bytes.fromhex(pk)))
+    expect_exception(decompress_G1,pk_for_wire)
+    yield f'deserialization_fails_infinity_with_false_b_flag', {
+        'input': {
+            'pubkey': pk
+        },
+        'output': False,
+    }
+
+    pk = '0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef'
+    pk_for_wire = G1Compressed(os2ip(bytes.fromhex(pk)))
+    expect_exception(decompress_G1,pk_for_wire)
+    yield f'deserialization_fails_with_wrong_c_flag', {
+        'input': {
+            'pubkey': pk
+        },
+        'output': False,
+    }
+
+    pk = 'c123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef'
+    pk_for_wire = G1Compressed(os2ip(bytes.fromhex(pk)))
+    expect_exception(decompress_G1,pk_for_wire)
+    yield f'deserialization_fails_with_b_flag_and_x_nonzero', {
+        'input': {
+            'pubkey': pk
+        },
+        'output': False,
+    }
+
+    pk = 'e00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000'
+    pk_for_wire = G1Compressed(os2ip(bytes.fromhex(pk)))
+    expect_exception(decompress_G1,pk_for_wire)
+    yield f'deserialization_fails_with_b_flag_and_a_flag_true', {
+        'input': {
+            'pubkey': pk
+        },
+        'output': False,
+    }
+
+
 def create_provider(handler_name: str,
                     test_case_fn: Callable[[], Iterable[Tuple[str, Dict[str, Any]]]]) -> gen_typing.TestProvider:
 
@@ -462,10 +602,11 @@ def create_provider(handler_name: str,
 if __name__ == "__main__":
     bls.use_py_ecc()  # Py-ecc is chosen instead of Milagro, since the code is better understood to be correct.
     gen_runner.run_generator("bls", [
-        create_provider('sign', case01_sign),
-        create_provider('verify', case02_verify),
-        create_provider('aggregate', case03_aggregate),
-        create_provider('fast_aggregate_verify', case04_fast_aggregate_verify),
-        create_provider('aggregate_verify', case05_aggregate_verify),
-        create_provider('hash_to_G2', case06_hash_to_G2),
+        #create_provider('sign', case01_sign),
+        #create_provider('verify', case02_verify),
+        #create_provider('aggregate', case03_aggregate),
+        #create_provider('fast_aggregate_verify', case04_fast_aggregate_verify),
+        #create_provider('aggregate_verify', case05_aggregate_verify),
+        #create_provider('hash_to_G2', case06_hash_to_G2),
+        create_provider('deserialization_G1', case07_deserialization_G1),
     ])
