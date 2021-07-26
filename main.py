@@ -679,6 +679,59 @@ def case08_deserialization_G2():
         'output': False,
     }
 
+    sk = 'c00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000'
+    sk_for_wire = bytes.fromhex(sk)
+    assert decompress_G2(G2Compressed((os2ip(sk_for_wire[:48]), os2ip(sk_for_wire[48:]))))
+    yield f'deserialization_succeeds_infinity_with_true_b_flag', {
+        'input': {
+            'pubkey': sk
+        },
+        'output': True,
+    }
+
+    sk = '800000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000'
+    sk_for_wire = bytes.fromhex(sk)
+    secretKey = G2Compressed((os2ip(sk_for_wire[:48]), os2ip(sk_for_wire[48:])))
+    expect_exception(decompress_G2, secretKey)
+    yield f'deserialization_fails_infinity_with_false_b_flag', {
+        'input': {
+            'pubkey': sk
+        },
+        'output': False,
+    }
+
+    sk = '0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef'
+    sk_for_wire = bytes.fromhex(sk)
+    secretKey = G2Compressed((os2ip(sk_for_wire[:48]), os2ip(sk_for_wire[48:])))
+    expect_exception(decompress_G2, secretKey)
+    yield f'deserialization_fails_with_wrong_c_flag', {
+        'input': {
+            'pubkey': sk
+        },
+        'output': False,
+    }
+
+    sk = 'c123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef'
+    sk_for_wire = bytes.fromhex(sk)
+    secretKey = G2Compressed((os2ip(sk_for_wire[:48]), os2ip(sk_for_wire[48:])))
+    expect_exception(decompress_G2, secretKey)
+    yield f'deserialization_fails_with_b_flag_and_x_nonzero', {
+        'input': {
+            'pubkey': sk
+        },
+        'output': False,
+    }
+
+    sk = 'e00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000'
+    sk_for_wire = bytes.fromhex(sk)
+    secretKey = G2Compressed((os2ip(sk_for_wire[:48]), os2ip(sk_for_wire[48:])))
+    expect_exception(decompress_G2, secretKey)
+    yield f'deserialization_fails_with_b_flag_and_a_flag_true', {
+        'input': {
+            'pubkey': sk
+        },
+        'output': False,
+    }
 
 def create_provider(handler_name: str,
                     test_case_fn: Callable[[], Iterable[Tuple[str, Dict[str, Any]]]]) -> gen_typing.TestProvider:
