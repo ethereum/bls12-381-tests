@@ -657,6 +657,29 @@ def case08_deserialization_G2():
         'output': False,
     }
 
+    sk = '8123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcd'
+    sk_for_wire = bytes.fromhex(sk)
+    secretKey = G2Compressed((os2ip(sk_for_wire[:48]), os2ip(sk_for_wire[48:])))
+    expect_exception(decompress_G2, secretKey)
+    yield f'deserialization_fails_too_few_bytes', {
+        'input': {
+            'pubkey': sk
+        },
+        'output': False,
+    }
+
+    sk = '8123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdefff'
+    sk_for_wire = bytes.fromhex(sk)
+    secretKey = G2Compressed((os2ip(sk_for_wire[:48]), os2ip(sk_for_wire[48:])))
+    expect_exception(decompress_G2, secretKey)
+    yield f'deserialization_fails_too_many_bytes', {
+        'input': {
+            'pubkey': sk
+        },
+        'output': False,
+    }
+
+
 def create_provider(handler_name: str,
                     test_case_fn: Callable[[], Iterable[Tuple[str, Dict[str, Any]]]]) -> gen_typing.TestProvider:
 
