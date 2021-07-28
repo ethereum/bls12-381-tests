@@ -1,12 +1,21 @@
-# BLS Test Generator
+# BLS 12-381 tests
 
-The [BLS Signature APIs](../../../specs/phase0/beacon-chain.md#bls-signatures)
+This repository provides a test-suite for the `BLS_SIG_BLS12381G2_XMD:SHA-256_SSWU_RO_POP_` ciphersuite (following [draft 4](https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-bls-signature-04)),
+as used in Ethereum 2.0 [BLS Signature APIs](https://github.com/ethereum/eth2.0-specs/blob/v1.0.0/specs/phase0/beacon-chain.md#bls-signatures),
+as well as common extensions such as signature-sets ([batch aggregate verification](https://ethresear.ch/t/fast-verification-of-multiple-bls-signatures/5407)) and serialization.
 
-Information on the format of the tests can be found in the [BLS test formats documentation](../../formats/bls/README.md).
+The test suite is generated with python, and can be downloaded via the releases.
+We suggest the following for integration into your testing pipeline:
+
+```shell
+TESTS_VERSION=v0.1.0
+wget https://github.com/ethereum/bls12-381-tests/releases/download/$(TESTS_VERSION)/tests.tar.gz -O - | tar -xz -C my-test/vector-path/here/bls-tests
+```
 
 ## Resources
 
-- [IETF BLS Signature Scheme](https://datatracker.ietf.org/doc/draft-irtf-cfrg-bls-signature/)
+- [IETF BLS Signature Scheme versions](https://datatracker.ietf.org/doc/draft-irtf-cfrg-bls-signature/)
+- [IETF BLS Signature Scheme draft 4](https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-bls-signature-04)
 - [Finite Field Arithmetic](http://www.springeronline.com/sgw/cda/pageitems/document/cda_downloaddocument/0,11996,0-0-45-110359-0,00.pdf)
 - Chapter 2 of [Elliptic Curve Cryptography](http://cacr.uwaterloo.ca/ecc/). Darrel Hankerson, Alfred Menezes, and Scott Vanstone
 
@@ -19,5 +28,8 @@ The BLS test suite runner has the following handlers:
 - [`fast_aggregate_verify`](./fast_aggregate_verify.md)
 - [`sign`](./sign.md)
 - [`verify`](./verify.md)
+- *TODO*: document other test types
 
-*TODO*: Signature-verification and aggregate-verify test cases are not yet supported.
+## License
+
+CC0 1.0 Universal, see [`LICENSE`](./LICENSE) file.
