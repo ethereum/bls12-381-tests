@@ -24,10 +24,10 @@ wget https://github.com/ethereum/bls12-381-tests/releases/download/$(TESTS_VERSI
 The BLS test suite runner has the following handlers:
 
 - [`aggregate_verify`](formats/aggregate_verify.md)
-- [`aggregate`](./aggregate.md)
-- [`fast_aggregate_verify`](./fast_aggregate_verify.md)
-- [`sign`](./sign.md)
-- [`verify`](./verify.md)
+- [`aggregate`](formats/aggregate.md)
+- [`fast_aggregate_verify`](formats/fast_aggregate_verify.md)
+- [`sign`](formats/sign.md)
+- [`verify`](formats/verify.md)
 - *TODO*: document other test types
 
 ## Test generation
