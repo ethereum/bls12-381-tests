@@ -30,6 +30,19 @@ The BLS test suite runner has the following handlers:
 - [`verify`](./verify.md)
 - *TODO*: document other test types
 
+## Test generation
+
+```shell
+# Create a virtual environment
+python -m venv venv
+# Activate the environment
+source venv/bin/activate
+# Install dependencies
+pip install -r requirements.txt
+# Run test generator
+python main.py --output-dir=out --encoding=yaml
+```
+
 ## License
 
 CC0 1.0 Universal, see [`LICENSE`](./LICENSE) file.

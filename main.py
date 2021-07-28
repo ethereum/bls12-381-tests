@@ -2,14 +2,18 @@
 BLS test vectors generator
 """
 
+from typing import Tuple, Any, Callable, Dict, Generator
+
+import argparse
+from pathlib import Path
+import json
+from ruamel.yaml import YAML
+
 from hashlib import sha256
-from typing import Tuple, Iterable, Any, Callable, Dict
 
 import milagro_bls_binding as milagro_bls
 
-from eth2spec.utils import bls
-from eth2spec.test.helpers.constants import PHASE0
-from eth2spec.gen_helpers.gen_base import gen_runner, gen_typing
+from py_ecc.bls import G2ProofOfPossession as bls
 
 from py_ecc.bls.g2_primitives import (
     G1_to_pubkey,
@@ -35,6 +39,7 @@ from py_ecc.bls.typing import (
     G1Compressed,
     G2Compressed
 )
+
 
 def to_bytes32(i):
     return i.to_bytes(32, byteorder='big')
@@ -739,40 +744,113 @@ def case08_deserialization_G2():
         'output': False,
     }
 
-def create_provider(handler_name: str,
-                    test_case_fn: Callable[[], Iterable[Tuple[str, Dict[str, Any]]]]) -> gen_typing.TestProvider:
 
-    def prepare_fn() -> None:
-        # Nothing to load / change in spec. Maybe in future forks.
-        # Put the tests into the general config category, to not require any particular configuration.
-        return
+test_kinds: Dict[str, Generator[Tuple[str, Any], None, None]] = {
+    'sign': case01_sign,
+    'verify': case02_verify,
+    'aggregate': case03_aggregate,
+    'fast_aggregate_verify': case04_fast_aggregate_verify,
+    'aggregate_verify': case05_aggregate_verify,
+    'hash_to_G2': case06_hash_to_G2,
+    'deserialization_G1': case07_deserialization_G1,
+    'deserialization_G2': case08_deserialization_G2,
+}
 
-    def cases_fn() -> Iterable[gen_typing.TestCase]:
-        for data in test_case_fn():
-            print(data)
-            (case_name, case_content) = data
-            yield gen_typing.TestCase(
-                fork_name=PHASE0,
-                preset_name='general',
-                runner_name='bls',
-                handler_name=handler_name,
-                suite_name='small',
-                case_name=case_name,
-                case_fn=lambda: [('data', 'data', case_content)]
-            )
 
-    return gen_typing.TestProvider(prepare=prepare_fn, make_cases=cases_fn)
+def validate_output_dir(path_str):
+    path = Path(path_str)
+
+    if not path.exists():
+        raise argparse.ArgumentTypeError("Output directory must exist")
+
+    if not path.is_dir():
+        raise argparse.ArgumentTypeError("Output path must lead to a directory")
+
+    return path
+
+
+def validate_encoding(encoding_str: str) -> Tuple[str, Callable[[Path, Any], None]]:
+    encoding_str = encoding_str.lower()
+
+    if encoding_str == "yaml" or encoding_str == "yml":
+        yaml = YAML(pure=True)
+        yaml.default_flow_style = None
+
+        def yaml_dumper(out_path: Path, data: Any) -> None:
+            with out_path.open(file_mode) as f:
+                yaml.dump(data, f)
+
+        return ".yaml", yaml_dumper
+
+    if encoding_str == "json":
+        def json_dumper(out_path: Path, data: Any) -> None:
+            with out_path.open(file_mode) as f:
+                json.dump(data, f)
+        return ".json", json_dumper
+
+    raise argparse.ArgumentTypeError(f"Unrecognized encoding: {encoding_str}, expected 'json' or 'yaml'")
 
 
 if __name__ == "__main__":
-    bls.use_py_ecc()  # Py-ecc is chosen instead of Milagro, since the code is better understood to be correct.
-    gen_runner.run_generator("bls", [
-        create_provider('sign', case01_sign),
-        create_provider('verify', case02_verify),
-        create_provider('aggregate', case03_aggregate),
-        create_provider('fast_aggregate_verify', case04_fast_aggregate_verify),
-        create_provider('aggregate_verify', case05_aggregate_verify),
-        create_provider('hash_to_G2', case06_hash_to_G2),
-        create_provider('deserialization_G1', case07_deserialization_G1),
-        create_provider('deserialization_G2', case08_deserialization_G2),
-    ])
+    parser = argparse.ArgumentParser(
+        prog="gen-bls",
+        description=f"Generate BLS test vectors",
+    )
+    parser.add_argument(
+        "-o",
+        "--output-dir",
+        dest="output_dir",
+        required=True,
+        type=validate_output_dir,
+        help="directory into which the generated test vector files will be dumped"
+    )
+    parser.add_argument(
+        "-e",
+        "--encoding",
+        dest="encoding",
+        required=False,
+        default='yaml',
+        type=validate_encoding,
+        help="encoding for output data"
+    )
+    parser.add_argument(
+        "-f",
+        "--force",
+        action="store_true",
+        default=False,
+        help="if set re-generate and overwrite test files if they already exist",
+    )
+
+    args = parser.parse_args()
+
+    output_dir = args.output_dir
+    print(f"Generating tests into {output_dir}")
+
+    if not args.force:
+        file_mode = "x"
+    else:
+        file_mode = "w"
+
+    extension, output_dumper = args.encoding
+
+    for test_kind_name, test_kind_gen in test_kinds.items():
+        test_dir = Path(output_dir) / Path('bls') / Path(test_kind_name)
+        test_dir.mkdir(parents=True, exist_ok=True)
+
+        for (case_name, case_content) in test_kind_gen():
+            case_filepath = test_dir / Path(case_name + extension)
+
+            if case_filepath.exists():
+                if not args.force:
+                    print(f'Skipping already existing test: {case_filepath}')
+                    continue
+                else:
+                    print(f'Warning, test case {case_filepath} already exists, test will be overwritten with new version')
+
+            print(f'Generating test: {case_filepath}')
+
+            # Lazy-evaluate test cases where necessary
+            if callable(case_content):
+                case_content = case_content()
+
+            output_dumper(case_filepath, case_content)

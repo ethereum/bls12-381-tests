@@ -4,3 +4,6 @@
 *.json
 *.tar
 *.tar.gz
+out
+
+venv
