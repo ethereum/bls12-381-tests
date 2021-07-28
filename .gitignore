@@ -1,0 +1,6 @@
+# test ouputs
+*.yml
+*.yaml
+*.json
+*.tar
+*.tar.gz
