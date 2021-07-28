@@ -5,10 +5,6 @@ BLS test vectors generator
 from hashlib import sha256
 from typing import Tuple, Iterable, Any, Callable, Dict
 
-from eth_utils import (
-    encode_hex,
-    int_to_big_endian,
-)
 import milagro_bls_binding as milagro_bls
 
 from eth2spec.utils import bls
@@ -40,12 +36,20 @@ from py_ecc.bls.typing import (
     G2Compressed
 )
 
-def to_bytes(i):
-    return i.to_bytes(32, "big")
+def to_bytes32(i):
+    return i.to_bytes(32, byteorder='big')
 
 
 def hash(x):
     return sha256(x).digest()
+
+
+def encode_hex(value: bytes) -> str:
+    return "0x" + value.hex()
+
+
+def int_to_big_endian(value: int) -> bytes:
+    return value.to_bytes((value.bit_length() + 7) // 8, byteorder='big')
 
 
 def int_to_hex(n: int, byte_length: int = None) -> str:
@@ -113,7 +117,7 @@ def case01_sign():
     for privkey in PRIVKEYS:
         for message in MESSAGES:
             sig = bls.Sign(privkey, message)
-            assert sig == milagro_bls.Sign(to_bytes(privkey), message)  # double-check with milagro
+            assert sig == milagro_bls.Sign(to_bytes32(privkey), message)  # double-check with milagro
             identifier = f'{int_to_hex(privkey)}_{encode_hex(message)}'
             yield f'sign_case_{(hash(bytes(identifier, "utf-8"))[:8]).hex()}', {
                 'input': {
@@ -141,8 +145,8 @@ def case02_verify():
             signature = bls.Sign(privkey, message)
             pubkey = bls.SkToPk(privkey)
 
-            assert milagro_bls.SkToPk(to_bytes(privkey)) == pubkey
-            assert milagro_bls.Sign(to_bytes(privkey), message) == signature
+            assert milagro_bls.SkToPk(to_bytes32(privkey)) == pubkey
+            assert milagro_bls.Sign(to_bytes32(privkey), message) == signature
 
             identifier = f'{encode_hex(pubkey)}_{encode_hex(message)}'
 
