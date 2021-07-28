@@ -39,6 +39,8 @@ python -m venv venv
 source venv/bin/activate
 # Install dependencies
 pip install -r requirements.txt
+# Create output dir
+mkdir out
 # Run test generator
 python main.py --output-dir=out --encoding=yaml
 ```
