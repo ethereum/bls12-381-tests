@@ -30,7 +30,7 @@ The BLS test suite runner has the following handlers:
 - [`verify`](formats/verify.md)
 - [`hash_to_G2`](formats/hash_to_G2.md)
 - [`deserialization_G1`](formats/deserialization_G1.md)
-- [`deserialization_G2.md`](formats/deserialization_G2.md)
+- [`deserialization_G2](formats/deserialization_G2.md)
 
 
 ## Test generation
