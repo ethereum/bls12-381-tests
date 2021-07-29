@@ -28,7 +28,7 @@ The BLS test suite runner has the following handlers:
 - [`fast_aggregate_verify`](formats/fast_aggregate_verify.md)
 - [`sign`](formats/sign.md)
 - [`verify`](formats/verify.md)
-- *TODO*: document other test types
+- [`hash_to_G2`](formats/hash_to_G2.md)
 
 ## Test generation
 
