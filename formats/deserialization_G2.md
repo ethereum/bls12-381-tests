@@ -1,13 +1,13 @@
 # Test format: Deserialization to G2
 
-Deserializaion of a public key should produce a point in G2
+Deserializaion of a signature should produce a point in G2
 
 ## Test case format
 
 The test data is declared in a `data.yaml` file:
 
 ```yaml
-input: pubkey: bytes92 -- the pubkey
+input: signature: bytes92 -- the signature
 output: bool  -- VALID or INVALID
 ```
 
