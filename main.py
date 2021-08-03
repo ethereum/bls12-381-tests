@@ -584,162 +584,162 @@ def case07_deserialization_G1():
 
 def case08_deserialization_G2():
 
-    sk = 'b2cc74bc9f089ed9764bbceac5edba416bef5e73701288977b9cac1ccb6964269d4ebf78b4e8aa7792ba09d3e49c8e6a1351bdf582971f796bbaf6320e81251c9d28f674d720cca07ed14596b96697cf18238e0e03ebd7fc1353d885a39407e0'
-    sk_for_wire = bytes.fromhex(sk)
-    assert decompress_G2(G2Compressed((os2ip(sk_for_wire[:48]), os2ip(sk_for_wire[48:]))))
+    sig = 'b2cc74bc9f089ed9764bbceac5edba416bef5e73701288977b9cac1ccb6964269d4ebf78b4e8aa7792ba09d3e49c8e6a1351bdf582971f796bbaf6320e81251c9d28f674d720cca07ed14596b96697cf18238e0e03ebd7fc1353d885a39407e0'
+    sig_for_wire = bytes.fromhex(sig)
+    assert decompress_G2(G2Compressed((os2ip(sig_for_wire[:48]), os2ip(sig_for_wire[48:]))))
     yield f'deserialization_succeeds_correct_point', {
         'input': {
-            'signature': sk
+            'signature': sig
         },
         'output': True,
     }
     
     # xRe is exactly the modulus, q, xIm is zero
-    sk = '8000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001a0111ea397fe69a4b1ba7b6434bacd764774b84f38512bf6730d2a0f6b0f6241eabfffeb153ffffb9feffffffffaaab'
-    sk_for_wire = bytes.fromhex(sk)
-    secretKey = G2Compressed((os2ip(sk_for_wire[:48]), os2ip(sk_for_wire[48:])))
+    sig = '8000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001a0111ea397fe69a4b1ba7b6434bacd764774b84f38512bf6730d2a0f6b0f6241eabfffeb153ffffb9feffffffffaaab'
+    sig_for_wire = bytes.fromhex(sig)
+    secretKey = G2Compressed((os2ip(sig_for_wire[:48]), os2ip(sig_for_wire[48:])))
     expect_exception(decompress_G2, secretKey)
     yield f'deserialization_fails_xre_equal_to_modulus', {
         'input': {
-            'signature': sk
+            'signature': sig
         },
         'output': False,
     }
 
     # xIm is exactly the modulus, q, xRe is zero
-    sk = '9a0111ea397fe69a4b1ba7b6434bacd764774b84f38512bf6730d2a0f6b0f6241eabfffeb153ffffb9feffffffffaaab000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000'
-    sk_for_wire = bytes.fromhex(sk)
-    secretKey = G2Compressed((os2ip(sk_for_wire[:48]), os2ip(sk_for_wire[48:])))
+    sig = '9a0111ea397fe69a4b1ba7b6434bacd764774b84f38512bf6730d2a0f6b0f6241eabfffeb153ffffb9feffffffffaaab000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000'
+    sig_for_wire = bytes.fromhex(sig)
+    secretKey = G2Compressed((os2ip(sig_for_wire[:48]), os2ip(sig_for_wire[48:])))
     expect_exception(decompress_G2, secretKey)
     yield f'deserialization_fails_xim_equal_to_modulus', {
         'input': {
-            'signature': sk
+            'signature': sig
         },
         'output': False,
     }
 
     # xRe is the modulus plus 1, xIm is zero
-    sk = '8000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001a0111ea397fe69a4b1ba7b6434bacd764774b84f38512bf6730d2a0f6b0f6241eabfffeb153ffffb9feffffffffaaac'    
-    sk_for_wire = bytes.fromhex(sk)
-    secretKey = G2Compressed((os2ip(sk_for_wire[:48]), os2ip(sk_for_wire[48:])))
+    sig = '8000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001a0111ea397fe69a4b1ba7b6434bacd764774b84f38512bf6730d2a0f6b0f6241eabfffeb153ffffb9feffffffffaaac'    
+    sig_for_wire = bytes.fromhex(sig)
+    secretKey = G2Compressed((os2ip(sig_for_wire[:48]), os2ip(sig_for_wire[48:])))
     expect_exception(decompress_G2, secretKey)
     yield f'deserialization_fails_xre_greater_than_modulus', {
         'input': {
-            'signature': sk
+            'signature': sig
         },
         'output': False,
     }
 
     # xIm is the modulus plus 1, xRe is zero
-    sk = '9a0111ea397fe69a4b1ba7b6434bacd764774b84f38512bf6730d2a0f6b0f6241eabfffeb153ffffb9feffffffffaaac000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000'
-    sk_for_wire = bytes.fromhex(sk)
-    secretKey = G2Compressed((os2ip(sk_for_wire[:48]), os2ip(sk_for_wire[48:])))
+    sig = '9a0111ea397fe69a4b1ba7b6434bacd764774b84f38512bf6730d2a0f6b0f6241eabfffeb153ffffb9feffffffffaaac000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000'
+    sig_for_wire = bytes.fromhex(sig)
+    secretKey = G2Compressed((os2ip(sig_for_wire[:48]), os2ip(sig_for_wire[48:])))
     # bug in py_ecc ?
     # TODO
     #expect_exception(decompress_G2, secretKey)
     yield f'deserialization_fails_xim_greater_than_modulus', {
         'input': {
-            'signature': sk
+            'signature': sig
         },
         'output': False,
     }
 
-    sk = '8123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef'
-    sk_for_wire = bytes.fromhex(sk)
-    secretKey = G2Compressed((os2ip(sk_for_wire[:48]), os2ip(sk_for_wire[48:])))
+    sig = '8123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef'
+    sig_for_wire = bytes.fromhex(sig)
+    secretKey = G2Compressed((os2ip(sig_for_wire[:48]), os2ip(sig_for_wire[48:])))
     # fixed in https://github.com/ethereum/py_ecc/pull/121
     # TODO
     #expect_exception(decompress_G2, secretKey)
     yield f'deserialization_fails_not_in_G2', {
         'input': {
-            'signature': sk
+            'signature': sig
         },
         'output': False,
     }
 
-    sk = '8123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcde0'
-    sk_for_wire = bytes.fromhex(sk)
-    secretKey = G2Compressed((os2ip(sk_for_wire[:48]), os2ip(sk_for_wire[48:])))
+    sig = '8123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcde0'
+    sig_for_wire = bytes.fromhex(sig)
+    secretKey = G2Compressed((os2ip(sig_for_wire[:48]), os2ip(sig_for_wire[48:])))
     expect_exception(decompress_G2, secretKey)
     yield f'deserialization_fails_not_in_curve', {
         'input': {
-            'signature': sk
+            'signature': sig
         },
         'output': False,
     }
 
-    sk = '8123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcd'
-    sk_for_wire = bytes.fromhex(sk)
-    secretKey = G2Compressed((os2ip(sk_for_wire[:48]), os2ip(sk_for_wire[48:])))
+    sig = '8123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcd'
+    sig_for_wire = bytes.fromhex(sig)
+    secretKey = G2Compressed((os2ip(sig_for_wire[:48]), os2ip(sig_for_wire[48:])))
     expect_exception(decompress_G2, secretKey)
     yield f'deserialization_fails_too_few_bytes', {
         'input': {
-            'signature': sk
+            'signature': sig
         },
         'output': False,
     }
 
-    sk = '8123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdefff'
-    sk_for_wire = bytes.fromhex(sk)
-    secretKey = G2Compressed((os2ip(sk_for_wire[:48]), os2ip(sk_for_wire[48:])))
+    sig = '8123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdefff'
+    sig_for_wire = bytes.fromhex(sig)
+    secretKey = G2Compressed((os2ip(sig_for_wire[:48]), os2ip(sig_for_wire[48:])))
     expect_exception(decompress_G2, secretKey)
     yield f'deserialization_fails_too_many_bytes', {
         'input': {
-            'signature': sk
+            'signature': sig
         },
         'output': False,
     }
 
-    sk = 'c00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000'
-    sk_for_wire = bytes.fromhex(sk)
-    assert decompress_G2(G2Compressed((os2ip(sk_for_wire[:48]), os2ip(sk_for_wire[48:]))))
+    sig = 'c00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000'
+    sig_for_wire = bytes.fromhex(sig)
+    assert decompress_G2(G2Compressed((os2ip(sig_for_wire[:48]), os2ip(sig_for_wire[48:]))))
     yield f'deserialization_succeeds_infinity_with_true_b_flag', {
         'input': {
-            'signature': sk
+            'signature': sig
         },
         'output': True,
     }
 
-    sk = '800000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000'
-    sk_for_wire = bytes.fromhex(sk)
-    secretKey = G2Compressed((os2ip(sk_for_wire[:48]), os2ip(sk_for_wire[48:])))
+    sig = '800000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000'
+    sig_for_wire = bytes.fromhex(sig)
+    secretKey = G2Compressed((os2ip(sig_for_wire[:48]), os2ip(sig_for_wire[48:])))
     expect_exception(decompress_G2, secretKey)
     yield f'deserialization_fails_infinity_with_false_b_flag', {
         'input': {
-            'signature': sk
+            'signature': sig
         },
         'output': False,
     }
 
-    sk = '0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef'
-    sk_for_wire = bytes.fromhex(sk)
-    secretKey = G2Compressed((os2ip(sk_for_wire[:48]), os2ip(sk_for_wire[48:])))
+    sig = '0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef'
+    sig_for_wire = bytes.fromhex(sig)
+    secretKey = G2Compressed((os2ip(sig_for_wire[:48]), os2ip(sig_for_wire[48:])))
     expect_exception(decompress_G2, secretKey)
     yield f'deserialization_fails_with_wrong_c_flag', {
         'input': {
-            'signature': sk
+            'signature': sig
         },
         'output': False,
     }
 
-    sk = 'c123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef'
-    sk_for_wire = bytes.fromhex(sk)
-    secretKey = G2Compressed((os2ip(sk_for_wire[:48]), os2ip(sk_for_wire[48:])))
+    sig = 'c123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef'
+    sig_for_wire = bytes.fromhex(sig)
+    secretKey = G2Compressed((os2ip(sig_for_wire[:48]), os2ip(sig_for_wire[48:])))
     expect_exception(decompress_G2, secretKey)
     yield f'deserialization_fails_with_b_flag_and_x_nonzero', {
         'input': {
-            'signature': sk
+            'signature': sig
         },
         'output': False,
     }
 
-    sk = 'e00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000'
-    sk_for_wire = bytes.fromhex(sk)
-    secretKey = G2Compressed((os2ip(sk_for_wire[:48]), os2ip(sk_for_wire[48:])))
+    sig = 'e00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000'
+    sig_for_wire = bytes.fromhex(sig)
+    secretKey = G2Compressed((os2ip(sig_for_wire[:48]), os2ip(sig_for_wire[48:])))
     expect_exception(decompress_G2, secretKey)
     yield f'deserialization_fails_with_b_flag_and_a_flag_true', {
         'input': {
-            'signature': sk
+            'signature': sig
         },
         'output': False,
     }
