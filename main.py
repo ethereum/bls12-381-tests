@@ -431,7 +431,16 @@ def case05_aggregate_verify():
         'output': False,
     }
 
-def case06_hash_to_G2():
+
+def case06_batch_verify():
+    yield f'deserialization_fails_not_in_G1', {
+        'input': {
+            'pubkey': 'todo'
+        },
+        'output': False,
+    }
+
+def case07_hash_to_G2():
     for (msg,x_r,x_i,y_r,y_i) in HASH_MESSAGES:
         point = hash_to_G2(msg, DST, H)
         # Affine
@@ -456,7 +465,7 @@ def case06_hash_to_G2():
             }
         }
 
-def case07_deserialization_G1():  
+def case08_deserialization_G1():  
 
     pk = 'a491d1b0ecd9bb917989f0e74f0dea0422eac4a873e5e2644f368dffb9a6e20fd6e10c1b77654d067c0618f6e5a7f79a'
     pk_for_wire = bytes.fromhex(pk)
@@ -582,7 +591,7 @@ def case07_deserialization_G1():
         'output': False,
     }
 
-def case08_deserialization_G2():
+def case09_deserialization_G2():
 
     sig = 'b2cc74bc9f089ed9764bbceac5edba416bef5e73701288977b9cac1ccb6964269d4ebf78b4e8aa7792ba09d3e49c8e6a1351bdf582971f796bbaf6320e81251c9d28f674d720cca07ed14596b96697cf18238e0e03ebd7fc1353d885a39407e0'
     sig_for_wire = bytes.fromhex(sig)
@@ -751,9 +760,10 @@ test_kinds: Dict[str, Generator[Tuple[str, Any], None, None]] = {
     'aggregate': case03_aggregate,
     'fast_aggregate_verify': case04_fast_aggregate_verify,
     'aggregate_verify': case05_aggregate_verify,
-    'hash_to_G2': case06_hash_to_G2,
-    'deserialization_G1': case07_deserialization_G1,
-    'deserialization_G2': case08_deserialization_G2,
+    'batch_verify': case06_batch_verify,
+    'hash_to_G2': case07_hash_to_G2,
+    'deserialization_G1': case08_deserialization_G1,
+    'deserialization_G2': case09_deserialization_G2,
 }
 
 
