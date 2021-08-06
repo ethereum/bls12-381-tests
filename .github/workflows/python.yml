@@ -1,0 +1,43 @@
+name: Python testing
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+          architecture: 'x64'
+      - name: Cache pip
+        uses: actions/cache@v2
+        with:
+          # This path is specific to Ubuntu
+          path: ~/.cache/pip
+          # Look to see if there is a cache hit for the corresponding requirements file
+          key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+            ${{ runner.os }}-
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          make install_ci
+      - name: Lint with flake8
+        run: make lint
+      - name: Run the generator with JSON output
+        run: make generate_json
+      - name: Run the generator with YAML output
+        run: make generate_yaml
+      - name: Upload generator output as artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: test-vectors
+          path: out
+          retention-days: 3
+        # Also upload outputs as artifact if generator failed, so we can look into the failure
+        if: ${{ always() }}
+
