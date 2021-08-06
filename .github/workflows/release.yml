@@ -1,0 +1,25 @@
+name: Release vectors
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Take the generated test vectors
+        uses: actions/download-artifact@v2
+        with:
+          name: test-vectors
+      - name: Prepare release
+        run: |
+          tar -czvf bls_tests_json.tar.gz out/json
+          tar -czvf bls_tests_yaml.tar.gz out/yaml
+      # see https://github.com/softprops/action-gh-release
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: |
+            bls_tests_json.tar.gz
+            bls_tests_yaml.tar.gz
