@@ -19,7 +19,7 @@ generate_yaml:
 	python main.py -e=yaml -o=out/yaml -f
 
 generate_json:
-	mkdir out/json
+	mkdir -p out/json
 	python main.py -e=json -o=out/json -f
 
 clean:

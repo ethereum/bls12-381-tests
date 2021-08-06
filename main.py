@@ -20,8 +20,6 @@ from py_ecc.bls.g2_primitives import (
 )
 
 from py_ecc.optimized_bls12_381 import (
-    multiply,
-    G1,
     FQ2,
 )
 
@@ -83,6 +81,15 @@ PRIVKEYS = [
     hex_to_int('0x00000000000000000000000000000000328388aff0d4a5b7dc9205abd374e7e98f3cd9f3418edb4eafda5fb16473d216'),
 ]
 PUBKEYS = [bls.SkToPk(privkey) for privkey in PRIVKEYS]
+
+PRIVKEYS2 = [
+    # Curve order is 256 so private keys are 32 bytes at most.
+    # Also not all integers is a valid private key, so using pre-generated keys
+    hex_to_int('0x00000000000000000000000000000000263dbd792f5b1be47ed85f8938c0f29586af0d3ac7b977f21c278fe1462040e2'),
+    hex_to_int('0x0000000000000000000000000000000047b8192d77bf871b62e87859d653922725724a5c031afeabc60bcef5ff665131'),
+    hex_to_int('0x00000000000000000000000000000000328388aff0d4a5b7dc9205abd374e7e98f3cd9f3418edb4eafda5fb16473d211'),
+]
+PUBKEYS2 = [bls.SkToPk(privkey) for privkey in PRIVKEYS2]
 
 Z1_PUBKEY = b'\xc0' + b'\x00' * 47
 NO_SIGNATURE = b'\x00' * 96
@@ -219,7 +226,7 @@ def case02_verify():
     privkey = 1
 
     # Valid  Edge case: privkey == 1
-    pubkey = G1_to_pubkey(multiply(G1, privkey))
+    pubkey = bls.SkToPk(privkey)
     signature = bls.Sign(privkey, SAMPLE_MESSAGE)
     identifier = f'{encode_hex(pubkey)}_{encode_hex(message)}'
     assert bls.Verify(pubkey, SAMPLE_MESSAGE, signature)
@@ -441,12 +448,35 @@ def case05_aggregate_verify():
 
 
 def case06_batch_verify():
-    yield 'deserialization_fails_not_in_G1', {
-        'input': {
-            'pubkey': 'todo'
-        },
-        'output': False,
-    }
+
+    # Valid signature
+    signature_set = [
+        (
+            bls.Aggregate( [bls.Sign(sk, msg) for sk in PRIVKEYS]),
+            bls._AggregatePKs([bls.SkToPk(sk) for sk in PRIVKEYS]),
+            msg
+        )
+        for msg in MESSAGES
+    ]
+    assert milagro_bls.VerifyMultipleAggregateSignatures(signature_set)
+    
+    pubkeys_serial = []
+    messages_serial = []
+    sigs_serial = []
+    for privkey, message in zip(PRIVKEYS, MESSAGES):
+        pubkeys_serial.append(encode_hex(bls.SkToPk(privkey)))
+        messages_serial.append(encode_hex(message))
+        sigs_serial.append(encode_hex(bls.Sign(privkey, message)))
+
+
+    yield f'batc_verify_valid_signature_set', {
+                'input': {
+                    'pubkey': pubkeys_serial,
+                    'message': messages_serial,
+                    'signature': sigs_serial
+                },
+                'output': True,
+            }
 
 
 def case07_hash_to_G2():
