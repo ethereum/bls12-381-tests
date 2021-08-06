@@ -92,19 +92,28 @@ ZERO_PRIVKEY_BYTES = b'\x00' * 32
 
 DST = b'QUUX-V01-CS02-with-BLS12381G2_XMD:SHA-256_SSWU_RO_'
 H = sha256
-HASH_MESSAGES  =  [
+HASH_MESSAGES = [
     (b'',
-    '0x0141ebfbdca40eb85b87142e130ab689c673cf60f1a3e98d69335266f30d9b8d4ac44c1038e9dcdd5393faf5c41fb78a', '0x05cb8437535e20ecffaef7752baddf98034139c38452458baeefab379ba13dff5bf5dd71b72418717047f5b0f37da03d',
-    '0x0503921d7f6a12805e72940b963c0cf3471c7b2a524950ca195d11062ee75ec076daf2d4bc358c4b190c0c98064fdd92', '0x12424ac32561493f3fe3c260708a12b7c620e7be00099a974e259ddc7d1f6395c3c811cdd19f1e8dbf3e9ecfdcbab8d6'),
+     '0x0141ebfbdca40eb85b87142e130ab689c673cf60f1a3e98d69335266f30d9b8d4ac44c1038e9dcdd5393faf5c41fb78a',
+     '0x05cb8437535e20ecffaef7752baddf98034139c38452458baeefab379ba13dff5bf5dd71b72418717047f5b0f37da03d',
+     '0x0503921d7f6a12805e72940b963c0cf3471c7b2a524950ca195d11062ee75ec076daf2d4bc358c4b190c0c98064fdd92',
+     '0x12424ac32561493f3fe3c260708a12b7c620e7be00099a974e259ddc7d1f6395c3c811cdd19f1e8dbf3e9ecfdcbab8d6'),
     (b'abc',
-    '0x02c2d18e033b960562aae3cab37a27ce00d80ccd5ba4b7fe0e7a210245129dbec7780ccc7954725f4168aff2787776e6', '0x139cddbccdc5e91b9623efd38c49f81a6f83f175e80b06fc374de9eb4b41dfe4ca3a230ed250fbe3a2acf73a41177fd8',
-    '0x1787327b68159716a37440985269cf584bcb1e621d3a7202be6ea05c4cfe244aeb197642555a0645fb87bf7466b2ba48', '0x00aa65dae3c8d732d10ecd2c50f8a1baf3001578f71c694e03866e9f3d49ac1e1ce70dd94a733534f106d4cec0eddd16'),
+     '0x02c2d18e033b960562aae3cab37a27ce00d80ccd5ba4b7fe0e7a210245129dbec7780ccc7954725f4168aff2787776e6',
+     '0x139cddbccdc5e91b9623efd38c49f81a6f83f175e80b06fc374de9eb4b41dfe4ca3a230ed250fbe3a2acf73a41177fd8',
+     '0x1787327b68159716a37440985269cf584bcb1e621d3a7202be6ea05c4cfe244aeb197642555a0645fb87bf7466b2ba48',
+     '0x00aa65dae3c8d732d10ecd2c50f8a1baf3001578f71c694e03866e9f3d49ac1e1ce70dd94a733534f106d4cec0eddd16'),
     (b'abcdef0123456789',
-    '0x121982811d2491fde9ba7ed31ef9ca474f0e1501297f68c298e9f4c0028add35aea8bb83d53c08cfc007c1e005723cd0', '0x190d119345b94fbd15497bcba94ecf7db2cbfd1e1fe7da034d26cbba169fb3968288b3fafb265f9ebd380512a71c3f2c',
-    '0x05571a0f8d3c08d094576981f4a3b8eda0a8e771fcdcc8ecceaf1356a6acf17574518acb506e435b639353c2e14827c8', '0x0bb5e7572275c567462d91807de765611490205a941a5a6af3b1691bfe596c31225d3aabdf15faff860cb4ef17c7c3be'),
-    (b'a512_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
-    '0x01a6ba2f9a11fa5598b2d8ace0fbe0a0eacb65deceb476fbbcb64fd24557c2f4b18ecfc5663e54ae16a84f5ab7f62534', '0x11fca2ff525572795a801eed17eb12785887c7b63fb77a42be46ce4a34131d71f7a73e95fee3f812aea3de78b4d01569',
-    '0x0b6798718c8aed24bc19cb27f866f1c9effcdbf92397ad6448b5c9db90d2b9da6cbabf48adc1adf59a1a28344e79d57e', '0x03a47f8e6d1763ba0cad63d6114c0accbef65707825a511b251a660a9b3994249ae4e63fac38b23da0c398689ee2ab52'),
+     '0x121982811d2491fde9ba7ed31ef9ca474f0e1501297f68c298e9f4c0028add35aea8bb83d53c08cfc007c1e005723cd0',
+     '0x190d119345b94fbd15497bcba94ecf7db2cbfd1e1fe7da034d26cbba169fb3968288b3fafb265f9ebd380512a71c3f2c',
+     '0x05571a0f8d3c08d094576981f4a3b8eda0a8e771fcdcc8ecceaf1356a6acf17574518acb506e435b639353c2e14827c8',
+     '0x0bb5e7572275c567462d91807de765611490205a941a5a6af3b1691bfe596c31225d3aabdf15faff860cb4ef17c7c3be'),
+    (
+    b'a512_aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
+    '0x01a6ba2f9a11fa5598b2d8ace0fbe0a0eacb65deceb476fbbcb64fd24557c2f4b18ecfc5663e54ae16a84f5ab7f62534',
+    '0x11fca2ff525572795a801eed17eb12785887c7b63fb77a42be46ce4a34131d71f7a73e95fee3f812aea3de78b4d01569',
+    '0x0b6798718c8aed24bc19cb27f866f1c9effcdbf92397ad6448b5c9db90d2b9da6cbabf48adc1adf59a1a28344e79d57e',
+    '0x03a47f8e6d1763ba0cad63d6114c0accbef65707825a511b251a660a9b3994249ae4e63fac38b23da0c398689ee2ab52'),
 ]
 
 
@@ -134,7 +143,7 @@ def case01_sign():
     # Edge case: privkey == 0
     expect_exception(bls.Sign, ZERO_PRIVKEY, message)
     expect_exception(milagro_bls.Sign, ZERO_PRIVKEY_BYTES, message)
-    yield f'sign_case_zero_privkey', {
+    yield 'sign_case_zero_privkey', {
         'input': {
             'privkey': encode_hex(ZERO_PRIVKEY_BYTES),
             'message': encode_hex(message),
@@ -198,7 +207,7 @@ def case02_verify():
     # Invalid pubkey and signature with the point at infinity
     assert not bls.Verify(Z1_PUBKEY, SAMPLE_MESSAGE, Z2_SIGNATURE)
     assert not milagro_bls.Verify(Z1_PUBKEY, SAMPLE_MESSAGE, Z2_SIGNATURE)
-    yield f'verify_infinity_pubkey_and_infinity_signature', {
+    yield 'verify_infinity_pubkey_and_infinity_signature', {
         'input': {
             'pubkey': encode_hex(Z1_PUBKEY),
             'message': encode_hex(SAMPLE_MESSAGE),
@@ -208,8 +217,8 @@ def case02_verify():
     }
 
     privkey = 1
-    
-    #Valid  Edge case: privkey == 1
+
+    # Valid  Edge case: privkey == 1
     pubkey = G1_to_pubkey(multiply(G1, privkey))
     signature = bls.Sign(privkey, SAMPLE_MESSAGE)
     identifier = f'{encode_hex(pubkey)}_{encode_hex(message)}'
@@ -223,7 +232,6 @@ def case02_verify():
         },
         'output': True,
     }
-
 
 
 def case03_aggregate():
@@ -240,7 +248,7 @@ def case03_aggregate():
     expect_exception(bls.Aggregate, [])
     # No signatures to aggregate. Follow IETF BLS spec, return `None` to represent INVALID.
     # https://tools.ietf.org/html/draft-irtf-cfrg-bls-signature-04#section-2.8
-    yield f'aggregate_na_signatures', {
+    yield 'aggregate_na_signatures', {
         'input': [],
         'output': None,
     }
@@ -248,7 +256,7 @@ def case03_aggregate():
     # Valid to aggregate G2 point at infinity
     aggregate_sig = bls.Aggregate([Z2_SIGNATURE])
     assert aggregate_sig == milagro_bls.Aggregate([Z2_SIGNATURE]) == Z2_SIGNATURE
-    yield f'aggregate_infinity_signature', {
+    yield 'aggregate_infinity_signature', {
         'input': [encode_hex(Z2_SIGNATURE)],
         'output': encode_hex(aggregate_sig),
     }
@@ -257,7 +265,7 @@ def case03_aggregate():
     sig = bls.Sign(PRIVKEYS[0], MESSAGES[0])
     aggregate_sig = bls.Aggregate([sig])
     assert aggregate_sig == milagro_bls.Aggregate([sig]) == sig
-    yield f'aggregate_single_signature', {
+    yield 'aggregate_single_signature', {
         'input': [encode_hex(sig)],
         'output': encode_hex(aggregate_sig),
     }
@@ -316,7 +324,7 @@ def case04_fast_aggregate_verify():
     # Invalid pubkeys and signature -- len(pubkeys) == 0 and signature == Z1_SIGNATURE
     assert not bls.FastAggregateVerify([], message, Z2_SIGNATURE)
     assert not milagro_bls.FastAggregateVerify([], message, Z2_SIGNATURE)
-    yield f'fast_aggregate_verify_na_pubkeys_and_infinity_signature', {
+    yield 'fast_aggregate_verify_na_pubkeys_and_infinity_signature', {
         'input': {
             'pubkeys': [],
             'message': encode_hex(message),
@@ -328,7 +336,7 @@ def case04_fast_aggregate_verify():
     # Invalid pubkeys and signature -- len(pubkeys) == 0 and signature == 0x00...
     assert not bls.FastAggregateVerify([], message, NO_SIGNATURE)
     assert not milagro_bls.FastAggregateVerify([], message, NO_SIGNATURE)
-    yield f'fast_aggregate_verify_na_pubkeys_and_na_signature', {
+    yield 'fast_aggregate_verify_na_pubkeys_and_na_signature', {
         'input': {
             'pubkeys': [],
             'message': encode_hex(message),
@@ -344,7 +352,7 @@ def case04_fast_aggregate_verify():
     aggregate_signature = bls.Aggregate(signatures)
     assert not bls.FastAggregateVerify(pubkeys_with_infinity, SAMPLE_MESSAGE, aggregate_signature)
     assert not milagro_bls.FastAggregateVerify(pubkeys_with_infinity, SAMPLE_MESSAGE, aggregate_signature)
-    yield f'fast_aggregate_verify_infinity_pubkey', {
+    yield 'fast_aggregate_verify_infinity_pubkey', {
         'input': {
             'pubkeys': [encode_hex(pubkey) for pubkey in pubkeys_with_infinity],
             'message': encode_hex(SAMPLE_MESSAGE),
@@ -372,7 +380,7 @@ def case05_aggregate_verify():
     aggregate_signature = bls.Aggregate(sigs)
     assert bls.AggregateVerify(pubkeys, messages, aggregate_signature)
     assert milagro_bls.AggregateVerify(pubkeys, messages, aggregate_signature)
-    yield f'aggregate_verify_valid', {
+    yield 'aggregate_verify_valid', {
         'input': {
             'pubkeys': pubkeys_serial,
             'messages': messages_serial,
@@ -384,7 +392,7 @@ def case05_aggregate_verify():
     tampered_signature = aggregate_signature[:4] + b'\xff\xff\xff\xff'
     assert not bls.AggregateVerify(pubkey, messages, tampered_signature)
     assert not milagro_bls.AggregateVerify(pubkeys, messages, tampered_signature)
-    yield f'aggregate_verify_tampered_signature', {
+    yield 'aggregate_verify_tampered_signature', {
         'input': {
             'pubkeys': pubkeys_serial,
             'messages': messages_serial,
@@ -396,7 +404,7 @@ def case05_aggregate_verify():
     # Invalid pubkeys and signature -- len(pubkeys) == 0 and signature == Z1_SIGNATURE
     assert not bls.AggregateVerify([], [], Z2_SIGNATURE)
     assert not milagro_bls.AggregateVerify([], [], Z2_SIGNATURE)
-    yield f'aggregate_verify_na_pubkeys_and_infinity_signature', {
+    yield 'aggregate_verify_na_pubkeys_and_infinity_signature', {
         'input': {
             'pubkeys': [],
             'messages': [],
@@ -408,7 +416,7 @@ def case05_aggregate_verify():
     # Invalid pubkeys and signature -- len(pubkeys) == 0 and signature == 0x00...
     assert not bls.AggregateVerify([], [], NO_SIGNATURE)
     assert not milagro_bls.AggregateVerify([], [], NO_SIGNATURE)
-    yield f'aggregate_verify_na_pubkeys_and_na_signature', {
+    yield 'aggregate_verify_na_pubkeys_and_na_signature', {
         'input': {
             'pubkeys': [],
             'messages': [],
@@ -422,7 +430,7 @@ def case05_aggregate_verify():
     messages_with_sample = messages + [SAMPLE_MESSAGE]
     assert not bls.AggregateVerify(pubkeys_with_infinity, messages_with_sample, aggregate_signature)
     assert not milagro_bls.AggregateVerify(pubkeys_with_infinity, messages_with_sample, aggregate_signature)
-    yield f'aggregate_verify_infinity_pubkey', {
+    yield 'aggregate_verify_infinity_pubkey', {
         'input': {
             'pubkeys': [encode_hex(pubkey) for pubkey in pubkeys_with_infinity],
             'messages': [encode_hex(message) for message in messages_with_sample],
@@ -433,28 +441,29 @@ def case05_aggregate_verify():
 
 
 def case06_batch_verify():
-    yield f'deserialization_fails_not_in_G1', {
+    yield 'deserialization_fails_not_in_G1', {
         'input': {
             'pubkey': 'todo'
         },
         'output': False,
     }
 
+
 def case07_hash_to_G2():
-    for (msg,x_r,x_i,y_r,y_i) in HASH_MESSAGES:
+    for (msg, x_r, x_i, y_r, y_i) in HASH_MESSAGES:
         point = hash_to_G2(msg, DST, H)
         # Affine
-        result_x = point[0] / point[2] # X / Z
-        result_y = point[1] / point[2] # Y / Z
+        result_x = point[0] / point[2]  # X / Z
+        result_y = point[1] / point[2]  # Y / Z
 
-        x = FQ2([hex_to_int(x_r),hex_to_int(x_i)])
-        y = FQ2([hex_to_int(y_r),hex_to_int(y_i)])
+        x = FQ2([hex_to_int(x_r), hex_to_int(x_i)])
+        y = FQ2([hex_to_int(y_r), hex_to_int(y_i)])
 
         assert x == result_x
         assert y == result_y
 
         identifier = f'{encode_hex(msg)}'
-        
+
         yield f'hash_to_G2__{(hash(bytes(identifier, "utf-8"))[:8]).hex()}', {
             'input': {
                 'msg': msg.decode('utf-8')
@@ -465,12 +474,12 @@ def case07_hash_to_G2():
             }
         }
 
-def case08_deserialization_G1():  
 
+def case08_deserialization_G1():
     pk = 'a491d1b0ecd9bb917989f0e74f0dea0422eac4a873e5e2644f368dffb9a6e20fd6e10c1b77654d067c0618f6e5a7f79a'
     pk_for_wire = bytes.fromhex(pk)
     assert decompress_G1(G1Compressed(os2ip(pk_for_wire)))
-    yield f'deserialization_succeeds_correct_point', {
+    yield 'deserialization_succeeds_correct_point', {
         'input': {
             'pubkey': pk
         },
@@ -481,8 +490,8 @@ def case08_deserialization_G1():
     pk_for_wire = G1Compressed(os2ip(bytes.fromhex(pk)))
     # bug in py_ecc ?
     # TODO
-    #expect_exception(decompress_G1,pk_for_wire)
-    yield f'deserialization_fails_not_in_G1', {
+    # expect_exception(decompress_G1,pk_for_wire)
+    yield 'deserialization_fails_not_in_G1', {
         'input': {
             'pubkey': pk
         },
@@ -491,8 +500,8 @@ def case08_deserialization_G1():
 
     pk = '8123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcde0'
     pk_for_wire = G1Compressed(os2ip(bytes.fromhex(pk)))
-    expect_exception(decompress_G1,pk_for_wire)
-    yield f'deserialization_fails_not_in_curve', {
+    expect_exception(decompress_G1, pk_for_wire)
+    yield 'deserialization_fails_not_in_curve', {
         'input': {
             'pubkey': pk
         },
@@ -502,8 +511,8 @@ def case08_deserialization_G1():
     # Exactly the modulus, q
     pk = '9a0111ea397fe69a4b1ba7b6434bacd764774b84f38512bf6730d2a0f6b0f6241eabfffeb153ffffb9feffffffffaaab'
     pk_for_wire = G1Compressed(os2ip(bytes.fromhex(pk)))
-    expect_exception(decompress_G1,pk_for_wire)
-    yield f'deserialization_fails_x_equal_to_modulus', {
+    expect_exception(decompress_G1, pk_for_wire)
+    yield 'deserialization_fails_x_equal_to_modulus', {
         'input': {
             'pubkey': pk
         },
@@ -513,8 +522,8 @@ def case08_deserialization_G1():
     # One more than the modulus, q
     pk = '9a0111ea397fe69a4b1ba7b6434bacd764774b84f38512bf6730d2a0f6b0f6241eabfffeb153ffffb9feffffffffaaac'
     pk_for_wire = G1Compressed(os2ip(bytes.fromhex(pk)))
-    expect_exception(decompress_G1,pk_for_wire)
-    yield f'deserialization_fails_x_greater_than_modulus', {
+    expect_exception(decompress_G1, pk_for_wire)
+    yield 'deserialization_fails_x_greater_than_modulus', {
         'input': {
             'pubkey': pk
         },
@@ -523,8 +532,8 @@ def case08_deserialization_G1():
 
     pk = '9a0111ea397fe69a4b1ba7b6434bacd764774b84f38512bf6730d2a0f6b0f6241eabfffeb153ffffb9feffffffffaa'
     pk_for_wire = G1Compressed(os2ip(bytes.fromhex(pk)))
-    expect_exception(decompress_G1,pk_for_wire)
-    yield f'deserialization_fails_too_few_bytes', {
+    expect_exception(decompress_G1, pk_for_wire)
+    yield 'deserialization_fails_too_few_bytes', {
         'input': {
             'pubkey': pk
         },
@@ -533,8 +542,8 @@ def case08_deserialization_G1():
 
     pk = '9a0111ea397fe69a4b1ba7b6434bacd764774b84f38512bf6730d2a0f6b0f6241eabfffeb153ffffb9feffffffffaaa900'
     pk_for_wire = G1Compressed(os2ip(bytes.fromhex(pk)))
-    expect_exception(decompress_G1,pk_for_wire)
-    yield f'deserialization_fails_too_many_bytes', {
+    expect_exception(decompress_G1, pk_for_wire)
+    yield 'deserialization_fails_too_many_bytes', {
         'input': {
             'pubkey': pk
         },
@@ -544,7 +553,7 @@ def case08_deserialization_G1():
     pk = 'c00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000'
     pk_for_wire = bytes.fromhex(pk)
     assert decompress_G1(G1Compressed(os2ip(pk_for_wire)))
-    yield f'deserialization_succeeds_infinity_with_true_b_flag', {
+    yield 'deserialization_succeeds_infinity_with_true_b_flag', {
         'input': {
             'pubkey': pk
         },
@@ -553,8 +562,8 @@ def case08_deserialization_G1():
 
     pk = 'c01000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000'
     pk_for_wire = G1Compressed(os2ip(bytes.fromhex(pk)))
-    expect_exception(decompress_G1,pk_for_wire)
-    yield f'deserialization_fails_infinity_with_true_b_flag', {
+    expect_exception(decompress_G1, pk_for_wire)
+    yield 'deserialization_fails_infinity_with_true_b_flag', {
         'input': {
             'pubkey': pk
         },
@@ -563,8 +572,8 @@ def case08_deserialization_G1():
 
     pk = '800000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000'
     pk_for_wire = G1Compressed(os2ip(bytes.fromhex(pk)))
-    expect_exception(decompress_G1,pk_for_wire)
-    yield f'deserialization_fails_infinity_with_false_b_flag', {
+    expect_exception(decompress_G1, pk_for_wire)
+    yield 'deserialization_fails_infinity_with_false_b_flag', {
         'input': {
             'pubkey': pk
         },
@@ -573,8 +582,8 @@ def case08_deserialization_G1():
 
     pk = '0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef'
     pk_for_wire = G1Compressed(os2ip(bytes.fromhex(pk)))
-    expect_exception(decompress_G1,pk_for_wire)
-    yield f'deserialization_fails_with_wrong_c_flag', {
+    expect_exception(decompress_G1, pk_for_wire)
+    yield 'deserialization_fails_with_wrong_c_flag', {
         'input': {
             'pubkey': pk
         },
@@ -583,8 +592,8 @@ def case08_deserialization_G1():
 
     pk = 'c123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef'
     pk_for_wire = G1Compressed(os2ip(bytes.fromhex(pk)))
-    expect_exception(decompress_G1,pk_for_wire)
-    yield f'deserialization_fails_with_b_flag_and_x_nonzero', {
+    expect_exception(decompress_G1, pk_for_wire)
+    yield 'deserialization_fails_with_b_flag_and_x_nonzero', {
         'input': {
             'pubkey': pk
         },
@@ -593,32 +602,32 @@ def case08_deserialization_G1():
 
     pk = 'e00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000'
     pk_for_wire = G1Compressed(os2ip(bytes.fromhex(pk)))
-    expect_exception(decompress_G1,pk_for_wire)
-    yield f'deserialization_fails_with_b_flag_and_a_flag_true', {
+    expect_exception(decompress_G1, pk_for_wire)
+    yield 'deserialization_fails_with_b_flag_and_a_flag_true', {
         'input': {
             'pubkey': pk
         },
         'output': False,
     }
 
-def case09_deserialization_G2():
 
+def case09_deserialization_G2():
     sig = 'b2cc74bc9f089ed9764bbceac5edba416bef5e73701288977b9cac1ccb6964269d4ebf78b4e8aa7792ba09d3e49c8e6a1351bdf582971f796bbaf6320e81251c9d28f674d720cca07ed14596b96697cf18238e0e03ebd7fc1353d885a39407e0'
     sig_for_wire = bytes.fromhex(sig)
     assert decompress_G2(G2Compressed((os2ip(sig_for_wire[:48]), os2ip(sig_for_wire[48:]))))
-    yield f'deserialization_succeeds_correct_point', {
+    yield 'deserialization_succeeds_correct_point', {
         'input': {
             'signature': sig
         },
         'output': True,
     }
-    
+
     # xRe is exactly the modulus, q, xIm is zero
     sig = '8000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001a0111ea397fe69a4b1ba7b6434bacd764774b84f38512bf6730d2a0f6b0f6241eabfffeb153ffffb9feffffffffaaab'
     sig_for_wire = bytes.fromhex(sig)
     secretKey = G2Compressed((os2ip(sig_for_wire[:48]), os2ip(sig_for_wire[48:])))
     expect_exception(decompress_G2, secretKey)
-    yield f'deserialization_fails_xre_equal_to_modulus', {
+    yield 'deserialization_fails_xre_equal_to_modulus', {
         'input': {
             'signature': sig
         },
@@ -630,7 +639,7 @@ def case09_deserialization_G2():
     sig_for_wire = bytes.fromhex(sig)
     secretKey = G2Compressed((os2ip(sig_for_wire[:48]), os2ip(sig_for_wire[48:])))
     expect_exception(decompress_G2, secretKey)
-    yield f'deserialization_fails_xim_equal_to_modulus', {
+    yield 'deserialization_fails_xim_equal_to_modulus', {
         'input': {
             'signature': sig
         },
@@ -638,11 +647,11 @@ def case09_deserialization_G2():
     }
 
     # xRe is the modulus plus 1, xIm is zero
-    sig = '8000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001a0111ea397fe69a4b1ba7b6434bacd764774b84f38512bf6730d2a0f6b0f6241eabfffeb153ffffb9feffffffffaaac'    
+    sig = '8000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001a0111ea397fe69a4b1ba7b6434bacd764774b84f38512bf6730d2a0f6b0f6241eabfffeb153ffffb9feffffffffaaac'
     sig_for_wire = bytes.fromhex(sig)
     secretKey = G2Compressed((os2ip(sig_for_wire[:48]), os2ip(sig_for_wire[48:])))
     expect_exception(decompress_G2, secretKey)
-    yield f'deserialization_fails_xre_greater_than_modulus', {
+    yield 'deserialization_fails_xre_greater_than_modulus', {
         'input': {
             'signature': sig
         },
@@ -655,8 +664,8 @@ def case09_deserialization_G2():
     secretKey = G2Compressed((os2ip(sig_for_wire[:48]), os2ip(sig_for_wire[48:])))
     # bug in py_ecc ?
     # TODO
-    #expect_exception(decompress_G2, secretKey)
-    yield f'deserialization_fails_xim_greater_than_modulus', {
+    # expect_exception(decompress_G2, secretKey)
+    yield 'deserialization_fails_xim_greater_than_modulus', {
         'input': {
             'signature': sig
         },
@@ -668,8 +677,8 @@ def case09_deserialization_G2():
     secretKey = G2Compressed((os2ip(sig_for_wire[:48]), os2ip(sig_for_wire[48:])))
     # fixed in https://github.com/ethereum/py_ecc/pull/121
     # TODO
-    #expect_exception(decompress_G2, secretKey)
-    yield f'deserialization_fails_not_in_G2', {
+    # expect_exception(decompress_G2, secretKey)
+    yield 'deserialization_fails_not_in_G2', {
         'input': {
             'signature': sig
         },
@@ -680,7 +689,7 @@ def case09_deserialization_G2():
     sig_for_wire = bytes.fromhex(sig)
     secretKey = G2Compressed((os2ip(sig_for_wire[:48]), os2ip(sig_for_wire[48:])))
     expect_exception(decompress_G2, secretKey)
-    yield f'deserialization_fails_not_in_curve', {
+    yield 'deserialization_fails_not_in_curve', {
         'input': {
             'signature': sig
         },
@@ -691,7 +700,7 @@ def case09_deserialization_G2():
     sig_for_wire = bytes.fromhex(sig)
     secretKey = G2Compressed((os2ip(sig_for_wire[:48]), os2ip(sig_for_wire[48:])))
     expect_exception(decompress_G2, secretKey)
-    yield f'deserialization_fails_too_few_bytes', {
+    yield 'deserialization_fails_too_few_bytes', {
         'input': {
             'signature': sig
         },
@@ -702,7 +711,7 @@ def case09_deserialization_G2():
     sig_for_wire = bytes.fromhex(sig)
     secretKey = G2Compressed((os2ip(sig_for_wire[:48]), os2ip(sig_for_wire[48:])))
     expect_exception(decompress_G2, secretKey)
-    yield f'deserialization_fails_too_many_bytes', {
+    yield 'deserialization_fails_too_many_bytes', {
         'input': {
             'signature': sig
         },
@@ -712,7 +721,7 @@ def case09_deserialization_G2():
     sig = 'c00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000'
     sig_for_wire = bytes.fromhex(sig)
     assert decompress_G2(G2Compressed((os2ip(sig_for_wire[:48]), os2ip(sig_for_wire[48:]))))
-    yield f'deserialization_succeeds_infinity_with_true_b_flag', {
+    yield 'deserialization_succeeds_infinity_with_true_b_flag', {
         'input': {
             'signature': sig
         },
@@ -723,7 +732,7 @@ def case09_deserialization_G2():
     sig_for_wire = bytes.fromhex(sig)
     secretKey = G2Compressed((os2ip(sig_for_wire[:48]), os2ip(sig_for_wire[48:])))
     expect_exception(decompress_G2, secretKey)
-    yield f'deserialization_fails_infinity_with_true_b_flag', {
+    yield 'deserialization_fails_infinity_with_true_b_flag', {
         'input': {
             'signature': sig
         },
@@ -734,7 +743,7 @@ def case09_deserialization_G2():
     sig_for_wire = bytes.fromhex(sig)
     secretKey = G2Compressed((os2ip(sig_for_wire[:48]), os2ip(sig_for_wire[48:])))
     expect_exception(decompress_G2, secretKey)
-    yield f'deserialization_fails_infinity_with_false_b_flag', {
+    yield 'deserialization_fails_infinity_with_false_b_flag', {
         'input': {
             'signature': sig
         },
@@ -745,7 +754,7 @@ def case09_deserialization_G2():
     sig_for_wire = bytes.fromhex(sig)
     secretKey = G2Compressed((os2ip(sig_for_wire[:48]), os2ip(sig_for_wire[48:])))
     expect_exception(decompress_G2, secretKey)
-    yield f'deserialization_fails_with_wrong_c_flag', {
+    yield 'deserialization_fails_with_wrong_c_flag', {
         'input': {
             'signature': sig
         },
@@ -756,7 +765,7 @@ def case09_deserialization_G2():
     sig_for_wire = bytes.fromhex(sig)
     secretKey = G2Compressed((os2ip(sig_for_wire[:48]), os2ip(sig_for_wire[48:])))
     expect_exception(decompress_G2, secretKey)
-    yield f'deserialization_fails_with_b_flag_and_x_nonzero', {
+    yield 'deserialization_fails_with_b_flag_and_x_nonzero', {
         'input': {
             'signature': sig
         },
@@ -767,7 +776,7 @@ def case09_deserialization_G2():
     sig_for_wire = bytes.fromhex(sig)
     secretKey = G2Compressed((os2ip(sig_for_wire[:48]), os2ip(sig_for_wire[48:])))
     expect_exception(decompress_G2, secretKey)
-    yield f'deserialization_fails_with_b_flag_and_a_flag_true', {
+    yield 'deserialization_fails_with_b_flag_and_a_flag_true', {
         'input': {
             'signature': sig
         },
@@ -817,6 +826,7 @@ def validate_encoding(encoding_str: str) -> Tuple[str, Callable[[Path, Any], Non
         def json_dumper(out_path: Path, data: Any) -> None:
             with out_path.open(file_mode) as f:
                 json.dump(data, f)
+
         return ".json", json_dumper
 
     raise argparse.ArgumentTypeError(f"Unrecognized encoding: {encoding_str}, expected 'json' or 'yaml'")
@@ -825,7 +835,7 @@ def validate_encoding(encoding_str: str) -> Tuple[str, Callable[[Path, Any], Non
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         prog="gen-bls",
-        description=f"Generate BLS test vectors",
+        description="Generate BLS test vectors",
     )
     parser.add_argument(
         "-o",
@@ -876,7 +886,8 @@ if __name__ == "__main__":
                     print(f'Skipping already existing test: {case_filepath}')
                     continue
                 else:
-                    print(f'Warning, test case {case_filepath} already exists, test will be overwritten with new version')
+                    print(
+                        f'Warning, test case {case_filepath} already exists, test will be overwritten with new version')
 
             print(f'Generating test: {case_filepath}')
 
