@@ -48,6 +48,9 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: test-vectors
+          path: out
+      - name: Display file structure
+        run: ls -R
       - name: Prepare release
         run: |
           tar -czvf bls_tests_json.tar.gz out/json
