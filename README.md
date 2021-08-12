@@ -8,8 +8,10 @@ The test suite is generated with python, and can be downloaded via the releases.
 We suggest the following for integration into your testing pipeline:
 
 ```shell
+mkdir -p destination/bls-tests
 TESTS_VERSION=v0.1.0
-wget https://github.com/ethereum/bls12-381-tests/releases/download/$(TESTS_VERSION)/tests.tar.gz -O - | tar -xz -C my-test/vector-path/here/bls-tests
+wget https://github.com/ethereum/bls12-381-tests/releases/download/$(TESTS_VERSION)/bls_tests_json.tar.gz -O - | tar -xz -C destination/bls-tests
+# bls_tests_yaml.tar.gz is also available: same tests, formatted as YAML
 ```
 
 ## Resources
