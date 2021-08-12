@@ -15,10 +15,6 @@ import milagro_bls_binding as milagro_bls
 
 from py_ecc.bls import G2ProofOfPossession as bls
 
-from py_ecc.bls.g2_primitives import (
-    G1_to_pubkey,
-)
-
 from py_ecc.optimized_bls12_381 import (
     FQ2,
 )
@@ -452,14 +448,13 @@ def case06_batch_verify():
     # Valid signature
     signature_set = [
         (
-            bls.Aggregate( [bls.Sign(sk, msg) for sk in PRIVKEYS]),
+            bls.Aggregate([bls.Sign(sk, msg) for sk in PRIVKEYS]),
             bls._AggregatePKs([bls.SkToPk(sk) for sk in PRIVKEYS]),
             msg
-        )
-        for msg in MESSAGES
+        ) for msg in MESSAGES
     ]
     assert milagro_bls.VerifyMultipleAggregateSignatures(signature_set)
-    
+
     pubkeys_serial = []
     messages_serial = []
     sigs_serial = []
@@ -468,16 +463,16 @@ def case06_batch_verify():
         messages_serial.append(encode_hex(message))
         sigs_serial.append(encode_hex(bls.Sign(privkey, message)))
 
-    yield f'batc_verify_valid_signature_set', {
-                'input': {
-                    'pubkey': pubkeys_serial,
-                    'message': messages_serial,
-                    'signature': sigs_serial
-                },
-                'output': True,
-            }
+    yield 'batc_verify_valid_signature_set', {
+        'input': {
+            'pubkey': pubkeys_serial,
+            'message': messages_serial,
+            'signature': sigs_serial
+        },
+        'output': True,
+    }
     # Credit
-    # test vectors taken from 
+    # test vectors taken from
     # https://github.com/status-im/nim-blscurve/blob/master/tests/t_batch_verifier.nim
     # ---------------------------------------------------------
     #
@@ -496,8 +491,9 @@ def case06_batch_verify():
     # S1 + S' and S2 - S' would verify when aggregated
     # i.e. PK1+PK2 verifying the aggregated ((S1+S')+(S2-S'), M1+M2)
 
+
 # Credit
-# test vectors taken from 
+# test vectors taken from
 # https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/tree/master/poc/vectors
 def case07_hash_to_G2():
     for (msg, x_r, x_i, y_r, y_i) in HASH_MESSAGES:
@@ -524,8 +520,9 @@ def case07_hash_to_G2():
             }
         }
 
+
 # Credit
-# test vectors taken from 
+# test vectors taken from
 # https://github.com/ConsenSys/teku/blob/4fa8f6a8204a56be67eb9dd68b464bff55fe9cf5/bls/src/test/java/tech/pegasys/teku/bls/impl/mikuli/G1PointTest.java
 def case08_deserialization_G1():
     pk = 'a491d1b0ecd9bb917989f0e74f0dea0422eac4a873e5e2644f368dffb9a6e20fd6e10c1b77654d067c0618f6e5a7f79a'
@@ -662,8 +659,9 @@ def case08_deserialization_G1():
         'output': False,
     }
 
+
 # Credit
-# test vectors taken from 
+# test vectors taken from
 # https://github.com/ConsenSys/teku/blob/4fa8f6a8204a56be67eb9dd68b464bff55fe9cf5/bls/src/test/java/tech/pegasys/teku/bls/impl/mikuli/G2PointTest.java
 def case09_deserialization_G2():
     sig = 'b2cc74bc9f089ed9764bbceac5edba416bef5e73701288977b9cac1ccb6964269d4ebf78b4e8aa7792ba09d3e49c8e6a1351bdf582971f796bbaf6320e81251c9d28f674d720cca07ed14596b96697cf18238e0e03ebd7fc1353d885a39407e0'
