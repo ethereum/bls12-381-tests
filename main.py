@@ -470,7 +470,7 @@ def case06_batch_verify():
     ]
 
     assert milagro_bls.VerifyMultipleAggregateSignatures(signature_set)
-    yield 'batc_verify_valid_simple_signature_set', {
+    yield 'batch_verify_valid_simple_signature_set', {
         'input': {
             'pubkey': pubkeys_serial,
             'message': messages_serial,
