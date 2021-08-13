@@ -445,7 +445,34 @@ def case05_aggregate_verify():
 
 def case06_batch_verify():
 
-    # Valid signature
+    pubkeys_serial = []
+    messages_serial = []
+    sigs_serial = []
+    for privkey, message in zip(PRIVKEYS, MESSAGES):
+        pubkeys_serial.append(encode_hex(bls.SkToPk(privkey)))
+        messages_serial.append(encode_hex(message))
+        sigs_serial.append(encode_hex(bls.Sign(privkey, message)))
+
+    # Valid single signatures
+    signature_set = [
+        (
+            bls.Sign(privkey, msg),
+            bls.SkToPk(privkey),
+            msg
+
+        ) for privkey, msg in zip(PRIVKEYS, MESSAGES)
+    ]
+
+    assert milagro_bls.VerifyMultipleAggregateSignatures(signature_set)
+    yield 'batc_verify_valid_simple_signature_set', {
+        'input': {
+            'pubkey': pubkeys_serial,
+            'message': messages_serial,
+            'signature': sigs_serial
+        },
+        'output': True,
+    }
+
     signature_set = [
         (
             bls.Aggregate([bls.Sign(sk, msg) for sk in PRIVKEYS]),
@@ -455,22 +482,6 @@ def case06_batch_verify():
     ]
     assert milagro_bls.VerifyMultipleAggregateSignatures(signature_set)
 
-    pubkeys_serial = []
-    messages_serial = []
-    sigs_serial = []
-    for privkey, message in zip(PRIVKEYS, MESSAGES):
-        pubkeys_serial.append(encode_hex(bls.SkToPk(privkey)))
-        messages_serial.append(encode_hex(message))
-        sigs_serial.append(encode_hex(bls.Sign(privkey, message)))
-
-    yield 'batc_verify_valid_signature_set', {
-        'input': {
-            'pubkey': pubkeys_serial,
-            'message': messages_serial,
-            'signature': sigs_serial
-        },
-        'output': True,
-    }
     # Credit
     # test vectors taken from
     # https://github.com/status-im/nim-blscurve/blob/master/tests/t_batch_verifier.nim
