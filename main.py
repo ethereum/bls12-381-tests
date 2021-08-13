@@ -17,12 +17,18 @@ from py_ecc.bls import G2ProofOfPossession as bls
 
 from py_ecc.optimized_bls12_381 import (
     FQ2,
+    neg
 )
 
 from py_ecc.bls.hash_to_curve import hash_to_G2
 
 from py_ecc.bls.hash import (
     os2ip,
+)
+
+from py_ecc.bls.g2_primitives import (
+    G2_to_signature,
+    signature_to_G2
 )
 
 from py_ecc.bls.point_compression import (
@@ -501,6 +507,41 @@ def case06_batch_verify():
     # Due to pairing bilinearity, this also means that forged signatures
     # S1 + S' and S2 - S' would verify when aggregated
     # i.e. PK1+PK2 verifying the aggregated ((S1+S')+(S2-S'), M1+M2)
+
+    sig1 = bls.Sign(PRIVKEYS[0], MESSAGES[0])
+    sig2 = bls.Sign(PRIVKEYS[1], MESSAGES[1])
+
+    # forged signature S'
+    sigp = bls.Sign(PRIVKEYS[2], MESSAGES[2])
+
+    # Check that the forged signature can be verified when naively aggregated
+    # 1. Create -S'. Note: if P has elliptic affine coordinates (x, y) then -P is (x, -y)
+    neg_sigp = G2_to_signature(neg(signature_to_G2(sigp)))
+
+    # 2. Forge signatures S1+S' and S2-S'
+    forgedSig1 = bls.Aggregate([sig1, sigp])
+    forgedSig2 = bls.Aggregate([sig2, neg_sigp])
+
+    # 3. Aggregate forged signatures
+    aggForged = bls.Aggregate([forgedSig1, forgedSig2])
+
+    # 4. Naive aggregation
+    assert bls.AggregateVerify([PUBKEYS[0], PUBKEYS[1]], [MESSAGES[0], MESSAGES[1]], aggForged)
+
+    # The forged signature
+    signature_set = [
+        (
+            forgedSig1,
+            PUBKEYS[0],
+            MESSAGES[0]
+        ),
+        (
+            forgedSig2,
+            PUBKEYS[1],
+            MESSAGES[1]
+        )
+    ]
+    assert not milagro_bls.VerifyMultipleAggregateSignatures(signature_set)
 
 
 # Credit
