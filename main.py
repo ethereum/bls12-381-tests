@@ -479,15 +479,6 @@ def case06_batch_verify():
         'output': True
     }
 
-    signature_set = [
-        (
-            bls.Aggregate([bls.Sign(sk, msg) for sk in PRIVKEYS]),
-            bls._AggregatePKs([bls.SkToPk(sk) for sk in PRIVKEYS]),
-            msg
-        ) for msg in MESSAGES
-    ]
-    assert milagro_bls.VerifyMultipleAggregateSignatures(signature_set)
-
     # Credit
     # test vectors taken from
     # https://github.com/status-im/nim-blscurve/blob/master/tests/t_batch_verifier.nim
