@@ -8,9 +8,9 @@ The test data is declared in a `data.yaml` file:
 
 ```yaml
 input:
-  pubkey: List[bytes48] -- the pubkeys
-  message: List[bytes32] -- the messages
-  signature: List[bytes96] -- the signatures to verify against pubkeys and messages
+  pubkeys: List[bytes48] -- the pubkeys
+  messages: List[bytes32] -- the messages
+  signatures: List[bytes96] -- the signatures to verify against pubkeys and messages
 output: bool  -- VALID or INVALID
 ```
 
