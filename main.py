@@ -472,9 +472,9 @@ def case06_batch_verify():
     assert milagro_bls.VerifyMultipleAggregateSignatures(signature_set)
     yield 'batch_verify_valid_simple_signature_set', {
         'input': {
-            'pubkey': pubkeys_serial,
-            'message': messages_serial,
-            'signature': sigs_serial
+            'pubkeys': pubkeys_serial,
+            'messages': messages_serial,
+            'signatures': sigs_serial
         },
         'output': True
     }
@@ -545,9 +545,9 @@ def case06_batch_verify():
     sigs_serial.append(encode_hex(forgedSig2))
     yield 'batch_verify_invalid_forged_signature_set', {
         'input': {
-            'pubkey': pubkeys_serial,
-            'message': messages_serial,
-            'signature': sigs_serial
+            'pubkeys': pubkeys_serial,
+            'messages': messages_serial,
+            'signatures': sigs_serial
         },
         'output': False
     }
