@@ -929,6 +929,11 @@ def validate_encoding(encoding_str: str) -> Tuple[str, Callable[[Path, Any], Non
         yaml = YAML(pure=True)
         yaml.default_flow_style = None
 
+        def _represent_none(self, _):
+            return self.represent_scalar('tag:yaml.org,2002:null', 'null')
+
+        yaml.representer.add_representer(type(None), _represent_none)
+
         def yaml_dumper(out_path: Path, data: Any) -> None:
             with out_path.open(file_mode) as f:
                 yaml.dump(data, f)
