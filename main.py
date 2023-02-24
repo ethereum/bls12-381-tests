@@ -552,6 +552,72 @@ def case06_batch_verify():
         'output': False
     }
 
+    # Valid multiple signatures
+    signature_set = [
+        (
+            sig1,
+            PUBKEYS[0],
+            MESSAGES[0]
+        ),
+        (
+            sig2,
+            PUBKEYS[1],
+            MESSAGES[1]
+        )
+    ]
+    assert milagro_bls.VerifyMultipleAggregateSignatures(signature_set)
+
+    pubkeys_serial = []
+    messages_serial = []
+    sigs_serial = []
+    pubkeys_serial.append(encode_hex(PUBKEYS[0]))
+    pubkeys_serial.append(encode_hex(PUBKEYS[1]))
+    messages_serial.append(encode_hex(MESSAGES[0]))
+    messages_serial.append(encode_hex(MESSAGES[1]))
+    sigs_serial.append(encode_hex(sig1))
+    sigs_serial.append(encode_hex(sig2))
+    yield 'batch_verify_valid_multiple_signature_set', {
+        'input': {
+            'pubkeys': pubkeys_serial,
+            'messages': messages_serial,
+            'signatures': sigs_serial
+        },
+        'output': True
+    }
+
+    # Invalid multiple signatures containing point at infinity
+    signature_set = [
+        (
+            sig1,
+            PUBKEYS[0],
+            MESSAGES[0]
+        ),
+        (
+            Z2_SIGNATURE,
+            Z1_PUBKEY,
+            MESSAGES[1]
+        )
+    ]
+    assert not milagro_bls.VerifyMultipleAggregateSignatures(signature_set)
+
+    pubkeys_serial = []
+    messages_serial = []
+    sigs_serial = []
+    pubkeys_serial.append(encode_hex(PUBKEYS[0]))
+    pubkeys_serial.append(encode_hex(Z1_PUBKEY))
+    messages_serial.append(encode_hex(MESSAGES[0]))
+    messages_serial.append(encode_hex(MESSAGES[1]))
+    sigs_serial.append(encode_hex(sig1))
+    sigs_serial.append(encode_hex(Z2_SIGNATURE))
+    yield 'batch_verify_invalid_infinity_signature_set', {
+        'input': {
+            'pubkeys': pubkeys_serial,
+            'messages': messages_serial,
+            'signatures': sigs_serial
+        },
+        'output': False
+    }
+
 
 # Credit
 # test vectors taken from
