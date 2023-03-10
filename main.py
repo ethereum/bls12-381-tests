@@ -794,7 +794,7 @@ def case08_deserialization_G1():
 def case09_deserialization_G2():
     sig = 'b2cc74bc9f089ed9764bbceac5edba416bef5e73701288977b9cac1ccb6964269d4ebf78b4e8aa7792ba09d3e49c8e6a1351bdf582971f796bbaf6320e81251c9d28f674d720cca07ed14596b96697cf18238e0e03ebd7fc1353d885a39407e0'
     sig_for_wire = bytes.fromhex(sig)
-    assert decompress_G2(G2Compressed((os2ip(sig_for_wire[:48]), os2ip(sig_for_wire[48:]))))
+    assert signature_to_G2(sig_for_wire)
     yield 'deserialization_succeeds_correct_point', {
         'input': {
             'signature': sig
@@ -898,7 +898,7 @@ def case09_deserialization_G2():
 
     sig = 'c00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000'
     sig_for_wire = bytes.fromhex(sig)
-    assert decompress_G2(G2Compressed((os2ip(sig_for_wire[:48]), os2ip(sig_for_wire[48:]))))
+    assert signature_to_G2(sig_for_wire)
     yield 'deserialization_succeeds_infinity_with_true_b_flag', {
         'input': {
             'signature': sig
