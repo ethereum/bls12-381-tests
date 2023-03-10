@@ -28,7 +28,8 @@ from py_ecc.bls.hash import (
 
 from py_ecc.bls.g2_primitives import (
     G2_to_signature,
-    signature_to_G2
+    signature_to_G2,
+    pubkey_to_G1
 )
 
 from py_ecc.bls.point_compression import (
@@ -654,7 +655,7 @@ def case07_hash_to_G2():
 def case08_deserialization_G1():
     pk = 'a491d1b0ecd9bb917989f0e74f0dea0422eac4a873e5e2644f368dffb9a6e20fd6e10c1b77654d067c0618f6e5a7f79a'
     pk_for_wire = bytes.fromhex(pk)
-    assert decompress_G1(G1Compressed(os2ip(pk_for_wire)))
+    assert pubkey_to_G1(pk_for_wire)
     yield 'deserialization_succeeds_correct_point', {
         'input': {
             'pubkey': pk
@@ -728,7 +729,7 @@ def case08_deserialization_G1():
 
     pk = 'c00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000'
     pk_for_wire = bytes.fromhex(pk)
-    assert decompress_G1(G1Compressed(os2ip(pk_for_wire)))
+    assert pubkey_to_G1(pk_for_wire)
     yield 'deserialization_succeeds_infinity_with_true_b_flag', {
         'input': {
             'pubkey': pk
