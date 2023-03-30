@@ -1,3 +1,4 @@
 py_ecc==6.0.0
 milagro-bls-binding==1.7.0
 ruamel.yaml==0.17.10
+py_arkworks_bls12381 == 0.3.4

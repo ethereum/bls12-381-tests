@@ -41,6 +41,11 @@ from py_ecc.bls.typing import (
     G2Compressed
 )
 
+from py_arkworks_bls12381 import (
+    G1Point as arkworks_G1
+)
+
+
 
 def to_bytes32(i):
     return i.to_bytes(32, byteorder='big')
@@ -655,6 +660,7 @@ def case07_hash_to_G2():
 def case08_deserialization_G1():
     pk = 'a491d1b0ecd9bb917989f0e74f0dea0422eac4a873e5e2644f368dffb9a6e20fd6e10c1b77654d067c0618f6e5a7f79a'
     pk_for_wire = bytes.fromhex(pk)
+    arkworks_G1.from_compressed_bytes( bytes.fromhex(pk))
     assert pubkey_to_G1(pk_for_wire)
     yield 'deserialization_succeeds_correct_point', {
         'input': {
@@ -664,6 +670,7 @@ def case08_deserialization_G1():
     }
 
     pk = '8123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef'
+    expect_exception(arkworks_G1.from_compressed_bytes,bytes.fromhex(pk))
     pk_for_wire = G1Compressed(os2ip(bytes.fromhex(pk)))
     # bug in py_ecc ?
     # TODO
@@ -676,6 +683,7 @@ def case08_deserialization_G1():
     }
 
     pk = '8123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcde0'
+    expect_exception(arkworks_G1.from_compressed_bytes,bytes.fromhex(pk))
     pk_for_wire = G1Compressed(os2ip(bytes.fromhex(pk)))
     expect_exception(decompress_G1, pk_for_wire)
     yield 'deserialization_fails_not_in_curve', {
@@ -687,6 +695,7 @@ def case08_deserialization_G1():
 
     # Exactly the modulus, q
     pk = '9a0111ea397fe69a4b1ba7b6434bacd764774b84f38512bf6730d2a0f6b0f6241eabfffeb153ffffb9feffffffffaaab'
+    expect_exception(arkworks_G1.from_compressed_bytes,bytes.fromhex(pk))
     pk_for_wire = G1Compressed(os2ip(bytes.fromhex(pk)))
     expect_exception(decompress_G1, pk_for_wire)
     yield 'deserialization_fails_x_equal_to_modulus', {
@@ -698,6 +707,7 @@ def case08_deserialization_G1():
 
     # One more than the modulus, q
     pk = '9a0111ea397fe69a4b1ba7b6434bacd764774b84f38512bf6730d2a0f6b0f6241eabfffeb153ffffb9feffffffffaaac'
+    expect_exception(arkworks_G1.from_compressed_bytes,bytes.fromhex(pk))
     pk_for_wire = G1Compressed(os2ip(bytes.fromhex(pk)))
     expect_exception(decompress_G1, pk_for_wire)
     yield 'deserialization_fails_x_greater_than_modulus', {
@@ -708,6 +718,7 @@ def case08_deserialization_G1():
     }
 
     pk = '9a0111ea397fe69a4b1ba7b6434bacd764774b84f38512bf6730d2a0f6b0f6241eabfffeb153ffffb9feffffffffaa'
+    expect_exception(arkworks_G1.from_compressed_bytes,bytes.fromhex(pk))
     pk_for_wire = G1Compressed(os2ip(bytes.fromhex(pk)))
     expect_exception(decompress_G1, pk_for_wire)
     yield 'deserialization_fails_too_few_bytes', {
@@ -718,6 +729,7 @@ def case08_deserialization_G1():
     }
 
     pk = '9a0111ea397fe69a4b1ba7b6434bacd764774b84f38512bf6730d2a0f6b0f6241eabfffeb153ffffb9feffffffffaaa900'
+    expect_exception(arkworks_G1.from_compressed_bytes,bytes.fromhex(pk))
     pk_for_wire = G1Compressed(os2ip(bytes.fromhex(pk)))
     expect_exception(decompress_G1, pk_for_wire)
     yield 'deserialization_fails_too_many_bytes', {
@@ -728,6 +740,7 @@ def case08_deserialization_G1():
     }
 
     pk = 'c00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000'
+    arkworks_G1.from_compressed_bytes( bytes.fromhex(pk))
     pk_for_wire = bytes.fromhex(pk)
     assert pubkey_to_G1(pk_for_wire)
     yield 'deserialization_succeeds_infinity_with_true_b_flag', {
@@ -738,6 +751,7 @@ def case08_deserialization_G1():
     }
 
     pk = 'c01000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000'
+    #expect_exception(arkworks_G1.from_compressed_bytes,bytes.fromhex(pk))
     pk_for_wire = G1Compressed(os2ip(bytes.fromhex(pk)))
     expect_exception(decompress_G1, pk_for_wire)
     yield 'deserialization_fails_infinity_with_true_b_flag', {
@@ -748,6 +762,7 @@ def case08_deserialization_G1():
     }
 
     pk = '800000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000'
+    expect_exception(arkworks_G1.from_compressed_bytes,bytes.fromhex(pk))
     pk_for_wire = G1Compressed(os2ip(bytes.fromhex(pk)))
     expect_exception(decompress_G1, pk_for_wire)
     yield 'deserialization_fails_infinity_with_false_b_flag', {
@@ -758,6 +773,7 @@ def case08_deserialization_G1():
     }
 
     pk = '0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef'
+    expect_exception(arkworks_G1.from_compressed_bytes,bytes.fromhex(pk))
     pk_for_wire = G1Compressed(os2ip(bytes.fromhex(pk)))
     expect_exception(decompress_G1, pk_for_wire)
     yield 'deserialization_fails_with_wrong_c_flag', {
@@ -768,6 +784,7 @@ def case08_deserialization_G1():
     }
 
     pk = 'c123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef'
+    #expect_exception(arkworks_G1.from_compressed_bytes,bytes.fromhex(pk))
     pk_for_wire = G1Compressed(os2ip(bytes.fromhex(pk)))
     expect_exception(decompress_G1, pk_for_wire)
     yield 'deserialization_fails_with_b_flag_and_x_nonzero', {
@@ -778,6 +795,7 @@ def case08_deserialization_G1():
     }
 
     pk = 'e00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000'
+    #expect_exception(arkworks_G1.from_compressed_bytes,bytes.fromhex(pk))
     pk_for_wire = G1Compressed(os2ip(bytes.fromhex(pk)))
     expect_exception(decompress_G1, pk_for_wire)
     yield 'deserialization_fails_with_b_flag_and_a_flag_true', {
