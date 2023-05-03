@@ -777,6 +777,16 @@ def case08_deserialization_G1():
         'output': False,
     }
 
+    pk = 'e00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000'
+    pk_for_wire = G1Compressed(os2ip(bytes.fromhex(pk)))
+    expect_exception(decompress_G1, pk_for_wire)
+    yield 'deserialization_fails_with_b_flag_and_a_flag_true', {
+        'input': {
+            'pubkey': pk
+        },
+        'output': False,
+    }
+
     pk = 'e491d1b0ecd9bb917989f0e74f0dea0422eac4a873e5e2644f368dffb9a6e20fd6e10c1b77654d067c0618f6e5a7f79a'
     pk_for_wire = G1Compressed(os2ip(bytes.fromhex(pk)))
     expect_exception(decompress_G1, pk_for_wire)
@@ -964,6 +974,17 @@ def case09_deserialization_G2():
     secretKey = G2Compressed((os2ip(sig_for_wire[:48]), os2ip(sig_for_wire[48:])))
     expect_exception(decompress_G2, secretKey)
     yield 'deserialization_fails_with_b_flag_and_x_nonzero', {
+        'input': {
+            'signature': sig
+        },
+        'output': False,
+    }
+
+    sig = 'e00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000'
+    sig_for_wire = bytes.fromhex(sig)
+    secretKey = G2Compressed((os2ip(sig_for_wire[:48]), os2ip(sig_for_wire[48:])))
+    expect_exception(decompress_G2, secretKey)
+    yield 'deserialization_fails_with_b_flag_and_a_flag_true', {
         'input': {
             'signature': sig
         },
