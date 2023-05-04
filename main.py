@@ -658,7 +658,7 @@ def case08_deserialization_G1():
     assert pubkey_to_G1(pk_for_wire)
     yield 'deserialization_succeeds_correct_point', {
         'input': {
-            'pubkey': pk
+            'pubkey': "0x" + pk,
         },
         'output': True,
     }
@@ -670,7 +670,7 @@ def case08_deserialization_G1():
     # expect_exception(decompress_G1,pk_for_wire)
     yield 'deserialization_fails_not_in_G1', {
         'input': {
-            'pubkey': pk
+            'pubkey': "0x" + pk,
         },
         'output': False,
     }
@@ -680,7 +680,7 @@ def case08_deserialization_G1():
     expect_exception(decompress_G1, pk_for_wire)
     yield 'deserialization_fails_not_in_curve', {
         'input': {
-            'pubkey': pk
+            'pubkey': "0x" + pk,
         },
         'output': False,
     }
@@ -691,7 +691,7 @@ def case08_deserialization_G1():
     expect_exception(decompress_G1, pk_for_wire)
     yield 'deserialization_fails_x_equal_to_modulus', {
         'input': {
-            'pubkey': pk
+            'pubkey': "0x" + pk,
         },
         'output': False,
     }
@@ -702,7 +702,7 @@ def case08_deserialization_G1():
     expect_exception(decompress_G1, pk_for_wire)
     yield 'deserialization_fails_x_greater_than_modulus', {
         'input': {
-            'pubkey': pk
+            'pubkey': "0x" + pk,
         },
         'output': False,
     }
@@ -712,7 +712,7 @@ def case08_deserialization_G1():
     expect_exception(decompress_G1, pk_for_wire)
     yield 'deserialization_fails_too_few_bytes', {
         'input': {
-            'pubkey': pk
+            'pubkey': "0x" + pk,
         },
         'output': False,
     }
@@ -722,7 +722,7 @@ def case08_deserialization_G1():
     expect_exception(decompress_G1, pk_for_wire)
     yield 'deserialization_fails_too_many_bytes', {
         'input': {
-            'pubkey': pk
+            'pubkey': "0x" + pk,
         },
         'output': False,
     }
@@ -732,7 +732,7 @@ def case08_deserialization_G1():
     assert pubkey_to_G1(pk_for_wire)
     yield 'deserialization_succeeds_infinity_with_true_b_flag', {
         'input': {
-            'pubkey': pk
+            'pubkey': "0x" + pk,
         },
         'output': True,
     }
@@ -742,7 +742,7 @@ def case08_deserialization_G1():
     expect_exception(decompress_G1, pk_for_wire)
     yield 'deserialization_fails_infinity_with_true_b_flag', {
         'input': {
-            'pubkey': pk
+            'pubkey': "0x" + pk,
         },
         'output': False,
     }
@@ -752,7 +752,7 @@ def case08_deserialization_G1():
     expect_exception(decompress_G1, pk_for_wire)
     yield 'deserialization_fails_infinity_with_false_b_flag', {
         'input': {
-            'pubkey': pk
+            'pubkey': "0x" + pk,
         },
         'output': False,
     }
@@ -762,7 +762,7 @@ def case08_deserialization_G1():
     expect_exception(decompress_G1, pk_for_wire)
     yield 'deserialization_fails_with_wrong_c_flag', {
         'input': {
-            'pubkey': pk
+            'pubkey': "0x" + pk,
         },
         'output': False,
     }
@@ -772,7 +772,7 @@ def case08_deserialization_G1():
     expect_exception(decompress_G1, pk_for_wire)
     yield 'deserialization_fails_with_b_flag_and_x_nonzero', {
         'input': {
-            'pubkey': pk
+            'pubkey': "0x" + pk,
         },
         'output': False,
     }
@@ -782,7 +782,7 @@ def case08_deserialization_G1():
     expect_exception(decompress_G1, pk_for_wire)
     yield 'deserialization_fails_with_b_flag_and_a_flag_true', {
         'input': {
-            'pubkey': pk
+            'pubkey': "0x" + pk,
         },
         'output': False,
     }
@@ -792,7 +792,7 @@ def case08_deserialization_G1():
     expect_exception(decompress_G1, pk_for_wire)
     yield 'deserialization_fails_with_mask_bits_111', {
         'input': {
-            'pubkey': pk,
+            'pubkey': "0x" + pk,
         },
         'output': False,
     }
@@ -802,7 +802,7 @@ def case08_deserialization_G1():
     expect_exception(decompress_G1, pk_for_wire)
     yield 'deserialization_fails_with_mask_bits_011', {
         'input': {
-            'pubkey': pk,
+            'pubkey': "0x" + pk,
         },
         'output': False,
     }
@@ -812,7 +812,7 @@ def case08_deserialization_G1():
     expect_exception(decompress_G1, pk_for_wire)
     yield 'deserialization_fails_with_mask_bits_001', {
         'input': {
-            'pubkey': pk,
+            'pubkey': "0x" + pk,
         },
         'output': False,
     }
@@ -827,7 +827,7 @@ def case09_deserialization_G2():
     assert signature_to_G2(sig_for_wire)
     yield 'deserialization_succeeds_correct_point', {
         'input': {
-            'signature': sig
+            'signature': "0x" + sig
         },
         'output': True,
     }
@@ -839,7 +839,7 @@ def case09_deserialization_G2():
     expect_exception(decompress_G2, secretKey)
     yield 'deserialization_fails_xre_equal_to_modulus', {
         'input': {
-            'signature': sig
+            'signature': "0x" + sig
         },
         'output': False,
     }
@@ -851,7 +851,7 @@ def case09_deserialization_G2():
     expect_exception(decompress_G2, secretKey)
     yield 'deserialization_fails_xim_equal_to_modulus', {
         'input': {
-            'signature': sig
+            'signature': "0x" + sig
         },
         'output': False,
     }
@@ -863,7 +863,7 @@ def case09_deserialization_G2():
     expect_exception(decompress_G2, secretKey)
     yield 'deserialization_fails_xre_greater_than_modulus', {
         'input': {
-            'signature': sig
+            'signature': "0x" + sig
         },
         'output': False,
     }
@@ -875,7 +875,7 @@ def case09_deserialization_G2():
     expect_exception(decompress_G2, secretKey)
     yield 'deserialization_fails_xim_greater_than_modulus', {
         'input': {
-            'signature': sig
+            'signature': "0x" + sig
         },
         'output': False,
     }
@@ -888,7 +888,7 @@ def case09_deserialization_G2():
     # expect_exception(decompress_G2, secretKey)
     yield 'deserialization_fails_not_in_G2', {
         'input': {
-            'signature': sig
+            'signature': "0x" + sig
         },
         'output': False,
     }
@@ -899,7 +899,7 @@ def case09_deserialization_G2():
     expect_exception(decompress_G2, secretKey)
     yield 'deserialization_fails_not_in_curve', {
         'input': {
-            'signature': sig
+            'signature': "0x" + sig
         },
         'output': False,
     }
@@ -910,7 +910,7 @@ def case09_deserialization_G2():
     expect_exception(decompress_G2, secretKey)
     yield 'deserialization_fails_too_few_bytes', {
         'input': {
-            'signature': sig
+            'signature': "0x" + sig
         },
         'output': False,
     }
@@ -921,7 +921,7 @@ def case09_deserialization_G2():
     expect_exception(decompress_G2, secretKey)
     yield 'deserialization_fails_too_many_bytes', {
         'input': {
-            'signature': sig
+            'signature': "0x" + sig
         },
         'output': False,
     }
@@ -931,7 +931,7 @@ def case09_deserialization_G2():
     assert signature_to_G2(sig_for_wire)
     yield 'deserialization_succeeds_infinity_with_true_b_flag', {
         'input': {
-            'signature': sig
+            'signature': "0x" + sig
         },
         'output': True,
     }
@@ -942,7 +942,7 @@ def case09_deserialization_G2():
     expect_exception(decompress_G2, secretKey)
     yield 'deserialization_fails_infinity_with_true_b_flag', {
         'input': {
-            'signature': sig
+            'signature': "0x" + sig
         },
         'output': False,
     }
@@ -953,7 +953,7 @@ def case09_deserialization_G2():
     expect_exception(decompress_G2, secretKey)
     yield 'deserialization_fails_infinity_with_false_b_flag', {
         'input': {
-            'signature': sig
+            'signature': "0x" + sig
         },
         'output': False,
     }
@@ -964,7 +964,7 @@ def case09_deserialization_G2():
     expect_exception(decompress_G2, secretKey)
     yield 'deserialization_fails_with_wrong_c_flag', {
         'input': {
-            'signature': sig
+            'signature': "0x" + sig
         },
         'output': False,
     }
@@ -975,7 +975,7 @@ def case09_deserialization_G2():
     expect_exception(decompress_G2, secretKey)
     yield 'deserialization_fails_with_b_flag_and_x_nonzero', {
         'input': {
-            'signature': sig
+            'signature': "0x" + sig
         },
         'output': False,
     }
@@ -986,7 +986,7 @@ def case09_deserialization_G2():
     expect_exception(decompress_G2, secretKey)
     yield 'deserialization_fails_with_b_flag_and_a_flag_true', {
         'input': {
-            'signature': sig
+            'signature': "0x" + sig
         },
         'output': False,
     }
@@ -997,7 +997,7 @@ def case09_deserialization_G2():
     expect_exception(decompress_G2, secretKey)
     yield 'deserialization_fails_with_mask_bits_111', {
         'input': {
-            'signature': sig
+            'signature': "0x" + sig
         },
         'output': False,
     }
@@ -1008,7 +1008,7 @@ def case09_deserialization_G2():
     expect_exception(decompress_G2, secretKey)
     yield 'deserialization_fails_with_mask_bits_011', {
         'input': {
-            'signature': sig
+            'signature': "0x" + sig
         },
         'output': False,
     }
@@ -1019,7 +1019,7 @@ def case09_deserialization_G2():
     expect_exception(decompress_G2, secretKey)
     yield 'deserialization_fails_with_mask_bits_001', {
         'input': {
-            'signature': sig
+            'signature': "0x" + sig
         },
         'output': False,
     }
