@@ -805,6 +805,36 @@ def case08_deserialization_G1():
         'output': False,
     }
 
+    pk = 'e491d1b0ecd9bb917989f0e74f0dea0422eac4a873e5e2644f368dffb9a6e20fd6e10c1b77654d067c0618f6e5a7f79a'
+    pk_for_wire = G1Compressed(os2ip(bytes.fromhex(pk)))
+    expect_exception(decompress_G1, pk_for_wire)
+    yield 'deserialization_fails_with_mask_bits_111', {
+        'input': {
+            'pubkey': pk,
+        },
+        'output': False,
+    }
+
+    pk = '6491d1b0ecd9bb917989f0e74f0dea0422eac4a873e5e2644f368dffb9a6e20fd6e10c1b77654d067c0618f6e5a7f79a'
+    pk_for_wire = G1Compressed(os2ip(bytes.fromhex(pk)))
+    expect_exception(decompress_G1, pk_for_wire)
+    yield 'deserialization_fails_with_mask_bits_011', {
+        'input': {
+            'pubkey': pk,
+        },
+        'output': False,
+    }
+
+    pk = '2491d1b0ecd9bb917989f0e74f0dea0422eac4a873e5e2644f368dffb9a6e20fd6e10c1b77654d067c0618f6e5a7f79a'
+    pk_for_wire = G1Compressed(os2ip(bytes.fromhex(pk)))
+    expect_exception(decompress_G1, pk_for_wire)
+    yield 'deserialization_fails_with_mask_bits_001', {
+        'input': {
+            'pubkey': pk,
+        },
+        'output': False,
+    }
+
 
 # Credit
 # test vectors taken from
@@ -973,6 +1003,39 @@ def case09_deserialization_G2():
     secretKey = G2Compressed((os2ip(sig_for_wire[:48]), os2ip(sig_for_wire[48:])))
     expect_exception(decompress_G2, secretKey)
     yield 'deserialization_fails_with_b_flag_and_a_flag_true', {
+        'input': {
+            'signature': sig
+        },
+        'output': False,
+    }
+
+    sig = 'f2cc74bc9f089ed9764bbceac5edba416bef5e73701288977b9cac1ccb6964269d4ebf78b4e8aa7792ba09d3e49c8e6a1351bdf582971f796bbaf6320e81251c9d28f674d720cca07ed14596b96697cf18238e0e03ebd7fc1353d885a39407e0'
+    sig_for_wire = bytes.fromhex(sig)
+    secretKey = G2Compressed((os2ip(sig_for_wire[:48]), os2ip(sig_for_wire[48:])))
+    expect_exception(decompress_G2, secretKey)
+    yield 'deserialization_fails_with_mask_bits_111', {
+        'input': {
+            'signature': sig
+        },
+        'output': False,
+    }
+
+    sig = '72cc74bc9f089ed9764bbceac5edba416bef5e73701288977b9cac1ccb6964269d4ebf78b4e8aa7792ba09d3e49c8e6a1351bdf582971f796bbaf6320e81251c9d28f674d720cca07ed14596b96697cf18238e0e03ebd7fc1353d885a39407e0'
+    sig_for_wire = bytes.fromhex(sig)
+    secretKey = G2Compressed((os2ip(sig_for_wire[:48]), os2ip(sig_for_wire[48:])))
+    expect_exception(decompress_G2, secretKey)
+    yield 'deserialization_fails_with_mask_bits_011', {
+        'input': {
+            'signature': sig
+        },
+        'output': False,
+    }
+
+    sig = '32cc74bc9f089ed9764bbceac5edba416bef5e73701288977b9cac1ccb6964269d4ebf78b4e8aa7792ba09d3e49c8e6a1351bdf582971f796bbaf6320e81251c9d28f674d720cca07ed14596b96697cf18238e0e03ebd7fc1353d885a39407e0'
+    sig_for_wire = bytes.fromhex(sig)
+    secretKey = G2Compressed((os2ip(sig_for_wire[:48]), os2ip(sig_for_wire[48:])))
+    expect_exception(decompress_G2, secretKey)
+    yield 'deserialization_fails_with_mask_bits_001', {
         'input': {
             'signature': sig
         },
