@@ -10,53 +10,25 @@ import json
 from ruamel.yaml import YAML
 
 from hashlib import sha256
-
-import milagro_bls_binding as milagro_bls
-
-from py_ecc.bls import G2ProofOfPossession as bls
+ 
 
 from py_ecc.optimized_bls12_381 import (
-    FQ2,
-    neg
+    G1
 )
 
 from py_ecc.bls.hash_to_curve import hash_to_G2
 
-from py_ecc.bls.hash import (
-    os2ip,
-)
-
-from py_ecc.bls.g2_primitives import (
-    G2_to_signature,
-    signature_to_G2,
-    pubkey_to_G1
-)
-
-from py_ecc.bls.point_compression import (
-    decompress_G1,
-    decompress_G2
-)
-from py_ecc.bls.typing import (
-    G1Compressed,
-    G2Compressed
-)
-
-
 def to_bytes32(i):
     return i.to_bytes(32, byteorder='big')
-
 
 def hash(x):
     return sha256(x).digest()
 
-
 def encode_hex(value: bytes) -> str:
     return "0x" + value.hex()
 
-
 def int_to_big_endian(value: int) -> bytes:
     return value.to_bytes((value.bit_length() + 7) // 8, byteorder='big')
-
 
 def int_to_hex(n: int, byte_length: int = None) -> str:
     byte_value = int_to_big_endian(n)
@@ -64,10 +36,8 @@ def int_to_hex(n: int, byte_length: int = None) -> str:
         byte_value = byte_value.rjust(byte_length, b'\x00')
     return encode_hex(byte_value)
 
-
 def hex_to_int(x: str) -> int:
     return int(x, 16)
-
 
 MESSAGES = [
     bytes(b'\x00' * 32),
@@ -75,30 +45,6 @@ MESSAGES = [
     bytes(b'\xab' * 32),
 ]
 SAMPLE_MESSAGE = b'\x12' * 32
-
-PRIVKEYS = [
-    # Curve order is 256 so private keys are 32 bytes at most.
-    # Also not all integers is a valid private key, so using pre-generated keys
-    hex_to_int('0x00000000000000000000000000000000263dbd792f5b1be47ed85f8938c0f29586af0d3ac7b977f21c278fe1462040e3'),
-    hex_to_int('0x0000000000000000000000000000000047b8192d77bf871b62e87859d653922725724a5c031afeabc60bcef5ff665138'),
-    hex_to_int('0x00000000000000000000000000000000328388aff0d4a5b7dc9205abd374e7e98f3cd9f3418edb4eafda5fb16473d216'),
-]
-PUBKEYS = [bls.SkToPk(privkey) for privkey in PRIVKEYS]
-
-PRIVKEYS2 = [
-    # Curve order is 256 so private keys are 32 bytes at most.
-    # Also not all integers is a valid private key, so using pre-generated keys
-    hex_to_int('0x00000000000000000000000000000000263dbd792f5b1be47ed85f8938c0f29586af0d3ac7b977f21c278fe1462040e2'),
-    hex_to_int('0x0000000000000000000000000000000047b8192d77bf871b62e87859d653922725724a5c031afeabc60bcef5ff665131'),
-    hex_to_int('0x00000000000000000000000000000000328388aff0d4a5b7dc9205abd374e7e98f3cd9f3418edb4eafda5fb16473d211'),
-]
-PUBKEYS2 = [bls.SkToPk(privkey) for privkey in PRIVKEYS2]
-
-Z1_PUBKEY = b'\xc0' + b'\x00' * 47
-NO_SIGNATURE = b'\x00' * 96
-Z2_SIGNATURE = b'\xc0' + b'\x00' * 95
-ZERO_PRIVKEY = 0
-ZERO_PRIVKEY_BYTES = b'\x00' * 32
 
 DST = b'QUUX-V01-CS02-with-BLS12381G2_XMD:SHA-256_SSWU_RO_'
 H = sha256
@@ -135,6 +81,12 @@ def expect_exception(func, *args):
     else:
         raise Exception("should have raised exception")
 
+def case01_add_G1():
+        
+        yield f'add_G1__{(hash(bytes("identifier", "utf-8"))[:8]).hex()}', [{
+            "Name": "bls_g1add_(g1+g1=2*g1)",
+        }]
+
 # Credit
 # test vectors taken from
 # https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/tree/master/poc/vectors
@@ -164,7 +116,7 @@ def case07_hash_to_G2():
         }
 
 test_kinds: Dict[str, Generator[Tuple[str, Any], None, None]] = {
-    'hash_to_G2': case07_hash_to_G2,
+    'add_G1': case01_add_G1,
 }
 
 
