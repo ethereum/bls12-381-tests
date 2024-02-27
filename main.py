@@ -12,8 +12,9 @@ from ruamel.yaml import YAML
 from hashlib import sha256
  
 
-from py_ecc.optimized_bls12_381 import (
-    G1
+from py_ecc.bls12_381 import (
+    G1,
+    add
 )
 
 from py_ecc.bls.hash_to_curve import hash_to_G2
@@ -25,7 +26,7 @@ def hash(x):
     return sha256(x).digest()
 
 def encode_hex(value: bytes) -> str:
-    return "0x" + value.hex()
+    return value.hex()
 
 def int_to_big_endian(value: int) -> bytes:
     return value.to_bytes((value.bit_length() + 7) // 8, byteorder='big')
@@ -38,6 +39,8 @@ def int_to_hex(n: int, byte_length: int = None) -> str:
 
 def hex_to_int(x: str) -> int:
     return int(x, 16)
+
+BLS12_G1ADD_GAS = 500
 
 MESSAGES = [
     bytes(b'\x00' * 32),
@@ -82,9 +85,13 @@ def expect_exception(func, *args):
         raise Exception("should have raised exception")
 
 def case01_add_G1():
-        
+        result = add(G1,G1)
         yield f'add_G1__{(hash(bytes("identifier", "utf-8"))[:8]).hex()}', [{
+            "Input": int_to_hex(int(G1[0]),64)+(int_to_hex(int(G1[1]),64))+int_to_hex(int(G1[0]),64)+(int_to_hex(int(G1[1]),64)),
             "Name": "bls_g1add_(g1+g1=2*g1)",
+            "Expected": int_to_hex(int(result[0]),64)+(int_to_hex(int(result[1]),64)),
+            "Gas": BLS12_G1ADD_GAS,
+             "NoBenchmark": False
         }]
 
 # Credit
