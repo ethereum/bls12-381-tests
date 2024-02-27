@@ -93,7 +93,7 @@ def case01_add_G1():
             "Name": "bls_g1add_(g1+g1=2*g1)",
             "Expected": int_to_hex(int(result[0]),64)+(int_to_hex(int(result[1]),64)),
             "Gas": BLS12_G1ADD_GAS,
-             "NoBenchmark": False
+            "NoBenchmark": False
         }]
 
 # Credit
