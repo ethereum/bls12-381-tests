@@ -88,7 +88,7 @@ def expect_exception(func, *args):
 def case01_add_G1():
         result = add(G1,G1)
         assert result == multiply(G1,2)
-        yield f'add_G1_bls', [{
+        yield f'add_G1_bls_g1_twice', [{
             "Input": int_to_hex(int(G1[0]),64)+(int_to_hex(int(G1[1]),64))+int_to_hex(int(G1[0]),64)+(int_to_hex(int(G1[1]),64)),
             "Name": "bls_g1add_(g1+g1=2*g1)",
             "Expected": int_to_hex(int(result[0]),64)+(int_to_hex(int(result[1]),64)),
