@@ -1,8 +1,6 @@
 # BLS 12-381 tests
 
-This repository provides a test-suite for the `BLS_SIG_BLS12381G2_XMD:SHA-256_SSWU_RO_POP_` ciphersuite (following [draft 4](https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-bls-signature-04)),
-as used in Ethereum 2.0 [BLS Signature APIs](https://github.com/ethereum/eth2.0-specs/blob/v1.0.0/specs/phase0/beacon-chain.md#bls-signatures),
-as well as common extensions such as signature-sets ([batch aggregate verification](https://ethresear.ch/t/fast-verification-of-multiple-bls-signatures/5407)) and serialization.
+This repository provides a test-suite for the [EIP-2537: Precompile for BLS12-381 curve operations](https://eips.ethereum.org/EIPS/eip-2537)
 
 The test suite is generated with python, and can be downloaded via the releases.
 We suggest the following for integration into your testing pipeline:
