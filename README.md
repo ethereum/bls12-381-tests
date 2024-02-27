@@ -14,8 +14,6 @@ wget https://github.com/ethereum/bls12-381-tests/releases/download/${TESTS_VERSI
 
 ## Resources
 
-- [IETF BLS Signature Scheme versions](https://datatracker.ietf.org/doc/draft-irtf-cfrg-bls-signature/)
-- [IETF BLS Signature Scheme draft 4](https://datatracker.ietf.org/doc/html/draft-irtf-cfrg-bls-signature-04)
 - [Finite Field Arithmetic](http://www.springeronline.com/sgw/cda/pageitems/document/cda_downloaddocument/0,11996,0-0-45-110359-0,00.pdf)
 - Chapter 2 of [Elliptic Curve Cryptography](http://cacr.uwaterloo.ca/ecc/). Darrel Hankerson, Alfred Menezes, and Scott Vanstone
 
@@ -23,14 +21,6 @@ wget https://github.com/ethereum/bls12-381-tests/releases/download/${TESTS_VERSI
 
 The BLS test suite runner has the following handlers:
 
-- [`aggregate_verify`](formats/aggregate_verify.md)
-- [`aggregate`](formats/aggregate.md)
-- [`fast_aggregate_verify`](formats/fast_aggregate_verify.md)
-- [`batch_verify`](formats/batch_verify.md)
-- [`sign`](formats/sign.md)
-- [`verify`](formats/verify.md)
-- [`hash_to_G2`](formats/hash_to_G2.md)
-- [`deserialization_G1`](formats/deserialization_G1.md)
 - [`deserialization_G2`](formats/deserialization_G2.md)
 
 
