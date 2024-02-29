@@ -106,6 +106,12 @@ def case01_add_G1():
         result_comm2 = add(P1,G1)
         assert result_comm1 == result_comm2
         
+        # Identity element
+        result_identity_G1 = add(G1,None)
+        assert G1 == result_identity_G1
+        result_identity_P1 = add(P1,None)
+        assert P1 == result_identity_P1
+
         # Additive negation
         result_neg_G1 = add(G1,neg(G1))
         assert(is_inf(result_neg_G1))
