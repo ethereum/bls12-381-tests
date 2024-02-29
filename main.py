@@ -98,6 +98,28 @@ def expect_exception(func, *args):
         raise Exception("should have raised exception")
 
 def case01_add_G1():
+        
+        # Commutativity
+        result1 = add(G1,P1)
+        result2 = add(P1,G1)
+        assert result1 == result2
+        yield f'add_G1_bls_g1_plus_p1', [{
+            "Input": int_to_hex(int(G1[0]),64)+(int_to_hex(int(G1[1]),64))+int_to_hex(int(P1[0]),64)+(int_to_hex(int(P1[1]),64)),
+            "Name": "bls_g1add_g1+p1",
+            "Expected": int_to_hex(int(result1[0]),64)+(int_to_hex(int(result1[1]),64)),
+            "Gas": BLS12_G1ADD_GAS,
+            "NoBenchmark": False
+        }]
+
+        yield f'add_G1_bls_p1_plus_g1', [{
+            "Input": int_to_hex(int(P1[0]),64)+(int_to_hex(int(P1[1]),64))+int_to_hex(int(G1[0]),64)+(int_to_hex(int(G1[1]),64)),
+            "Name": "bls_g1add_p1+g1",
+            "Expected": int_to_hex(int(result1[0]),64)+(int_to_hex(int(result1[1]),64)),
+            "Gas": BLS12_G1ADD_GAS,
+            "NoBenchmark": False
+        }]
+
+        # Doubling 
         result = add(G1,G1)
         assert result == multiply(G1,2)
         yield f'add_G1_bls_g1_twice', [{
@@ -117,7 +139,6 @@ def case01_add_G1():
             "Gas": BLS12_G1ADD_GAS,
             "NoBenchmark": False
         }]
-
 
 # Credit
 # test vectors taken from
