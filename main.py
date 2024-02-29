@@ -10,7 +10,6 @@ import json
 from ruamel.yaml import YAML
 
 from hashlib import sha256
- 
 
 from py_ecc.bls12_381 import (
     G1,
@@ -22,8 +21,7 @@ from py_ecc.bls12_381 import (
 )
 
 from py_ecc.optimized_bls12_381 import (
-    FQ2,
-    neg
+    FQ2
 )
 
 from py_ecc.bls.hash_to_curve import hash_to_G2
@@ -31,20 +29,25 @@ from py_ecc.bls.hash_to_curve import hash_to_G2
 def to_bytes32(i):
     return i.to_bytes(32, byteorder='big')
 
+
 def hash(x):
     return sha256(x).digest()
+
 
 def encode_hex(value: bytes) -> str:
     return value.hex()
 
+
 def int_to_big_endian(value: int) -> bytes:
     return value.to_bytes((value.bit_length() + 7) // 8, byteorder='big')
+
 
 def int_to_hex(n: int, byte_length: int = None) -> str:
     byte_value = int_to_big_endian(n)
     if byte_length:
         byte_value = byte_value.rjust(byte_length, b'\x00')
     return encode_hex(byte_value)
+
 
 def hex_to_int(x: str) -> int:
     return int(x, 16)
@@ -103,6 +106,7 @@ def expect_exception(func, *args):
         pass
     else:
         raise Exception("should have raised exception")
+
 
 def case01_add_G1():
         
