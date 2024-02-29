@@ -139,6 +139,12 @@ def case01_add_G1():
             "Expected": int_to_hex(0,64)+int_to_hex(0,64),
             "Gas": BLS12_G1ADD_GAS,
             "NoBenchmark": False
+            },          {
+            "Input": int_to_hex(int(P1[0]),64)+(int_to_hex(int(P1[1]),64))+int_to_hex(int(neg(P1)[0]),64)+(int_to_hex(int(neg(P1)[1]),64)),
+            "Name": "bls_g1add_(p1-p1=0)",
+            "Expected": int_to_hex(0,64)+int_to_hex(0,64),
+            "Gas": BLS12_G1ADD_GAS,
+            "NoBenchmark": False
             },
             {
             "Input": int_to_hex(int(G1[0]),64)+(int_to_hex(int(G1[1]),64))+int_to_hex(int(G1[0]),64)+(int_to_hex(int(G1[1]),64)),
