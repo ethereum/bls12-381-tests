@@ -14,6 +14,7 @@ from hashlib import sha256
 
 from py_ecc.bls12_381 import (
     G1,
+    FQ,
     add,
     multiply
 )
@@ -41,7 +42,18 @@ def int_to_hex(n: int, byte_length: int = None) -> str:
 def hex_to_int(x: str) -> int:
     return int(x, 16)
 
+# gas costs
 BLS12_G1ADD_GAS = 500
+
+# random point in G1
+P1 = (
+    FQ(
+        2642749686785829596817345696055666872043783053155481581788492942917249902143862050648544313423577373440886627275814  # noqa: E501
+    ),  # noqa: E501
+    FQ(
+        3758365293065836235831663685357329573226673833426684174336991792633405517674721205716466791757730149346109800483361  # noqa: E501
+    ),  # noqa: E501
+)
 
 MESSAGES = [
     bytes(b'\x00' * 32),
@@ -95,6 +107,17 @@ def case01_add_G1():
             "Gas": BLS12_G1ADD_GAS,
             "NoBenchmark": False
         }]
+
+        result = add(P1,P1)
+        assert result == multiply(P1,2)
+        yield f'add_G1_bls_p1_twice', [{
+            "Input": int_to_hex(int(P1[0]),64)+(int_to_hex(int(P1[1]),64))+int_to_hex(int(P1[0]),64)+(int_to_hex(int(P1[1]),64)),
+            "Name": "bls_p[1add_(p1+p1=2*p1)",
+            "Expected": int_to_hex(int(result[0]),64)+(int_to_hex(int(result[1]),64)),
+            "Gas": BLS12_G1ADD_GAS,
+            "NoBenchmark": False
+        }]
+
 
 # Credit
 # test vectors taken from
