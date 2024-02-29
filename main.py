@@ -21,6 +21,11 @@ from py_ecc.bls12_381 import (
     is_inf
 )
 
+from py_ecc.optimized_bls12_381 import (
+    FQ2,
+    neg
+)
+
 from py_ecc.bls.hash_to_curve import hash_to_G2
 
 def to_bytes32(i):
