@@ -132,7 +132,7 @@ def case01_add_G1():
 
     yield f'add_G1_bls', [
         {
-        "Input": int_to_hex(int(G1[0]), 64) + (int_to_hex(int(G1[1]), 64))+int_to_hex(int(P1[0]), 64) + (int_to_hex(int(P1[1]), 64)),
+        "Input": int_to_hex(int(G1[0]), 64) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(P1[0]), 64) + (int_to_hex(int(P1[1]), 64)),
         "Name": "bls_g1add_g1+p1",
         "Expected": int_to_hex(int(result_comm1[0]), 64) + (int_to_hex(int(result_comm1[1]), 64)),
         "Gas": BLS12_G1ADD_GAS,
@@ -146,72 +146,74 @@ def case01_add_G1():
         "NoBenchmark": False
         },
         {
-        "Input": int_to_hex(int(G1[0]), 64)+(int_to_hex(int(G1[1]), 64))+int_to_hex(0, 64)+int_to_hex(0, 64),
+        "Input": int_to_hex(int(G1[0]), 64) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(0, 64) + int_to_hex(0, 64),
         "Name": "bls_g1add_(g1+0=g1)",
-        "Expected": int_to_hex(int(G1[0]), 64)+(int_to_hex(int(G1[1]), 64)),
+        "Expected": int_to_hex(int(G1[0]), 64) + (int_to_hex(int(G1[1]), 64)),
         "Gas": BLS12_G1ADD_GAS,
         "NoBenchmark": False
         },
         {
-        "Input": int_to_hex(int(P1[0]), 64)+(int_to_hex(int(P1[1]), 64))+int_to_hex(0, 64)+int_to_hex(0, 64),
+        "Input": int_to_hex(int(P1[0]), 64) + (int_to_hex(int(P1[1]), 64)) + int_to_hex(0, 64) + int_to_hex(0, 64),
         "Name": "bls_g1add_(p1+0=p1)",
-        "Expected": int_to_hex(int(P1[0]), 64)+(int_to_hex(int(P1[1]), 64)),
+        "Expected": int_to_hex(int(P1[0]), 64) + (int_to_hex(int(P1[1]), 64)),
         "Gas": BLS12_G1ADD_GAS,
         "NoBenchmark": False
         },
         {
-        "Input": int_to_hex(int(G1[0]), 64)+(int_to_hex(int(G1[1]), 64))+int_to_hex(int(neg(G1)[0]), 64)+(int_to_hex(int(neg(G1)[1]), 64)),
+        "Input": int_to_hex(int(G1[0]), 64) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(neg(G1)[0]), 64) + (int_to_hex(int(neg(G1)[1]), 64)),
         "Name": "bls_g1add_(g1-g1=0)",
-        "Expected": int_to_hex(0, 64)+int_to_hex(0, 64),
+        "Expected": int_to_hex(0, 64) + int_to_hex(0, 64),
         "Gas": BLS12_G1ADD_GAS,
         "NoBenchmark": False
         },
         {
-        "Input": int_to_hex(int(P1[0]), 64)+(int_to_hex(int(P1[1]), 64))+int_to_hex(int(neg(P1)[0]), 64)+(int_to_hex(int(neg(P1)[1]), 64)),
+        "Input": int_to_hex(int(P1[0]), 64) + (int_to_hex(int(P1[1]), 64)) + int_to_hex(int(neg(P1)[0]), 64) + (int_to_hex(int(neg(P1)[1]), 64)),
         "Name": "bls_g1add_(p1-p1=0)",
-        "Expected": int_to_hex(0, 64)+int_to_hex(0, 64),
+        "Expected": int_to_hex(0, 64) + int_to_hex(0, 64),
         "Gas": BLS12_G1ADD_GAS,
         "NoBenchmark": False
         },
         {
-        "Input": int_to_hex(int(G1[0]), 64)+(int_to_hex(int(G1[1]), 64))+int_to_hex(int(G1[0]), 64)+(int_to_hex(int(G1[1]), 64)),
+        "Input": int_to_hex(int(G1[0]), 64) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(G1[0]), 64) + (int_to_hex(int(G1[1]), 64)),
         "Name": "bls_g1add_(g1+g1=2*g1)",
         "Expected": int_to_hex(int(result_doubling_G1[0]), 64) + (int_to_hex(int(result_doubling_G1[1]), 64)),
         "Gas": BLS12_G1ADD_GAS,
         "NoBenchmark": False
         },
         {
-        "Input": int_to_hex(int(P1[0]), 64)+(int_to_hex(int(P1[1]), 64))+int_to_hex(int(P1[0]), 64)+(int_to_hex(int(P1[1]), 64)),
+        "Input": int_to_hex(int(P1[0]), 64) + (int_to_hex(int(P1[1]), 64)) + int_to_hex(int(P1[0]), 64) + (int_to_hex(int(P1[1]), 64)),
         "Name": "bls_g1add_(p1+p1=2*p1)",
         "Expected": int_to_hex(int(result_doubling_P1[0]), 64) + (int_to_hex(int(result_doubling_P1[1]), 64)),
         "Gas": BLS12_G1ADD_GAS,
         "NoBenchmark": False
         },
         {
-        "Input": int_to_hex(int(G1[0]), 64)+(int_to_hex(int(G1[1]), 64))+int_to_hex(int(G1[0]), 64)+(int_to_hex(int(neg(G1)[1]), 64)),
+        "Input": int_to_hex(int(G1[0]), 64) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(G1[0]), 64) + (int_to_hex(int(neg(G1)[1]), 64)),
         "Name": "bls_g1add_(g1+(-g1)=0)",
-        "Expected": int_to_hex(0, 64)+int_to_hex(0, 64),
+        "Expected": int_to_hex(0, 64) + int_to_hex(0, 64),
         "Gas": BLS12_G1ADD_GAS,
         "NoBenchmark": False
         },
         {
-        "Input": int_to_hex(int(P1[0]), 64)+(int_to_hex(int(P1[1]), 64))+int_to_hex(int(P1[0]), 64)+(int_to_hex(int(neg(P1)[1]), 64)),
+        "Input": int_to_hex(int(P1[0]), 64) + (int_to_hex(int(P1[1]), 64)) + int_to_hex(int(P1[0]), 64) + (int_to_hex(int(neg(P1)[1]), 64)),
         "Name": "bls_g1add_(p1+(-p1)=0)",
-        "Expected": int_to_hex(0, 64)+int_to_hex(0, 64),
+        "Expected": int_to_hex(0, 64) + int_to_hex(0, 64),
         "Gas": BLS12_G1ADD_GAS,
         "NoBenchmark": False
         },
     ]
 
-    
+
 def case02_add_G2():
-    # Doubling 
+    # Doubling
     result_doubling_G2 = add(G2, G2)
     assert result_doubling_G2 == multiply(G2, 2)
     yield f'add_G2_bls', [
     {
     }
     ]
+
+
 # Credit
 # test vectors taken from
 # https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/tree/master/poc/vectors
@@ -239,6 +241,7 @@ def case07_hash_to_G2():
                 'y': f'{y_r},{y_i}'
             }
         }
+
 
 test_kinds: Dict[str, Generator[Tuple[str, Any], None, None]] = {
     'add_G1': case01_add_G1,
