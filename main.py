@@ -121,9 +121,9 @@ def case01_add_G1():
 
     # Additive negation
     result_neg_G1 = add(G1, neg(G1))
-    assert(is_inf(result_neg_G1))
+    assert (is_inf(result_neg_G1))
     result_neg_P1 = add(P1, neg(P1))
-    assert(is_inf(result_neg_P1))
+    assert (is_inf(result_neg_P1))
     # Doubling
     result_doubling_G1 = add(G1, G1)
     assert result_doubling_G1 == multiply(G1, 2)
