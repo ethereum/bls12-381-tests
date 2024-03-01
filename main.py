@@ -22,11 +22,8 @@ from py_ecc.bls12_381 import (
     is_inf
 )
 
-from py_ecc.optimized_bls12_381 import (
-    FQ2
-)
-
 from py_ecc.bls.hash_to_curve import hash_to_G2
+
 
 def to_bytes32(i):
     return i.to_bytes(32, byteorder='big')
@@ -53,6 +50,7 @@ def int_to_hex(n: int, byte_length: int = None) -> str:
 
 def hex_to_int(x: str) -> int:
     return int(x, 16)
+
 
 # gas costs
 BLS12_G1ADD_GAS = 500
@@ -111,42 +109,39 @@ def expect_exception(func, *args):
 
 
 def case01_add_G1():
-        
     # Commutativity
-    result_comm1 = add(G1,P1)
-    result_comm2 = add(P1,G1)
+    result_comm1 = add(G1, P1)
+    result_comm2 = add(P1, G1)
     assert result_comm1 == result_comm2
-    
     # Identity element
-    result_identity_G1 = add(G1,None)
+    result_identity_G1 = add(G1, None)
     assert G1 == result_identity_G1
-    result_identity_P1 = add(P1,None)
+    result_identity_P1 = add(P1, None)
     assert P1 == result_identity_P1
 
     # Additive negation
-    result_neg_G1 = add(G1,neg(G1))
+    result_neg_G1 = add(G1, neg(G1))
     assert(is_inf(result_neg_G1))
-    result_neg_P1 = add(P1,neg(P1))
+    result_neg_P1 = add(P1, neg(P1))
     assert(is_inf(result_neg_P1))
-
-    # Doubling 
-    result_doubling_G1 = add(G1,G1)
-    assert result_doubling_G1 == multiply(G1,2)
-    result_doubling_P1 = add(P1,P1)
-    assert result_doubling_P1 == multiply(P1,2)
+    # Doubling
+    result_doubling_G1 = add(G1, G1)
+    assert result_doubling_G1 == multiply(G1, 2)
+    result_doubling_P1 = add(P1, P1)
+    assert result_doubling_P1 == multiply(P1, 2)
 
     yield f'add_G1_bls', [
         {
-        "Input": int_to_hex(int(G1[0]),64)+(int_to_hex(int(G1[1]),64))+int_to_hex(int(P1[0]),64)+(int_to_hex(int(P1[1]),64)),
+        "Input": int_to_hex(int(G1[0]), 64) + (int_to_hex(int(G1[1]), 64))+int_to_hex(int(P1[0]), 64) + (int_to_hex(int(P1[1]), 64)),
         "Name": "bls_g1add_g1+p1",
-        "Expected": int_to_hex(int(result_comm1[0]),64)+(int_to_hex(int(result_comm1[1]),64)),
+        "Expected": int_to_hex(int(result_comm1[0]),64) + (int_to_hex(int(result_comm1[1]),64)),
         "Gas": BLS12_G1ADD_GAS,
         "NoBenchmark": False
         },
         {
-        "Input": int_to_hex(int(P1[0]),64)+(int_to_hex(int(P1[1]),64))+int_to_hex(int(G1[0]),64)+(int_to_hex(int(G1[1]),64)),
+        "Input": int_to_hex(int(P1[0]),64) + (int_to_hex(int(P1[1]),64)) + int_to_hex(int(G1[0]),64) + (int_to_hex(int(G1[1]),64)),
         "Name": "bls_g1add_p1+g1",
-        "Expected": int_to_hex(int(result_comm2[0]),64)+(int_to_hex(int(result_comm2[1]),64)),
+        "Expected": int_to_hex(int(result_comm2[0]),64) + (int_to_hex(int(result_comm2[1]), 64)),
         "Gas": BLS12_G1ADD_GAS,
         "NoBenchmark": False
         },
@@ -186,9 +181,9 @@ def case01_add_G1():
         "NoBenchmark": False
         },
         {
-        "Input": int_to_hex(int(P1[0]),64)+(int_to_hex(int(P1[1]),64))+int_to_hex(int(P1[0]),64)+(int_to_hex(int(P1[1]),64)),
+        "Input": int_to_hex(int(P1[0]),64)+(int_to_hex(int(P1[1]), 64))+int_to_hex(int(P1[0]), 64)+(int_to_hex(int(P1[1]),64)),
         "Name": "bls_p[1add_(p1+p1=2*p1)",
-        "Expected": int_to_hex(int(result_doubling_P1[0]),64)+(int_to_hex(int(result_doubling_P1[1]),64)),
+        "Expected": int_to_hex(int(result_doubling_P1[0]), 64)+(int_to_hex(int(result_doubling_P1[1]),64)),
         "Gas": BLS12_G1ADD_GAS,
         "NoBenchmark": False
         }
@@ -196,8 +191,8 @@ def case01_add_G1():
 
 def case02_add_G2():
     # Doubling 
-    result_doubling_G2 = add(G2,G2)
-    assert result_doubling_G2 == multiply(G2,2)
+    result_doubling_G2 = add(G2, G2)
+    assert result_doubling_G2 == multiply(G2, 2)
     yield f'add_G2_bls', [
     {
     }
