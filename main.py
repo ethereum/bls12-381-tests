@@ -137,7 +137,6 @@ def case01_add_G1():
     assert G1 == result_identity_G1
     result_identity_P1 = add(P1, None)
     assert P1 == result_identity_P1
-
     # Additive negation
     result_neg_G1 = add(G1, neg(G1))
     assert (is_inf(result_neg_G1))
@@ -228,6 +227,16 @@ def case02_add_G2():
     result_comm1 = add(G2, P2)
     result_comm2 = add(P2, G2)
     assert result_comm1 == result_comm2
+    # Identity element
+    result_identity_G2 = add(G2, None)
+    assert G2 == result_identity_G2
+    result_identity_P2 = add(P2, None)
+    assert P2 == result_identity_P2
+    # Additive negation
+    result_neg_G2 = add(G2, neg(G2))
+    assert (is_inf(result_neg_G2))
+    result_neg_P2 = add(P2, neg(P2))
+    assert (is_inf(result_neg_P2))
     # Doubling
     result_doubling_G2 = add(G2, G2)
     assert result_doubling_G2 == multiply(G2, 2)
