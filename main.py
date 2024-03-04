@@ -53,8 +53,9 @@ def hex_to_int(x: str) -> int:
 
 
 # gas costs
-BLS12_G1ADD_GAS = 500
-BLS12_G2ADD_GAS = 800
+# TODO to change
+BLS12_G1ADD_GAS = 600
+BLS12_G2ADD_GAS = 4500
 
 # random point in G1
 P1 = (
@@ -245,16 +246,23 @@ def case02_add_G2():
     yield 'add_G2_bls', [
         {
         "Input": int_to_hex(int(G2[0].coeffs[0]), 64) + int_to_hex(int(G2[0].coeffs[1]), 64) + int_to_hex(int(G2[1].coeffs[0]), 64) + int_to_hex(int(G2[1].coeffs[1]), 64) + int_to_hex(int(P2[0].coeffs[0]), 64) + int_to_hex(int(P2[0].coeffs[1]), 64) + int_to_hex(int(P2[1].coeffs[0]), 64) + int_to_hex(int(P2[1].coeffs[1]), 64),
-        "Name": "bls_g1add_g2+p2",
+        "Name": "bls_g2add_g2+p2",
         "Expected": int_to_hex(int(result_comm1[0].coeffs[0]), 64) + int_to_hex(int(result_comm1[0].coeffs[1]), 64) + int_to_hex(int(result_comm1[1].coeffs[0]), 64) + int_to_hex(int(result_comm1[1].coeffs[1]), 64),
-        "Gas": BLS12_G1ADD_GAS,
+        "Gas": BLS12_G2ADD_GAS,
         "NoBenchmark": False
         },
         {
         "Input": int_to_hex(int(P2[0].coeffs[0]), 64) + int_to_hex(int(P2[0].coeffs[1]), 64) + int_to_hex(int(P2[1].coeffs[0]), 64) + int_to_hex(int(P2[1].coeffs[1]), 64) + int_to_hex(int(G2[0].coeffs[0]), 64) + int_to_hex(int(G2[0].coeffs[1]), 64) + int_to_hex(int(G2[1].coeffs[0]), 64) + int_to_hex(int(G2[1].coeffs[1]), 64),
-        "Name": "bls_g1add_p2+g2",
+        "Name": "bls_g2add_p2+g2",
         "Expected": int_to_hex(int(result_comm2[0].coeffs[0]), 64) + int_to_hex(int(result_comm2[0].coeffs[1]), 64) + int_to_hex(int(result_comm2[1].coeffs[0]), 64) + int_to_hex(int(result_comm2[1].coeffs[1]), 64),
-        "Gas": BLS12_G1ADD_GAS,
+        "Gas": BLS12_G2ADD_GAS,
+        "NoBenchmark": False
+        },
+        {
+        "Input": int_to_hex(int(G2[0].coeffs[0]), 64) + int_to_hex(int(G2[0].coeffs[1]), 64) + int_to_hex(int(G2[1].coeffs[0]), 64) + int_to_hex(int(G2[1].coeffs[1]), 64) + int_to_hex(0, 64) + int_to_hex(0, 64) + int_to_hex(0, 64) + int_to_hex(0, 64),
+        "Name": "bls_g2add_(g2+0=g2)",
+        "Expected": int_to_hex(int(G2[0].coeffs[0]), 64) + int_to_hex(int(G2[0].coeffs[1]), 64) + int_to_hex(int(G2[1].coeffs[0]), 64) + int_to_hex(int(G2[1].coeffs[1]), 64),
+        "Gas": BLS12_G2ADD_GAS,
         "NoBenchmark": False
         },
         {
