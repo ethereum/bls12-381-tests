@@ -57,6 +57,7 @@ def hex_to_int(x: str) -> int:
 BLS12_G1ADD_GAS = 600
 BLS12_G2ADD_GAS = 4500
 BLS12_G1MUL_GAS = 12000
+BLS12_G2MUL_GAS = 55000
 
 # random point in G1
 P1 = (
@@ -299,6 +300,20 @@ def case03_mul_G1():
 
     yield 'mul_G1_bls', [
         {
+        "Input": int_to_hex(int(G1[0]), 64) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(2), 32),
+        "Name": "bls_g1mul_(g1+g1=2*g1)",
+        "Expected": int_to_hex(int(result_doubling_G1[0]), 64) + (int_to_hex(int(result_doubling_G1[1]), 64)),
+        "Gas": BLS12_G1MUL_GAS,
+        "NoBenchmark": False
+        },
+        {
+        "Input": int_to_hex(int(P1[0]), 64) + (int_to_hex(int(P1[1]), 64)) + int_to_hex(int(2), 32),
+        "Name": "bls_g1mul_(p1+p1=2*p1)",
+        "Expected": int_to_hex(int(result_doubling_P1[0]), 64) + (int_to_hex(int(result_doubling_P1[1]), 64)),
+        "Gas": BLS12_G1MUL_GAS,
+        "NoBenchmark": False
+        },
+        {
         "Input": int_to_hex(int(G1[0]), 64) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(1), 32),
         "Name": "bls_g1mul_(1*g1=g1)",
         "Expected": int_to_hex(int(G1[0]), 64) + (int_to_hex(int(G1[1]), 64)),
@@ -327,20 +342,6 @@ def case03_mul_G1():
         "NoBenchmark": False
         },
         {
-        "Input": int_to_hex(int(G1[0]), 64) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(2), 32),
-        "Name": "bls_g1mul_(g1+g1=2*g1)",
-        "Expected": int_to_hex(int(result_doubling_G1[0]), 64) + (int_to_hex(int(result_doubling_G1[1]), 64)),
-        "Gas": BLS12_G1MUL_GAS,
-        "NoBenchmark": False
-        },
-        {
-        "Input": int_to_hex(int(P1[0]), 64) + (int_to_hex(int(P1[1]), 64)) + int_to_hex(int(2), 32),
-        "Name": "bls_g1mul_(p1+p1=2*p1)",
-        "Expected": int_to_hex(int(result_doubling_P1[0]), 64) + (int_to_hex(int(result_doubling_P1[1]), 64)),
-        "Gas": BLS12_G1MUL_GAS,
-        "NoBenchmark": False
-        },
-        {
         "Input": int_to_hex(0, 64) + int_to_hex(0, 64) + int_to_hex(int(17), 32),
         "Name": "bls_g1mul_(x*inf=inf)",
         "Expected": int_to_hex(0, 64) + int_to_hex(0, 64),
@@ -357,6 +358,20 @@ def case04_mul_G2():
     result_doubling_P2 = add(P2, P2)
     assert result_doubling_P2 == multiply(P2, 2)
     yield 'mul_G2_bls', [
+        {
+        "Input": int_to_hex(int(G2[0].coeffs[0]), 64) + int_to_hex(int(G2[0].coeffs[1]), 64) + int_to_hex(int(G2[1].coeffs[0]), 64) + int_to_hex(int(G2[1].coeffs[1]), 64) + int_to_hex(int(2), 32),
+        "Name": "bls_g2mul_(g2+g2=2*g2)",
+        "Expected": int_to_hex(int(result_doubling_G2[0].coeffs[0]), 64) + int_to_hex(int(result_doubling_G2[0].coeffs[1]), 64) + int_to_hex(int(result_doubling_G2[1].coeffs[0]), 64) + int_to_hex(int(result_doubling_G2[1].coeffs[1]), 64),
+        "Gas": BLS12_G2MUL_GAS,
+        "NoBenchmark": False
+        },
+        {
+        "Input": int_to_hex(int(P2[0].coeffs[0]), 64) + int_to_hex(int(P2[0].coeffs[1]), 64) + int_to_hex(int(P2[1].coeffs[0]), 64) + int_to_hex(int(P2[1].coeffs[1]), 64) + int_to_hex(int(2), 32),
+        "Name": "bls_g2mul_(g2+g2=2*g2)",
+        "Expected": int_to_hex(int(result_doubling_P2[0].coeffs[0]), 64) + int_to_hex(int(result_doubling_P2[0].coeffs[1]), 64) + int_to_hex(int(result_doubling_P2[1].coeffs[0]), 64) + int_to_hex(int(result_doubling_P2[1].coeffs[1]), 64),
+        "Gas": BLS12_G2MUL_GAS,
+        "NoBenchmark": False
+        }
     ]
 
 
