@@ -399,6 +399,13 @@ def case04_mul_G2():
         "Expected": int_to_hex(0, 64) + int_to_hex(0, 64) + int_to_hex(0, 64) + int_to_hex(0, 64),
         "Gas": BLS12_G2MUL_GAS,
         "NoBenchmark": False
+        },
+        {
+        "Input": int_to_hex(0, 64) + int_to_hex(0, 64) + int_to_hex(0, 64) + int_to_hex(0, 64) + int_to_hex(int(17), 32),
+        "Name": "bls_g2mul_(x*inf=inf)",
+        "Expected": int_to_hex(0, 64) + int_to_hex(0, 64) + int_to_hex(0, 64) + int_to_hex(0, 64),
+        "Gas": BLS12_G2MUL_GAS,
+        "NoBenchmark": False
         }
     ]
 
