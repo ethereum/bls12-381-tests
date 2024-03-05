@@ -322,7 +322,7 @@ def case03_mul_G1():
         },
         {
         "Input": int_to_hex(int(P1[0]), 64) + (int_to_hex(int(P1[1]), 64)) + int_to_hex(int(1), 32),
-        "Name": "bls_g1mul_(1*g1=g1)",
+        "Name": "bls_g1mul_(1*p1=p1)",
         "Expected": int_to_hex(int(P1[0]), 64) + (int_to_hex(int(P1[1]), 64)),
         "Gas": BLS12_G1MUL_GAS,
         "NoBenchmark": False
