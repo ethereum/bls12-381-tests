@@ -56,6 +56,7 @@ def hex_to_int(x: str) -> int:
 # TODO to change
 BLS12_G1ADD_GAS = 600
 BLS12_G2ADD_GAS = 4500
+BLS12_G1MUL_GAS = 1200
 
 # random point in G1
 P1 = (
