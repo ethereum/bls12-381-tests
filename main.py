@@ -386,6 +386,20 @@ def case04_mul_G2():
         "Gas": BLS12_G2MUL_GAS,
         "NoBenchmark": False
         },
+        {
+        "Input": int_to_hex(int(G2[0].coeffs[0]), 64) + int_to_hex(int(G2[0].coeffs[1]), 64) + int_to_hex(int(G2[1].coeffs[0]), 64) + int_to_hex(int(G2[1].coeffs[1]), 64) + int_to_hex(int(0), 32),
+        "Name": "bls_g2mul_(0*g2=inf)",
+        "Expected": int_to_hex(0, 64) + int_to_hex(0, 64) + int_to_hex(0, 64) + int_to_hex(0, 64),
+        "Gas": BLS12_G2MUL_GAS,
+        "NoBenchmark": False
+        },
+        {
+        "Input": int_to_hex(int(P2[0].coeffs[0]), 64) + int_to_hex(int(P2[0].coeffs[1]), 64) + int_to_hex(int(P2[1].coeffs[0]), 64) + int_to_hex(int(P2[1].coeffs[1]), 64) + int_to_hex(int(0), 32),
+        "Name": "bls_g2mul_(0*p2=inf)",
+        "Expected": int_to_hex(0, 64) + int_to_hex(0, 64) + int_to_hex(0, 64) + int_to_hex(0, 64),
+        "Gas": BLS12_G2MUL_GAS,
+        "NoBenchmark": False
+        }
     ]
 
 
