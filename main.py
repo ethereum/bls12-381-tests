@@ -339,6 +339,13 @@ def case03_mul_G1():
         "Expected": int_to_hex(int(result_doubling_P1[0]), 64) + (int_to_hex(int(result_doubling_P1[1]), 64)),
         "Gas": BLS12_G1MUL_GAS,
         "NoBenchmark": False
+        },
+        {
+        "Input": int_to_hex(0, 64) + int_to_hex(0, 64) + int_to_hex(int(17), 32),
+        "Name": "bls_g1mul_(x*inf=inf)",
+        "Expected": int_to_hex(0, 64) + int_to_hex(0, 64),
+        "Gas": BLS12_G1MUL_GAS,
+        "NoBenchmark": False
         }
     ]
 
