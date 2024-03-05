@@ -313,6 +313,20 @@ def case03_mul_G1():
         "NoBenchmark": False
         },
         {
+        "Input": int_to_hex(int(G1[0]), 64) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(0), 32),
+        "Name": "bls_g1mul_(0*g1=inf)",
+        "Expected": int_to_hex(0, 64) + int_to_hex(0, 64),
+        "Gas": BLS12_G1MUL_GAS,
+        "NoBenchmark": False
+        },
+        {
+        "Input": int_to_hex(int(P1[0]), 64) + (int_to_hex(int(P1[1]), 64)) + int_to_hex(int(0), 32),
+        "Name": "bls_g1mul_(0*p1=inf)",
+        "Expected": int_to_hex(0, 64) + int_to_hex(0, 64),
+        "Gas": BLS12_G1MUL_GAS,
+        "NoBenchmark": False
+        },
+        {
         "Input": int_to_hex(int(G1[0]), 64) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(2), 32),
         "Name": "bls_g1mul_(g1+g1=2*g1)",
         "Expected": int_to_hex(int(result_doubling_G1[0]), 64) + (int_to_hex(int(result_doubling_G1[1]), 64)),
