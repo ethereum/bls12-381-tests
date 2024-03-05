@@ -350,6 +350,16 @@ def case03_mul_G1():
     ]
 
 
+def case04_mul_G2():
+    # Doubling
+    result_doubling_G2 = add(G2, G2)
+    assert result_doubling_G2 == multiply(G2, 2)
+    result_doubling_P2 = add(P2, P2)
+    assert result_doubling_P2 == multiply(P2, 2)
+    yield 'mul_G2_bls', [
+    ]
+
+
 # Credit
 # test vectors taken from
 # https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/tree/master/poc/vectors
@@ -382,7 +392,8 @@ def case07_hash_to_G2():
 test_kinds: Dict[str, Generator[Tuple[str, Any], None, None]] = {
     'add_G1': case01_add_G1,
     'add_G2': case02_add_G2,
-    'mul_G1': case03_mul_G1
+    'mul_G1': case03_mul_G1,
+    'mul_G2': case04_mul_G2
 }
 
 
