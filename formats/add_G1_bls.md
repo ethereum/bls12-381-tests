@@ -6,7 +6,7 @@ point addition in G1
 
 The test data is declared in a json file:
 
-```json
+```
 [
     {
         "Input": concatenation of two G1 points (128 bytes each),
