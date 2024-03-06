@@ -96,7 +96,7 @@ SAMPLE_MESSAGE = b'\x12' * 32
 
 DST = b'QUUX-V01-CS02-with-BLS12381G2_XMD:SHA-256_SSWU_RO_'
 H = sha256
-HASH_MESSAGES = [
+HASH_G2_MESSAGES = [
     (b'',
      '0x0141ebfbdca40eb85b87142e130ab689c673cf60f1a3e98d69335266f30d9b8d4ac44c1038e9dcdd5393faf5c41fb78a',
      '0x05cb8437535e20ecffaef7752baddf98034139c38452458baeefab379ba13dff5bf5dd71b72418717047f5b0f37da03d',
@@ -413,6 +413,14 @@ def case04_mul_G2():
 # Credit
 # test vectors taken from
 # https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/tree/master/poc/vectors
+def case05_map_fp_to_G1():
+    yield 'map_fp_to_G1_bls', [
+    ]
+
+
+# Credit
+# test vectors taken from
+# https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/tree/master/poc/vectors
 def case07_hash_to_G2():
     for (msg, x_r, x_i, y_r, y_i) in HASH_MESSAGES:
         point = hash_to_G2(msg, DST, H)
@@ -443,7 +451,8 @@ test_kinds: Dict[str, Generator[Tuple[str, Any], None, None]] = {
     'add_G1': case01_add_G1,
     'add_G2': case02_add_G2,
     'mul_G1': case03_mul_G1,
-    'mul_G2': case04_mul_G2
+    'mul_G2': case04_mul_G2,
+    'map_fp_to_G1': case05_map_fp_to_G1
 }
 
 
