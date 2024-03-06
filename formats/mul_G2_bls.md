@@ -1,6 +1,6 @@
 # Test format: 'BLS12_G2MUL'
 
-point addition in G2
+point multiplication in G2
 
 ## Test case format
 
