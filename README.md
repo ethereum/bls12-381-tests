@@ -21,7 +21,7 @@ wget https://github.com/ethereum/bls12-381-tests/releases/download/${TESTS_VERSI
 
 The BLS test suite runner has the following handlers:
 
-- [`deserialization_G2`](formats/deserialization_G2.md)
+- [`BLS12_G1ADD`](formats/add_G1_bls.md)
 
 
 ## Test generation
