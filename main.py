@@ -422,7 +422,7 @@ def case05_map_fp_to_G1():
 # test vectors taken from
 # https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/tree/master/poc/vectors
 def case07_hash_to_G2():
-    for (msg, x_r, x_i, y_r, y_i) in HASH_MESSAGES:
+    for (msg, x_r, x_i, y_r, y_i) in HASH_G2_MESSAGES:
         point = hash_to_G2(msg, DST, H)
         # Affine
         result_x = point[0] / point[2]  # X / Z
