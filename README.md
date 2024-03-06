@@ -39,7 +39,7 @@ pip install -r requirements.txt
 # Create output dir
 mkdir out
 # Run test generator
-python main.py --output-dir=out --encoding=yaml
+python main.py --output-dir=out --encoding=json
 ```
 
 ## License
