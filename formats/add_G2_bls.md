@@ -1,6 +1,6 @@
-# Test format: 'BLS12_G1ADD'
+# Test format: 'BLS12_G2ADD'
 
-point addition in G1
+point addition in G2
 
 ## Test case format
 
