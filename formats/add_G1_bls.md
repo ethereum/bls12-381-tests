@@ -4,7 +4,7 @@ point addition in G1
 
 ## Test case format
 
-The test data is declared in a json file:
+The test data is declared in a 'json' file:
 
 ```
 [
