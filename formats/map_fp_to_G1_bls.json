@@ -1,4 +1,4 @@
-# Test format: 'BLS12_MAP_FP_TO_G1'
+# Test format: `BLS12_MAP_FP_TO_G1`
 
 maps base field element into the G1 point 
 
