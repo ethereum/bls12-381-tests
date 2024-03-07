@@ -479,8 +479,7 @@ def case06_map_fp2_to_G2():
         "Expected": HASH_G2_MESSAGES[1][3] + HASH_G2_MESSAGES[1][4] + HASH_G2_MESSAGES[1][5] + HASH_G2_MESSAGES[1][6],
         "Gas": BLS12_MAP_FP2_TO_G2_GAS,
         "NoBenchmark": False
-        },
-
+        }
     ]
 
 
