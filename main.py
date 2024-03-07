@@ -22,8 +22,6 @@ from py_ecc.bls12_381 import (
     is_inf
 )
 
-from py_ecc.bls.hash_to_curve import hash_to_G2
-
 
 def to_bytes32(i):
     return i.to_bytes(32, byteorder='big')
@@ -59,6 +57,7 @@ BLS12_G2ADD_GAS = 4500
 BLS12_G1MUL_GAS = 12000
 BLS12_G2MUL_GAS = 55000
 BLS12_MAP_FP_TO_G1_GAS = 5500
+BLS12_MAP_FP2_TO_G2_GAS = 75000
 
 # random point in G1
 P1 = (
@@ -111,9 +110,6 @@ HASH_G1_MESSAGES = [
      '000000000000000000000000000000000ae89e677711d05c30a48d6d75e76ca9fb70fe06c6dd6ff988683d89ccde29ac7d46c53bb97a59b1901abf1db66052db')
 ]
 
-
-DST = b'QUUX-V01-CS02-with-BLS12381G2_XMD:SHA-256_SSWU_RO_'
-H = sha256
 HASH_G2_MESSAGES = [
     (b'',
      '0141ebfbdca40eb85b87142e130ab689c673cf60f1a3e98d69335266f30d9b8d4ac44c1038e9dcdd5393faf5c41fb78a',
@@ -468,31 +464,10 @@ def case05_map_fp_to_G1():
 
 # Credit
 # test vectors taken from
-# https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/tree/master/poc/vectors
-def case07_hash_to_G2():
-    for (msg, x_r, x_i, y_r, y_i) in HASH_G2_MESSAGES:
-        point = hash_to_G2(msg, DST, H)
-        # Affine
-        result_x = point[0] / point[2]  # X / Z
-        result_y = point[1] / point[2]  # Y / Z
-
-        x = FQ2([hex_to_int(x_r), hex_to_int(x_i)])
-        y = FQ2([hex_to_int(y_r), hex_to_int(y_i)])
-
-        assert x == result_x
-        assert y == result_y
-
-        identifier = f'{encode_hex(msg)}'
-
-        yield f'hash_to_G2__{(hash(bytes(identifier, "utf-8"))[:8]).hex()}', {
-            'input': {
-                'msg': msg.decode('utf-8')
-            },
-            'output': {
-                'x': f'{x_r},{x_i}',
-                'y': f'{y_r},{y_i}'
-            }
-        }
+# https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/blob/main/poc/vectors/BLS12381G2_XMD%3ASHA-256_SSWU_NU_.json
+def case06_map_fp2_to_G2():
+    yield 'map_fp2_to_G2_bls', [
+    ]
 
 
 test_kinds: Dict[str, Generator[Tuple[str, Any], None, None]] = {
@@ -500,7 +475,8 @@ test_kinds: Dict[str, Generator[Tuple[str, Any], None, None]] = {
     'add_G2': case02_add_G2,
     'mul_G1': case03_mul_G1,
     'mul_G2': case04_mul_G2,
-    'map_fp_to_G1': case05_map_fp_to_G1
+    'map_fp_to_G1': case05_map_fp_to_G1,
+    'map_fp_to_G2': case06_map_fp2_to_G2
 }
 
 
