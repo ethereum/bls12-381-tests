@@ -58,6 +58,7 @@ BLS12_G1ADD_GAS = 600
 BLS12_G2ADD_GAS = 4500
 BLS12_G1MUL_GAS = 12000
 BLS12_G2MUL_GAS = 55000
+BLS12_MAP_FP_TO_G1_GAS = 5500
 
 # random point in G1
 P1 = (
@@ -85,6 +86,14 @@ P2 = (
         ]
     ),
 )
+
+
+HASH_G1_MESSAGES = [
+    (b'',
+     '00000000000000000000000000000000156c8a6a2c184569d69a76be144b5cdc5141d2d2ca4fe341f011e25e3969c55ad9e9b9ce2eb833c81a908e5fa4ac5f03',
+     '00000000000000000000000000000000184bb665c37ff561a89ec2122dd343f20e0f4cbcaec84e3c3052ea81d1834e192c426074b02ed3dca4e7676ce4ce48ba',
+     '0000000000000000000000000000000004407b8d35af4dacc809927071fc0405218f1401a6d15af775810e4e460064bcc9468beeba82fdc751be70476c888bf3'),
+]
 
 
 DST = b'QUUX-V01-CS02-with-BLS12381G2_XMD:SHA-256_SSWU_RO_'
@@ -407,7 +416,15 @@ def case04_mul_G2():
 # test vectors taken from
 # https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/tree/master/poc/vectors
 def case05_map_fp_to_G1():
+
     yield 'map_fp_to_G1_bls', [
+        {
+        "Input": HASH_G1_MESSAGES[0][1],
+        "Name": encode_hex(HASH_G1_MESSAGES[0][0]),
+        "Expected": HASH_G1_MESSAGES[0][2] + HASH_G1_MESSAGES[0][3],
+        "Gas": BLS12_MAP_FP_TO_G1_GAS,
+        "NoBenchmark": False
+        }
     ]
 
 
