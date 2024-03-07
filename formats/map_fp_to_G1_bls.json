@@ -1,6 +1,6 @@
-# Test format: `BLS12_MAP_FP_TO_G1`
+# Test format: 'BLS12_G1ADD'
 
-maps base field element into the G1 point 
+point addition in G1
 
 ## Test case format
 
