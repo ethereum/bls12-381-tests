@@ -462,7 +462,7 @@ def case06_map_fp2_to_G2():
         {
         "Input": HASH_G2_MESSAGES[0][1] + HASH_G2_MESSAGES[0][2],
         "Name": "bls_g2map_" + encode_hex(HASH_G2_MESSAGES[0][0])[0:16],
-        "Expected": HASH_G2_MESSAGES[0][3] + HASH_G2_MESSAGES[0][4] + HASH_G2_MESSAGES[0][3] + HASH_G2_MESSAGES[0][4],
+        "Expected": HASH_G2_MESSAGES[0][3] + HASH_G2_MESSAGES[0][4] + HASH_G2_MESSAGES[0][5] + HASH_G2_MESSAGES[0][6],
         "Gas": BLS12_MAP_FP2_TO_G2_GAS,
         "NoBenchmark": False
         }
