@@ -9,7 +9,7 @@ The test data is declared in a 'json' file:
 ```
 [
     {
-        "Input": 64 bytes as an input that is interpreted as an element of the base field.,
+        "Input": 64 bytes as an input that is interpreted as an element of the base field,
         "Name": the name of the test,
         "Expected": single G1 point 128 bytes,
         "Gas": the cost of the gas,
