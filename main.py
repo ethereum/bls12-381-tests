@@ -87,8 +87,6 @@ P2 = (
 )
 
 
- 
-
 DST = b'QUUX-V01-CS02-with-BLS12381G2_XMD:SHA-256_SSWU_RO_'
 H = sha256
 HASH_G2_MESSAGES = [
