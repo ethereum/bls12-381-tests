@@ -25,6 +25,7 @@ The BLS test suite runner has the following handlers:
 - [`BLS12_G2ADD`](formats/add_G2_bls.md)
 - [`BLS12_G1MUL`](formats/mul_G1_bls.md)
 - [`BLS12_G2MUL`](formats/mul_G2_bls.md)
+- [`BLS12_MAP_FP_TO_G1`](formats/map_fp_to_G1_bls.md)
 
 
 ## Test generation
