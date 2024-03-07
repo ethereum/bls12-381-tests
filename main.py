@@ -430,35 +430,35 @@ def case05_map_fp_to_G1():
     yield 'map_fp_to_G1_bls', [
         {
         "Input": HASH_G1_MESSAGES[0][1],
-        "Name": "bls_g1map_" + encode_hex(HASH_G1_MESSAGES[0][0]),
+        "Name": "bls_g1map_" + encode_hex(HASH_G1_MESSAGES[0][0])[0:16],
         "Expected": HASH_G1_MESSAGES[0][2] + HASH_G1_MESSAGES[0][3],
         "Gas": BLS12_MAP_FP_TO_G1_GAS,
         "NoBenchmark": False
         },
         {
         "Input": HASH_G1_MESSAGES[1][1],
-        "Name": "bls_g1map_" + encode_hex(HASH_G1_MESSAGES[1][0]),
+        "Name": "bls_g1map_" + encode_hex(HASH_G1_MESSAGES[1][0])[0:16],
         "Expected": HASH_G1_MESSAGES[1][2] + HASH_G1_MESSAGES[1][3],
         "Gas": BLS12_MAP_FP_TO_G1_GAS,
         "NoBenchmark": False
         },
         {
         "Input": HASH_G1_MESSAGES[2][1],
-        "Name": "bls_g1map_" + encode_hex(HASH_G1_MESSAGES[2][0]),
+        "Name": "bls_g1map_" + encode_hex(HASH_G1_MESSAGES[2][0])[0:16],
         "Expected": HASH_G1_MESSAGES[2][2] + HASH_G1_MESSAGES[2][3],
         "Gas": BLS12_MAP_FP_TO_G1_GAS,
         "NoBenchmark": False
         },
         {
         "Input": HASH_G1_MESSAGES[3][1],
-        "Name": "bls_g1map_" + encode_hex(HASH_G1_MESSAGES[3][0]),
+        "Name": "bls_g1map_" + encode_hex(HASH_G1_MESSAGES[3][0])[0:16],
         "Expected": HASH_G1_MESSAGES[3][2] + HASH_G1_MESSAGES[3][3],
         "Gas": BLS12_MAP_FP_TO_G1_GAS,
         "NoBenchmark": False
         },
         {
         "Input": HASH_G1_MESSAGES[4][1],
-        "Name": "bls_g1map_" + encode_hex(HASH_G1_MESSAGES[4][0]),
+        "Name": "bls_g1map_" + encode_hex(HASH_G1_MESSAGES[4][0])[0:16],
         "Expected": HASH_G1_MESSAGES[4][2] + HASH_G1_MESSAGES[4][3],
         "Gas": BLS12_MAP_FP_TO_G1_GAS,
         "NoBenchmark": False
