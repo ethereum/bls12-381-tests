@@ -87,12 +87,7 @@ P2 = (
 )
 
 
-MESSAGES = [
-    bytes(b'\x00' * 32),
-    bytes(b'\x56' * 32),
-    bytes(b'\xab' * 32),
-]
-SAMPLE_MESSAGE = b'\x12' * 32
+ 
 
 DST = b'QUUX-V01-CS02-with-BLS12381G2_XMD:SHA-256_SSWU_RO_'
 H = sha256
