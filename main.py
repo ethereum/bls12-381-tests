@@ -414,7 +414,7 @@ def case04_mul_G2():
 
 # Credit
 # test vectors taken from
-# https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/tree/master/poc/vectors
+# https://github.com/cfrg/draft-irtf-cfrg-hash-to-curve/blob/main/poc/vectors/BLS12381G1_XMD%3ASHA-256_SSWU_NU_.json
 def case05_map_fp_to_G1():
 
     yield 'map_fp_to_G1_bls', [
