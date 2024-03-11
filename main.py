@@ -19,7 +19,21 @@ from py_ecc.bls12_381 import (
     add,
     multiply,
     neg,
-    is_inf
+    is_inf,
+    field_modulus as q
+)
+
+
+from py_ecc.bls.typing import (
+    G1Compressed,
+    G1Uncompressed
+)
+
+
+from py_ecc.bls.constants import (
+    POW_2_381,
+    POW_2_382,
+    POW_2_383
 )
 
 
@@ -48,6 +62,25 @@ def int_to_hex(n: int, byte_length: int = None) -> str:
 
 def hex_to_int(x: str) -> int:
     return int(x, 16)
+
+
+def compress_G1(pt: G1Uncompressed) -> G1Compressed:
+    """
+    A compressed point is a 384-bit integer with the bit order
+    (c_flag, b_flag, a_flag, x), where the c_flag bit is always set to 1,
+    the b_flag bit indicates infinity when set to 1,
+    the a_flag bit helps determine the y-coordinate when decompressing,
+    and the 381-bit integer x is the x-coordinate of the point.
+    """
+    if is_inf(pt):
+        # Set c_flag = 1 and b_flag = 1. leave a_flag = x = 0
+        return G1Compressed(POW_2_383 + POW_2_382)
+    else:
+        x, y = pt[0], pt[1]
+        # Record y's leftmost bit to the a_flag
+        a_flag = (y.n * 2) // q
+        # Set c_flag = 1 and b_flag = 0
+        return G1Compressed(x.n + a_flag * POW_2_381 + POW_2_383)
 
 
 # gas costs
