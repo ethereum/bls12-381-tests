@@ -683,7 +683,7 @@ def case07_multiexp_G1():
                 int(25345834), 32),
         "Name": "bls_g1multiexp_multiple",
         "Expected": int_to_hex(int(g1multiexp[0]), 64) + (int_to_hex(int(g1multiexp[1]), 64)),
-        "Gas": int((3 * BLS12_G1MUL_GAS * BLS12_MULTIEXP_DISCOUNT_TABLE[2][1]) / 1000),
+        "Gas": int((7 * BLS12_G1MUL_GAS * BLS12_MULTIEXP_DISCOUNT_TABLE[6][1]) / 1000),
         "NoBenchmark": False
         }
     ]
