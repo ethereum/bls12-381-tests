@@ -592,6 +592,11 @@ def case07_multiexp_G1():
     g1s = [G1Point(), G1Point.from_compressed_bytes(bytes.fromhex(int_to_hex(compress_G1(P1))))]
     scalars = [Scalar(2), Scalar(2)]
     doubleP1G1 = decompress_G1(G1Compressed(os2ip(bytes.fromhex(str(G1Point.multiexp_unchecked(g1s, scalars))))))
+    H1 = (FQ(hex_to_int(HASH_G1_MESSAGES[0][2])), FQ(hex_to_int(HASH_G1_MESSAGES[0][3])))
+    g1s = [G1Point(), G1Point.from_compressed_bytes(bytes.fromhex(int_to_hex(compress_G1(P1)))), G1Point.from_compressed_bytes(bytes.fromhex(int_to_hex(compress_G1(H1))))]
+    scalars = [Scalar(2), Scalar(2), Scalar(25345834)]
+    g1multiexp = decompress_G1(G1Compressed(os2ip(bytes.fromhex(str(G1Point.multiexp_unchecked(g1s, scalars))))))
+
     yield 'multiexp_G1_bls', [
         {
         "Input": int_to_hex(int(G1[0]), 64) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(2), 32),
@@ -661,6 +666,13 @@ def case07_multiexp_G1():
         "Name": "bls_g1multiexp_(2g1+2p1)",
         "Expected": int_to_hex(int(doubleP1G1[0]), 64) + (int_to_hex(int(doubleP1G1[1]), 64)),
         "Gas": int((2 * BLS12_G1MUL_GAS * BLS12_MULTIEXP_DISCOUNT_TABLE[1][1]) / 1000),
+        "NoBenchmark": False
+        },
+        {
+        "Input": int_to_hex(int(G1[0]), 64) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(2), 32) + int_to_hex(int(P1[0]), 64) + (int_to_hex(int(P1[1]), 64)) + int_to_hex(int(2), 32) + int_to_hex(int(H1[0]), 64) + (int_to_hex(int(H1[1]), 64)) + int_to_hex(int(25345834), 32),
+        "Name": "bls_g1multiexp_multiple",
+        "Expected": int_to_hex(int(g1multiexp[0]), 64) + (int_to_hex(int(g1multiexp[1]), 64)),
+        "Gas": int((3 * BLS12_G1MUL_GAS * BLS12_MULTIEXP_DISCOUNT_TABLE[2][1]) / 1000),
         "NoBenchmark": False
         }
     ]
