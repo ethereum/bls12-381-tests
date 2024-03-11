@@ -1,6 +1,6 @@
 # Test format: 'BLS12_G1MULTIEXP'
 
-point multiplication in G1
+multiexponentiation in G1
 
 ## Test case format
 
