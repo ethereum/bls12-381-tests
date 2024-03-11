@@ -669,7 +669,9 @@ def case07_multiexp_G1():
         "NoBenchmark": False
         },
         {
-        "Input": int_to_hex(int(G1[0]), 64) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(2), 32) + int_to_hex(int(P1[0]), 64) + (int_to_hex(int(P1[1]), 64)) + int_to_hex(int(2), 32) + int_to_hex(int(H1[0]), 64) + (int_to_hex(int(H1[1]), 64)) + int_to_hex(int(25345834), 32),
+        "Input": int_to_hex(int(G1[0]), 64) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(2), 32) + int_to_hex(int(P1[0]), 64) + (
+            int_to_hex(int(P1[1]), 64)) + int_to_hex(int(2), 32) + int_to_hex(int(H1[0]), 64) + (int_to_hex(int(H1[1]), 64)) + int_to_hex(
+                int(25345834), 32),
         "Name": "bls_g1multiexp_multiple",
         "Expected": int_to_hex(int(g1multiexp[0]), 64) + (int_to_hex(int(g1multiexp[1]), 64)),
         "Gas": int((3 * BLS12_G1MUL_GAS * BLS12_MULTIEXP_DISCOUNT_TABLE[2][1]) / 1000),
