@@ -593,8 +593,17 @@ def case07_multiexp_G1():
     scalars = [Scalar(2), Scalar(2)]
     doubleP1G1 = decompress_G1(G1Compressed(os2ip(bytes.fromhex(str(G1Point.multiexp_unchecked(g1s, scalars))))))
     H1 = (FQ(hex_to_int(HASH_G1_MESSAGES[0][2])), FQ(hex_to_int(HASH_G1_MESSAGES[0][3])))
-    g1s = [G1Point(), G1Point.from_compressed_bytes(bytes.fromhex(int_to_hex(compress_G1(P1)))), G1Point.from_compressed_bytes(bytes.fromhex(int_to_hex(compress_G1(H1))))]
-    scalars = [Scalar(2), Scalar(2), Scalar(25345834)]
+    H2 = (FQ(hex_to_int(HASH_G1_MESSAGES[1][2])), FQ(hex_to_int(HASH_G1_MESSAGES[1][3])))
+    H3 = (FQ(hex_to_int(HASH_G1_MESSAGES[2][2])), FQ(hex_to_int(HASH_G1_MESSAGES[2][3])))
+    H4 = (FQ(hex_to_int(HASH_G1_MESSAGES[3][2])), FQ(hex_to_int(HASH_G1_MESSAGES[3][3])))
+    H5 = (FQ(hex_to_int(HASH_G1_MESSAGES[4][2])), FQ(hex_to_int(HASH_G1_MESSAGES[4][3])))
+    g1s = [G1Point(), G1Point.from_compressed_bytes(bytes.fromhex(int_to_hex(compress_G1(P1)))), G1Point.from_compressed_bytes(
+        bytes.fromhex(int_to_hex(compress_G1(H1)))), G1Point.from_compressed_bytes(
+        bytes.fromhex(int_to_hex(compress_G1(H2)))), G1Point.from_compressed_bytes(
+        bytes.fromhex(int_to_hex(compress_G1(H3)))), G1Point.from_compressed_bytes(
+        bytes.fromhex(int_to_hex(compress_G1(H4)))), G1Point.from_compressed_bytes(
+        bytes.fromhex(int_to_hex(compress_G1(H5))))]
+    scalars = [Scalar(2), Scalar(2), Scalar(25345834), Scalar(4249239), Scalar(242120101010101011010104), Scalar(21205), Scalar(342343242)]
     g1multiexp = decompress_G1(G1Compressed(os2ip(bytes.fromhex(str(G1Point.multiexp_unchecked(g1s, scalars))))))
 
     yield 'multiexp_G1_bls', [
