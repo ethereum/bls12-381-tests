@@ -549,7 +549,42 @@ def case07_multiexp_G1():
         "Gas": int((1 * BLS12_G1MUL_GAS * BLS12_MULTIEXP_DISCOUNT_TABLE[0][1]) / 1000),
         "NoBenchmark": False
         },
-                {
+        {
+        "Input": int_to_hex(int(G1[0]), 64) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(1), 32),
+        "Name": "bls_g1multiexp_(1*g1=g1)",
+        "Expected": int_to_hex(int(G1[0]), 64) + (int_to_hex(int(G1[1]), 64)),
+        "Gas": int((1 * BLS12_G1MUL_GAS * BLS12_MULTIEXP_DISCOUNT_TABLE[0][1]) / 1000),
+        "NoBenchmark": False
+        },
+        {
+        "Input": int_to_hex(int(P1[0]), 64) + (int_to_hex(int(P1[1]), 64)) + int_to_hex(int(1), 32),
+        "Name": "bls_g1multiexp_(1*p1=p1)",
+        "Expected": int_to_hex(int(P1[0]), 64) + (int_to_hex(int(P1[1]), 64)),
+        "Gas": int((1 * BLS12_G1MUL_GAS * BLS12_MULTIEXP_DISCOUNT_TABLE[0][1]) / 1000),
+        "NoBenchmark": False
+        },
+        {
+        "Input": int_to_hex(int(G1[0]), 64) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(0), 32),
+        "Name": "bls_g1multiexp_(0*g1=inf)",
+        "Expected": int_to_hex(0, 64) + int_to_hex(0, 64),
+        "Gas": int((1 * BLS12_G1MUL_GAS * BLS12_MULTIEXP_DISCOUNT_TABLE[0][1]) / 1000),
+        "NoBenchmark": False
+        },
+        {
+        "Input": int_to_hex(int(P1[0]), 64) + (int_to_hex(int(P1[1]), 64)) + int_to_hex(int(0), 32),
+        "Name": "bls_g1multiexp_(0*p1=inf)",
+        "Expected": int_to_hex(0, 64) + int_to_hex(0, 64),
+        "Gas": int((1 * BLS12_G1MUL_GAS * BLS12_MULTIEXP_DISCOUNT_TABLE[0][1]) / 1000),
+        "NoBenchmark": False
+        },
+        {
+        "Input": int_to_hex(0, 64) + int_to_hex(0, 64) + int_to_hex(int(17), 32),
+        "Name": "bls_g1multiexp_(x*inf=inf)",
+        "Expected": int_to_hex(0, 64) + int_to_hex(0, 64),
+        "Gas": int((1 * BLS12_G1MUL_GAS * BLS12_MULTIEXP_DISCOUNT_TABLE[0][1]) / 1000),
+        "NoBenchmark": False
+        },
+        {
         "Input": int_to_hex(int(G1[0]), 64) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(2), 32) + int_to_hex(int(P1[0]), 64) + (int_to_hex(int(P1[1]), 64)) + int_to_hex(int(2), 32),
         "Name": "bls_g1multiexp_(2g1+2p1)",
         "Expected": int_to_hex(int(doubleP1G1[0]), 64) + (int_to_hex(int(doubleP1G1[1]), 64)),
