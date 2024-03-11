@@ -591,7 +591,7 @@ def case07_multiexp_G1():
     assert result_doubling_P1 == multiply(P1, 2)
     g1s = [G1Point(), G1Point.from_compressed_bytes(bytes.fromhex(int_to_hex(compress_G1(P1))))]
     scalars = [Scalar(2), Scalar(2)]
-    doubleP1G1 = decompress_G1(G1Compressed(G1Compressed(os2ip(bytes.fromhex(str(G1Point.multiexp_unchecked(g1s, scalars)))))))
+    doubleP1G1 = decompress_G1(G1Compressed(os2ip(bytes.fromhex(str(G1Point.multiexp_unchecked(g1s, scalars))))))
     yield 'multiexp_G1_bls', [
         {
         "Input": int_to_hex(int(G1[0]), 64) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(2), 32),
