@@ -596,7 +596,7 @@ def case07_multiexp_G1():
         bytes.fromhex(int_to_hex(compress_G1(H3)))), G1Point.from_compressed_bytes(
         bytes.fromhex(int_to_hex(compress_G1(H4)))), G1Point.from_compressed_bytes(
         bytes.fromhex(int_to_hex(compress_G1(H5))))]
-    scalars = [Scalar(2), Scalar(2), Scalar(25345834), Scalar(4249239), Scalar(242120101010101011010104), Scalar(21205), Scalar(342343242)]
+    scalars = [Scalar(2), Scalar(2), Scalar(2), Scalar(2), Scalar(2), Scalar(2), Scalar(2)]
     g1multiexp = decompress_G1(G1Compressed(os2ip(bytes.fromhex(str(G1Point.multiexp_unchecked(g1s, scalars))))))
 
     yield 'multiexp_G1_bls', [
@@ -671,9 +671,9 @@ def case07_multiexp_G1():
         "NoBenchmark": False
         },
         {
-        "Input": int_to_hex(int(G1[0]), 64) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(2), 32) + int_to_hex(int(P1[0]), 64) + (
-            int_to_hex(int(P1[1]), 64)) + int_to_hex(int(2), 32) + int_to_hex(int(H1[0]), 64) + (int_to_hex(int(H1[1]), 64)) + int_to_hex(
-                int(25345834), 32) + int_to_hex(int(H2[0]), 64) + (int_to_hex(int(H2[1]), 64)) + int_to_hex(
+        "Input": int_to_hex(int(G1[0]), 64) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(str(scalars[0])), 32) + int_to_hex(int(P1[0]), 64) + (
+            int_to_hex(int(P1[1]), 64)) + int_to_hex(int(str(scalars[1])), 32) + int_to_hex(int(H1[0]), 64) + (int_to_hex(int(H1[1]), 64)) + int_to_hex(
+                int(str(scalars[2])), 32) + int_to_hex(int(H2[0]), 64) + (int_to_hex(int(H2[1]), 64)) + int_to_hex(
                 int(4249239), 32) + int_to_hex(int(H3[0]), 64) + (int_to_hex(int(H3[1]), 64)) + int_to_hex(
                 int(242120101010101011010104), 32) + int_to_hex(int(H4[0]), 64) + (int_to_hex(int(H4[1]), 64)) + int_to_hex(
                 int(21205), 32) + int_to_hex(int(H5[0]), 64) + (int_to_hex(int(H5[1]), 64)) + int_to_hex(
