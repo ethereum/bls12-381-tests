@@ -533,7 +533,7 @@ def case07_multiexp_G1():
     assert result_doubling_G1 == multiply(G1, 2)
     result_doubling_P1 = add(P1, P1)
     assert result_doubling_P1 == multiply(P1, 2)
-    doubleP1G1 =  add(result_doubling_G1,result_doubling_P1)
+    doubleP1G1 = add(result_doubling_G1, result_doubling_P1)
     yield 'multiexp_G1_bls', [
         {
         "Input": int_to_hex(int(G1[0]), 64) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(2), 32),
@@ -588,6 +588,20 @@ def case07_multiexp_G1():
         "Input": int_to_hex(int(G1[0]), 64) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(2), 32) + int_to_hex(int(P1[0]), 64) + (int_to_hex(int(P1[1]), 64)) + int_to_hex(int(2), 32),
         "Name": "bls_g1multiexp_(2g1+2p1)",
         "Expected": int_to_hex(int(doubleP1G1[0]), 64) + (int_to_hex(int(doubleP1G1[1]), 64)),
+        "Gas": int((2 * BLS12_G1MUL_GAS * BLS12_MULTIEXP_DISCOUNT_TABLE[1][1]) / 1000),
+        "NoBenchmark": False
+        },
+        {
+        "Input": int_to_hex(int(G1[0]), 64) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(2), 32) + int_to_hex(int(G1[0]), 64) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(0), 32),
+        "Name": "bls_g1multiexp_(2g1+inf)",
+        "Expected": int_to_hex(int(result_doubling_G1[0]), 64) + (int_to_hex(int(result_doubling_G1[1]), 64)),
+        "Gas": int((2 * BLS12_G1MUL_GAS * BLS12_MULTIEXP_DISCOUNT_TABLE[1][1]) / 1000),
+        "NoBenchmark": False
+        },
+        {
+        "Input": int_to_hex(int(G1[0]), 64) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(0), 32) + int_to_hex(int(G1[0]), 64) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(0), 32),
+        "Name": "bls_g1multiexp_(inf+inf)",
+        "Expected": int_to_hex(0, 64) + int_to_hex(0, 64),
         "Gas": int((2 * BLS12_G1MUL_GAS * BLS12_MULTIEXP_DISCOUNT_TABLE[1][1]) / 1000),
         "NoBenchmark": False
         }
