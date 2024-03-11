@@ -11,6 +11,11 @@ from ruamel.yaml import YAML
 
 from hashlib import sha256
 
+from py_ecc.bls.hash import (
+    os2ip,
+)
+
+
 from py_ecc.bls12_381 import (
     G1,
     G2,
@@ -34,6 +39,17 @@ from py_ecc.bls.constants import (
     POW_2_381,
     POW_2_382,
     POW_2_383
+)
+
+
+from py_arkworks_bls12381 import (
+    G1Point,
+    Scalar
+)
+
+
+from py_ecc.bls.point_compression import (
+    decompress_G1,
 )
 
 
@@ -62,6 +78,13 @@ def int_to_hex(n: int, byte_length: int = None) -> str:
 
 def hex_to_int(x: str) -> int:
     return int(x, 16)
+
+
+def get_flags(z: int) -> Tuple[bool, bool, bool]:
+    c_flag = bool((z >> 383) & 1)  # The most significant bit.
+    b_flag = bool((z >> 382) & 1)  # The second-most significant bit.
+    a_flag = bool((z >> 381) & 1)  # The third-most significant bit.
+    return c_flag, b_flag, a_flag
 
 
 def compress_G1(pt: G1Uncompressed) -> G1Compressed:
@@ -566,7 +589,9 @@ def case07_multiexp_G1():
     assert result_doubling_G1 == multiply(G1, 2)
     result_doubling_P1 = add(P1, P1)
     assert result_doubling_P1 == multiply(P1, 2)
-    doubleP1G1 = add(result_doubling_G1, result_doubling_P1)
+    g1s = [G1Point(), G1Point.from_compressed_bytes(bytes.fromhex(int_to_hex(compress_G1(P1))))]
+    scalars = [Scalar(2), Scalar(2)]
+    doubleP1G1 = decompress_G1(G1Compressed(G1Compressed(os2ip(bytes.fromhex(str(G1Point.multiexp_unchecked(g1s, scalars)))))))
     yield 'multiexp_G1_bls', [
         {
         "Input": int_to_hex(int(G1[0]), 64) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(2), 32),
