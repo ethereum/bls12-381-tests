@@ -80,13 +80,6 @@ def hex_to_int(x: str) -> int:
     return int(x, 16)
 
 
-def get_flags(z: int) -> Tuple[bool, bool, bool]:
-    c_flag = bool((z >> 383) & 1)  # The most significant bit.
-    b_flag = bool((z >> 382) & 1)  # The second-most significant bit.
-    a_flag = bool((z >> 381) & 1)  # The third-most significant bit.
-    return c_flag, b_flag, a_flag
-
-
 def compress_G1(pt: G1Uncompressed) -> G1Compressed:
     """
     A compressed point is a 384-bit integer with the bit order
