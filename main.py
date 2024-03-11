@@ -674,10 +674,10 @@ def case07_multiexp_G1():
         "Input": int_to_hex(int(G1[0]), 64) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(str(scalars[0])), 32) + int_to_hex(int(P1[0]), 64) + (
             int_to_hex(int(P1[1]), 64)) + int_to_hex(int(str(scalars[1])), 32) + int_to_hex(int(H1[0]), 64) + (int_to_hex(int(H1[1]), 64)) + int_to_hex(
                 int(str(scalars[2])), 32) + int_to_hex(int(H2[0]), 64) + (int_to_hex(int(H2[1]), 64)) + int_to_hex(
-                int(4249239), 32) + int_to_hex(int(H3[0]), 64) + (int_to_hex(int(H3[1]), 64)) + int_to_hex(
-                int(242120101010101011010104), 32) + int_to_hex(int(H4[0]), 64) + (int_to_hex(int(H4[1]), 64)) + int_to_hex(
-                int(21205), 32) + int_to_hex(int(H5[0]), 64) + (int_to_hex(int(H5[1]), 64)) + int_to_hex(
-                int(34234324), 32),
+                int(str(scalars[3])), 32) + int_to_hex(int(H3[0]), 64) + (int_to_hex(int(H3[1]), 64)) + int_to_hex(
+                int(str(scalars[4])), 32) + int_to_hex(int(H4[0]), 64) + (int_to_hex(int(H4[1]), 64)) + int_to_hex(
+                int(str(scalars[5])), 32) + int_to_hex(int(H5[0]), 64) + (int_to_hex(int(H5[1]), 64)) + int_to_hex(
+                int(str(scalars[6])), 32),
         "Name": "bls_g1multiexp_multiple",
         "Expected": int_to_hex(int(g1multiexp[0]), 64) + (int_to_hex(int(g1multiexp[1]), 64)),
         "Gas": int((7 * BLS12_G1MUL_GAS * BLS12_MULTIEXP_DISCOUNT_TABLE[6][1]) / 1000),
