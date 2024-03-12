@@ -596,7 +596,7 @@ def case07_multiexp_G1():
         bytes.fromhex(int_to_hex(compress_G1(H3)))), G1Point.from_compressed_bytes(
         bytes.fromhex(int_to_hex(compress_G1(H4)))), G1Point.from_compressed_bytes(
         bytes.fromhex(int_to_hex(compress_G1(H5))))]
-    scalars = [Scalar(2), Scalar(2), Scalar(2), Scalar(2), Scalar(2), Scalar(2), Scalar(2)]
+    scalars = [Scalar.from_le_bytes(int(2).to_bytes(32, byteorder='big')), Scalar(2), Scalar(2), Scalar(2), Scalar(2), Scalar(2), Scalar(2)]
     g1multiexp = decompress_G1(G1Compressed(os2ip(bytes.fromhex(str(G1Point.multiexp_unchecked(g1s, scalars))))))
 
     yield 'multiexp_G1_bls', [
