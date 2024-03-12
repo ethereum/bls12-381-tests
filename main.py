@@ -686,6 +686,16 @@ def case07_multiexp_G1():
     ]
 
 
+def case08_multiexp_G2():
+    # Doubling
+    result_doubling_G2 = add(G2, G2)
+    assert result_doubling_G2 == multiply(G2, 2)
+    result_doubling_P2 = add(P2, P2)
+    assert result_doubling_P2 == multiply(P2, 2)
+    yield 'multiexp_G2_bls', [
+    ]
+
+
 test_kinds: Dict[str, Generator[Tuple[str, Any], None, None]] = {
     'add_G1': case01_add_G1,
     'add_G2': case02_add_G2,
@@ -693,7 +703,8 @@ test_kinds: Dict[str, Generator[Tuple[str, Any], None, None]] = {
     'mul_G2': case04_mul_G2,
     'map_fp_to_G1': case05_map_fp_to_G1,
     'map_fp2_to_G2': case06_map_fp2_to_G2,
-    'multiexp_G1': case07_multiexp_G1
+    'multiexp_G1': case07_multiexp_G1,
+    'multiexp_G2': case08_multiexp_G2
 }
 
 
