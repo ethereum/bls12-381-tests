@@ -1,6 +1,6 @@
 # Test format:  'BLS12_G2MULTIEXP'
 
-multiexponentiation in G1
+multiexponentiation in G2
 
 ## Test case format
 
