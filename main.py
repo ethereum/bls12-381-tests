@@ -31,7 +31,9 @@ from py_ecc.bls12_381 import (
 
 from py_ecc.bls.typing import (
     G1Compressed,
-    G1Uncompressed
+    G1Uncompressed,
+    G2Compressed,
+    G2Uncompressed
 )
 
 
@@ -44,12 +46,13 @@ from py_ecc.bls.constants import (
 
 from py_arkworks_bls12381 import (
     G1Point,
+    G2Point,
     Scalar
 )
 
 
 from py_ecc.bls.point_compression import (
-    decompress_G1,
+    decompress_G1
 )
 
 
@@ -101,6 +104,36 @@ def compress_G1(pt: G1Uncompressed) -> G1Compressed:
         a_flag = (y.n * 2) // q
         # Set c_flag = 1 and b_flag = 0
         return G1Compressed(x.n + a_flag * POW_2_381 + POW_2_383)
+
+
+def compress_G2(pt: G2Uncompressed) -> G2Compressed:
+    """
+    The compressed point (z1, z2) has the bit order:
+    z1: (c_flag1, b_flag1, a_flag1, x1)
+    z2: (c_flag2, b_flag2, a_flag2, x2)
+    where
+    - c_flag1 is always set to 1
+    - b_flag1 indicates infinity when set to 1
+    - a_flag1 helps determine the y-coordinate when decompressing,
+    - a_flag2, b_flag2, and c_flag2 are always set to 0
+    """
+    if is_inf(pt):
+        return G2Compressed((POW_2_383 + POW_2_382, 0))
+    x, y = pt[0], pt[1]
+    x_re = int(x.coeffs[0])
+    x_im = int(x.coeffs[1])
+    y_re = int(y.coeffs[0])
+    y_im = int(y.coeffs[1])
+    # Record the leftmost bit of y_im to the a_flag1
+    # If y_im happens to be zero, then use the bit of y_re
+    a_flag1 = (y_im * 2) // q if y_im > 0 else (y_re * 2) // q
+
+    # Imaginary part of x goes to z1, real part goes to z2
+    # c_flag1 = 1, b_flag1 = 0
+    z1 = x_im + a_flag1 * POW_2_381 + POW_2_383
+    # a_flag2 = b_flag2 = c_flag2 = 0
+    z2 = x_re
+    return G2Compressed((z1, z2))
 
 
 # gas costs
