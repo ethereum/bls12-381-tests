@@ -46,7 +46,6 @@ from py_ecc.bls.constants import (
 
 from py_arkworks_bls12381 import (
     G1Point,
-    G2Point,
     Scalar
 )
 
