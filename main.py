@@ -778,21 +778,26 @@ def case08_multiexp_G2():
         "NoBenchmark": False
         },
         {
-        "Input": int_to_hex(int(G2[0].coeffs[0]), 64) + int_to_hex(int(G2[0].coeffs[1]), 64) + int_to_hex(int(G2[1].coeffs[0]), 64) + int_to_hex(int(G2[1].coeffs[1]), 64) + int_to_hex(int(2), 32) + int_to_hex(0, 256) + int_to_hex(int(2), 32),
+        "Input": int_to_hex(int(G2[0].coeffs[0]), 64) + int_to_hex(int(G2[0].coeffs[1]), 64) + int_to_hex(int(G2[1].coeffs[0]), 64) + int_to_hex(
+            int(G2[1].coeffs[1]), 64) + int_to_hex(int(2), 32) + int_to_hex(0, 256) + int_to_hex(int(2), 32),
         "Name": "bls_g2multiexp_(2g2+inf)",
-        "Expected": int_to_hex(int(result_doubling_G2[0].coeffs[0]), 64) + int_to_hex(int(result_doubling_G2[0].coeffs[1]), 64) + int_to_hex(int(result_doubling_G2[1].coeffs[0]), 64) + int_to_hex(int(result_doubling_G2[1].coeffs[1]), 64),
+        "Expected": int_to_hex(int(result_doubling_G2[0].coeffs[0]), 64) + int_to_hex(int(result_doubling_G2[0].coeffs[1]), 64) + int_to_hex(
+            int(result_doubling_G2[1].coeffs[0]), 64) + int_to_hex(int(result_doubling_G2[1].coeffs[1]), 64),
         "Gas": int((2 * BLS12_G2MUL_GAS * BLS12_MULTIEXP_DISCOUNT_TABLE[1][1]) / 1000),
         "NoBenchmark": False
         },
         {
-        "Input": int_to_hex(int(P2[0].coeffs[0]), 64) + int_to_hex(int(P2[0].coeffs[1]), 64) + int_to_hex(int(P2[1].coeffs[0]), 64) + int_to_hex(int(P2[1].coeffs[1]), 64) + int_to_hex(int(2), 32) + int_to_hex(0, 256) + int_to_hex(int(2), 32),
+        "Input": int_to_hex(int(P2[0].coeffs[0]), 64) + int_to_hex(int(P2[0].coeffs[1]), 64) + int_to_hex(int(P2[1].coeffs[0]), 64) + int_to_hex(
+            int(P2[1].coeffs[1]), 64) + int_to_hex(int(2), 32) + int_to_hex(0, 256) + int_to_hex(int(2), 32),
         "Name": "bls_g2multiexp_(2p2+inf)",
-        "Expected": int_to_hex(int(result_doubling_P2[0].coeffs[0]), 64) + int_to_hex(int(result_doubling_P2[0].coeffs[1]), 64) + int_to_hex(int(result_doubling_P2[1].coeffs[0]), 64) + int_to_hex(int(result_doubling_P2[1].coeffs[1]), 64),
+        "Expected": int_to_hex(int(result_doubling_P2[0].coeffs[0]), 64) + int_to_hex(int(result_doubling_P2[0].coeffs[1]), 64) + int_to_hex(
+            int(result_doubling_P2[1].coeffs[0]), 64) + int_to_hex(int(result_doubling_P2[1].coeffs[1]), 64),
         "Gas": int((2 * BLS12_G2MUL_GAS * BLS12_MULTIEXP_DISCOUNT_TABLE[1][1]) / 1000),
         "NoBenchmark": False
         },
         {
-        "Input": int_to_hex(int(P2[0].coeffs[0]), 64) + int_to_hex(int(P2[0].coeffs[1]), 64) + int_to_hex(int(P2[1].coeffs[0]), 64) + int_to_hex(int(P2[1].coeffs[1]), 64) + int_to_hex(int(0), 32) + int_to_hex(int(P2[0].coeffs[0]), 64) + int_to_hex(int(P2[0].coeffs[1]), 64) + int_to_hex(int(P2[1].coeffs[0]), 64) + int_to_hex(int(P2[1].coeffs[1]), 64) + int_to_hex(int(0), 32),
+        "Input": int_to_hex(int(P2[0].coeffs[0]), 64) + int_to_hex(int(P2[0].coeffs[1]), 64) + int_to_hex(int(P2[1].coeffs[0]), 64) + int_to_hex(
+            int(P2[1].coeffs[1]), 64) + int_to_hex(int(0), 32) + int_to_hex(int(P2[0].coeffs[0]), 64) + int_to_hex(int(P2[0].coeffs[1]), 64) + int_to_hex(int(P2[1].coeffs[0]), 64) + int_to_hex(int(P2[1].coeffs[1]), 64) + int_to_hex(int(0), 32),
         "Name": "bls_g1multiexp_(inf+inf)",
         "Expected": int_to_hex(0, 128) + int_to_hex(0, 128),
         "Gas": int((2 * BLS12_G2MUL_GAS * BLS12_MULTIEXP_DISCOUNT_TABLE[1][1]) / 1000),
