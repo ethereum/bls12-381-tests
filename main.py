@@ -610,9 +610,14 @@ def case07_multiexp_G1():
         bytes.fromhex(int_to_hex(compress_G1(H3)))), G1Point.from_compressed_bytes(
         bytes.fromhex(int_to_hex(compress_G1(H4)))), G1Point.from_compressed_bytes(
         bytes.fromhex(int_to_hex(compress_G1(H5))))]
-    scalars = [ Scalar(2), Scalar(2), Scalar(2), Scalar(2), Scalar(2), Scalar(2), Scalar(2)]
+    scalars = [Scalar.from_le_bytes(int_to_little_endian(PRIVKEYS[0])),
+               Scalar.from_le_bytes(int_to_little_endian(PRIVKEYS[1])),
+               Scalar.from_le_bytes(int_to_little_endian(PRIVKEYS[2])),
+               Scalar.from_le_bytes(int_to_little_endian(PRIVKEYS[3])),
+               Scalar.from_le_bytes(int_to_little_endian(PRIVKEYS[4])),
+               Scalar.from_le_bytes(int_to_little_endian(PRIVKEYS[5])),
+               Scalar.from_le_bytes(int_to_little_endian(PRIVKEYS[6]))]
     g1multiexp = decompress_G1(G1Compressed(os2ip(bytes.fromhex(str(G1Point.multiexp_unchecked(g1s, scalars))))))
-
     yield 'multiexp_G1_bls', [
         {
         "Input": int_to_hex(int(G1[0]), 64) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(2), 32),
@@ -685,13 +690,13 @@ def case07_multiexp_G1():
         "NoBenchmark": False
         },
         {
-        "Input": int_to_hex(int(G1[0]), 64) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(str(scalars[0])), 32) + int_to_hex(int(P1[0]), 64) + (
-            int_to_hex(int(P1[1]), 64)) + int_to_hex(int(str(scalars[1])), 32) + int_to_hex(int(H1[0]), 64) + (int_to_hex(int(H1[1]), 64)) + int_to_hex(
-                int(str(scalars[2])), 32) + int_to_hex(int(H2[0]), 64) + (int_to_hex(int(H2[1]), 64)) + int_to_hex(
-                int(str(scalars[3])), 32) + int_to_hex(int(H3[0]), 64) + (int_to_hex(int(H3[1]), 64)) + int_to_hex(
-                int(str(scalars[4])), 32) + int_to_hex(int(H4[0]), 64) + (int_to_hex(int(H4[1]), 64)) + int_to_hex(
-                int(str(scalars[5])), 32) + int_to_hex(int(H5[0]), 64) + (int_to_hex(int(H5[1]), 64)) + int_to_hex(
-                int(str(scalars[6])), 32),
+        "Input": int_to_hex(int(G1[0]), 64) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(PRIVKEYS[0], 32) + int_to_hex(int(P1[0]), 64) + (
+            int_to_hex(int(P1[1]), 64)) + int_to_hex(PRIVKEYS[1], 32) + int_to_hex(int(H1[0]), 64) + (int_to_hex(int(H1[1]), 64)) + int_to_hex(
+                PRIVKEYS[2], 32) + int_to_hex(int(H2[0]), 64) + (int_to_hex(int(H2[1]), 64)) + int_to_hex(
+                PRIVKEYS[3], 32) + int_to_hex(int(H3[0]), 64) + (int_to_hex(int(H3[1]), 64)) + int_to_hex(
+                PRIVKEYS[4], 32) + int_to_hex(int(H4[0]), 64) + (int_to_hex(int(H4[1]), 64)) + int_to_hex(
+                PRIVKEYS[5], 32) + int_to_hex(int(H5[0]), 64) + (int_to_hex(int(H5[1]), 64)) + int_to_hex(
+                PRIVKEYS[6], 32),
         "Name": "bls_g1multiexp_multiple",
         "Expected": int_to_hex(int(g1multiexp[0]), 64) + (int_to_hex(int(g1multiexp[1]), 64)),
         "Gas": int((7 * BLS12_G1MUL_GAS * BLS12_MULTIEXP_DISCOUNT_TABLE[6][1]) / 1000),
