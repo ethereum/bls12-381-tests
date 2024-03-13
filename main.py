@@ -69,6 +69,10 @@ def int_to_big_endian(value: int) -> bytes:
     return value.to_bytes((value.bit_length() + 7) // 8, byteorder='big')
 
 
+def int_to_little_endian(value: int) -> bytes:
+    return value.to_bytes((value.bit_length() + 7) // 8, byteorder='big')
+
+
 def int_to_hex(n: int, byte_length: int = None) -> str:
     byte_value = int_to_big_endian(n)
     if byte_length:
