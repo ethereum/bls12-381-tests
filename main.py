@@ -778,6 +778,8 @@ def case08_multiexp_G2():
                Scalar.from_le_bytes(int_to_little_endian(PRIVKEYS[4])),
                Scalar.from_le_bytes(int_to_little_endian(PRIVKEYS[5])),
                Scalar.from_le_bytes(int_to_little_endian(PRIVKEYS[6]))]
+    g2multiexpArk = bytes.fromhex(str(G2Point.multiexp_unchecked(g2s, scalars)))
+    g2multiex = decompress_G2(G2Compressed((os2ip(g2multiexpArk[:48]), os2ip(g2multiexpArk[48:]))))
     yield 'multiexp_G2_bls', [
         {
         "Input": int_to_hex(int(G2[0].coeffs[0]), 64) + int_to_hex(int(G2[0].coeffs[1]), 64) + int_to_hex(int(G2[1].coeffs[0]), 64) + int_to_hex(int(G2[1].coeffs[1]), 64) + int_to_hex(int(2), 32),
