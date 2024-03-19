@@ -763,6 +763,22 @@ def case08_multiexp_G2():
     scalars = [Scalar(2), Scalar(2)]
     doubleP2G2Ark = bytes.fromhex(str(G2Point.multiexp_unchecked(g2s, scalars)))
     doubleP2G2 = decompress_G2(G2Compressed((os2ip(doubleP2G2Ark[:48]), os2ip(doubleP2G2Ark[48:]))))
+    H2 = (FQ2([hex_to_int(HASH_G2_MESSAGES[1][3]),hex_to_int(HASH_G2_MESSAGES[1][4])],),FQ2([hex_to_int(HASH_G2_MESSAGES[1][5]),hex_to_int(HASH_G2_MESSAGES[1][6]),]),)
+    H3 = (FQ2([hex_to_int(HASH_G2_MESSAGES[2][3]),hex_to_int(HASH_G2_MESSAGES[2][4])],),FQ2([hex_to_int(HASH_G2_MESSAGES[2][5]),hex_to_int(HASH_G2_MESSAGES[2][6]),]),)
+    H4 = (FQ2([hex_to_int(HASH_G2_MESSAGES[3][3]),hex_to_int(HASH_G2_MESSAGES[3][4])],),FQ2([hex_to_int(HASH_G2_MESSAGES[3][5]),hex_to_int(HASH_G2_MESSAGES[3][6]),]),)
+    H5 = (FQ2([hex_to_int(HASH_G2_MESSAGES[4][3]),hex_to_int(HASH_G2_MESSAGES[4][4])],),FQ2([hex_to_int(HASH_G2_MESSAGES[4][5]),hex_to_int(HASH_G2_MESSAGES[4][6]),]),)
+    g2s = [G2Point(), G2Point.from_compressed_bytes(bytes.fromhex(int_to_hex(compress_G2(P2)[0]) + int_to_hex(compress_G2(P2)[1]))), G2Point.from_compressed_bytes(
+        bytes.fromhex(int_to_hex(compress_G2(H2)[0]) + int_to_hex(compress_G2(H2)[1]))), G2Point.from_compressed_bytes(
+        bytes.fromhex(int_to_hex(compress_G2(H3)[0]) + int_to_hex(compress_G2(H3)[1]))), G2Point.from_compressed_bytes(
+        bytes.fromhex(int_to_hex(compress_G2(H4)[0]) + int_to_hex(compress_G2(H4)[1]))), G2Point.from_compressed_bytes(
+        bytes.fromhex(int_to_hex(compress_G2(H5)[0]) + int_to_hex(compress_G2(H5)[1])))]
+    scalars = [Scalar.from_le_bytes(int_to_little_endian(PRIVKEYS[0])),
+               Scalar.from_le_bytes(int_to_little_endian(PRIVKEYS[1])),
+               Scalar.from_le_bytes(int_to_little_endian(PRIVKEYS[2])),
+               Scalar.from_le_bytes(int_to_little_endian(PRIVKEYS[3])),
+               Scalar.from_le_bytes(int_to_little_endian(PRIVKEYS[4])),
+               Scalar.from_le_bytes(int_to_little_endian(PRIVKEYS[5])),
+               Scalar.from_le_bytes(int_to_little_endian(PRIVKEYS[6]))]
     yield 'multiexp_G2_bls', [
         {
         "Input": int_to_hex(int(G2[0].coeffs[0]), 64) + int_to_hex(int(G2[0].coeffs[1]), 64) + int_to_hex(int(G2[1].coeffs[0]), 64) + int_to_hex(int(G2[1].coeffs[1]), 64) + int_to_hex(int(2), 32),
