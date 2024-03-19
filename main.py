@@ -46,12 +46,14 @@ from py_ecc.bls.constants import (
 
 from py_arkworks_bls12381 import (
     G1Point,
+    G2Point,
     Scalar
 )
 
 
 from py_ecc.bls.point_compression import (
-    decompress_G1
+    decompress_G1,
+    decompress_G2
 )
 
 
@@ -757,6 +759,11 @@ def case08_multiexp_G2():
     assert result_doubling_G2 == multiply(G2, 2)
     result_doubling_P2 = add(P2, P2)
     assert result_doubling_P2 == multiply(P2, 2)
+    g2s = [G2Point(), G2Point.from_compressed_bytes(bytes.fromhex(int_to_hex(compress_G2(P2)[0]) + int_to_hex(compress_G2(P2)[1])))]
+    scalars = [Scalar(2), Scalar(2)]
+    doubleP2G2Ark = bytes.fromhex(str(G2Point.multiexp_unchecked(g2s, scalars)))
+    doubleP2G2 = decompress_G2(G2Compressed((os2ip(doubleP2G2Ark[:48]), os2ip(doubleP2G2Ark[48:]))))
+
     yield 'multiexp_G2_bls', [
         {
         "Input": int_to_hex(int(G2[0].coeffs[0]), 64) + int_to_hex(int(G2[0].coeffs[1]), 64) + int_to_hex(int(G2[1].coeffs[0]), 64) + int_to_hex(int(G2[1].coeffs[1]), 64) + int_to_hex(int(2), 32),
