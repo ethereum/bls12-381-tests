@@ -772,12 +772,12 @@ def case08_multiexp_G2():
         bytes.fromhex(int_to_hex(compress_G2(H3)[0]) + int_to_hex(compress_G2(H3)[1]))), G2Point.from_compressed_bytes(
         bytes.fromhex(int_to_hex(compress_G2(H4)[0]) + int_to_hex(compress_G2(H4)[1]))), G2Point.from_compressed_bytes(
         bytes.fromhex(int_to_hex(compress_G2(H5)[0]) + int_to_hex(compress_G2(H5)[1])))]
-    scalars = [Scalar.from_le_bytes(int_to_little_endian(PRIVKEYS[1])),
+    scalars = [Scalar.from_le_bytes(int_to_little_endian(PRIVKEYS[0])),
+               Scalar.from_le_bytes(int_to_little_endian(PRIVKEYS[1])),
                Scalar.from_le_bytes(int_to_little_endian(PRIVKEYS[2])),
                Scalar.from_le_bytes(int_to_little_endian(PRIVKEYS[3])),
                Scalar.from_le_bytes(int_to_little_endian(PRIVKEYS[4])),
-               Scalar.from_le_bytes(int_to_little_endian(PRIVKEYS[5])),
-               Scalar.from_le_bytes(int_to_little_endian(PRIVKEYS[6]))]
+               Scalar.from_le_bytes(int_to_little_endian(PRIVKEYS[5]))]
     g2multiexpArk = bytes.fromhex(str(G2Point.multiexp_unchecked(g2s, scalars)))
     g2multiex = decompress_G2(G2Compressed((os2ip(g2multiexpArk[:48]), os2ip(g2multiexpArk[48:]))))
     yield 'multiexp_G2_bls', [
@@ -866,6 +866,20 @@ def case08_multiexp_G2():
         "Expected": int_to_hex(int(doubleP2G2[0].coeffs[0]), 64) + int_to_hex(int(doubleP2G2[0].coeffs[1]), 64) + int_to_hex(
             int(doubleP2G2[1].coeffs[0]), 64) + int_to_hex(int(doubleP2G2[1].coeffs[1]), 64),
         "Gas": int((2 * BLS12_G2MUL_GAS * BLS12_MULTIEXP_DISCOUNT_TABLE[1][1]) / 1000),
+        "NoBenchmark": False
+        },
+        {
+        "Input": int_to_hex(int(G2[0].coeffs[0]), 64) + int_to_hex(int(G2[0].coeffs[1]), 64) + int_to_hex(int(G2[1].coeffs[0]), 64) + int_to_hex(int(G2[1].coeffs[1]), 64) + int_to_hex(
+            PRIVKEYS[0], 32) + int_to_hex(int(P2[0].coeffs[0]), 64) + int_to_hex(int(P2[0].coeffs[1]), 64) + int_to_hex(int(P2[1].coeffs[0]), 64) + int_to_hex(int(P2[1].coeffs[1]), 64) + int_to_hex(
+                PRIVKEYS[1], 32) + int_to_hex(int(H2[0].coeffs[0]), 64) + int_to_hex(int(H2[0].coeffs[1]), 64) + int_to_hex(int(H2[1].coeffs[0]), 64) + int_to_hex(int(H2[1].coeffs[1]), 64) + int_to_hex(
+                PRIVKEYS[2], 32) + int_to_hex(int(H3[0].coeffs[0]), 64) + int_to_hex(int(H3[0].coeffs[1]), 64) + int_to_hex(int(H3[1].coeffs[0]), 64) + int_to_hex(int(H3[1].coeffs[1]), 64) + int_to_hex(
+                PRIVKEYS[3], 32) + int_to_hex(int(H4[0].coeffs[0]), 64) + int_to_hex(int(H4[0].coeffs[1]), 64) + int_to_hex(int(H4[1].coeffs[0]), 64) + int_to_hex(int(H4[1].coeffs[1]), 64) + int_to_hex(
+                PRIVKEYS[4], 32) + int_to_hex(int(H5[0].coeffs[0]), 64) + int_to_hex(int(H5[0].coeffs[1]), 64) + int_to_hex(int(H5[1].coeffs[0]), 64) + int_to_hex(int(H5[1].coeffs[1]), 64) + int_to_hex(
+                PRIVKEYS[5], 32),
+        "Name": "bls_g2multiexp_multiple",
+        "Expected": int_to_hex(int(g2multiex[0].coeffs[0]), 64) + int_to_hex(int(g2multiex[0].coeffs[1]), 64) + int_to_hex(
+            int(g2multiex[1].coeffs[0]), 64) + int_to_hex(int(g2multiex[1].coeffs[1]), 64),
+        "Gas": int((6 * BLS12_G2MUL_GAS * BLS12_MULTIEXP_DISCOUNT_TABLE[5][1]) / 1000),
         "NoBenchmark": False
         }
     ]
