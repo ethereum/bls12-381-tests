@@ -763,7 +763,6 @@ def case08_multiexp_G2():
     scalars = [Scalar(2), Scalar(2)]
     doubleP2G2Ark = bytes.fromhex(str(G2Point.multiexp_unchecked(g2s, scalars)))
     doubleP2G2 = decompress_G2(G2Compressed((os2ip(doubleP2G2Ark[:48]), os2ip(doubleP2G2Ark[48:]))))
-
     yield 'multiexp_G2_bls', [
         {
         "Input": int_to_hex(int(G2[0].coeffs[0]), 64) + int_to_hex(int(G2[0].coeffs[1]), 64) + int_to_hex(int(G2[1].coeffs[0]), 64) + int_to_hex(int(G2[1].coeffs[1]), 64) + int_to_hex(int(2), 32),
@@ -843,6 +842,15 @@ def case08_multiexp_G2():
         "Gas": int((2 * BLS12_G2MUL_GAS * BLS12_MULTIEXP_DISCOUNT_TABLE[1][1]) / 1000),
         "NoBenchmark": False
         },
+        {
+        "Input": int_to_hex(int(G2[0].coeffs[0]), 64) + int_to_hex(int(G2[0].coeffs[1]), 64) + int_to_hex(int(G2[1].coeffs[0]), 64) + int_to_hex(int(G2[1].coeffs[1]), 64) + int_to_hex(
+            int(2), 32) + int_to_hex(int(P2[0].coeffs[0]), 64) + int_to_hex(int(P2[0].coeffs[1]), 64) + int_to_hex(int(P2[1].coeffs[0]), 64) + int_to_hex(int(P2[1].coeffs[1]), 64) + int_to_hex(int(2), 32),
+        "Name": "bls_g2multiexp_(2g2+2p2)",
+        "Expected": int_to_hex(int(doubleP2G2[0].coeffs[0]), 64) + int_to_hex(int(doubleP2G2[0].coeffs[1]), 64) + int_to_hex(
+            int(doubleP2G2[1].coeffs[0]), 64) + int_to_hex(int(doubleP2G2[1].coeffs[1]), 64),
+        "Gas": int((2 * BLS12_G2MUL_GAS * BLS12_MULTIEXP_DISCOUNT_TABLE[1][1]) / 1000),
+        "NoBenchmark": False
+        }
     ]
 
 
