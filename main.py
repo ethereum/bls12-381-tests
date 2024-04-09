@@ -25,7 +25,8 @@ from py_ecc.bls12_381 import (
     multiply,
     neg,
     is_inf,
-    field_modulus as q
+    field_modulus as q,
+    curve_order
 )
 
 
@@ -491,18 +492,32 @@ def case03_mul_G1():
         },
         {
         "Input": int_to_hex(int(G1[0]), 64) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(PRIVKEYS[0], 32),
-        "Name": "bls_g1mul_random*g1)",
+        "Name": "bls_g1mul_random*g1",
         "Expected": int_to_hex(int(result_multiply_G1[0]), 64) + (int_to_hex(int(result_multiply_G1[1]), 64)),
         "Gas": BLS12_G1MUL_GAS,
         "NoBenchmark": False
         },
         {
         "Input": int_to_hex(int(P1[0]), 64) + (int_to_hex(int(P1[1]), 64)) + int_to_hex(PRIVKEYS[0], 32),
-        "Name": "bls_g1mul_random*p1)",
+        "Name": "bls_g1mul_random*p1",
         "Expected": int_to_hex(int(result_multiply_P1[0]), 64) + (int_to_hex(int(result_multiply_P1[1]), 64)),
         "Gas": BLS12_G1MUL_GAS,
         "NoBenchmark": False
-        }
+        },
+        {
+        "Input": int_to_hex(int(G1[0]), 64) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(PRIVKEYS[0] + curve_order, 32),
+        "Name": "bls_g1mul_random*g1_unnormalized_scalar",
+        "Expected": int_to_hex(int(result_multiply_G1[0]), 64) + (int_to_hex(int(result_multiply_G1[1]), 64)),
+        "Gas": BLS12_G1MUL_GAS,
+        "NoBenchmark": False
+        },
+        {
+        "Input": int_to_hex(int(P1[0]), 64) + (int_to_hex(int(P1[1]), 64)) + int_to_hex(PRIVKEYS[0] + curve_order, 32),
+        "Name": "bls_g1mul_random*p1_unnormalized_scalar",
+        "Expected": int_to_hex(int(result_multiply_P1[0]), 64) + (int_to_hex(int(result_multiply_P1[1]), 64)),
+        "Gas": BLS12_G1MUL_GAS,
+        "NoBenchmark": False
+        },
     ]
 
 
