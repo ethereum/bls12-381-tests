@@ -884,6 +884,10 @@ def case08_multiexp_G2():
     ]
 
 
+def case09_pairing_check():
+    yield 'pairing_check_bls', []
+
+
 test_kinds: Dict[str, Generator[Tuple[str, Any], None, None]] = {
     'add_G1': case01_add_G1,
     'add_G2': case02_add_G2,
@@ -892,7 +896,8 @@ test_kinds: Dict[str, Generator[Tuple[str, Any], None, None]] = {
     'map_fp_to_G1': case05_map_fp_to_G1,
     'map_fp2_to_G2': case06_map_fp2_to_G2,
     'multiexp_G1': case07_multiexp_G1,
-    'multiexp_G2': case08_multiexp_G2
+    'multiexp_G2': case08_multiexp_G2,
+    'pairing_check': case09_pairing_check
 }
 
 
