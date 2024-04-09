@@ -527,6 +527,10 @@ def case04_mul_G2():
     assert result_doubling_G2 == multiply(G2, 2)
     result_doubling_P2 = add(P2, P2)
     assert result_doubling_P2 == multiply(P2, 2)
+
+    result_multiply_G2 = multiply(G2, PRIVKEYS[0])
+    result_multiply_P2 = multiply(P2, PRIVKEYS[0])
+
     yield 'mul_G2_bls', [
         {
         "Input": int_to_hex(int(G2[0].coeffs[0]), 64) + int_to_hex(int(G2[0].coeffs[1]), 64) + int_to_hex(int(G2[1].coeffs[0]), 64) + int_to_hex(int(G2[1].coeffs[1]), 64) + int_to_hex(int(2), 32),
@@ -577,6 +581,22 @@ def case04_mul_G2():
         "Input": int_to_hex(0, 64) + int_to_hex(0, 64) + int_to_hex(0, 64) + int_to_hex(0, 64) + int_to_hex(int(17), 32),
         "Name": "bls_g2mul_(x*inf=inf)",
         "Expected": int_to_hex(0, 64) + int_to_hex(0, 64) + int_to_hex(0, 64) + int_to_hex(0, 64),
+        "Gas": BLS12_G2MUL_GAS,
+        "NoBenchmark": False
+        },
+        {
+        "Input": int_to_hex(int(G2[0].coeffs[0]), 64) + int_to_hex(int(G2[0].coeffs[1]), 64) + int_to_hex(int(G2[1].coeffs[0]), 64) + int_to_hex(int(G2[1].coeffs[1]), 64) + int_to_hex(PRIVKEYS[0], 32),
+        "Name": "bls_g2mul_random*g2",
+        "Expected": int_to_hex(int(result_multiply_G2[0].coeffs[0]), 64) + int_to_hex(int(result_multiply_G2[0].coeffs[1]), 64) + int_to_hex(
+            int(result_multiply_G2[1].coeffs[0]), 64) + int_to_hex(int(result_multiply_G2[1].coeffs[1]), 64),
+        "Gas": BLS12_G2MUL_GAS,
+        "NoBenchmark": False
+        },
+        {
+        "Input": int_to_hex(int(P2[0].coeffs[0]), 64) + int_to_hex(int(P2[0].coeffs[1]), 64) + int_to_hex(int(P2[1].coeffs[0]), 64) + int_to_hex(int(P2[1].coeffs[1]), 64) + int_to_hex(PRIVKEYS[0], 32),
+        "Name": "bls_g2mul_random*p2",
+        "Expected": int_to_hex(int(result_multiply_P2[0].coeffs[0]), 64) + int_to_hex(int(result_multiply_P2[0].coeffs[1]), 64) + int_to_hex(
+            int(result_multiply_P2[1].coeffs[0]), 64) + int_to_hex(int(result_multiply_P2[1].coeffs[1]), 64),
         "Gas": BLS12_G2MUL_GAS,
         "NoBenchmark": False
         }
