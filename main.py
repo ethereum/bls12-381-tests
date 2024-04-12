@@ -972,6 +972,14 @@ def case09_pairing_check():
         "NoBenchmark": False
         },
         {
+        "Input": int_to_hex(int(G1[0]), 64) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(G2[0].coeffs[0]), 64) + int_to_hex(
+            int(G2[0].coeffs[1]), 64) + int_to_hex(int(G2[1].coeffs[0]), 64) + int_to_hex(int(G2[1].coeffs[1]), 64),
+        "Name": "bls_pairing_non-degeneracy",
+        "Expected": int_to_hex(0, 32),
+        "Gas": 1 * BLS12_PAIRING_VARIABLE + BLS12_PAIRING_CONSTANT,
+        "NoBenchmark": False
+        },
+        {
         "Input": int_to_hex(int(result_multiply_G1[0]), 64) + (int_to_hex(int(result_multiply_G1[1]), 64)) + int_to_hex(int(result_multiply_G2[0].coeffs[0]), 64) + int_to_hex(
             int(result_multiply_G2[0].coeffs[1]), 64) + int_to_hex(int(result_multiply_G2[1].coeffs[0]), 64) + int_to_hex(int(result_multiply_G2[1].coeffs[1]), 64) + int_to_hex(
             int(result_multiply_G1a[0]), 64) + (int_to_hex(int(result_multiply_G1a[1]), 64)) + int_to_hex(int(neg(G2)[0].coeffs[0]), 64) + int_to_hex(
