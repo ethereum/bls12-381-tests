@@ -1025,6 +1025,16 @@ def case09_pairing_check():
     ]
 
 
+def case10_fail_add_G1():
+    yield 'fail_add_G1', [
+        {
+        "Input": "",
+        "ExpectedError": "invalid input length",
+        "Name": "bls_g1add_empty_input"
+        }
+    ]
+
+
 test_kinds: Dict[str, Generator[Tuple[str, Any], None, None]] = {
     'add_G1': case01_add_G1,
     'add_G2': case02_add_G2,
@@ -1034,7 +1044,8 @@ test_kinds: Dict[str, Generator[Tuple[str, Any], None, None]] = {
     'map_fp2_to_G2': case06_map_fp2_to_G2,
     'multiexp_G1': case07_multiexp_G1,
     'multiexp_G2': case08_multiexp_G2,
-    'pairing_check': case09_pairing_check
+    'pairing_check': case09_pairing_check,
+    'fail_add_G1': case10_fail_add_G1
 }
 
 
