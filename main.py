@@ -1041,7 +1041,17 @@ def case10_fail_add_G1():
         {
         "Input": int_to_hex(int(G1[0]) + q, 64) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(P1[0]), 64) + (int_to_hex(int(P1[1]), 64)),
         "ExpectedError": "invalid fp.Element encoding",
-        "Name": "bls_g1add_point_not_on_curve"
+        "Name": "bls_g2add_invalid_field_element"
+        }
+    ]
+
+
+def case11_fail_add_G2():
+    yield 'fail-add_G2_bls', [
+        {
+        "Input": "",
+        "ExpectedError": "invalid input length",
+        "Name": "bls_g2add_empty_input"
         }
     ]
 
@@ -1056,7 +1066,8 @@ test_kinds: Dict[str, Generator[Tuple[str, Any], None, None]] = {
     'multiexp_G1': case07_multiexp_G1,
     'multiexp_G2': case08_multiexp_G2,
     'pairing_check': case09_pairing_check,
-    'fail_add_G1': case10_fail_add_G1
+    'fail_add_G1': case10_fail_add_G1,
+    'fail_add_G2': case11_fail_add_G2
 }
 
 
