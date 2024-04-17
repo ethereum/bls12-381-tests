@@ -1022,6 +1022,16 @@ def case10_fail_add_G1():
         "Input": "",
         "ExpectedError": "invalid input length",
         "Name": "bls_g1add_empty_input"
+        },
+        {
+        "Input": int_to_hex(int(G1[0]), 63) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(P1[0]), 64) + (int_to_hex(int(P1[1]), 64)),
+        "ExpectedError": "invalid input length",
+        "Name": "bls_g1add_short_input"
+        },
+        {
+        "Input": int_to_hex(int(G1[0]), 65) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(P1[0]), 64) + (int_to_hex(int(P1[1]), 64)),
+        "ExpectedError": "invalid input length",
+        "Name": "bls_g1add_large_input"
         }
     ]
 
