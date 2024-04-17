@@ -252,15 +252,6 @@ HASH_G2_MESSAGES = [
 ]
 
 
-def expect_exception(func, *args):
-    try:
-        func(*args)
-    except Exception:
-        pass
-    else:
-        raise Exception("should have raised exception")
-
-
 def case01_add_G1():
     # Commutativity
     result_comm1 = add(G1, P1)
