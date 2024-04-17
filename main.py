@@ -1026,7 +1026,7 @@ def case09_pairing_check():
 
 
 def case10_fail_add_G1():
-    yield 'fail_add_G1', [
+    yield 'fail-add_G1_bls', [
         {
         "Input": "",
         "ExpectedError": "invalid input length",
