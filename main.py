@@ -1032,6 +1032,11 @@ def case10_fail_add_G1():
         "Input": int_to_hex(int(G1[0]), 65) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(P1[0]), 64) + (int_to_hex(int(P1[1]), 64)),
         "ExpectedError": "invalid input length",
         "Name": "bls_g1add_large_input"
+        },
+        {
+        "Input": int_to_hex(int(G1[0]), 64) + (int_to_hex(int(P1[1]), 64)) + int_to_hex(int(P1[0]), 64) + (int_to_hex(int(P1[1]), 64)),
+        "ExpectedError": "invalid point: not on curve",
+        "Name": "bls_g1add_large_input"
         }
     ]
 
