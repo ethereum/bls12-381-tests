@@ -189,7 +189,7 @@ G1_wrong_order = (
 
 
 # Poinat not in subgroup (order 13) for curve over FQ2
-G2_low_order = (
+G2_wrong_order = (
     FQ2([
         3922397287649913227621058437622997108794641953057758105879357683864299671651819357275859520733535654147680406731276,
         3741137028670202333708729730342450399205516524855163427388600406129033394826520864962370018146369072778910602014330
@@ -368,6 +368,7 @@ def case02_add_G2():
     result_comm1 = add(G2, P2)
     result_comm2 = add(P2, G2)
     assert result_comm1 == result_comm2
+    result_add_wrong_order = add(G2_wrong_order, G2)
     # Identity element
     result_identity_G2 = add(G2, None)
     assert G2 == result_identity_G2
@@ -397,6 +398,14 @@ def case02_add_G2():
         "Input": int_to_hex(int(P2[0].coeffs[0]), 64) + int_to_hex(int(P2[0].coeffs[1]), 64) + int_to_hex(int(P2[1].coeffs[0]), 64) + int_to_hex(
             int(P2[1].coeffs[1]), 64) + int_to_hex(int(G2[0].coeffs[0]), 64) + int_to_hex(int(G2[0].coeffs[1]), 64) + int_to_hex(int(G2[1].coeffs[0]), 64) + int_to_hex(int(G2[1].coeffs[1]), 64),
         "Name": "bls_g2add_p2+g2",
+        "Expected": int_to_hex(int(result_comm2[0].coeffs[0]), 64) + int_to_hex(int(result_comm2[0].coeffs[1]), 64) + int_to_hex(int(result_comm2[1].coeffs[0]), 64) + int_to_hex(int(result_comm2[1].coeffs[1]), 64),
+        "Gas": BLS12_G2ADD_GAS,
+        "NoBenchmark": False
+        },
+        {
+        "Input": int_to_hex(int(G2_wrong_order[0].coeffs[0]), 64) + int_to_hex(int(G2_wrong_order[0].coeffs[1]), 64) + int_to_hex(int(G2_wrong_order[1].coeffs[0]), 64) + int_to_hex(
+            int(G2_wrong_order[1].coeffs[1]), 64) + int_to_hex(int(G2[0].coeffs[0]), 64) + int_to_hex(int(G2[0].coeffs[1]), 64) + int_to_hex(int(G2[1].coeffs[0]), 64) + int_to_hex(int(G2[1].coeffs[1]), 64),
+        "Name": "bls_g2add_g2_wrong_order+g2",
         "Expected": int_to_hex(int(result_comm2[0].coeffs[0]), 64) + int_to_hex(int(result_comm2[0].coeffs[1]), 64) + int_to_hex(int(result_comm2[1].coeffs[0]), 64) + int_to_hex(int(result_comm2[1].coeffs[1]), 64),
         "Gas": BLS12_G2ADD_GAS,
         "NoBenchmark": False
