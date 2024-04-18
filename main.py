@@ -183,8 +183,7 @@ P2 = (
 # Wrong order generator for curve over FQ
 G1_wrong_order = (
     FQ(175120027539531016442854006573889751122153014990298010045047409866982914293422983043097473453160715743839524736495),
-    FQ(3886161143382294459707944199964771025143673781268592314417728386394555910678469538674068117321209145872489588747338),
-    FQ(1)
+    FQ(3886161143382294459707944199964771025143673781268592314417728386394555910678469538674068117321209145872489588747338)
 )
 
 
@@ -197,10 +196,6 @@ G2_low_order = (
     FQ2([
         2318861511113254089730073927932992301121994664766687670497054556026428871746827995944986621318870599424754598753423,
         1139817624251523735913718360323397122746649955859850938514186251456988186435865415993431523202408255536265404879025
-    ]),
-    FQ2([
-        1,  # noqa: E501
-        0,  # noqa: E501
     ])
 )
 
@@ -283,6 +278,7 @@ def case01_add_G1():
     result_comm1 = add(G1, P1)
     result_comm2 = add(P1, G1)
     assert result_comm1 == result_comm2
+    result_add_wrong_order = add(G1_wrong_order, G1)
     # Identity element
     result_identity_G1 = add(G1, None)
     assert G1 == result_identity_G1
@@ -311,6 +307,13 @@ def case01_add_G1():
         "Input": int_to_hex(int(P1[0]), 64) + (int_to_hex(int(P1[1]), 64)) + int_to_hex(int(G1[0]), 64) + (int_to_hex(int(G1[1]), 64)),
         "Name": "bls_g1add_p1+g1",
         "Expected": int_to_hex(int(result_comm2[0]), 64) + (int_to_hex(int(result_comm2[1]), 64)),
+        "Gas": BLS12_G1ADD_GAS,
+        "NoBenchmark": False
+        },
+        {
+        "Input": int_to_hex(int(G1_wrong_order[0]), 64) + (int_to_hex(int(G1_wrong_order[1]), 64)) + int_to_hex(int(G1[0]), 64) + (int_to_hex(int(G1[1]), 64)),
+        "Name": "bls_g1add_g1_wrong_order+g1",
+        "Expected": int_to_hex(int(result_add_wrong_order[0]), 64) + (int_to_hex(int(result_add_wrong_order[1]), 64)),
         "Gas": BLS12_G1ADD_GAS,
         "NoBenchmark": False
         },
