@@ -1081,7 +1081,12 @@ def case10_fail_add_G1():
         "Input": int_to_hex(int(G1[0]) + q, 64) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(P1[0]), 64) + (int_to_hex(int(P1[1]), 64)),
         "ExpectedError": "invalid fp.Element encoding",
         "Name": "bls_g2add_invalid_field_element"
-        }
+        },
+        {
+        "Input": "10" + int_to_hex(int(G1[0]), 63) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(P1[0]), 64) + (int_to_hex(int(P1[1]), 64)),
+        "ExpectedError": "invalid field element top bytes",
+        "Name": "bls_g1add_violate_top_bytes"
+        },
     ]
 
 
