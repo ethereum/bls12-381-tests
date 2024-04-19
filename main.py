@@ -1142,6 +1142,31 @@ def case12_fail_mul_G1():
         "ExpectedError": "invalid input length",
         "Name": "bls_g1mul_empty_input"
         },
+        {
+        "Input": int_to_hex(int(G1[0]), 63) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(2), 32),
+        "ExpectedError": "invalid input length",
+        "Name": "bls_g1mul_short_input"
+        },
+        {
+        "Input": int_to_hex(int(G1[0]), 65) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(2), 32),
+        "ExpectedError": "invalid input length",
+        "Name": "bls_g1mul_large_input"
+        },
+        {
+        "Input": int_to_hex(int(G1[0]) + q, 64) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(2), 32),
+        "ExpectedError": "invalid fp.Element encoding",
+        "Name": "bls_g1mul_invalid_field_element"
+        },
+        {
+        "Input": int_to_hex(int(G1[0]), 64) + (int_to_hex(int(P1[1]), 64)) + int_to_hex(int(2), 32),
+        "ExpectedError": "invalid point: not on curve",
+        "Name": "bls_g1mul_point_not_on_curve"
+        },
+        {
+        "Input": "10" + int_to_hex(int(G1[0]), 63) + (int_to_hex(int(P1[1]), 64)) + int_to_hex(int(2), 32),
+        "ExpectedError": "invalid field element top bytes",
+        "Name": "bls_g1mul_violate_top_bytes"
+        }
     ]
 
 
