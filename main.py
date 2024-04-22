@@ -1211,6 +1211,11 @@ def case14_fail_map_fp_to_G1():
         "Input": "",
         "ExpectedError": "invalid input length",
         "Name": "bls_mapg1_empty_input"
+        },
+        {
+        "Input": HASH_G1_MESSAGES[0][1][0:127],
+        "ExpectedError": "invalid input length",
+        "Name": "bls__mapg1_short_input"
         }
     ]
 
