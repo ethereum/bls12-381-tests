@@ -1251,6 +1251,16 @@ def case15_fail_map_fp2_to_G2():
         "Input": "00" + HASH_G2_MESSAGES[0][1] + HASH_G2_MESSAGES[0][2],
         "ExpectedError": "invalid input length",
         "Name": "bls_mapg2_long_input"
+        },
+        {
+        "Input": "00" + HASH_G2_MESSAGES[0][1] + HASH_G2_MESSAGES[0][2][0:126],
+        "ExpectedError": "invalid field element top bytes",
+        "Name": "bls_mapg2_top_bytes"
+        },
+        {
+        "Input": int_to_hex(hex_to_int(HASH_G2_MESSAGES[0][1]) + q, 64) + HASH_G2_MESSAGES[0][2],
+        "ExpectedError": "invalid fp.Element encoding",
+        "Name": "bls_mapg2_invalid_fq_element"
         }
     ]
 
