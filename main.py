@@ -1243,14 +1243,14 @@ def case15_fail_map_fp2_to_G2():
         "Name": "bls_mapg2_empty_input"
         },
         {
-        "Input": "00" + HASH_G2_MESSAGES[0][1] + HASH_G2_MESSAGES[0][2],
-        "ExpectedError": "invalid input length",
-        "Name": "bls_mapg2_long_input"
-        },
-        {
         "Input": HASH_G2_MESSAGES[0][1] + HASH_G2_MESSAGES[0][2][0:126],
         "ExpectedError": "invalid input length",
         "Name": "bls_mapg2_short_input"
+        },
+        {
+        "Input": "00" + HASH_G2_MESSAGES[0][1] + HASH_G2_MESSAGES[0][2],
+        "ExpectedError": "invalid input length",
+        "Name": "bls_mapg2_long_input"
         }
     ]
 
