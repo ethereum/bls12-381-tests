@@ -1205,6 +1205,16 @@ def case13_fail_mul_G2():
     ]
 
 
+def case14_fail_map_fp_to_G1():
+    yield 'fail-map_fp_to_G1_bls', [
+        {
+        "Input": "",
+        "ExpectedError": "invalid input length",
+        "Name": "bls_mapg1_empty_input"
+        }
+    ]
+
+
 test_kinds: Dict[str, Generator[Tuple[str, Any], None, None]] = {
     'add_G1': case01_add_G1,
     'add_G2': case02_add_G2,
@@ -1218,7 +1228,8 @@ test_kinds: Dict[str, Generator[Tuple[str, Any], None, None]] = {
     'fail_add_G1': case10_fail_add_G1,
     'fail_add_G2': case11_fail_add_G2,
     'fail_mul_G1': case12_fail_mul_G1,
-    'fail_mul_G2': case13_fail_mul_G2
+    'fail_mul_G2': case13_fail_mul_G2,
+    'fail_map_fp_to_G1': case14_fail_map_fp_to_G1
 }
 
 
