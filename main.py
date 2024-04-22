@@ -1218,10 +1218,15 @@ def case14_fail_map_fp_to_G1():
         "Name": "bls_mapg1_short_input"
         },
         {
-        "Input": "00"+HASH_G1_MESSAGES[0][1],
+        "Input": "00" + HASH_G1_MESSAGES[0][1],
         "ExpectedError": "invalid input length",
         "Name": "bls_mapg1_large_input"
-        }
+        },
+        {
+        "Input": "10" + HASH_G1_MESSAGES[0][1][0:126],
+        "ExpectedError": "invalid field element top bytes",
+        "Name": "bls_mapg1_top_bytes"
+        },
     ]
 
 
