@@ -1227,6 +1227,11 @@ def case14_fail_map_fp_to_G1():
         "ExpectedError": "invalid field element top bytes",
         "Name": "bls_mapg1_top_bytes"
         },
+        {
+        "Input": int_to_hex(hex_to_int(HASH_G1_MESSAGES[0][1]) + q, 64),
+        "ExpectedError": "invalid fp.Element encoding",
+        "Name": "bls_invalid_fq_element"
+        },
     ]
 
 
