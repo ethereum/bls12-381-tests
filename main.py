@@ -1300,6 +1300,16 @@ def case16_fail_multiexp_G1():
     ]
 
 
+def case17_fail_multiexp_G2():
+    yield 'fail-multiexp_G2_bls', [
+        {
+            "Input": "",
+            "ExpectedError": "invalid input length",
+            "Name": "bls_g2multiexp_empty_input"
+        }
+    ]
+
+
 test_kinds: Dict[str, Generator[Tuple[str, Any], None, None]] = {
     'add_G1': case01_add_G1,
     'add_G2': case02_add_G2,
@@ -1316,7 +1326,8 @@ test_kinds: Dict[str, Generator[Tuple[str, Any], None, None]] = {
     'fail_mul_G2': case13_fail_mul_G2,
     'fail_map_fp_to_G1': case14_fail_map_fp_to_G1,
     'fail_map_fp2_to_G2': case15_fail_map_fp2_to_G2,
-    'fail_multiexp_G1': case16_fail_multiexp_G1
+    'fail_multiexp_G1': case16_fail_multiexp_G1,
+    'fail_multiexp_G2': case17_fail_multiexp_G2
 }
 
 
