@@ -1373,6 +1373,14 @@ def case18_fail_pairing_check():
             int(neg(G2)[0].coeffs[1]), 64) + int_to_hex(int(neg(G2)[1].coeffs[0]), 64) + int_to_hex(int(neg(G2)[1].coeffs[1]), 64),
         "ExpectedError": "invalid fp.Element encoding",
         "Name": "bls_pairing_invalid_field_element"
+        },
+        {
+        "Input": int_to_hex(int(G1[0]), 64) + (int_to_hex(int(P1[1]), 64)) + int_to_hex(int(G2[0].coeffs[0]), 64) + int_to_hex(
+            int(G2[0].coeffs[1]), 64) + int_to_hex(int(G2[1].coeffs[0]), 64) + int_to_hex(int(G2[1].coeffs[1]), 64) + int_to_hex(
+            int(G1[0]), 64) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(neg(G2)[0].coeffs[0]), 64) + int_to_hex(
+            int(neg(G2)[0].coeffs[1]), 64) + int_to_hex(int(neg(G2)[1].coeffs[0]), 64) + int_to_hex(int(neg(G2)[1].coeffs[1]), 64),
+        "ExpectedError": "invalid point: not on curve",
+        "Name": "bls_pairing_g1_not_on_curve"
         }
     ]
 
