@@ -1281,6 +1281,21 @@ def case16_fail_multiexp_G1():
         "Input": int_to_hex(int(G1[0]), 65) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(2), 32),
         "ExpectedError": "invalid input length",
         "Name": "bls_g1multiexp_long_input"
+        },
+        {
+        "Input": int_to_hex(int(G1[0]) + q, 64) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(2), 32),
+        "ExpectedError": "invalid fp.Element encoding",
+        "Name": "bls_g1multiexp_invalid_field_element"
+        },
+        {
+        "Input": "10" + int_to_hex(int(G1[0]), 63) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(2), 32),
+        "ExpectedError": "invalid field element top bytes",
+        "Name": "bls_g1multiexp_violate_top_bytes"
+        },
+        {
+        "Input": int_to_hex(int(G1[0]), 64) + (int_to_hex(int(P1[1]), 64)) + int_to_hex(int(2), 32),
+        "ExpectedError": "invalid point: not on curve",
+        "Name": "bls_g1multiexp_point_not_on_curve"
         }
     ]
 
