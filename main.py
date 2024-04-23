@@ -1303,34 +1303,44 @@ def case16_fail_multiexp_G1():
 def case17_fail_multiexp_G2():
     yield 'fail-multiexp_G2_bls', [
         {
-            "Input": "",
-            "ExpectedError": "invalid input length",
-            "Name": "bls_g2multiexp_empty_input"
+        "Input": "",
+        "ExpectedError": "invalid input length",
+        "Name": "bls_g2multiexp_empty_input"
         },
         {
-            "Input": int_to_hex(int(G2[0].coeffs[0]), 63) + int_to_hex(int(G2[0].coeffs[1]), 64) + int_to_hex(int(G2[1].coeffs[0]), 64) + int_to_hex(int(G2[1].coeffs[1]), 64) + int_to_hex(int(2), 32),
-            "ExpectedError": "invalid input length",
-            "Name": "bls_g2multiexp_short_input"
+        "Input": int_to_hex(int(G2[0].coeffs[0]), 63) + int_to_hex(int(G2[0].coeffs[1]), 64) + int_to_hex(int(G2[1].coeffs[0]), 64) + int_to_hex(int(G2[1].coeffs[1]), 64) + int_to_hex(int(2), 32),
+        "ExpectedError": "invalid input length",
+        "Name": "bls_g2multiexp_short_input"
         },
         {
-            "Input": int_to_hex(int(G2[0].coeffs[0]), 65) + int_to_hex(int(G2[0].coeffs[1]), 64) + int_to_hex(int(G2[1].coeffs[0]), 64) + int_to_hex(int(G2[1].coeffs[1]), 64) + int_to_hex(int(2), 32),
-            "ExpectedError": "invalid input length",
-            "Name": "bls_g2multiexp_long_input"
+        "Input": int_to_hex(int(G2[0].coeffs[0]), 65) + int_to_hex(int(G2[0].coeffs[1]), 64) + int_to_hex(int(G2[1].coeffs[0]), 64) + int_to_hex(int(G2[1].coeffs[1]), 64) + int_to_hex(int(2), 32),
+        "ExpectedError": "invalid input length",
+        "Name": "bls_g2multiexp_long_input"
         },
         {
-            "Input": "10" + int_to_hex(int(G2[0].coeffs[0]), 63) + int_to_hex(int(G2[0].coeffs[1]), 64) + int_to_hex(int(G2[1].coeffs[0]), 64) + int_to_hex(int(G2[1].coeffs[1]), 64) + int_to_hex(int(2), 32),
-            "ExpectedError": "invalid field element top bytes",
-            "Name": "bls_g2multiexp_violate_top_bytes"
+        "Input": "10" + int_to_hex(int(G2[0].coeffs[0]), 63) + int_to_hex(int(G2[0].coeffs[1]), 64) + int_to_hex(int(G2[1].coeffs[0]), 64) + int_to_hex(int(G2[1].coeffs[1]), 64) + int_to_hex(int(2), 32),
+        "ExpectedError": "invalid field element top bytes",
+        "Name": "bls_g2multiexp_violate_top_bytes"
         },
         {
-            "Input": int_to_hex(int(G2[0].coeffs[0]) + q, 64) + int_to_hex(int(G2[0].coeffs[1]), 64) + int_to_hex(int(G2[1].coeffs[0]), 64) + int_to_hex(int(G2[1].coeffs[1]), 64) + int_to_hex(int(2), 32),
-            "ExpectedError": "invalid fp.Element encoding",
-            "Name": "bls_g2multiexp_invalid_field_element"
+        "Input": int_to_hex(int(G2[0].coeffs[0]) + q, 64) + int_to_hex(int(G2[0].coeffs[1]), 64) + int_to_hex(int(G2[1].coeffs[0]), 64) + int_to_hex(int(G2[1].coeffs[1]), 64) + int_to_hex(int(2), 32),
+        "ExpectedError": "invalid fp.Element encoding",
+        "Name": "bls_g2multiexp_invalid_field_element"
         },
         {
-            "Input": int_to_hex(int(G2[0].coeffs[0]), 64) + int_to_hex(int(P2[0].coeffs[1]), 64) + int_to_hex(int(G2[1].coeffs[0]), 64) + int_to_hex(int(G2[1].coeffs[1]), 64) + int_to_hex(int(2), 32),
-            "ExpectedError": "invalid point: not on curve",
-            "Name": "bls_g2multiexp_point_not_on_curve"
+        "Input": int_to_hex(int(G2[0].coeffs[0]), 64) + int_to_hex(int(P2[0].coeffs[1]), 64) + int_to_hex(int(G2[1].coeffs[0]), 64) + int_to_hex(int(G2[1].coeffs[1]), 64) + int_to_hex(int(2), 32),
+        "ExpectedError": "invalid point: not on curve",
+        "Name": "bls_g2multiexp_point_not_on_curve"
+        }
+    ]
+
+
+def case18_fail_pairing_check():
+    yield 'fail-pairing_check_bls', [
+        {
+        "Input": "",
+        "ExpectedError": "invalid input length",
+        "Name": "bls_pairing_empty_input"
         }
     ]
 
@@ -1352,7 +1362,8 @@ test_kinds: Dict[str, Generator[Tuple[str, Any], None, None]] = {
     'fail_map_fp_to_G1': case14_fail_map_fp_to_G1,
     'fail_map_fp2_to_G2': case15_fail_map_fp2_to_G2,
     'fail_multiexp_G1': case16_fail_multiexp_G1,
-    'fail_multiexp_G2': case17_fail_multiexp_G2
+    'fail_multiexp_G2': case17_fail_multiexp_G2,
+    'fail_pairing_check': case18_fail_pairing_check
 }
 
 
