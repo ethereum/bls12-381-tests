@@ -1319,7 +1319,7 @@ def case17_fail_multiexp_G2():
         },
         {
             "Input": "10" + int_to_hex(int(G2[0].coeffs[0]), 63) + int_to_hex(int(G2[0].coeffs[1]), 64) + int_to_hex(int(G2[1].coeffs[0]), 64) + int_to_hex(int(G2[1].coeffs[1]), 64) + int_to_hex(int(2), 32),
-            "ExpectedError": "invalid input length",
+            "ExpectedError": "invalid field element top bytes",
             "Name": "bls_g2multiexp_violate_top_bytes"
         }
     ]
