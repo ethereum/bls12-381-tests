@@ -138,8 +138,6 @@ def compress_G2(pt: G2Uncompressed) -> G2Compressed:
     return G2Compressed((z1, z2))
 
 
-# gas costs
-# TODO to change
 BLS12_G1ADD_GAS = 500
 BLS12_G2ADD_GAS = 800
 BLS12_G1MUL_GAS = 12000
@@ -1389,6 +1387,14 @@ def case18_fail_pairing_check():
             int(neg(G2)[0].coeffs[1]), 64) + int_to_hex(int(neg(G2)[1].coeffs[0]), 64) + int_to_hex(int(neg(G2)[1].coeffs[1]), 64),
         "ExpectedError": "invalid point: not on curve",
         "Name": "bls_pairing_g2_not_on_curve"
+        },
+        {
+        "Input": int_to_hex(int(G1_wrong_order[0]), 64) + (int_to_hex(int(G1_wrong_order[1]), 64)) + int_to_hex(int(G2[0].coeffs[0]), 64) + int_to_hex(
+            int(G2[0].coeffs[1]), 64) + int_to_hex(int(G2[1].coeffs[0]), 64) + int_to_hex(int(G2[1].coeffs[1]), 64) + int_to_hex(
+            int(G1[0]), 64) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(neg(G2)[0].coeffs[0]), 64) + int_to_hex(
+            int(neg(G2)[0].coeffs[1]), 64) + int_to_hex(int(neg(G2)[1].coeffs[0]), 64) + int_to_hex(int(neg(G2)[1].coeffs[1]), 64),
+        "ExpectedError": "g1 point is not on correct subgroup",
+        "Name": "bls_pairing_g1_not_in_correct_subgroup"
         }
     ]
 
