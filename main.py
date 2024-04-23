@@ -1306,6 +1306,16 @@ def case17_fail_multiexp_G2():
             "Input": "",
             "ExpectedError": "invalid input length",
             "Name": "bls_g2multiexp_empty_input"
+        },
+        {
+            "Input": int_to_hex(int(G2[0].coeffs[0]), 63) + int_to_hex(int(G2[0].coeffs[1]), 64) + int_to_hex(int(G2[1].coeffs[0]), 64) + int_to_hex(int(G2[1].coeffs[1]), 64) + int_to_hex(int(2), 32),
+            "ExpectedError": "invalid input length",
+            "Name": "bls_g2multiexp_short_input"
+        },
+        {
+            "Input": int_to_hex(int(G2[0].coeffs[0]), 65) + int_to_hex(int(G2[0].coeffs[1]), 64) + int_to_hex(int(G2[1].coeffs[0]), 64) + int_to_hex(int(G2[1].coeffs[1]), 64) + int_to_hex(int(2), 32),
+            "ExpectedError": "invalid input length",
+            "Name": "bls_g2multiexp_long_input"
         }
     ]
 
