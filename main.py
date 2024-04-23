@@ -1271,6 +1271,16 @@ def case16_fail_multiexp_G1():
         "Input": "",
         "ExpectedError": "invalid input length",
         "Name": "bls_g1multiexp_empty_input"
+        },
+        {
+        "Input": int_to_hex(int(G1[0]), 63) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(2), 32),
+        "ExpectedError": "invalid input length",
+        "Name": "bls_g1multiexp_short_input"
+        },
+        {
+        "Input": int_to_hex(int(G1[0]), 65) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(2), 32),
+        "ExpectedError": "invalid input length",
+        "Name": "bls_g1multiexp_long_input"
         }
     ]
 
