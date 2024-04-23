@@ -1341,6 +1341,22 @@ def case18_fail_pairing_check():
         "Input": "",
         "ExpectedError": "invalid input length",
         "Name": "bls_pairing_empty_input"
+        },
+        {
+        "Input": int_to_hex(int(G1[0]), 63) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(G2[0].coeffs[0]), 64) + int_to_hex(
+            int(G2[0].coeffs[1]), 64) + int_to_hex(int(G2[1].coeffs[0]), 64) + int_to_hex(int(G2[1].coeffs[1]), 64) + int_to_hex(
+            int(G1[0]), 64) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(neg(G2)[0].coeffs[0]), 64) + int_to_hex(
+            int(neg(G2)[0].coeffs[1]), 64) + int_to_hex(int(neg(G2)[1].coeffs[0]), 64) + int_to_hex(int(neg(G2)[1].coeffs[1]), 64),
+        "ExpectedError": "invalid input length",
+        "Name": "bls_pairing_missing_data"
+        },
+        {
+        "Input": int_to_hex(int(G1[0]), 65) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(G2[0].coeffs[0]), 64) + int_to_hex(
+            int(G2[0].coeffs[1]), 64) + int_to_hex(int(G2[1].coeffs[0]), 64) + int_to_hex(int(G2[1].coeffs[1]), 64) + int_to_hex(
+            int(G1[0]), 64) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(neg(G2)[0].coeffs[0]), 64) + int_to_hex(
+            int(neg(G2)[0].coeffs[1]), 64) + int_to_hex(int(neg(G2)[1].coeffs[0]), 64) + int_to_hex(int(neg(G2)[1].coeffs[1]), 64),
+        "ExpectedError": "invalid input length",
+        "Name": "bls_pairing_extra_data"
         }
     ]
 
