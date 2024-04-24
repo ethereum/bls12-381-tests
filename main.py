@@ -1349,6 +1349,12 @@ def case17_fail_multiexp_G2():
             int(2), 32) + int_to_hex(int(P2[0].coeffs[0]), 64) + int_to_hex(int(P2[0].coeffs[1]), 64) + int_to_hex(int(P2[1].coeffs[0]), 64) + int_to_hex(int(P2[1].coeffs[1]), 64) + int_to_hex(int(2), 32),
         "ExpectedError": "invalid point: not on curve",
         "Name": "bls_g2multiexp_point_not_on_curve"
+        },
+        {
+        "Input": int_to_hex(int(G2_wrong_order[0].coeffs[0]), 64) + int_to_hex(int(G2_wrong_order[0].coeffs[1]), 64) + int_to_hex(int(G2_wrong_order[1].coeffs[0]), 64) + int_to_hex(int(G2_wrong_order[1].coeffs[1]), 64) + int_to_hex(
+            int(2), 32) + int_to_hex(int(P2[0].coeffs[0]), 64) + int_to_hex(int(P2[0].coeffs[1]), 64) + int_to_hex(int(P2[1].coeffs[0]), 64) + int_to_hex(int(P2[1].coeffs[1]), 64) + int_to_hex(int(2), 32),
+        "ExpectedError": "g2 point is not on correct subgroup",
+        "Name": "bls_pairing_g2_not_in_correct_subgroup"
         }
     ]
 
