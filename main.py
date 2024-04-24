@@ -1161,9 +1161,14 @@ def case12_fail_mul_G1():
         "Name": "bls_g1mul_point_not_on_curve"
         },
         {
-        "Input": "10" + int_to_hex(int(G1[0]), 63) + (int_to_hex(int(P1[1]), 64)) + int_to_hex(int(2), 32),
+        "Input": "10" + int_to_hex(int(G1[0]), 63) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(2), 32),
         "ExpectedError": "invalid field element top bytes",
         "Name": "bls_g1mul_violate_top_bytes"
+        },
+        {
+        "Input": int_to_hex(int(G1_wrong_order[0]), 64) + (int_to_hex(int(G1_wrong_order[1]), 64)) + int_to_hex(int(2), 32),
+        "ExpectedError": "g1 point is not on correct subgroup",
+        "Name": "bls_g1mul_g1_not_in_correct_subgroup"
         }
     ]
 
