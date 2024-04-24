@@ -1204,6 +1204,11 @@ def case13_fail_mul_G2():
         "Input": "10" + int_to_hex(int(G2[0].coeffs[0]), 63) + int_to_hex(int(G2[0].coeffs[1]), 64) + int_to_hex(int(G2[1].coeffs[0]), 64) + int_to_hex(int(G2[1].coeffs[1]), 64) + int_to_hex(int(2), 32),
         "ExpectedError": "invalid field element top bytes",
         "Name": "bls_g2mul_violate_top_bytes"
+        },
+        {
+        "Input": int_to_hex(int(G2_wrong_order[0].coeffs[0]), 64) + int_to_hex(int(G2_wrong_order[0].coeffs[1]), 64) + int_to_hex(int(G2_wrong_order[1].coeffs[0]), 64) + int_to_hex(int(G2_wrong_order[1].coeffs[1]), 64) + int_to_hex(int(2), 32),
+        "ExpectedError": "g2 point is not on correct subgroup",
+        "Name": "bls_g2mul_g2_not_in_correct_subgroup"
         }
     ]
 
