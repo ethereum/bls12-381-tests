@@ -1304,6 +1304,11 @@ def case16_fail_multiexp_G1():
         "Input": int_to_hex(int(G1[0]), 64) + (int_to_hex(int(P1[1]), 64)) + int_to_hex(int(2), 32) + int_to_hex(int(P1[0]), 64) + (int_to_hex(int(P1[1]), 64)) + int_to_hex(int(2), 32),
         "ExpectedError": "invalid point: not on curve",
         "Name": "bls_g1multiexp_point_not_on_curve"
+        },
+        {
+        "Input": int_to_hex(int(G1_wrong_order[0]), 64) + (int_to_hex(int(G1_wrong_order[1]), 64)) + int_to_hex(int(2), 32) + int_to_hex(int(P1[0]), 64) + (int_to_hex(int(P1[1]), 64)) + int_to_hex(int(2), 32),
+        "ExpectedError": "g1 point is not on correct subgroup",
+        "Name": "bls_g1multiexp_g1_not_in_correct_subgroup"
         }
     ]
 
