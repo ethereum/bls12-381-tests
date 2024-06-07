@@ -1,6 +1,6 @@
-# Test format: BLS sign message
+# Test format: BLS aggregate signature verification
 
-Verify the signature against the given pubkeys and one messages.
+Verify the signature against the given pubkeys and messages.
 
 ## Test case format
 

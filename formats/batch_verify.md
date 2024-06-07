@@ -1,6 +1,6 @@
-# Test format: BLS sign message
+# Test format: BLS batch signature verification
 
-[Batch verify](https://ethresear.ch/t/fast-verification-of-multiple-bls-signatures/5407) the signatures against the given pubkeys and one messages.
+[Batch verify](https://ethresear.ch/t/fast-verification-of-multiple-bls-signatures/5407) the signatures against the given pubkeys and messages.
 
 ## Test case format
 

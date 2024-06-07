@@ -1,4 +1,4 @@
-# Test format: BLS sign message
+# Test format: BLS signature verification
 
 Verify the signature against the given one pubkey and one message.
 

@@ -1,6 +1,6 @@
 # Test format: Deserialization to G1
 
-Deserializaion of a public key should produce a point in G1
+Deserialization of a public key should produce a point in G1
 
 ## Test case format
 

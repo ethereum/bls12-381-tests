@@ -1,6 +1,6 @@
 # Test format: Deserialization to G2
 
-Deserializaion of a signature should produce a point in G2
+Deserialization of a signature should produce a point in G2
 
 ## Test case format
 
