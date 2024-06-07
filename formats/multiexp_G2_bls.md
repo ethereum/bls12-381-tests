@@ -1,4 +1,4 @@
-# Test format:  'BLS12_G2MULTIEXP'
+# Test format: 'BLS12_G2MULTIEXP'
 
 multiexponentiation in G2
 
@@ -13,11 +13,11 @@ The test data is declared in a 'json' file:
         of them being a byte concatenation of encoding of G2 point (256 bytes) and encoding of a
         scalar value (32 bytes),
         "Name": the name of the test,
-        "Expected": single G2 point 256 bytes,
+        "Expected": single G2 point (256 bytes),
         "Gas": the cost of the gas,
         "NoBenchmark": True/False
     },
-    ....
+    ...
 ]
 ```
 
