@@ -859,7 +859,7 @@ def case07_multiexp_G1():
         },
         {
         "Input": int_to_hex(int(P1[0]), 64) + (int_to_hex(int(P1[1]), 64)) + int_to_hex(PRIVKEYS[0] + curve_order, 32),
-        "Name": "bls_g1multiexp_random*g1_unnormalized_scalar",
+        "Name": "bls_g1multiexp_random*p1_unnormalized_scalar",
         "Expected": int_to_hex(int(result_multiply_P1[0]), 64) + (int_to_hex(int(result_multiply_P1[1]), 64)),
         "Gas": int((1 * BLS12_G1MUL_GAS * BLS12_MULTIEXP_DISCOUNT_TABLE[0][1]) / 1000),
         "NoBenchmark": False
