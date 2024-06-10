@@ -1,4 +1,4 @@
-# Test format: BLS sign message
+# Test format: BLS fast aggregate signature verification
 
 Verify the signature against the given pubkeys and one message.
 
