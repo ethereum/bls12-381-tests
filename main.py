@@ -178,7 +178,7 @@ P2 = (
 )
 
 
-# Poinat not in subgroup
+# Point not in subgroup
 # (order 11 * 10177 * 859267 * 52437899 * 52435875175126190479447740508185965837690552500527637822603658699938581184513) for curve over FQ
 G1_wrong_order = (
     FQ(175120027539531016442854006573889751122153014990298010045047409866982914293422983043097473453160715743839524736495),
@@ -186,7 +186,7 @@ G1_wrong_order = (
 )
 
 
-# Poinat not in subgroup (order 13) for curve over FQ2
+# Point not in subgroup (order 13) for curve over FQ2
 G2_wrong_order = (
     FQ2([
         3922397287649913227621058437622997108794641953057758105879357683864299671651819357275859520733535654147680406731276,
@@ -764,6 +764,8 @@ def case07_multiexp_G1():
                Scalar.from_le_bytes(int_to_little_endian(PRIVKEYS[5])),
                Scalar.from_le_bytes(int_to_little_endian(PRIVKEYS[6]))]
     g1multiexp = decompress_G1(G1Compressed(os2ip(bytes.fromhex(str(G1Point.multiexp_unchecked(g1s, scalars))))))
+    result_multiply_G1 = multiply(G1, PRIVKEYS[0])
+    result_multiply_P1 = multiply(P1, PRIVKEYS[0])
     yield 'multiexp_G1_bls', [
         {
         "Input": int_to_hex(int(G1[0]), 64) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(2), 32),
@@ -847,6 +849,20 @@ def case07_multiexp_G1():
         "Expected": int_to_hex(int(g1multiexp[0]), 64) + (int_to_hex(int(g1multiexp[1]), 64)),
         "Gas": int((7 * BLS12_G1MUL_GAS * BLS12_MULTIEXP_DISCOUNT_TABLE[6][1]) / 1000),
         "NoBenchmark": False
+        },
+        {
+        "Input": int_to_hex(int(G1[0]), 64) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(PRIVKEYS[0] + curve_order, 32),
+        "Name": "bls_g1multiexp_random*g1_unnormalized_scalar",
+        "Expected": int_to_hex(int(result_multiply_G1[0]), 64) + (int_to_hex(int(result_multiply_G1[1]), 64)),
+        "Gas": int((1 * BLS12_G1MUL_GAS * BLS12_MULTIEXP_DISCOUNT_TABLE[0][1]) / 1000),
+        "NoBenchmark": False
+        },
+        {
+        "Input": int_to_hex(int(P1[0]), 64) + (int_to_hex(int(P1[1]), 64)) + int_to_hex(PRIVKEYS[0] + curve_order, 32),
+        "Name": "bls_g1multiexp_random*p1_unnormalized_scalar",
+        "Expected": int_to_hex(int(result_multiply_P1[0]), 64) + (int_to_hex(int(result_multiply_P1[1]), 64)),
+        "Gas": int((1 * BLS12_G1MUL_GAS * BLS12_MULTIEXP_DISCOUNT_TABLE[0][1]) / 1000),
+        "NoBenchmark": False
         }
     ]
 
@@ -878,6 +894,8 @@ def case08_multiexp_G2():
                Scalar.from_le_bytes(int_to_little_endian(PRIVKEYS[5]))]
     g2multiexpArk = bytes.fromhex(str(G2Point.multiexp_unchecked(g2s, scalars)))
     g2multiex = decompress_G2(G2Compressed((os2ip(g2multiexpArk[:48]), os2ip(g2multiexpArk[48:]))))
+    result_multiply_G2 = multiply(G2, PRIVKEYS[0])
+    result_multiply_P2 = multiply(P2, PRIVKEYS[0])
     yield 'multiexp_G2_bls', [
         {
         "Input": int_to_hex(int(G2[0].coeffs[0]), 64) + int_to_hex(int(G2[0].coeffs[1]), 64) + int_to_hex(int(G2[1].coeffs[0]), 64) + int_to_hex(int(G2[1].coeffs[1]), 64) + int_to_hex(int(2), 32),
@@ -978,6 +996,22 @@ def case08_multiexp_G2():
         "Expected": int_to_hex(int(g2multiex[0].coeffs[0]), 64) + int_to_hex(int(g2multiex[0].coeffs[1]), 64) + int_to_hex(
             int(g2multiex[1].coeffs[0]), 64) + int_to_hex(int(g2multiex[1].coeffs[1]), 64),
         "Gas": int((6 * BLS12_G2MUL_GAS * BLS12_MULTIEXP_DISCOUNT_TABLE[5][1]) / 1000),
+        "NoBenchmark": False
+        },
+        {
+        "Input": int_to_hex(int(G2[0].coeffs[0]), 64) + int_to_hex(int(G2[0].coeffs[1]), 64) + int_to_hex(int(G2[1].coeffs[0]), 64) + int_to_hex(int(G2[1].coeffs[1]), 64) + int_to_hex(PRIVKEYS[0] + curve_order, 32),
+        "Name": "bls_g2multiexp_random*g2_unnormalized_scalar",
+        "Expected": int_to_hex(int(result_multiply_G2[0].coeffs[0]), 64) + int_to_hex(int(result_multiply_G2[0].coeffs[1]), 64) + int_to_hex(
+            int(result_multiply_G2[1].coeffs[0]), 64) + int_to_hex(int(result_multiply_G2[1].coeffs[1]), 64),
+        "Gas": int((1 * BLS12_G2MUL_GAS * BLS12_MULTIEXP_DISCOUNT_TABLE[0][1]) / 1000),
+        "NoBenchmark": False
+        },
+        {
+        "Input": int_to_hex(int(P2[0].coeffs[0]), 64) + int_to_hex(int(P2[0].coeffs[1]), 64) + int_to_hex(int(P2[1].coeffs[0]), 64) + int_to_hex(int(P2[1].coeffs[1]), 64) + int_to_hex(PRIVKEYS[0] + curve_order, 32),
+        "Name": "bls_g2multiexp_random*p2_unnormalized_scalar",
+        "Expected": int_to_hex(int(result_multiply_P2[0].coeffs[0]), 64) + int_to_hex(int(result_multiply_P2[0].coeffs[1]), 64) + int_to_hex(
+            int(result_multiply_P2[1].coeffs[0]), 64) + int_to_hex(int(result_multiply_P2[1].coeffs[1]), 64),
+        "Gas": int((1 * BLS12_G2MUL_GAS * BLS12_MULTIEXP_DISCOUNT_TABLE[0][1]) / 1000),
         "NoBenchmark": False
         }
     ]
