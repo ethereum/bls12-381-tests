@@ -1,6 +1,6 @@
 # Test format: 'BLS12_G2ADD'
 
-point addition in G2
+Point addition in G2.
 
 ## Test case format
 
@@ -13,7 +13,7 @@ The test data is declared in a 'json' file:
         "Name": the name of the test,
         "Expected": single G2 point (256 bytes),
         "Gas": the cost of the gas,
-        "NoBenchmark": True/False
+        "NoBenchmark": true/false
     },
     ...
 ]

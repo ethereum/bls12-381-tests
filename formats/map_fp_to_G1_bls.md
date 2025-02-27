@@ -1,6 +1,6 @@
 # Test format: 'BLS12_MAP_FP_TO_G1'
 
-maps base field element into the G1 point
+Maps base field element into the G1 point.
 
 ## Test case format
 
@@ -13,7 +13,7 @@ The test data is declared in a 'json' file:
         "Name": the name of the test,
         "Expected": single G1 point (128 bytes),
         "Gas": the cost of the gas,
-        "NoBenchmark": True/False
+        "NoBenchmark": true/false
     },
     ...
 ]
