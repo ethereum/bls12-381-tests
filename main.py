@@ -1550,6 +1550,27 @@ def case18_fail_pairing_check():
         },
         {
         "Input": ""
+            # G1 point 1
+            + int_to_hex(int(G1[0]), 64)
+            + int_to_hex(int(G1[1]), 64)
+            # G1 point 1
+            + int_to_hex(int(G2[0].coeffs[0]) + q, 64) # Plus Q
+            + int_to_hex(int(G2[0].coeffs[1]), 64)
+            + int_to_hex(int(G2[1].coeffs[0]), 64)
+            + int_to_hex(int(G2[1].coeffs[1]), 64)
+            # G1 point 2
+            + int_to_hex(int(G1[0]), 64)
+            + int_to_hex(int(G1[1]), 64)
+            # G1 point 2
+            + int_to_hex(int(neg(G2)[0].coeffs[0]), 64)
+            + int_to_hex(int(neg(G2)[0].coeffs[1]), 64)
+            + int_to_hex(int(neg(G2)[1].coeffs[0]), 64)
+            + int_to_hex(int(neg(G2)[1].coeffs[1]), 64),
+        "ExpectedError": "invalid fp.Element encoding",
+        "Name": "bls_pairing_e(G1,-G2_invalid_field_element)=e(-G1,G2)",
+        },
+        {
+        "Input": ""
             # G1 point (not on curve)
             + int_to_hex(int(P1[0]), 64) # Using P1 instead of G1
             + int_to_hex(int(G1[1]), 64)
