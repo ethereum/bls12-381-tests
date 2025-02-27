@@ -1567,7 +1567,7 @@ def case18_fail_pairing_check():
             + int_to_hex(int(neg(G2)[1].coeffs[0]), 64)
             + int_to_hex(int(neg(G2)[1].coeffs[1]), 64),
         "ExpectedError": "invalid fp.Element encoding",
-        "Name": "bls_pairing_e(G1,-G2_invalid_field_element)=e(-G1,G2)",
+        "Name": "bls_pairing_e(G1,G2_invalid_field_element)=e(-G1,G2)",
         },
         {
         "Input": ""
@@ -1695,7 +1695,7 @@ def case18_fail_pairing_check():
             int(G1[0]), 64) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(neg(G2)[0].coeffs[0]), 64) + int_to_hex(
             int(neg(G2)[0].coeffs[1]), 64) + int_to_hex(int(neg(G2)[1].coeffs[0]), 64) + int_to_hex(int(neg(G2)[1].coeffs[1]), 64),
         "ExpectedError": "g2 point is not on correct subgroup",
-        "Name": "bls_pairing_e(G1,-G2_not_in_correct_subgroup)=e(-G1,G2)"
+        "Name": "bls_pairing_e(G1,G2_not_in_correct_subgroup)=e(-G1,G2)"
         }
     ]
 
