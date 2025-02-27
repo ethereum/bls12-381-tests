@@ -1495,7 +1495,7 @@ def case18_fail_pairing_check():
         {
         "Input": ""
             # G1 point (invalid field element)
-            + int_to_hex(int(G1[0]) + q, 64) # Plus Q
+            + int_to_hex(int(G1[0]) + q, 64)  # Plus Q
             + int_to_hex(int(G1[1]), 64)
             # G2 point (point at infinity)
             + int_to_hex(0, 256),
@@ -1507,7 +1507,7 @@ def case18_fail_pairing_check():
             # G1 point (point at infinity)
             + int_to_hex(0, 128)
             # G2 point (invalid field element)
-            + int_to_hex(int(G2[0].coeffs[0]) + q, 64) # Plus Q
+            + int_to_hex(int(G2[0].coeffs[0]) + q, 64)  # Plus Q
             + int_to_hex(int(G2[0].coeffs[1]), 64)
             + int_to_hex(int(G2[1].coeffs[0]), 64)
             + int_to_hex(int(G2[1].coeffs[1]), 64),
@@ -1517,7 +1517,7 @@ def case18_fail_pairing_check():
         {
         "Input": ""
             # G1 point
-            + int_to_hex(int(G1[0]) + q, 64) # Plus Q
+            + int_to_hex(int(G1[0]) + q, 64)  # Plus Q
             + int_to_hex(int(G1[1]), 64)
             # G2 point (invalid field element)
             + int_to_hex(int(G2[0].coeffs[0]), 64)
@@ -1533,7 +1533,7 @@ def case18_fail_pairing_check():
             + int_to_hex(int(G1[0]), 64)
             + int_to_hex(int(G1[1]), 64)
             # G2 point (invalid field element)
-            + int_to_hex(int(G2[0].coeffs[0]) + q, 64) # Plus Q
+            + int_to_hex(int(G2[0].coeffs[0]) + q, 64)  # Plus Q
             + int_to_hex(int(G2[0].coeffs[1]), 64)
             + int_to_hex(int(G2[1].coeffs[0]), 64)
             + int_to_hex(int(G2[1].coeffs[1]), 64),
@@ -1554,7 +1554,7 @@ def case18_fail_pairing_check():
             + int_to_hex(int(G1[0]), 64)
             + int_to_hex(int(G1[1]), 64)
             # G1 point 1
-            + int_to_hex(int(G2[0].coeffs[0]) + q, 64) # Plus Q
+            + int_to_hex(int(G2[0].coeffs[0]) + q, 64)  # Plus Q
             + int_to_hex(int(G2[0].coeffs[1]), 64)
             + int_to_hex(int(G2[1].coeffs[0]), 64)
             + int_to_hex(int(G2[1].coeffs[1]), 64)
@@ -1572,7 +1572,7 @@ def case18_fail_pairing_check():
         {
         "Input": ""
             # G1 point (not on curve)
-            + int_to_hex(int(P1[0]), 64) # Using P1 instead of G1
+            + int_to_hex(int(P1[0]), 64)  # Using P1 instead of G1
             + int_to_hex(int(G1[1]), 64)
             # G2 point (point at infinity)
             + int_to_hex(0, 256),
@@ -1584,7 +1584,7 @@ def case18_fail_pairing_check():
             # G1 point (point at infinity)
             + int_to_hex(0, 128)
             # G2 point (not on curve)
-            + int_to_hex(int(P2[0].coeffs[0]), 64) # Using P2 instead of G2
+            + int_to_hex(int(P2[0].coeffs[0]), 64)  # Using P2 instead of G2
             + int_to_hex(int(G2[0].coeffs[1]), 64)
             + int_to_hex(int(G2[1].coeffs[0]), 64)
             + int_to_hex(int(G2[1].coeffs[1]), 64),
@@ -1594,7 +1594,7 @@ def case18_fail_pairing_check():
         {
         "Input": ""
             # G1 point (not on curve)
-            + int_to_hex(int(P1[0]), 64) # Using P1 instead of G1
+            + int_to_hex(int(P1[0]), 64)  # Using P1 instead of G1
             + int_to_hex(int(G1[1]), 64)
             # G2 point
             + int_to_hex(int(G2[0].coeffs[0]), 64)
@@ -1610,7 +1610,7 @@ def case18_fail_pairing_check():
             + int_to_hex(int(G1[0]), 64)
             + int_to_hex(int(G1[1]), 64)
             # G2 point (not on curve)
-            + int_to_hex(int(P2[0].coeffs[0]), 64) # Using P2 instead of G2
+            + int_to_hex(int(P2[0].coeffs[0]), 64)  # Using P2 instead of G2
             + int_to_hex(int(G2[0].coeffs[1]), 64)
             + int_to_hex(int(G2[1].coeffs[0]), 64)
             + int_to_hex(int(G2[1].coeffs[1]), 64),

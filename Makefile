@@ -12,7 +12,8 @@ lint:
 	# Ignored:
 	#   - E122 continuation line missing indentation or outdented
 	#   - E501 line too long
-	flake8 . --count --ignore=E122,E501 --max-complexity=10 --max-line-length=127 --statistics --exclude=venv
+	#   - W503 line break before binary operator
+	flake8 . --count --ignore=E122,E501,W503 --max-complexity=10 --max-line-length=127 --statistics --exclude=venv
 
 generate_yaml:
 	mkdir -p out/yaml
