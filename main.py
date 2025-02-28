@@ -774,6 +774,13 @@ def case07_multiexp_G1():
     g1multiexp = decompress_G1(G1Compressed(os2ip(bytes.fromhex(str(G1Point.multiexp_unchecked(g1s, scalars))))))
     result_multiply_G1 = multiply(G1, PRIVKEYS[0])
     result_multiply_P1 = multiply(P1, PRIVKEYS[0])
+
+    def discount_table_lookup(count):
+        try:
+            return BLS12_G1_MULTIEXP_DISCOUNT_TABLE[count - 1][1]
+        except IndexError:
+            return BLS12_G1_MULTIEXP_MAX_DISCOUNT
+
     yield 'multiexp_G1_bls', [
         {
         "Input": int_to_hex(int(G1[0]), 64) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(2), 32),
@@ -872,6 +879,14 @@ def case07_multiexp_G1():
         "Gas": int((1 * BLS12_G1MUL_GAS * BLS12_G1_MULTIEXP_DISCOUNT_TABLE[0][1]) / 1000),
         "NoBenchmark": False
         }
+    ] + [
+        {
+        "Input": count * (int_to_hex(0, 128) + int_to_hex(0, 32)),
+        "Name": f"bls_g1multiexp_discount_table_{count}",
+        "Expected": int_to_hex(0, 128),
+        "Gas": int((count * BLS12_G1MUL_GAS * discount_table_lookup(count)) / 1000),
+        "NoBenchmark": False
+        } for count in range(1, 150)
     ]
 
 
@@ -904,6 +919,13 @@ def case08_multiexp_G2():
     g2multiex = decompress_G2(G2Compressed((os2ip(g2multiexpArk[:48]), os2ip(g2multiexpArk[48:]))))
     result_multiply_G2 = multiply(G2, PRIVKEYS[0])
     result_multiply_P2 = multiply(P2, PRIVKEYS[0])
+
+    def discount_table_lookup(count):
+        try:
+            return BLS12_G2_MULTIEXP_DISCOUNT_TABLE[count - 1][1]
+        except IndexError:
+            return BLS12_G2_MULTIEXP_MAX_DISCOUNT
+
     yield 'multiexp_G2_bls', [
         {
         "Input": int_to_hex(int(G2[0].coeffs[0]), 64) + int_to_hex(int(G2[0].coeffs[1]), 64) + int_to_hex(int(G2[1].coeffs[0]), 64) + int_to_hex(int(G2[1].coeffs[1]), 64) + int_to_hex(int(2), 32),
@@ -1022,6 +1044,14 @@ def case08_multiexp_G2():
         "Gas": int((1 * BLS12_G2MUL_GAS * BLS12_G2_MULTIEXP_DISCOUNT_TABLE[0][1]) / 1000),
         "NoBenchmark": False
         }
+    ] + [
+        {
+        "Input": count * (int_to_hex(0, 256) + int_to_hex(0, 32)),
+        "Name": f"bls_g2multiexp_discount_table_{count}",
+        "Expected": int_to_hex(0, 256),
+        "Gas": int((count * BLS12_G2MUL_GAS * discount_table_lookup(count)) / 1000),
+        "NoBenchmark": False
+        } for count in range(1, 150)
     ]
 
 
