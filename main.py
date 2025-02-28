@@ -144,10 +144,18 @@ BLS12_G1MUL_GAS = 12000
 BLS12_G2MUL_GAS = 22500
 BLS12_MAP_FP_TO_G1_GAS = 5500
 BLS12_MAP_FP2_TO_G2_GAS = 23800
-BLS12_MULTIEXP_DISCOUNT_TABLE = [[1, 1200], [2, 888], [3, 764], [4, 641], [5, 594], [6, 547], [7, 500], [8, 453], [9, 438], [10, 423], [11, 408], [12, 394], [13, 379], [14, 364], [15, 349], [16, 334], [17, 330], [18, 326], [19, 322], [20, 318], [21, 314], [22, 310], [23, 306], [24, 302], [25, 298], [26, 294], [27, 289], [28, 285], [29, 281], [30, 277], [31, 273], [32, 269], [33, 268], [34, 266], [35, 265], [36, 263], [37, 262], [38, 260], [39, 259], [40, 257], [41, 256], [42, 254], [43, 253], [44, 251], [45, 250], [46, 248], [47, 247], [48, 245], [49, 244], [50, 242], [51, 241], [52, 239], [53, 238], [54, 236], [55, 235], [56, 233], [57, 232], [58, 231], [59, 229], [60, 228], [61, 226], [62, 225], [63, 223], [64, 222], [65, 221], [66, 220], [67, 219], [68, 219], [69, 218], [70, 217], [71, 216], [72, 216], [73, 215], [74, 214], [75, 213], [76, 213], [77, 212], [78, 211], [79, 211], [80, 210], [81, 209], [82, 208], [83, 208], [84, 207], [85, 206], [86, 205], [87, 205], [88, 204], [89, 203], [90, 202], [91, 202], [92, 201], [93, 200], [94, 199], [95, 199], [96, 198], [97, 197], [98, 196], [99, 196], [100, 195], [101, 194], [102, 193], [103, 193], [104, 192], [105, 191], [106, 191], [107, 190], [108, 189], [109, 188], [110, 188], [111, 187], [112, 186], [113, 185], [114, 185], [115, 184], [116, 183], [117, 182], [118, 182], [119, 181], [120, 180], [121, 179], [122, 179], [123, 178], [124, 177], [125, 176], [126, 176], [127, 175], [128, 174]]
-BLS12_MULTIEXP_MAX_DISCOUNT = 174
-BLS12_PAIRING_VARIABLE = 43000
-BLS12_PAIRING_CONSTANT = 65000
+
+# G1 MSM discount table as per EIP-2537
+BLS12_G1_MULTIEXP_DISCOUNT_TABLE = [[1, 1000], [2, 949], [3, 848], [4, 797], [5, 764], [6, 750], [7, 738], [8, 728], [9, 719], [10, 712], [11, 705], [12, 698], [13, 692], [14, 687], [15, 682], [16, 677], [17, 673], [18, 669], [19, 665], [20, 661], [21, 658], [22, 654], [23, 651], [24, 648], [25, 645], [26, 642], [27, 640], [28, 637], [29, 635], [30, 632], [31, 630], [32, 627], [33, 625], [34, 623], [35, 621], [36, 619], [37, 617], [38, 615], [39, 613], [40, 611], [41, 609], [42, 608], [43, 606], [44, 604], [45, 603], [46, 601], [47, 599], [48, 598], [49, 596], [50, 595], [51, 593], [52, 592], [53, 591], [54, 589], [55, 588], [56, 586], [57, 585], [58, 584], [59, 582], [60, 581], [61, 580], [62, 579], [63, 577], [64, 576], [65, 575], [66, 574], [67, 573], [68, 572], [69, 570], [70, 569], [71, 568], [72, 567], [73, 566], [74, 565], [75, 564], [76, 563], [77, 562], [78, 561], [79, 560], [80, 559], [81, 558], [82, 557], [83, 556], [84, 555], [85, 554], [86, 553], [87, 552], [88, 551], [89, 550], [90, 549], [91, 548], [92, 547], [93, 547], [94, 546], [95, 545], [96, 544], [97, 543], [98, 542], [99, 541], [100, 540], [101, 540], [102, 539], [103, 538], [104, 537], [105, 536], [106, 536], [107, 535], [108, 534], [109, 533], [110, 532], [111, 532], [112, 531], [113, 530], [114, 529], [115, 528], [116, 528], [117, 527], [118, 526], [119, 525], [120, 525], [121, 524], [122, 523], [123, 522], [124, 522], [125, 521], [126, 520], [127, 520], [128, 519]]
+BLS12_G1_MULTIEXP_MAX_DISCOUNT = 519
+
+# G2 MSM discount table as per EIP-2537
+BLS12_G2_MULTIEXP_DISCOUNT_TABLE = [[1, 1000], [2, 1000], [3, 923], [4, 884], [5, 855], [6, 832], [7, 812], [8, 796], [9, 782], [10, 770], [11, 759], [12, 749], [13, 740], [14, 732], [15, 724], [16, 717], [17, 711], [18, 704], [19, 699], [20, 693], [21, 688], [22, 683], [23, 679], [24, 674], [25, 670], [26, 666], [27, 663], [28, 659], [29, 655], [30, 652], [31, 649], [32, 646], [33, 643], [34, 640], [35, 637], [36, 634], [37, 632], [38, 629], [39, 627], [40, 624], [41, 622], [42, 620], [43, 618], [44, 615], [45, 613], [46, 611], [47, 609], [48, 607], [49, 606], [50, 604], [51, 602], [52, 600], [53, 598], [54, 597], [55, 595], [56, 593], [57, 592], [58, 590], [59, 589], [60, 587], [61, 586], [62, 584], [63, 583], [64, 582], [65, 580], [66, 579], [67, 578], [68, 576], [69, 575], [70, 574], [71, 573], [72, 571], [73, 570], [74, 569], [75, 568], [76, 567], [77, 566], [78, 565], [79, 563], [80, 562], [81, 561], [82, 560], [83, 559], [84, 558], [85, 557], [86, 556], [87, 555], [88, 554], [89, 553], [90, 552], [91, 552], [92, 551], [93, 550], [94, 549], [95, 548], [96, 547], [97, 546], [98, 545], [99, 545], [100, 544], [101, 543], [102, 542], [103, 541], [104, 541], [105, 540], [106, 539], [107, 538], [108, 537], [109, 537], [110, 536], [111, 535], [112, 535], [113, 534], [114, 533], [115, 532], [116, 532], [117, 531], [118, 530], [119, 530], [120, 529], [121, 528], [122, 528], [123, 527], [124, 526], [125, 526], [126, 525], [127, 524], [128, 524]]
+BLS12_G2_MULTIEXP_MAX_DISCOUNT = 524
+
+# Pairing check gas cost as per EIP-2537
+BLS12_PAIRING_VARIABLE = 32600
+BLS12_PAIRING_CONSTANT = 37700
 
 
 # random point in G1
@@ -771,70 +779,70 @@ def case07_multiexp_G1():
         "Input": int_to_hex(int(G1[0]), 64) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(2), 32),
         "Name": "bls_g1multiexp_(g1+g1=2*g1)",
         "Expected": int_to_hex(int(result_doubling_G1[0]), 64) + (int_to_hex(int(result_doubling_G1[1]), 64)),
-        "Gas": int((1 * BLS12_G1MUL_GAS * BLS12_MULTIEXP_DISCOUNT_TABLE[0][1]) / 1000),
+        "Gas": int((1 * BLS12_G1MUL_GAS * BLS12_G1_MULTIEXP_DISCOUNT_TABLE[0][1]) / 1000),
         "NoBenchmark": False
         },
         {
         "Input": int_to_hex(int(P1[0]), 64) + (int_to_hex(int(P1[1]), 64)) + int_to_hex(int(2), 32),
         "Name": "bls_g1multiexp_(p1+p1=2*p1)",
         "Expected": int_to_hex(int(result_doubling_P1[0]), 64) + (int_to_hex(int(result_doubling_P1[1]), 64)),
-        "Gas": int((1 * BLS12_G1MUL_GAS * BLS12_MULTIEXP_DISCOUNT_TABLE[0][1]) / 1000),
+        "Gas": int((1 * BLS12_G1MUL_GAS * BLS12_G1_MULTIEXP_DISCOUNT_TABLE[0][1]) / 1000),
         "NoBenchmark": False
         },
         {
         "Input": int_to_hex(int(G1[0]), 64) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(1), 32),
         "Name": "bls_g1multiexp_(1*g1=g1)",
         "Expected": int_to_hex(int(G1[0]), 64) + (int_to_hex(int(G1[1]), 64)),
-        "Gas": int((1 * BLS12_G1MUL_GAS * BLS12_MULTIEXP_DISCOUNT_TABLE[0][1]) / 1000),
+        "Gas": int((1 * BLS12_G1MUL_GAS * BLS12_G1_MULTIEXP_DISCOUNT_TABLE[0][1]) / 1000),
         "NoBenchmark": False
         },
         {
         "Input": int_to_hex(int(P1[0]), 64) + (int_to_hex(int(P1[1]), 64)) + int_to_hex(int(1), 32),
         "Name": "bls_g1multiexp_(1*p1=p1)",
         "Expected": int_to_hex(int(P1[0]), 64) + (int_to_hex(int(P1[1]), 64)),
-        "Gas": int((1 * BLS12_G1MUL_GAS * BLS12_MULTIEXP_DISCOUNT_TABLE[0][1]) / 1000),
+        "Gas": int((1 * BLS12_G1MUL_GAS * BLS12_G1_MULTIEXP_DISCOUNT_TABLE[0][1]) / 1000),
         "NoBenchmark": False
         },
         {
         "Input": int_to_hex(int(G1[0]), 64) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(0), 32),
         "Name": "bls_g1multiexp_(0*g1=inf)",
         "Expected": int_to_hex(0, 64) + int_to_hex(0, 64),
-        "Gas": int((1 * BLS12_G1MUL_GAS * BLS12_MULTIEXP_DISCOUNT_TABLE[0][1]) / 1000),
+        "Gas": int((1 * BLS12_G1MUL_GAS * BLS12_G1_MULTIEXP_DISCOUNT_TABLE[0][1]) / 1000),
         "NoBenchmark": False
         },
         {
         "Input": int_to_hex(int(P1[0]), 64) + (int_to_hex(int(P1[1]), 64)) + int_to_hex(int(0), 32),
         "Name": "bls_g1multiexp_(0*p1=inf)",
         "Expected": int_to_hex(0, 64) + int_to_hex(0, 64),
-        "Gas": int((1 * BLS12_G1MUL_GAS * BLS12_MULTIEXP_DISCOUNT_TABLE[0][1]) / 1000),
+        "Gas": int((1 * BLS12_G1MUL_GAS * BLS12_G1_MULTIEXP_DISCOUNT_TABLE[0][1]) / 1000),
         "NoBenchmark": False
         },
         {
         "Input": int_to_hex(0, 64) + int_to_hex(0, 64) + int_to_hex(int(17), 32),
         "Name": "bls_g1multiexp_(x*inf=inf)",
         "Expected": int_to_hex(0, 64) + int_to_hex(0, 64),
-        "Gas": int((1 * BLS12_G1MUL_GAS * BLS12_MULTIEXP_DISCOUNT_TABLE[0][1]) / 1000),
+        "Gas": int((1 * BLS12_G1MUL_GAS * BLS12_G1_MULTIEXP_DISCOUNT_TABLE[0][1]) / 1000),
         "NoBenchmark": False
         },
         {
         "Input": int_to_hex(int(G1[0]), 64) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(2), 32) + int_to_hex(int(G1[0]), 64) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(0), 32),
         "Name": "bls_g1multiexp_(2g1+inf)",
         "Expected": int_to_hex(int(result_doubling_G1[0]), 64) + (int_to_hex(int(result_doubling_G1[1]), 64)),
-        "Gas": int((2 * BLS12_G1MUL_GAS * BLS12_MULTIEXP_DISCOUNT_TABLE[1][1]) / 1000),
+        "Gas": int((2 * BLS12_G1MUL_GAS * BLS12_G1_MULTIEXP_DISCOUNT_TABLE[1][1]) / 1000),
         "NoBenchmark": False
         },
         {
         "Input": int_to_hex(int(G1[0]), 64) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(0), 32) + int_to_hex(int(G1[0]), 64) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(0), 32),
         "Name": "bls_g1multiexp_(inf+inf)",
         "Expected": int_to_hex(0, 64) + int_to_hex(0, 64),
-        "Gas": int((2 * BLS12_G1MUL_GAS * BLS12_MULTIEXP_DISCOUNT_TABLE[1][1]) / 1000),
+        "Gas": int((2 * BLS12_G1MUL_GAS * BLS12_G1_MULTIEXP_DISCOUNT_TABLE[1][1]) / 1000),
         "NoBenchmark": False
         },
         {
         "Input": int_to_hex(int(G1[0]), 64) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(2), 32) + int_to_hex(int(P1[0]), 64) + (int_to_hex(int(P1[1]), 64)) + int_to_hex(int(2), 32),
         "Name": "bls_g1multiexp_(2g1+2p1)",
         "Expected": int_to_hex(int(doubleP1G1[0]), 64) + (int_to_hex(int(doubleP1G1[1]), 64)),
-        "Gas": int((2 * BLS12_G1MUL_GAS * BLS12_MULTIEXP_DISCOUNT_TABLE[1][1]) / 1000),
+        "Gas": int((2 * BLS12_G1MUL_GAS * BLS12_G1_MULTIEXP_DISCOUNT_TABLE[1][1]) / 1000),
         "NoBenchmark": False
         },
         {
@@ -847,21 +855,21 @@ def case07_multiexp_G1():
                 PRIVKEYS[6], 32),
         "Name": "bls_g1multiexp_multiple",
         "Expected": int_to_hex(int(g1multiexp[0]), 64) + (int_to_hex(int(g1multiexp[1]), 64)),
-        "Gas": int((7 * BLS12_G1MUL_GAS * BLS12_MULTIEXP_DISCOUNT_TABLE[6][1]) / 1000),
+        "Gas": int((7 * BLS12_G1MUL_GAS * BLS12_G1_MULTIEXP_DISCOUNT_TABLE[6][1]) / 1000),
         "NoBenchmark": False
         },
         {
         "Input": int_to_hex(int(G1[0]), 64) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(PRIVKEYS[0] + curve_order, 32),
         "Name": "bls_g1multiexp_random*g1_unnormalized_scalar",
         "Expected": int_to_hex(int(result_multiply_G1[0]), 64) + (int_to_hex(int(result_multiply_G1[1]), 64)),
-        "Gas": int((1 * BLS12_G1MUL_GAS * BLS12_MULTIEXP_DISCOUNT_TABLE[0][1]) / 1000),
+        "Gas": int((1 * BLS12_G1MUL_GAS * BLS12_G1_MULTIEXP_DISCOUNT_TABLE[0][1]) / 1000),
         "NoBenchmark": False
         },
         {
         "Input": int_to_hex(int(P1[0]), 64) + (int_to_hex(int(P1[1]), 64)) + int_to_hex(PRIVKEYS[0] + curve_order, 32),
         "Name": "bls_g1multiexp_random*p1_unnormalized_scalar",
         "Expected": int_to_hex(int(result_multiply_P1[0]), 64) + (int_to_hex(int(result_multiply_P1[1]), 64)),
-        "Gas": int((1 * BLS12_G1MUL_GAS * BLS12_MULTIEXP_DISCOUNT_TABLE[0][1]) / 1000),
+        "Gas": int((1 * BLS12_G1MUL_GAS * BLS12_G1_MULTIEXP_DISCOUNT_TABLE[0][1]) / 1000),
         "NoBenchmark": False
         }
     ]
@@ -902,7 +910,7 @@ def case08_multiexp_G2():
         "Name": "bls_g2multiexp_(g2+g2=2*g2)",
         "Expected": int_to_hex(int(result_doubling_G2[0].coeffs[0]), 64) + int_to_hex(int(result_doubling_G2[0].coeffs[1]), 64) + int_to_hex(
             int(result_doubling_G2[1].coeffs[0]), 64) + int_to_hex(int(result_doubling_G2[1].coeffs[1]), 64),
-        "Gas": int((1 * BLS12_G2MUL_GAS * BLS12_MULTIEXP_DISCOUNT_TABLE[0][1]) / 1000),
+        "Gas": int((1 * BLS12_G2MUL_GAS * BLS12_G2_MULTIEXP_DISCOUNT_TABLE[0][1]) / 1000),
         "NoBenchmark": False
         },
         {
@@ -910,42 +918,42 @@ def case08_multiexp_G2():
         "Name": "bls_g2multiexp_(p2+p2=2*p2)",
         "Expected": int_to_hex(int(result_doubling_P2[0].coeffs[0]), 64) + int_to_hex(int(result_doubling_P2[0].coeffs[1]), 64) + int_to_hex(
             int(result_doubling_P2[1].coeffs[0]), 64) + int_to_hex(int(result_doubling_P2[1].coeffs[1]), 64),
-        "Gas": int((1 * BLS12_G2MUL_GAS * BLS12_MULTIEXP_DISCOUNT_TABLE[0][1]) / 1000),
+        "Gas": int((1 * BLS12_G2MUL_GAS * BLS12_G2_MULTIEXP_DISCOUNT_TABLE[0][1]) / 1000),
         "NoBenchmark": False
         },
         {
         "Input": int_to_hex(int(G2[0].coeffs[0]), 64) + int_to_hex(int(G2[0].coeffs[1]), 64) + int_to_hex(int(G2[1].coeffs[0]), 64) + int_to_hex(int(G2[1].coeffs[1]), 64) + int_to_hex(int(1), 32),
         "Name": "bls_g2multiexp_(1*g2=g2)",
         "Expected": int_to_hex(int(G2[0].coeffs[0]), 64) + int_to_hex(int(G2[0].coeffs[1]), 64) + int_to_hex(int(G2[1].coeffs[0]), 64) + int_to_hex(int(G2[1].coeffs[1]), 64),
-        "Gas": int((1 * BLS12_G2MUL_GAS * BLS12_MULTIEXP_DISCOUNT_TABLE[0][1]) / 1000),
+        "Gas": int((1 * BLS12_G2MUL_GAS * BLS12_G2_MULTIEXP_DISCOUNT_TABLE[0][1]) / 1000),
         "NoBenchmark": False
         },
         {
         "Input": int_to_hex(int(P2[0].coeffs[0]), 64) + int_to_hex(int(P2[0].coeffs[1]), 64) + int_to_hex(int(P2[1].coeffs[0]), 64) + int_to_hex(int(P2[1].coeffs[1]), 64) + int_to_hex(int(1), 32),
         "Name": "bls_g2multiexp_(1*p2=p2)",
         "Expected": int_to_hex(int(P2[0].coeffs[0]), 64) + int_to_hex(int(P2[0].coeffs[1]), 64) + int_to_hex(int(P2[1].coeffs[0]), 64) + int_to_hex(int(P2[1].coeffs[1]), 64),
-        "Gas": int((1 * BLS12_G2MUL_GAS * BLS12_MULTIEXP_DISCOUNT_TABLE[0][1]) / 1000),
+        "Gas": int((1 * BLS12_G2MUL_GAS * BLS12_G2_MULTIEXP_DISCOUNT_TABLE[0][1]) / 1000),
         "NoBenchmark": False
         },
         {
         "Input": int_to_hex(int(G2[0].coeffs[0]), 64) + int_to_hex(int(G2[0].coeffs[1]), 64) + int_to_hex(int(G2[1].coeffs[0]), 64) + int_to_hex(int(G2[1].coeffs[1]), 64) + int_to_hex(int(0), 32),
         "Name": "bls_g2multiexp_(0*g2=inf)",
         "Expected": int_to_hex(0, 64) + int_to_hex(0, 64) + int_to_hex(0, 64) + int_to_hex(0, 64),
-        "Gas": int((1 * BLS12_G2MUL_GAS * BLS12_MULTIEXP_DISCOUNT_TABLE[0][1]) / 1000),
+        "Gas": int((1 * BLS12_G2MUL_GAS * BLS12_G2_MULTIEXP_DISCOUNT_TABLE[0][1]) / 1000),
         "NoBenchmark": False
         },
         {
         "Input": int_to_hex(int(P2[0].coeffs[0]), 64) + int_to_hex(int(P2[0].coeffs[1]), 64) + int_to_hex(int(P2[1].coeffs[0]), 64) + int_to_hex(int(P2[1].coeffs[1]), 64) + int_to_hex(int(0), 32),
         "Name": "bls_g2multiexp_(0*p2=inf)",
         "Expected": int_to_hex(0, 64) + int_to_hex(0, 64) + int_to_hex(0, 64) + int_to_hex(0, 64),
-        "Gas": int((1 * BLS12_G2MUL_GAS * BLS12_MULTIEXP_DISCOUNT_TABLE[0][1]) / 1000),
+        "Gas": int((1 * BLS12_G2MUL_GAS * BLS12_G2_MULTIEXP_DISCOUNT_TABLE[0][1]) / 1000),
         "NoBenchmark": False
         },
         {
         "Input": int_to_hex(0, 64) + int_to_hex(0, 64) + int_to_hex(0, 64) + int_to_hex(0, 64) + int_to_hex(int(17), 32),
         "Name": "bls_g2multiexp_(x*inf=inf)",
         "Expected": int_to_hex(0, 64) + int_to_hex(0, 64) + int_to_hex(0, 64) + int_to_hex(0, 64),
-        "Gas": int((1 * BLS12_G2MUL_GAS * BLS12_MULTIEXP_DISCOUNT_TABLE[0][1]) / 1000),
+        "Gas": int((1 * BLS12_G2MUL_GAS * BLS12_G2_MULTIEXP_DISCOUNT_TABLE[0][1]) / 1000),
         "NoBenchmark": False
         },
         {
@@ -954,7 +962,7 @@ def case08_multiexp_G2():
         "Name": "bls_g2multiexp_(2g2+inf)",
         "Expected": int_to_hex(int(result_doubling_G2[0].coeffs[0]), 64) + int_to_hex(int(result_doubling_G2[0].coeffs[1]), 64) + int_to_hex(
             int(result_doubling_G2[1].coeffs[0]), 64) + int_to_hex(int(result_doubling_G2[1].coeffs[1]), 64),
-        "Gas": int((2 * BLS12_G2MUL_GAS * BLS12_MULTIEXP_DISCOUNT_TABLE[1][1]) / 1000),
+        "Gas": int((2 * BLS12_G2MUL_GAS * BLS12_G2_MULTIEXP_DISCOUNT_TABLE[1][1]) / 1000),
         "NoBenchmark": False
         },
         {
@@ -963,7 +971,7 @@ def case08_multiexp_G2():
         "Name": "bls_g2multiexp_(2p2+inf)",
         "Expected": int_to_hex(int(result_doubling_P2[0].coeffs[0]), 64) + int_to_hex(int(result_doubling_P2[0].coeffs[1]), 64) + int_to_hex(
             int(result_doubling_P2[1].coeffs[0]), 64) + int_to_hex(int(result_doubling_P2[1].coeffs[1]), 64),
-        "Gas": int((2 * BLS12_G2MUL_GAS * BLS12_MULTIEXP_DISCOUNT_TABLE[1][1]) / 1000),
+        "Gas": int((2 * BLS12_G2MUL_GAS * BLS12_G2_MULTIEXP_DISCOUNT_TABLE[1][1]) / 1000),
         "NoBenchmark": False
         },
         {
@@ -972,7 +980,7 @@ def case08_multiexp_G2():
                 int(P2[1].coeffs[0]), 64) + int_to_hex(int(P2[1].coeffs[1]), 64) + int_to_hex(int(0), 32),
         "Name": "bls_g1multiexp_(inf+inf)",
         "Expected": int_to_hex(0, 128) + int_to_hex(0, 128),
-        "Gas": int((2 * BLS12_G2MUL_GAS * BLS12_MULTIEXP_DISCOUNT_TABLE[1][1]) / 1000),
+        "Gas": int((2 * BLS12_G2MUL_GAS * BLS12_G2_MULTIEXP_DISCOUNT_TABLE[1][1]) / 1000),
         "NoBenchmark": False
         },
         {
@@ -981,7 +989,7 @@ def case08_multiexp_G2():
         "Name": "bls_g2multiexp_(2g2+2p2)",
         "Expected": int_to_hex(int(doubleP2G2[0].coeffs[0]), 64) + int_to_hex(int(doubleP2G2[0].coeffs[1]), 64) + int_to_hex(
             int(doubleP2G2[1].coeffs[0]), 64) + int_to_hex(int(doubleP2G2[1].coeffs[1]), 64),
-        "Gas": int((2 * BLS12_G2MUL_GAS * BLS12_MULTIEXP_DISCOUNT_TABLE[1][1]) / 1000),
+        "Gas": int((2 * BLS12_G2MUL_GAS * BLS12_G2_MULTIEXP_DISCOUNT_TABLE[1][1]) / 1000),
         "NoBenchmark": False
         },
         {
@@ -995,7 +1003,7 @@ def case08_multiexp_G2():
         "Name": "bls_g2multiexp_multiple",
         "Expected": int_to_hex(int(g2multiex[0].coeffs[0]), 64) + int_to_hex(int(g2multiex[0].coeffs[1]), 64) + int_to_hex(
             int(g2multiex[1].coeffs[0]), 64) + int_to_hex(int(g2multiex[1].coeffs[1]), 64),
-        "Gas": int((6 * BLS12_G2MUL_GAS * BLS12_MULTIEXP_DISCOUNT_TABLE[5][1]) / 1000),
+        "Gas": int((6 * BLS12_G2MUL_GAS * BLS12_G2_MULTIEXP_DISCOUNT_TABLE[5][1]) / 1000),
         "NoBenchmark": False
         },
         {
@@ -1003,7 +1011,7 @@ def case08_multiexp_G2():
         "Name": "bls_g2multiexp_random*g2_unnormalized_scalar",
         "Expected": int_to_hex(int(result_multiply_G2[0].coeffs[0]), 64) + int_to_hex(int(result_multiply_G2[0].coeffs[1]), 64) + int_to_hex(
             int(result_multiply_G2[1].coeffs[0]), 64) + int_to_hex(int(result_multiply_G2[1].coeffs[1]), 64),
-        "Gas": int((1 * BLS12_G2MUL_GAS * BLS12_MULTIEXP_DISCOUNT_TABLE[0][1]) / 1000),
+        "Gas": int((1 * BLS12_G2MUL_GAS * BLS12_G2_MULTIEXP_DISCOUNT_TABLE[0][1]) / 1000),
         "NoBenchmark": False
         },
         {
@@ -1011,7 +1019,7 @@ def case08_multiexp_G2():
         "Name": "bls_g2multiexp_random*p2_unnormalized_scalar",
         "Expected": int_to_hex(int(result_multiply_P2[0].coeffs[0]), 64) + int_to_hex(int(result_multiply_P2[0].coeffs[1]), 64) + int_to_hex(
             int(result_multiply_P2[1].coeffs[0]), 64) + int_to_hex(int(result_multiply_P2[1].coeffs[1]), 64),
-        "Gas": int((1 * BLS12_G2MUL_GAS * BLS12_MULTIEXP_DISCOUNT_TABLE[0][1]) / 1000),
+        "Gas": int((1 * BLS12_G2MUL_GAS * BLS12_G2_MULTIEXP_DISCOUNT_TABLE[0][1]) / 1000),
         "NoBenchmark": False
         }
     ]
