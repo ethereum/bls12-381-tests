@@ -1513,6 +1513,19 @@ def case18_fail_pairing_check():
         },
         {
         "Input": ""
+            # G1 point (field element equal to modulus)
+            + int_to_hex(q, 64)  # Set to modulus
+            + int_to_hex(int(G1[1]), 64)
+            # G2 point
+            + int_to_hex(int(G2[0].coeffs[0]), 64)
+            + int_to_hex(int(G2[0].coeffs[1]), 64)
+            + int_to_hex(int(G2[1].coeffs[0]), 64)
+            + int_to_hex(int(G2[1].coeffs[1]), 64),
+        "ExpectedError": "invalid fp.Element encoding",
+        "Name": "bls_pairing_e(G1_field_element_equal_to_modulus,G2)"
+        },
+        {
+        "Input": ""
             # G1 point (invalid field element)
             + int_to_hex(int(G1[0]) + q, 64)  # Plus Q
             + int_to_hex(int(G1[1]), 64)
