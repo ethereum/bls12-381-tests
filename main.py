@@ -1027,6 +1027,74 @@ def case09_pairing_check():
 
     yield 'pairing_check_bls', [
         {
+        "Input": ""
+            # G1 point (point at infinity)
+            + int_to_hex(0, 128)
+            # G2 point
+            + int_to_hex(int(G2[0].coeffs[0]), 64)
+            + int_to_hex(int(G2[0].coeffs[1]), 64)
+            + int_to_hex(int(G2[1].coeffs[0]), 64)
+            + int_to_hex(int(G2[1].coeffs[1]), 64),
+        "Name": "bls_pairing_e(0,G2)",
+        "Expected": int_to_hex(1, 32),
+        "Gas": 1 * BLS12_PAIRING_VARIABLE + BLS12_PAIRING_CONSTANT,
+        "NoBenchmark": False
+        },
+        {
+        "Input": ""
+            # G1 point
+            + int_to_hex(int(G1[0]), 64)
+            + int_to_hex(int(G1[1]), 64)
+            # G2 point (point at infinity)
+            + int_to_hex(0, 256),
+        "Name": "bls_pairing_e(G1,0)",
+        "Expected": int_to_hex(1, 32),
+        "Gas": 1 * BLS12_PAIRING_VARIABLE + BLS12_PAIRING_CONSTANT,
+        "NoBenchmark": False
+        },
+        {
+        "Input": ""
+            # G1 point 1 (point at infinity)
+            + int_to_hex(0, 128)
+            # G2 point 1
+            + int_to_hex(int(G2[0].coeffs[0]), 64)
+            + int_to_hex(int(G2[0].coeffs[1]), 64)
+            + int_to_hex(int(G2[1].coeffs[0]), 64)
+            + int_to_hex(int(G2[1].coeffs[1]), 64)
+            # G1 point 2
+            + int_to_hex(int(G1[0]), 64)
+            + int_to_hex(int(G1[1]), 64)
+            # G2 point 2
+            + int_to_hex(int(neg(G2)[0].coeffs[0]), 64)
+            + int_to_hex(int(neg(G2)[0].coeffs[1]), 64)
+            + int_to_hex(int(neg(G2)[1].coeffs[0]), 64)
+            + int_to_hex(int(neg(G2)[1].coeffs[1]), 64),
+        "Name": "bls_pairing_e(0,-G2)!=e(-G1,G2)",
+        "Expected": int_to_hex(0, 32),
+        "Gas": 2 * BLS12_PAIRING_VARIABLE + BLS12_PAIRING_CONSTANT,
+        "NoBenchmark": False
+        },
+        {
+        "Input": ""
+            # G1 point 1
+            + int_to_hex(int(G1[0]), 64)
+            + int_to_hex(int(G1[1]), 64)
+            # G2 point 1 (point at infinity)
+            + int_to_hex(0, 256)
+            # G1 point 2
+            + int_to_hex(int(G1[0]), 64)
+            + int_to_hex(int(G1[1]), 64)
+            # G2 point 2
+            + int_to_hex(int(neg(G2)[0].coeffs[0]), 64)
+            + int_to_hex(int(neg(G2)[0].coeffs[1]), 64)
+            + int_to_hex(int(neg(G2)[1].coeffs[0]), 64)
+            + int_to_hex(int(neg(G2)[1].coeffs[1]), 64),
+        "Name": "bls_pairing_e(G1,0)!=e(-G1,G2)",
+        "Expected": int_to_hex(0, 32),
+        "Gas": 2 * BLS12_PAIRING_VARIABLE + BLS12_PAIRING_CONSTANT,
+        "NoBenchmark": False
+        },
+        {
         "Input": int_to_hex(int(G1[0]), 64) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(0, 256) + int_to_hex(0, 128) + int_to_hex(int(G2[0].coeffs[0]), 64) + int_to_hex(
             int(G2[0].coeffs[1]), 64) + int_to_hex(int(G2[1].coeffs[0]), 64) + int_to_hex(int(G2[1].coeffs[1]), 64),
         "Name": "bls_pairing_e(G1,0)=e(0,G2)",
@@ -1425,12 +1493,129 @@ def case18_fail_pairing_check():
         "Name": "bls_pairing_top_bytes"
         },
         {
+        "Input": ""
+            # G1 point (invalid field element)
+            + int_to_hex(int(G1[0]) + q, 64)  # Plus Q
+            + int_to_hex(int(G1[1]), 64)
+            # G2 point (point at infinity)
+            + int_to_hex(0, 256),
+        "ExpectedError": "invalid fp.Element encoding",
+        "Name": "bls_pairing_e(G1_invalid_field_element,0)",
+        },
+        {
+        "Input": ""
+            # G1 point (point at infinity)
+            + int_to_hex(0, 128)
+            # G2 point (invalid field element)
+            + int_to_hex(int(G2[0].coeffs[0]) + q, 64)  # Plus Q
+            + int_to_hex(int(G2[0].coeffs[1]), 64)
+            + int_to_hex(int(G2[1].coeffs[0]), 64)
+            + int_to_hex(int(G2[1].coeffs[1]), 64),
+        "ExpectedError": "invalid fp.Element encoding",
+        "Name": "bls_pairing_e(0,G2_invalid_field_element)",
+        },
+        {
+        "Input": ""
+            # G1 point
+            + int_to_hex(int(G1[0]) + q, 64)  # Plus Q
+            + int_to_hex(int(G1[1]), 64)
+            # G2 point (invalid field element)
+            + int_to_hex(int(G2[0].coeffs[0]), 64)
+            + int_to_hex(int(G2[0].coeffs[1]), 64)
+            + int_to_hex(int(G2[1].coeffs[0]), 64)
+            + int_to_hex(int(G2[1].coeffs[1]), 64),
+        "ExpectedError": "invalid fp.Element encoding",
+        "Name": "bls_pairing_e(G1_invalid_field_element,G2)",
+        },
+        {
+        "Input": ""
+            # G1 point
+            + int_to_hex(int(G1[0]), 64)
+            + int_to_hex(int(G1[1]), 64)
+            # G2 point (invalid field element)
+            + int_to_hex(int(G2[0].coeffs[0]) + q, 64)  # Plus Q
+            + int_to_hex(int(G2[0].coeffs[1]), 64)
+            + int_to_hex(int(G2[1].coeffs[0]), 64)
+            + int_to_hex(int(G2[1].coeffs[1]), 64),
+        "ExpectedError": "invalid fp.Element encoding",
+        "Name": "bls_pairing_e(G1,G2_invalid_field_element)",
+        },
+        {
         "Input": int_to_hex(int(G1[0]) + q, 64) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(G2[0].coeffs[0]), 64) + int_to_hex(
             int(G2[0].coeffs[1]), 64) + int_to_hex(int(G2[1].coeffs[0]), 64) + int_to_hex(int(G2[1].coeffs[1]), 64) + int_to_hex(
             int(G1[0]), 64) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(neg(G2)[0].coeffs[0]), 64) + int_to_hex(
             int(neg(G2)[0].coeffs[1]), 64) + int_to_hex(int(neg(G2)[1].coeffs[0]), 64) + int_to_hex(int(neg(G2)[1].coeffs[1]), 64),
         "ExpectedError": "invalid fp.Element encoding",
-        "Name": "bls_pairing_invalid_field_element"
+        "Name": "bls_pairing_e(G1_invalid_field_element,-G2)=e(-G1,G2)",
+        },
+        {
+        "Input": ""
+            # G1 point 1
+            + int_to_hex(int(G1[0]), 64)
+            + int_to_hex(int(G1[1]), 64)
+            # G1 point 1
+            + int_to_hex(int(G2[0].coeffs[0]) + q, 64)  # Plus Q
+            + int_to_hex(int(G2[0].coeffs[1]), 64)
+            + int_to_hex(int(G2[1].coeffs[0]), 64)
+            + int_to_hex(int(G2[1].coeffs[1]), 64)
+            # G1 point 2
+            + int_to_hex(int(G1[0]), 64)
+            + int_to_hex(int(G1[1]), 64)
+            # G1 point 2
+            + int_to_hex(int(neg(G2)[0].coeffs[0]), 64)
+            + int_to_hex(int(neg(G2)[0].coeffs[1]), 64)
+            + int_to_hex(int(neg(G2)[1].coeffs[0]), 64)
+            + int_to_hex(int(neg(G2)[1].coeffs[1]), 64),
+        "ExpectedError": "invalid fp.Element encoding",
+        "Name": "bls_pairing_e(G1,G2_invalid_field_element)=e(-G1,G2)",
+        },
+        {
+        "Input": ""
+            # G1 point (not on curve)
+            + int_to_hex(int(P1[0]), 64)  # Using P1 instead of G1
+            + int_to_hex(int(G1[1]), 64)
+            # G2 point (point at infinity)
+            + int_to_hex(0, 256),
+        "ExpectedError": "invalid point: not on curve",
+        "Name": "bls_pairing_e(G1_not_on_curve,0)",
+        },
+        {
+        "Input": ""
+            # G1 point (point at infinity)
+            + int_to_hex(0, 128)
+            # G2 point (not on curve)
+            + int_to_hex(int(P2[0].coeffs[0]), 64)  # Using P2 instead of G2
+            + int_to_hex(int(G2[0].coeffs[1]), 64)
+            + int_to_hex(int(G2[1].coeffs[0]), 64)
+            + int_to_hex(int(G2[1].coeffs[1]), 64),
+        "ExpectedError": "invalid point: not on curve",
+        "Name": "bls_pairing_e(0,G2_not_on_curve)",
+        },
+        {
+        "Input": ""
+            # G1 point (not on curve)
+            + int_to_hex(int(P1[0]), 64)  # Using P1 instead of G1
+            + int_to_hex(int(G1[1]), 64)
+            # G2 point
+            + int_to_hex(int(G2[0].coeffs[0]), 64)
+            + int_to_hex(int(G2[0].coeffs[1]), 64)
+            + int_to_hex(int(G2[1].coeffs[0]), 64)
+            + int_to_hex(int(G2[1].coeffs[1]), 64),
+        "ExpectedError": "invalid point: not on curve",
+        "Name": "bls_pairing_e(G1_not_on_curve,G2)",
+        },
+        {
+        "Input": ""
+            # G1 point
+            + int_to_hex(int(G1[0]), 64)
+            + int_to_hex(int(G1[1]), 64)
+            # G2 point (not on curve)
+            + int_to_hex(int(P2[0].coeffs[0]), 64)  # Using P2 instead of G2
+            + int_to_hex(int(G2[0].coeffs[1]), 64)
+            + int_to_hex(int(G2[1].coeffs[0]), 64)
+            + int_to_hex(int(G2[1].coeffs[1]), 64),
+        "ExpectedError": "invalid point: not on curve",
+        "Name": "bls_pairing_e(G1,G2_not_on_curve)",
         },
         {
         "Input": int_to_hex(int(G1[0]), 64) + (int_to_hex(int(P1[1]), 64)) + int_to_hex(int(G2[0].coeffs[0]), 64) + int_to_hex(
@@ -1438,7 +1623,7 @@ def case18_fail_pairing_check():
             int(G1[0]), 64) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(neg(G2)[0].coeffs[0]), 64) + int_to_hex(
             int(neg(G2)[0].coeffs[1]), 64) + int_to_hex(int(neg(G2)[1].coeffs[0]), 64) + int_to_hex(int(neg(G2)[1].coeffs[1]), 64),
         "ExpectedError": "invalid point: not on curve",
-        "Name": "bls_pairing_g1_not_on_curve"
+        "Name": "bls_pairing_e(G1_not_on_curve,-G2)=e(-G1,G2)"
         },
         {
         "Input": int_to_hex(int(G1[0]), 64) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(G2[0].coeffs[0]), 64) + int_to_hex(
@@ -1446,7 +1631,55 @@ def case18_fail_pairing_check():
             int(G1[0]), 64) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(neg(G2)[0].coeffs[0]), 64) + int_to_hex(
             int(neg(G2)[0].coeffs[1]), 64) + int_to_hex(int(neg(G2)[1].coeffs[0]), 64) + int_to_hex(int(neg(G2)[1].coeffs[1]), 64),
         "ExpectedError": "invalid point: not on curve",
-        "Name": "bls_pairing_g2_not_on_curve"
+        "Name": "bls_pairing_e(G1,G2_not_on_curve)=e(-G1,G2)"
+        },
+        {
+        "Input": ""
+            # G1 point (not on curve)
+            + int_to_hex(int(G1_wrong_order[0]), 64)
+            + int_to_hex(int(G1_wrong_order[1]), 64)
+            # G2 point (point at infinity)
+            + int_to_hex(0, 256),
+        "ExpectedError": "g1 point is not on correct subgroup",
+        "Name": "bls_pairing_e(G1_not_in_correct_subgroup,0)",
+        },
+        {
+        "Input": ""
+            # G1 point (point at infinity)
+            + int_to_hex(0, 128)
+            # G2 point (not on curve)
+            + int_to_hex(int(G2_wrong_order[0].coeffs[0]), 64)
+            + int_to_hex(int(G2_wrong_order[0].coeffs[1]), 64)
+            + int_to_hex(int(G2_wrong_order[1].coeffs[0]), 64)
+            + int_to_hex(int(G2_wrong_order[1].coeffs[1]), 64),
+        "ExpectedError": "g2 point is not on correct subgroup",
+        "Name": "bls_pairing_e(0,G2_not_in_correct_subgroup)",
+        },
+        {
+        "Input": ""
+            # G1 point (not on curve)
+            + int_to_hex(int(G1_wrong_order[0]), 64)
+            + int_to_hex(int(G1_wrong_order[1]), 64)
+            # G2 point
+            + int_to_hex(int(G2[0].coeffs[0]), 64)
+            + int_to_hex(int(G2[0].coeffs[1]), 64)
+            + int_to_hex(int(G2[1].coeffs[0]), 64)
+            + int_to_hex(int(G2[1].coeffs[1]), 64),
+        "ExpectedError": "g1 point is not on correct subgroup",
+        "Name": "bls_pairing_e(G1_not_in_correct_subgroup,G2)",
+        },
+        {
+        "Input": ""
+            # G1 point
+            + int_to_hex(int(G1[0]), 64)
+            + int_to_hex(int(G1[1]), 64)
+            # G2 point (not on curve)
+            + int_to_hex(int(G2_wrong_order[0].coeffs[0]), 64)
+            + int_to_hex(int(G2_wrong_order[0].coeffs[1]), 64)
+            + int_to_hex(int(G2_wrong_order[1].coeffs[0]), 64)
+            + int_to_hex(int(G2_wrong_order[1].coeffs[1]), 64),
+        "ExpectedError": "g2 point is not on correct subgroup",
+        "Name": "bls_pairing_e(G1,G2_not_in_correct_subgroup)",
         },
         {
         "Input": int_to_hex(int(G1_wrong_order[0]), 64) + (int_to_hex(int(G1_wrong_order[1]), 64)) + int_to_hex(int(G2[0].coeffs[0]), 64) + int_to_hex(
@@ -1454,7 +1687,7 @@ def case18_fail_pairing_check():
             int(G1[0]), 64) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(neg(G2)[0].coeffs[0]), 64) + int_to_hex(
             int(neg(G2)[0].coeffs[1]), 64) + int_to_hex(int(neg(G2)[1].coeffs[0]), 64) + int_to_hex(int(neg(G2)[1].coeffs[1]), 64),
         "ExpectedError": "g1 point is not on correct subgroup",
-        "Name": "bls_pairing_g1_not_in_correct_subgroup"
+        "Name": "bls_pairing_e(G1_not_in_correct_subgroup,-G2)=e(-G1,G2)"
         },
         {
         "Input": int_to_hex(int(G1[0]), 64) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(G2_wrong_order[0].coeffs[0]), 64) + int_to_hex(
@@ -1462,7 +1695,7 @@ def case18_fail_pairing_check():
             int(G1[0]), 64) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(neg(G2)[0].coeffs[0]), 64) + int_to_hex(
             int(neg(G2)[0].coeffs[1]), 64) + int_to_hex(int(neg(G2)[1].coeffs[0]), 64) + int_to_hex(int(neg(G2)[1].coeffs[1]), 64),
         "ExpectedError": "g2 point is not on correct subgroup",
-        "Name": "bls_pairing_g2_not_in_correct_subgroup"
+        "Name": "bls_pairing_e(G1,G2_not_in_correct_subgroup)=e(-G1,G2)"
         }
     ]
 
