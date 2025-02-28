@@ -1703,8 +1703,6 @@ def case18_fail_pairing_check():
 test_kinds: Dict[str, Generator[Tuple[str, Any], None, None]] = {
     'add_G1': case01_add_G1,
     'add_G2': case02_add_G2,
-    'mul_G1': case03_mul_G1,
-    'mul_G2': case04_mul_G2,
     'map_fp_to_G1': case05_map_fp_to_G1,
     'map_fp2_to_G2': case06_map_fp2_to_G2,
     'multiexp_G1': case07_multiexp_G1,
@@ -1712,8 +1710,6 @@ test_kinds: Dict[str, Generator[Tuple[str, Any], None, None]] = {
     'pairing_check': case09_pairing_check,
     'fail_add_G1': case10_fail_add_G1,
     'fail_add_G2': case11_fail_add_G2,
-    'fail_mul_G1': case12_fail_mul_G1,
-    'fail_mul_G2': case13_fail_mul_G2,
     'fail_map_fp_to_G1': case14_fail_map_fp_to_G1,
     'fail_map_fp2_to_G2': case15_fail_map_fp2_to_G2,
     'fail_multiexp_G1': case16_fail_multiexp_G1,
