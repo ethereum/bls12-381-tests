@@ -744,7 +744,7 @@ def case06_map_fp2_to_G2():
     ]
 
 
-def case07_multiexp_G1():
+def case07_msm_G1():
     # Doubling
     result_doubling_G1 = add(G1, G1)
     assert result_doubling_G1 == multiply(G1, 2)
@@ -890,7 +890,7 @@ def case07_multiexp_G1():
     ]
 
 
-def case08_multiexp_G2():
+def case08_msm_G2():
     # Doubling
     result_doubling_G2 = add(G2, G2)
     assert result_doubling_G2 == multiply(G2, 2)
@@ -1439,7 +1439,7 @@ def case15_fail_map_fp2_to_G2():
     ]
 
 
-def case16_fail_multiexp_G1():
+def case16_fail_msm_G1():
     yield 'fail-multiexp_G1_bls', [
         {
         "Input": "",
@@ -1479,7 +1479,7 @@ def case16_fail_multiexp_G1():
     ]
 
 
-def case17_fail_multiexp_G2():
+def case17_fail_msm_G2():
     yield 'fail-multiexp_G2_bls', [
         {
         "Input": "",
@@ -1782,15 +1782,15 @@ test_kinds: Dict[str, Generator[Tuple[str, Any], None, None]] = {
     'add_G2': case02_add_G2,
     'map_fp_to_G1': case05_map_fp_to_G1,
     'map_fp2_to_G2': case06_map_fp2_to_G2,
-    'multiexp_G1': case07_multiexp_G1,
-    'multiexp_G2': case08_multiexp_G2,
+    'msm_G1': case07_msm_G1,
+    'msm_G2': case08_msm_G2,
     'pairing_check': case09_pairing_check,
     'fail_add_G1': case10_fail_add_G1,
     'fail_add_G2': case11_fail_add_G2,
     'fail_map_fp_to_G1': case14_fail_map_fp_to_G1,
     'fail_map_fp2_to_G2': case15_fail_map_fp2_to_G2,
-    'fail_multiexp_G1': case16_fail_multiexp_G1,
-    'fail_multiexp_G2': case17_fail_multiexp_G2,
+    'fail_msm_G1': case16_fail_msm_G1,
+    'fail_msm_G2': case17_fail_msm_G2,
     'fail_pairing_check': case18_fail_pairing_check
 }
 
