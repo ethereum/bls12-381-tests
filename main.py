@@ -1333,7 +1333,7 @@ def case12_fail_mul_G1():
         },
         {
         "Input": int_to_hex(int(G1_wrong_order[0]), 64) + (int_to_hex(int(G1_wrong_order[1]), 64)) + int_to_hex(int(2), 32),
-        "ExpectedError": "g1 point is not on correct subgroup",
+        "ExpectedError": "g1 point is not in the correct subgroup",
         "Name": "bls_g1mul_g1_not_in_correct_subgroup"
         }
     ]
@@ -1373,7 +1373,7 @@ def case13_fail_mul_G2():
         },
         {
         "Input": int_to_hex(int(G2_wrong_order[0].coeffs[0]), 64) + int_to_hex(int(G2_wrong_order[0].coeffs[1]), 64) + int_to_hex(int(G2_wrong_order[1].coeffs[0]), 64) + int_to_hex(int(G2_wrong_order[1].coeffs[1]), 64) + int_to_hex(int(2), 32),
-        "ExpectedError": "g2 point is not on correct subgroup",
+        "ExpectedError": "g2 point is not in the correct subgroup",
         "Name": "bls_g2mul_g2_not_in_correct_subgroup"
         }
     ]
@@ -1473,7 +1473,7 @@ def case16_fail_multiexp_G1():
         },
         {
         "Input": int_to_hex(int(G1_wrong_order[0]), 64) + (int_to_hex(int(G1_wrong_order[1]), 64)) + int_to_hex(int(2), 32) + int_to_hex(int(P1[0]), 64) + (int_to_hex(int(P1[1]), 64)) + int_to_hex(int(2), 32),
-        "ExpectedError": "g1 point is not on correct subgroup",
+        "ExpectedError": "g1 point is not in the correct subgroup",
         "Name": "bls_g1multiexp_g1_not_in_correct_subgroup"
         }
     ]
@@ -1519,7 +1519,7 @@ def case17_fail_multiexp_G2():
         {
         "Input": int_to_hex(int(G2_wrong_order[0].coeffs[0]), 64) + int_to_hex(int(G2_wrong_order[0].coeffs[1]), 64) + int_to_hex(int(G2_wrong_order[1].coeffs[0]), 64) + int_to_hex(int(G2_wrong_order[1].coeffs[1]), 64) + int_to_hex(
             int(2), 32) + int_to_hex(int(P2[0].coeffs[0]), 64) + int_to_hex(int(P2[0].coeffs[1]), 64) + int_to_hex(int(P2[1].coeffs[0]), 64) + int_to_hex(int(P2[1].coeffs[1]), 64) + int_to_hex(int(2), 32),
-        "ExpectedError": "g2 point is not on correct subgroup",
+        "ExpectedError": "g2 point is not in the correct subgroup",
         "Name": "bls_pairing_g2_not_in_correct_subgroup"
         }
     ]
@@ -1717,7 +1717,7 @@ def case18_fail_pairing_check():
             + int_to_hex(int(G1_wrong_order[1]), 64)
             # G2 point (point at infinity)
             + int_to_hex(0, 256),
-        "ExpectedError": "g1 point is not on correct subgroup",
+        "ExpectedError": "g1 point is not in the correct subgroup",
         "Name": "bls_pairing_e(G1_not_in_correct_subgroup,0)",
         },
         {
@@ -1729,7 +1729,7 @@ def case18_fail_pairing_check():
             + int_to_hex(int(G2_wrong_order[0].coeffs[1]), 64)
             + int_to_hex(int(G2_wrong_order[1].coeffs[0]), 64)
             + int_to_hex(int(G2_wrong_order[1].coeffs[1]), 64),
-        "ExpectedError": "g2 point is not on correct subgroup",
+        "ExpectedError": "g2 point is not in the correct subgroup",
         "Name": "bls_pairing_e(0,G2_not_in_correct_subgroup)",
         },
         {
@@ -1742,7 +1742,7 @@ def case18_fail_pairing_check():
             + int_to_hex(int(G2[0].coeffs[1]), 64)
             + int_to_hex(int(G2[1].coeffs[0]), 64)
             + int_to_hex(int(G2[1].coeffs[1]), 64),
-        "ExpectedError": "g1 point is not on correct subgroup",
+        "ExpectedError": "g1 point is not in the correct subgroup",
         "Name": "bls_pairing_e(G1_not_in_correct_subgroup,G2)",
         },
         {
@@ -1755,7 +1755,7 @@ def case18_fail_pairing_check():
             + int_to_hex(int(G2_wrong_order[0].coeffs[1]), 64)
             + int_to_hex(int(G2_wrong_order[1].coeffs[0]), 64)
             + int_to_hex(int(G2_wrong_order[1].coeffs[1]), 64),
-        "ExpectedError": "g2 point is not on correct subgroup",
+        "ExpectedError": "g2 point is not in the correct subgroup",
         "Name": "bls_pairing_e(G1,G2_not_in_correct_subgroup)",
         },
         {
@@ -1763,7 +1763,7 @@ def case18_fail_pairing_check():
             int(G2[0].coeffs[1]), 64) + int_to_hex(int(G2[1].coeffs[0]), 64) + int_to_hex(int(G2[1].coeffs[1]), 64) + int_to_hex(
             int(G1[0]), 64) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(neg(G2)[0].coeffs[0]), 64) + int_to_hex(
             int(neg(G2)[0].coeffs[1]), 64) + int_to_hex(int(neg(G2)[1].coeffs[0]), 64) + int_to_hex(int(neg(G2)[1].coeffs[1]), 64),
-        "ExpectedError": "g1 point is not on correct subgroup",
+        "ExpectedError": "g1 point is not in the correct subgroup",
         "Name": "bls_pairing_e(G1_not_in_correct_subgroup,-G2)=e(-G1,G2)"
         },
         {
@@ -1771,7 +1771,7 @@ def case18_fail_pairing_check():
             int(G2_wrong_order[0].coeffs[1]), 64) + int_to_hex(int(G2_wrong_order[1].coeffs[0]), 64) + int_to_hex(int(G2_wrong_order[1].coeffs[1]), 64) + int_to_hex(
             int(G1[0]), 64) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(neg(G2)[0].coeffs[0]), 64) + int_to_hex(
             int(neg(G2)[0].coeffs[1]), 64) + int_to_hex(int(neg(G2)[1].coeffs[0]), 64) + int_to_hex(int(neg(G2)[1].coeffs[1]), 64),
-        "ExpectedError": "g2 point is not on correct subgroup",
+        "ExpectedError": "g2 point is not in the correct subgroup",
         "Name": "bls_pairing_e(G1,G2_not_in_correct_subgroup)=e(-G1,G2)"
         }
     ]
