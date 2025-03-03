@@ -1057,8 +1057,23 @@ def case08_msm_G2():
         "Expected": int_to_hex(int(result_multiply_P2[0].coeffs[0]), 64) + int_to_hex(int(result_multiply_P2[0].coeffs[1]), 64) + int_to_hex(
             int(result_multiply_P2[1].coeffs[0]), 64) + int_to_hex(int(result_multiply_P2[1].coeffs[1]), 64),
         "Gas": int((1 * BLS12_G2MUL_GAS * BLS12_G2_MULTIEXP_DISCOUNT_TABLE[0][1]) / 1000),
+        "NoBenchma,rk": False
+        },
+        {
+        "Input": int_to_hex(int(G2[0].coeffs[0]), 64) + int_to_hex(int(G2[0].coeffs[1]), 64) + int_to_hex(int(G2[1].coeffs[0]), 64) + int_to_hex(int(G2[1].coeffs[1]), 64) + int_to_hex(
+            PRIVKEYS[0], 32) + int_to_hex(int(P2[0].coeffs[0]), 64) + int_to_hex(int(P2[0].coeffs[1]), 64) + int_to_hex(int(P2[1].coeffs[0]), 64) + int_to_hex(int(P2[1].coeffs[1]), 64) + int_to_hex(
+                PRIVKEYS[1], 32) + int_to_hex(int(H2[0].coeffs[0]), 64) + int_to_hex(int(H2[0].coeffs[1]), 64) + int_to_hex(int(H2[1].coeffs[0]), 64) + int_to_hex(int(H2[1].coeffs[1]), 64) + int_to_hex(
+                PRIVKEYS[2], 32) + int_to_hex(int(H3[0].coeffs[0]), 64) + int_to_hex(int(H3[0].coeffs[1]), 64) + int_to_hex(int(H3[1].coeffs[0]), 64) + int_to_hex(int(H3[1].coeffs[1]), 64) + int_to_hex(
+                PRIVKEYS[3], 32) + int_to_hex(int(H4[0].coeffs[0]), 64) + int_to_hex(int(H4[0].coeffs[1]), 64) + int_to_hex(int(H4[1].coeffs[0]), 64) + int_to_hex(int(H4[1].coeffs[1]), 64) + int_to_hex(
+                # Place a point at infinity in between
+                PRIVKEYS[4], 32) + int_to_hex(0, 256) + int_to_hex(0, 32) + int_to_hex(int(H5[0].coeffs[0]), 64) + int_to_hex(int(H5[0].coeffs[1]), 64) + int_to_hex(int(H5[1].coeffs[0]), 64) + int_to_hex(int(H5[1].coeffs[1]), 64) + int_to_hex(
+                PRIVKEYS[5], 32),
+        "Name": "bls_g2msm_multiple_with_point_at_infinity",
+        "Expected": int_to_hex(int(g2multiex[0].coeffs[0]), 64) + int_to_hex(int(g2multiex[0].coeffs[1]), 64) + int_to_hex(
+            int(g2multiex[1].coeffs[0]), 64) + int_to_hex(int(g2multiex[1].coeffs[1]), 64),
+        "Gas": int((7 * BLS12_G2MUL_GAS * BLS12_G2_MULTIEXP_DISCOUNT_TABLE[6][1]) / 1000),
         "NoBenchmark": False
-        }
+        },
     ] + [
         {
         "Input": count * (int_to_hex(0, 256) + int_to_hex(0, 32)),
