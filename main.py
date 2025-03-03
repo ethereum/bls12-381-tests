@@ -781,73 +781,73 @@ def case07_msm_G1():
         except IndexError:
             return BLS12_G1_MULTIEXP_MAX_DISCOUNT
 
-    yield 'multiexp_G1_bls', [
+    yield 'msm_G1_bls', [
         {
         "Input": int_to_hex(int(G1[0]), 64) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(2), 32),
-        "Name": "bls_g1multiexp_(g1+g1=2*g1)",
+        "Name": "bls_g1msm_(g1+g1=2*g1)",
         "Expected": int_to_hex(int(result_doubling_G1[0]), 64) + (int_to_hex(int(result_doubling_G1[1]), 64)),
         "Gas": int((1 * BLS12_G1MUL_GAS * BLS12_G1_MULTIEXP_DISCOUNT_TABLE[0][1]) / 1000),
         "NoBenchmark": False
         },
         {
         "Input": int_to_hex(int(P1[0]), 64) + (int_to_hex(int(P1[1]), 64)) + int_to_hex(int(2), 32),
-        "Name": "bls_g1multiexp_(p1+p1=2*p1)",
+        "Name": "bls_g1msm_(p1+p1=2*p1)",
         "Expected": int_to_hex(int(result_doubling_P1[0]), 64) + (int_to_hex(int(result_doubling_P1[1]), 64)),
         "Gas": int((1 * BLS12_G1MUL_GAS * BLS12_G1_MULTIEXP_DISCOUNT_TABLE[0][1]) / 1000),
         "NoBenchmark": False
         },
         {
         "Input": int_to_hex(int(G1[0]), 64) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(1), 32),
-        "Name": "bls_g1multiexp_(1*g1=g1)",
+        "Name": "bls_g1msm_(1*g1=g1)",
         "Expected": int_to_hex(int(G1[0]), 64) + (int_to_hex(int(G1[1]), 64)),
         "Gas": int((1 * BLS12_G1MUL_GAS * BLS12_G1_MULTIEXP_DISCOUNT_TABLE[0][1]) / 1000),
         "NoBenchmark": False
         },
         {
         "Input": int_to_hex(int(P1[0]), 64) + (int_to_hex(int(P1[1]), 64)) + int_to_hex(int(1), 32),
-        "Name": "bls_g1multiexp_(1*p1=p1)",
+        "Name": "bls_g1msm_(1*p1=p1)",
         "Expected": int_to_hex(int(P1[0]), 64) + (int_to_hex(int(P1[1]), 64)),
         "Gas": int((1 * BLS12_G1MUL_GAS * BLS12_G1_MULTIEXP_DISCOUNT_TABLE[0][1]) / 1000),
         "NoBenchmark": False
         },
         {
         "Input": int_to_hex(int(G1[0]), 64) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(0), 32),
-        "Name": "bls_g1multiexp_(0*g1=inf)",
+        "Name": "bls_g1msm_(0*g1=inf)",
         "Expected": int_to_hex(0, 64) + int_to_hex(0, 64),
         "Gas": int((1 * BLS12_G1MUL_GAS * BLS12_G1_MULTIEXP_DISCOUNT_TABLE[0][1]) / 1000),
         "NoBenchmark": False
         },
         {
         "Input": int_to_hex(int(P1[0]), 64) + (int_to_hex(int(P1[1]), 64)) + int_to_hex(int(0), 32),
-        "Name": "bls_g1multiexp_(0*p1=inf)",
+        "Name": "bls_g1msm_(0*p1=inf)",
         "Expected": int_to_hex(0, 64) + int_to_hex(0, 64),
         "Gas": int((1 * BLS12_G1MUL_GAS * BLS12_G1_MULTIEXP_DISCOUNT_TABLE[0][1]) / 1000),
         "NoBenchmark": False
         },
         {
         "Input": int_to_hex(0, 64) + int_to_hex(0, 64) + int_to_hex(int(17), 32),
-        "Name": "bls_g1multiexp_(x*inf=inf)",
+        "Name": "bls_g1msm_(x*inf=inf)",
         "Expected": int_to_hex(0, 64) + int_to_hex(0, 64),
         "Gas": int((1 * BLS12_G1MUL_GAS * BLS12_G1_MULTIEXP_DISCOUNT_TABLE[0][1]) / 1000),
         "NoBenchmark": False
         },
         {
         "Input": int_to_hex(int(G1[0]), 64) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(2), 32) + int_to_hex(int(G1[0]), 64) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(0), 32),
-        "Name": "bls_g1multiexp_(2g1+inf)",
+        "Name": "bls_g1msm_(2g1+inf)",
         "Expected": int_to_hex(int(result_doubling_G1[0]), 64) + (int_to_hex(int(result_doubling_G1[1]), 64)),
         "Gas": int((2 * BLS12_G1MUL_GAS * BLS12_G1_MULTIEXP_DISCOUNT_TABLE[1][1]) / 1000),
         "NoBenchmark": False
         },
         {
         "Input": int_to_hex(int(G1[0]), 64) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(0), 32) + int_to_hex(int(G1[0]), 64) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(0), 32),
-        "Name": "bls_g1multiexp_(inf+inf)",
+        "Name": "bls_g1msm_(inf+inf)",
         "Expected": int_to_hex(0, 64) + int_to_hex(0, 64),
         "Gas": int((2 * BLS12_G1MUL_GAS * BLS12_G1_MULTIEXP_DISCOUNT_TABLE[1][1]) / 1000),
         "NoBenchmark": False
         },
         {
         "Input": int_to_hex(int(G1[0]), 64) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(2), 32) + int_to_hex(int(P1[0]), 64) + (int_to_hex(int(P1[1]), 64)) + int_to_hex(int(2), 32),
-        "Name": "bls_g1multiexp_(2g1+2p1)",
+        "Name": "bls_g1msm_(2g1+2p1)",
         "Expected": int_to_hex(int(doubleP1G1[0]), 64) + (int_to_hex(int(doubleP1G1[1]), 64)),
         "Gas": int((2 * BLS12_G1MUL_GAS * BLS12_G1_MULTIEXP_DISCOUNT_TABLE[1][1]) / 1000),
         "NoBenchmark": False
@@ -860,21 +860,21 @@ def case07_msm_G1():
                 PRIVKEYS[4], 32) + int_to_hex(int(H4[0]), 64) + (int_to_hex(int(H4[1]), 64)) + int_to_hex(
                 PRIVKEYS[5], 32) + int_to_hex(int(H5[0]), 64) + (int_to_hex(int(H5[1]), 64)) + int_to_hex(
                 PRIVKEYS[6], 32),
-        "Name": "bls_g1multiexp_multiple",
+        "Name": "bls_g1msm_multiple",
         "Expected": int_to_hex(int(g1multiexp[0]), 64) + (int_to_hex(int(g1multiexp[1]), 64)),
         "Gas": int((7 * BLS12_G1MUL_GAS * BLS12_G1_MULTIEXP_DISCOUNT_TABLE[6][1]) / 1000),
         "NoBenchmark": False
         },
         {
         "Input": int_to_hex(int(G1[0]), 64) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(PRIVKEYS[0] + curve_order, 32),
-        "Name": "bls_g1multiexp_random*g1_unnormalized_scalar",
+        "Name": "bls_g1msm_random*g1_unnormalized_scalar",
         "Expected": int_to_hex(int(result_multiply_G1[0]), 64) + (int_to_hex(int(result_multiply_G1[1]), 64)),
         "Gas": int((1 * BLS12_G1MUL_GAS * BLS12_G1_MULTIEXP_DISCOUNT_TABLE[0][1]) / 1000),
         "NoBenchmark": False
         },
         {
         "Input": int_to_hex(int(P1[0]), 64) + (int_to_hex(int(P1[1]), 64)) + int_to_hex(PRIVKEYS[0] + curve_order, 32),
-        "Name": "bls_g1multiexp_random*p1_unnormalized_scalar",
+        "Name": "bls_g1msm_random*p1_unnormalized_scalar",
         "Expected": int_to_hex(int(result_multiply_P1[0]), 64) + (int_to_hex(int(result_multiply_P1[1]), 64)),
         "Gas": int((1 * BLS12_G1MUL_GAS * BLS12_G1_MULTIEXP_DISCOUNT_TABLE[0][1]) / 1000),
         "NoBenchmark": False
@@ -882,7 +882,7 @@ def case07_msm_G1():
     ] + [
         {
         "Input": count * (int_to_hex(0, 128) + int_to_hex(0, 32)),
-        "Name": f"bls_g1multiexp_discount_table_{count}",
+        "Name": f"bls_g1msm_discount_table_{count}",
         "Expected": int_to_hex(0, 128),
         "Gas": int((count * BLS12_G1MUL_GAS * discount_table_lookup(count)) / 1000),
         "NoBenchmark": False
@@ -926,10 +926,10 @@ def case08_msm_G2():
         except IndexError:
             return BLS12_G2_MULTIEXP_MAX_DISCOUNT
 
-    yield 'multiexp_G2_bls', [
+    yield 'msm_G2_bls', [
         {
         "Input": int_to_hex(int(G2[0].coeffs[0]), 64) + int_to_hex(int(G2[0].coeffs[1]), 64) + int_to_hex(int(G2[1].coeffs[0]), 64) + int_to_hex(int(G2[1].coeffs[1]), 64) + int_to_hex(int(2), 32),
-        "Name": "bls_g2multiexp_(g2+g2=2*g2)",
+        "Name": "bls_g2msm_(g2+g2=2*g2)",
         "Expected": int_to_hex(int(result_doubling_G2[0].coeffs[0]), 64) + int_to_hex(int(result_doubling_G2[0].coeffs[1]), 64) + int_to_hex(
             int(result_doubling_G2[1].coeffs[0]), 64) + int_to_hex(int(result_doubling_G2[1].coeffs[1]), 64),
         "Gas": int((1 * BLS12_G2MUL_GAS * BLS12_G2_MULTIEXP_DISCOUNT_TABLE[0][1]) / 1000),
@@ -937,7 +937,7 @@ def case08_msm_G2():
         },
         {
         "Input": int_to_hex(int(P2[0].coeffs[0]), 64) + int_to_hex(int(P2[0].coeffs[1]), 64) + int_to_hex(int(P2[1].coeffs[0]), 64) + int_to_hex(int(P2[1].coeffs[1]), 64) + int_to_hex(int(2), 32),
-        "Name": "bls_g2multiexp_(p2+p2=2*p2)",
+        "Name": "bls_g2msm_(p2+p2=2*p2)",
         "Expected": int_to_hex(int(result_doubling_P2[0].coeffs[0]), 64) + int_to_hex(int(result_doubling_P2[0].coeffs[1]), 64) + int_to_hex(
             int(result_doubling_P2[1].coeffs[0]), 64) + int_to_hex(int(result_doubling_P2[1].coeffs[1]), 64),
         "Gas": int((1 * BLS12_G2MUL_GAS * BLS12_G2_MULTIEXP_DISCOUNT_TABLE[0][1]) / 1000),
@@ -945,35 +945,35 @@ def case08_msm_G2():
         },
         {
         "Input": int_to_hex(int(G2[0].coeffs[0]), 64) + int_to_hex(int(G2[0].coeffs[1]), 64) + int_to_hex(int(G2[1].coeffs[0]), 64) + int_to_hex(int(G2[1].coeffs[1]), 64) + int_to_hex(int(1), 32),
-        "Name": "bls_g2multiexp_(1*g2=g2)",
+        "Name": "bls_g2msm_(1*g2=g2)",
         "Expected": int_to_hex(int(G2[0].coeffs[0]), 64) + int_to_hex(int(G2[0].coeffs[1]), 64) + int_to_hex(int(G2[1].coeffs[0]), 64) + int_to_hex(int(G2[1].coeffs[1]), 64),
         "Gas": int((1 * BLS12_G2MUL_GAS * BLS12_G2_MULTIEXP_DISCOUNT_TABLE[0][1]) / 1000),
         "NoBenchmark": False
         },
         {
         "Input": int_to_hex(int(P2[0].coeffs[0]), 64) + int_to_hex(int(P2[0].coeffs[1]), 64) + int_to_hex(int(P2[1].coeffs[0]), 64) + int_to_hex(int(P2[1].coeffs[1]), 64) + int_to_hex(int(1), 32),
-        "Name": "bls_g2multiexp_(1*p2=p2)",
+        "Name": "bls_g2msm_(1*p2=p2)",
         "Expected": int_to_hex(int(P2[0].coeffs[0]), 64) + int_to_hex(int(P2[0].coeffs[1]), 64) + int_to_hex(int(P2[1].coeffs[0]), 64) + int_to_hex(int(P2[1].coeffs[1]), 64),
         "Gas": int((1 * BLS12_G2MUL_GAS * BLS12_G2_MULTIEXP_DISCOUNT_TABLE[0][1]) / 1000),
         "NoBenchmark": False
         },
         {
         "Input": int_to_hex(int(G2[0].coeffs[0]), 64) + int_to_hex(int(G2[0].coeffs[1]), 64) + int_to_hex(int(G2[1].coeffs[0]), 64) + int_to_hex(int(G2[1].coeffs[1]), 64) + int_to_hex(int(0), 32),
-        "Name": "bls_g2multiexp_(0*g2=inf)",
+        "Name": "bls_g2msm_(0*g2=inf)",
         "Expected": int_to_hex(0, 64) + int_to_hex(0, 64) + int_to_hex(0, 64) + int_to_hex(0, 64),
         "Gas": int((1 * BLS12_G2MUL_GAS * BLS12_G2_MULTIEXP_DISCOUNT_TABLE[0][1]) / 1000),
         "NoBenchmark": False
         },
         {
         "Input": int_to_hex(int(P2[0].coeffs[0]), 64) + int_to_hex(int(P2[0].coeffs[1]), 64) + int_to_hex(int(P2[1].coeffs[0]), 64) + int_to_hex(int(P2[1].coeffs[1]), 64) + int_to_hex(int(0), 32),
-        "Name": "bls_g2multiexp_(0*p2=inf)",
+        "Name": "bls_g2msm_(0*p2=inf)",
         "Expected": int_to_hex(0, 64) + int_to_hex(0, 64) + int_to_hex(0, 64) + int_to_hex(0, 64),
         "Gas": int((1 * BLS12_G2MUL_GAS * BLS12_G2_MULTIEXP_DISCOUNT_TABLE[0][1]) / 1000),
         "NoBenchmark": False
         },
         {
         "Input": int_to_hex(0, 64) + int_to_hex(0, 64) + int_to_hex(0, 64) + int_to_hex(0, 64) + int_to_hex(int(17), 32),
-        "Name": "bls_g2multiexp_(x*inf=inf)",
+        "Name": "bls_g2msm_(x*inf=inf)",
         "Expected": int_to_hex(0, 64) + int_to_hex(0, 64) + int_to_hex(0, 64) + int_to_hex(0, 64),
         "Gas": int((1 * BLS12_G2MUL_GAS * BLS12_G2_MULTIEXP_DISCOUNT_TABLE[0][1]) / 1000),
         "NoBenchmark": False
@@ -981,7 +981,7 @@ def case08_msm_G2():
         {
         "Input": int_to_hex(int(G2[0].coeffs[0]), 64) + int_to_hex(int(G2[0].coeffs[1]), 64) + int_to_hex(int(G2[1].coeffs[0]), 64) + int_to_hex(
             int(G2[1].coeffs[1]), 64) + int_to_hex(int(2), 32) + int_to_hex(0, 256) + int_to_hex(int(2), 32),
-        "Name": "bls_g2multiexp_(2g2+inf)",
+        "Name": "bls_g2msm_(2g2+inf)",
         "Expected": int_to_hex(int(result_doubling_G2[0].coeffs[0]), 64) + int_to_hex(int(result_doubling_G2[0].coeffs[1]), 64) + int_to_hex(
             int(result_doubling_G2[1].coeffs[0]), 64) + int_to_hex(int(result_doubling_G2[1].coeffs[1]), 64),
         "Gas": int((2 * BLS12_G2MUL_GAS * BLS12_G2_MULTIEXP_DISCOUNT_TABLE[1][1]) / 1000),
@@ -990,7 +990,7 @@ def case08_msm_G2():
         {
         "Input": int_to_hex(int(P2[0].coeffs[0]), 64) + int_to_hex(int(P2[0].coeffs[1]), 64) + int_to_hex(int(P2[1].coeffs[0]), 64) + int_to_hex(
             int(P2[1].coeffs[1]), 64) + int_to_hex(int(2), 32) + int_to_hex(0, 256) + int_to_hex(int(2), 32),
-        "Name": "bls_g2multiexp_(2p2+inf)",
+        "Name": "bls_g2msm_(2p2+inf)",
         "Expected": int_to_hex(int(result_doubling_P2[0].coeffs[0]), 64) + int_to_hex(int(result_doubling_P2[0].coeffs[1]), 64) + int_to_hex(
             int(result_doubling_P2[1].coeffs[0]), 64) + int_to_hex(int(result_doubling_P2[1].coeffs[1]), 64),
         "Gas": int((2 * BLS12_G2MUL_GAS * BLS12_G2_MULTIEXP_DISCOUNT_TABLE[1][1]) / 1000),
@@ -1000,7 +1000,7 @@ def case08_msm_G2():
         "Input": int_to_hex(int(P2[0].coeffs[0]), 64) + int_to_hex(int(P2[0].coeffs[1]), 64) + int_to_hex(int(P2[1].coeffs[0]), 64) + int_to_hex(
             int(P2[1].coeffs[1]), 64) + int_to_hex(int(0), 32) + int_to_hex(int(P2[0].coeffs[0]), 64) + int_to_hex(int(P2[0].coeffs[1]), 64) + int_to_hex(
                 int(P2[1].coeffs[0]), 64) + int_to_hex(int(P2[1].coeffs[1]), 64) + int_to_hex(int(0), 32),
-        "Name": "bls_g1multiexp_(inf+inf)",
+        "Name": "bls_g1msm_(inf+inf)",
         "Expected": int_to_hex(0, 128) + int_to_hex(0, 128),
         "Gas": int((2 * BLS12_G2MUL_GAS * BLS12_G2_MULTIEXP_DISCOUNT_TABLE[1][1]) / 1000),
         "NoBenchmark": False
@@ -1008,7 +1008,7 @@ def case08_msm_G2():
         {
         "Input": int_to_hex(int(G2[0].coeffs[0]), 64) + int_to_hex(int(G2[0].coeffs[1]), 64) + int_to_hex(int(G2[1].coeffs[0]), 64) + int_to_hex(int(G2[1].coeffs[1]), 64) + int_to_hex(
             int(2), 32) + int_to_hex(int(P2[0].coeffs[0]), 64) + int_to_hex(int(P2[0].coeffs[1]), 64) + int_to_hex(int(P2[1].coeffs[0]), 64) + int_to_hex(int(P2[1].coeffs[1]), 64) + int_to_hex(int(2), 32),
-        "Name": "bls_g2multiexp_(2g2+2p2)",
+        "Name": "bls_g2msm_(2g2+2p2)",
         "Expected": int_to_hex(int(doubleP2G2[0].coeffs[0]), 64) + int_to_hex(int(doubleP2G2[0].coeffs[1]), 64) + int_to_hex(
             int(doubleP2G2[1].coeffs[0]), 64) + int_to_hex(int(doubleP2G2[1].coeffs[1]), 64),
         "Gas": int((2 * BLS12_G2MUL_GAS * BLS12_G2_MULTIEXP_DISCOUNT_TABLE[1][1]) / 1000),
@@ -1022,7 +1022,7 @@ def case08_msm_G2():
                 PRIVKEYS[3], 32) + int_to_hex(int(H4[0].coeffs[0]), 64) + int_to_hex(int(H4[0].coeffs[1]), 64) + int_to_hex(int(H4[1].coeffs[0]), 64) + int_to_hex(int(H4[1].coeffs[1]), 64) + int_to_hex(
                 PRIVKEYS[4], 32) + int_to_hex(int(H5[0].coeffs[0]), 64) + int_to_hex(int(H5[0].coeffs[1]), 64) + int_to_hex(int(H5[1].coeffs[0]), 64) + int_to_hex(int(H5[1].coeffs[1]), 64) + int_to_hex(
                 PRIVKEYS[5], 32),
-        "Name": "bls_g2multiexp_multiple",
+        "Name": "bls_g2msm_multiple",
         "Expected": int_to_hex(int(g2multiex[0].coeffs[0]), 64) + int_to_hex(int(g2multiex[0].coeffs[1]), 64) + int_to_hex(
             int(g2multiex[1].coeffs[0]), 64) + int_to_hex(int(g2multiex[1].coeffs[1]), 64),
         "Gas": int((6 * BLS12_G2MUL_GAS * BLS12_G2_MULTIEXP_DISCOUNT_TABLE[5][1]) / 1000),
@@ -1030,7 +1030,7 @@ def case08_msm_G2():
         },
         {
         "Input": int_to_hex(int(G2[0].coeffs[0]), 64) + int_to_hex(int(G2[0].coeffs[1]), 64) + int_to_hex(int(G2[1].coeffs[0]), 64) + int_to_hex(int(G2[1].coeffs[1]), 64) + int_to_hex(PRIVKEYS[0] + curve_order, 32),
-        "Name": "bls_g2multiexp_random*g2_unnormalized_scalar",
+        "Name": "bls_g2msm_random*g2_unnormalized_scalar",
         "Expected": int_to_hex(int(result_multiply_G2[0].coeffs[0]), 64) + int_to_hex(int(result_multiply_G2[0].coeffs[1]), 64) + int_to_hex(
             int(result_multiply_G2[1].coeffs[0]), 64) + int_to_hex(int(result_multiply_G2[1].coeffs[1]), 64),
         "Gas": int((1 * BLS12_G2MUL_GAS * BLS12_G2_MULTIEXP_DISCOUNT_TABLE[0][1]) / 1000),
@@ -1038,7 +1038,7 @@ def case08_msm_G2():
         },
         {
         "Input": int_to_hex(int(P2[0].coeffs[0]), 64) + int_to_hex(int(P2[0].coeffs[1]), 64) + int_to_hex(int(P2[1].coeffs[0]), 64) + int_to_hex(int(P2[1].coeffs[1]), 64) + int_to_hex(PRIVKEYS[0] + curve_order, 32),
-        "Name": "bls_g2multiexp_random*p2_unnormalized_scalar",
+        "Name": "bls_g2msm_random*p2_unnormalized_scalar",
         "Expected": int_to_hex(int(result_multiply_P2[0].coeffs[0]), 64) + int_to_hex(int(result_multiply_P2[0].coeffs[1]), 64) + int_to_hex(
             int(result_multiply_P2[1].coeffs[0]), 64) + int_to_hex(int(result_multiply_P2[1].coeffs[1]), 64),
         "Gas": int((1 * BLS12_G2MUL_GAS * BLS12_G2_MULTIEXP_DISCOUNT_TABLE[0][1]) / 1000),
@@ -1047,7 +1047,7 @@ def case08_msm_G2():
     ] + [
         {
         "Input": count * (int_to_hex(0, 256) + int_to_hex(0, 32)),
-        "Name": f"bls_g2multiexp_discount_table_{count}",
+        "Name": f"bls_g2msm_discount_table_{count}",
         "Expected": int_to_hex(0, 256),
         "Gas": int((count * BLS12_G2MUL_GAS * discount_table_lookup(count)) / 1000),
         "NoBenchmark": False
@@ -1440,81 +1440,81 @@ def case15_fail_map_fp2_to_G2():
 
 
 def case16_fail_msm_G1():
-    yield 'fail-multiexp_G1_bls', [
+    yield 'fail-msm_G1_bls', [
         {
         "Input": "",
         "ExpectedError": "invalid input length",
-        "Name": "bls_g1multiexp_empty_input"
+        "Name": "bls_g1msm_empty_input"
         },
         {
         "Input": int_to_hex(int(G1[0]), 63) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(2), 32) + int_to_hex(int(P1[0]), 64) + (int_to_hex(int(P1[1]), 64)) + int_to_hex(int(2), 32),
         "ExpectedError": "invalid input length",
-        "Name": "bls_g1multiexp_short_input"
+        "Name": "bls_g1msm_short_input"
         },
         {
         "Input": int_to_hex(int(G1[0]), 65) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(2), 32) + int_to_hex(int(P1[0]), 64) + (int_to_hex(int(P1[1]), 64)) + int_to_hex(int(2), 32),
         "ExpectedError": "invalid input length",
-        "Name": "bls_g1multiexp_long_input"
+        "Name": "bls_g1msm_long_input"
         },
         {
         "Input": int_to_hex(int(G1[0]) + q, 64) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(2), 32) + int_to_hex(int(P1[0]), 64) + (int_to_hex(int(P1[1]), 64)) + int_to_hex(int(2), 32),
         "ExpectedError": "invalid fp.Element encoding",
-        "Name": "bls_g1multiexp_invalid_field_element"
+        "Name": "bls_g1msm_invalid_field_element"
         },
         {
         "Input": "10" + int_to_hex(int(G1[0]), 63) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(2), 32) + int_to_hex(int(P1[0]), 64) + (int_to_hex(int(P1[1]), 64)) + int_to_hex(int(2), 32),
         "ExpectedError": "invalid field element top bytes",
-        "Name": "bls_g1multiexp_violate_top_bytes"
+        "Name": "bls_g1msm_violate_top_bytes"
         },
         {
         "Input": int_to_hex(int(G1[0]), 64) + (int_to_hex(int(P1[1]), 64)) + int_to_hex(int(2), 32) + int_to_hex(int(P1[0]), 64) + (int_to_hex(int(P1[1]), 64)) + int_to_hex(int(2), 32),
         "ExpectedError": "invalid point: not on curve",
-        "Name": "bls_g1multiexp_point_not_on_curve"
+        "Name": "bls_g1msm_point_not_on_curve"
         },
         {
         "Input": int_to_hex(int(G1_wrong_order[0]), 64) + (int_to_hex(int(G1_wrong_order[1]), 64)) + int_to_hex(int(2), 32) + int_to_hex(int(P1[0]), 64) + (int_to_hex(int(P1[1]), 64)) + int_to_hex(int(2), 32),
         "ExpectedError": "g1 point is not in the correct subgroup",
-        "Name": "bls_g1multiexp_g1_not_in_correct_subgroup"
+        "Name": "bls_g1msm_g1_not_in_correct_subgroup"
         }
     ]
 
 
 def case17_fail_msm_G2():
-    yield 'fail-multiexp_G2_bls', [
+    yield 'fail-msm_G2_bls', [
         {
         "Input": "",
         "ExpectedError": "invalid input length",
-        "Name": "bls_g2multiexp_empty_input"
+        "Name": "bls_g2msm_empty_input"
         },
         {
         "Input": int_to_hex(int(G2[0].coeffs[0]), 63) + int_to_hex(int(G2[0].coeffs[1]), 64) + int_to_hex(int(G2[1].coeffs[0]), 64) + int_to_hex(int(G2[1].coeffs[1]), 64) + int_to_hex(
             int(2), 32) + int_to_hex(int(P2[0].coeffs[0]), 64) + int_to_hex(int(P2[0].coeffs[1]), 64) + int_to_hex(int(P2[1].coeffs[0]), 64) + int_to_hex(int(P2[1].coeffs[1]), 64) + int_to_hex(int(2), 32),
         "ExpectedError": "invalid input length",
-        "Name": "bls_g2multiexp_short_input"
+        "Name": "bls_g2msm_short_input"
         },
         {
         "Input": int_to_hex(int(G2[0].coeffs[0]), 65) + int_to_hex(int(G2[0].coeffs[1]), 64) + int_to_hex(int(G2[1].coeffs[0]), 64) + int_to_hex(int(G2[1].coeffs[1]), 64) + int_to_hex(
             int(2), 32) + int_to_hex(int(P2[0].coeffs[0]), 64) + int_to_hex(int(P2[0].coeffs[1]), 64) + int_to_hex(int(P2[1].coeffs[0]), 64) + int_to_hex(int(P2[1].coeffs[1]), 64) + int_to_hex(int(2), 32),
         "ExpectedError": "invalid input length",
-        "Name": "bls_g2multiexp_long_input"
+        "Name": "bls_g2msm_long_input"
         },
         {
         "Input": "10" + int_to_hex(int(G2[0].coeffs[0]), 63) + int_to_hex(int(G2[0].coeffs[1]), 64) + int_to_hex(int(G2[1].coeffs[0]), 64) + int_to_hex(int(G2[1].coeffs[1]), 64) + int_to_hex(
             int(2), 32) + int_to_hex(int(P2[0].coeffs[0]), 64) + int_to_hex(int(P2[0].coeffs[1]), 64) + int_to_hex(int(P2[1].coeffs[0]), 64) + int_to_hex(int(P2[1].coeffs[1]), 64) + int_to_hex(int(2), 32),
         "ExpectedError": "invalid field element top bytes",
-        "Name": "bls_g2multiexp_violate_top_bytes"
+        "Name": "bls_g2msm_violate_top_bytes"
         },
         {
         "Input": int_to_hex(int(G2[0].coeffs[0]) + q, 64) + int_to_hex(int(G2[0].coeffs[1]), 64) + int_to_hex(int(G2[1].coeffs[0]), 64) + int_to_hex(int(G2[1].coeffs[1]), 64) + int_to_hex(
             int(2), 32) + int_to_hex(int(P2[0].coeffs[0]), 64) + int_to_hex(int(P2[0].coeffs[1]), 64) + int_to_hex(int(P2[1].coeffs[0]), 64) + int_to_hex(int(P2[1].coeffs[1]), 64) + int_to_hex(int(2), 32),
         "ExpectedError": "invalid fp.Element encoding",
-        "Name": "bls_g2multiexp_invalid_field_element"
+        "Name": "bls_g2msm_invalid_field_element"
         },
         {
         "Input": int_to_hex(int(G2[0].coeffs[0]), 64) + int_to_hex(int(P2[0].coeffs[1]), 64) + int_to_hex(int(G2[1].coeffs[0]), 64) + int_to_hex(int(G2[1].coeffs[1]), 64) + int_to_hex(
             int(2), 32) + int_to_hex(int(P2[0].coeffs[0]), 64) + int_to_hex(int(P2[0].coeffs[1]), 64) + int_to_hex(int(P2[1].coeffs[0]), 64) + int_to_hex(int(P2[1].coeffs[1]), 64) + int_to_hex(int(2), 32),
         "ExpectedError": "invalid point: not on curve",
-        "Name": "bls_g2multiexp_point_not_on_curve"
+        "Name": "bls_g2msm_point_not_on_curve"
         },
         {
         "Input": int_to_hex(int(G2_wrong_order[0].coeffs[0]), 64) + int_to_hex(int(G2_wrong_order[0].coeffs[1]), 64) + int_to_hex(int(G2_wrong_order[1].coeffs[0]), 64) + int_to_hex(int(G2_wrong_order[1].coeffs[1]), 64) + int_to_hex(
