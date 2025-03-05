@@ -1057,7 +1057,7 @@ def case08_msm_G2():
         "Expected": int_to_hex(int(result_multiply_P2[0].coeffs[0]), 64) + int_to_hex(int(result_multiply_P2[0].coeffs[1]), 64) + int_to_hex(
             int(result_multiply_P2[1].coeffs[0]), 64) + int_to_hex(int(result_multiply_P2[1].coeffs[1]), 64),
         "Gas": int((1 * BLS12_G2MUL_GAS * BLS12_G2_MULTIEXP_DISCOUNT_TABLE[0][1]) / 1000),
-        "NoBenchma,rk": False
+        "NoBenchmark": False
         },
         {
         "Input": int_to_hex(int(G2[0].coeffs[0]), 64) + int_to_hex(int(G2[0].coeffs[1]), 64) + int_to_hex(int(G2[1].coeffs[0]), 64) + int_to_hex(int(G2[1].coeffs[1]), 64) + int_to_hex(
