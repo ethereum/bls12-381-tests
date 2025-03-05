@@ -1321,6 +1321,83 @@ def case09_pairing_check():
         "Expected": int_to_hex(1, 32),
         "Gas": 2 * BLS12_PAIRING_VARIABLE + BLS12_PAIRING_CONSTANT,
         "NoBenchmark": False
+        },
+        {
+        "Input": ""
+            # aG1 point 1
+            + int_to_hex(int(result_multiply_G1[0]), 64)
+            + int_to_hex(int(result_multiply_G1[1]), 64)
+            # bG2 point 1
+            + int_to_hex(int(result_multiply_G2[0].coeffs[0]), 64)
+            + int_to_hex(int(result_multiply_G2[0].coeffs[1]), 64)
+            + int_to_hex(int(result_multiply_G2[1].coeffs[0]), 64)
+            + int_to_hex(int(result_multiply_G2[1].coeffs[1]), 64)
+            # -G1 point 2
+            + int_to_hex(int(neg(G1)[0]), 64)
+            + int_to_hex(int(neg(G1)[1]), 64)
+            # abG2 point 2
+            + int_to_hex(int(result_multiply_G2a[0].coeffs[0]), 64)
+            + int_to_hex(int(result_multiply_G2a[0].coeffs[1]), 64)
+            + int_to_hex(int(result_multiply_G2a[1].coeffs[0]), 64)
+            + int_to_hex(int(result_multiply_G2a[1].coeffs[1]), 64),
+        "Name": "bls_pairing_e(aG1,bG2)=3De(G1,abG2)",
+        "Expected": int_to_hex(1, 32),
+        "Gas": 2 * BLS12_PAIRING_VARIABLE + BLS12_PAIRING_CONSTANT,
+        "NoBenchmark": False
+        },
+        {
+        "Input": ""
+            # G1 point 1
+            + int_to_hex(int(G1[0]), 64)
+            + int_to_hex(int(G1[1]), 64)
+            # G2 point 1
+            + int_to_hex(int(G2[0].coeffs[0]), 64)
+            + int_to_hex(int(G2[0].coeffs[1]), 64)
+            + int_to_hex(int(G2[1].coeffs[0]), 64)
+            + int_to_hex(int(G2[1].coeffs[1]), 64)
+            # G1 point (point at infinity)
+            + int_to_hex(0, 128)
+            # G2 point (point at infinity)
+            + int_to_hex(0, 256)
+            # G1 point 3
+            + int_to_hex(int(G1[0]), 64)
+            + int_to_hex(int(G1[1]), 64)
+            # -G2 point 3
+            + int_to_hex(int(neg(G2)[0].coeffs[0]), 64)
+            + int_to_hex(int(neg(G2)[0].coeffs[1]), 64)
+            + int_to_hex(int(neg(G2)[1].coeffs[0]), 64)
+            + int_to_hex(int(neg(G2)[1].coeffs[1]), 64),
+        "Name": "bls_pairing_e(G1,G2)*e(0,0)*e(G1,-G2)=1",
+        "Expected": int_to_hex(1, 32),
+        "Gas": 3 * BLS12_PAIRING_VARIABLE + BLS12_PAIRING_CONSTANT,
+        "NoBenchmark": False
+        },
+        {
+        "Input": ""
+            # G1 point 1
+            + int_to_hex(int(G1[0]), 64)
+            + int_to_hex(int(G1[1]), 64)
+            # G2 point 1
+            + int_to_hex(int(G2[0].coeffs[0]), 64)
+            + int_to_hex(int(G2[0].coeffs[1]), 64)
+            + int_to_hex(int(G2[1].coeffs[0]), 64)
+            + int_to_hex(int(G2[1].coeffs[1]), 64)
+            # G1 point (point at infinity)
+            + int_to_hex(0, 128)
+            # G2 point (point at infinity)
+            + int_to_hex(0, 256)
+            # G1 point 3
+            + int_to_hex(int(G1[0]), 64)
+            + int_to_hex(int(G1[1]), 64)
+            # G2 point 3
+            + int_to_hex(int(G2[0].coeffs[0]), 64)
+            + int_to_hex(int(G2[0].coeffs[1]), 64)
+            + int_to_hex(int(G2[1].coeffs[0]), 64)
+            + int_to_hex(int(G2[1].coeffs[1]), 64),
+        "Name": "bls_pairing_e(G1,G2)*e(0,0)*e(G1,G2)=0",
+        "Expected": int_to_hex(0, 32),
+        "Gas": 3 * BLS12_PAIRING_VARIABLE + BLS12_PAIRING_CONSTANT,
+        "NoBenchmark": False
         }
     ]
 
