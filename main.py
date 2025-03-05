@@ -1225,20 +1225,26 @@ def case09_pairing_check():
         },
         {
         "Input": ""
+            # G1 point 1
             + int_to_hex(int(G1[0]), 64)
             + int_to_hex(int(G1[1]), 64)
+            # G2 point 1
             + int_to_hex(int(G2[0].coeffs[0]), 64)
             + int_to_hex(int(G2[0].coeffs[1]), 64)
             + int_to_hex(int(G2[1].coeffs[0]), 64)
             + int_to_hex(int(G2[1].coeffs[1]), 64)
+            # P1 point 2
             + int_to_hex(int(P1[0]), 64)
             + int_to_hex(int(P1[1]), 64)
+            # G2 point 2
             + int_to_hex(int(G2[0].coeffs[0]), 64)
             + int_to_hex(int(G2[0].coeffs[1]), 64)
             + int_to_hex(int(G2[1].coeffs[0]), 64)
             + int_to_hex(int(G2[1].coeffs[1]), 64)
+            # P1 + G1 point 3
             + int_to_hex(int(result_add[0]), 64)
             + int_to_hex(int(result_add[1]), 64)
+            # -G2 point 3
             + int_to_hex(int(neg(G2)[0].coeffs[0]), 64)
             + int_to_hex(int(neg(G2)[0].coeffs[1]), 64)
             + int_to_hex(int(neg(G2)[1].coeffs[0]), 64)
