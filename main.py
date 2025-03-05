@@ -1249,7 +1249,7 @@ def case09_pairing_check():
             + int_to_hex(int(neg(G2)[0].coeffs[1]), 64)
             + int_to_hex(int(neg(G2)[1].coeffs[0]), 64)
             + int_to_hex(int(neg(G2)[1].coeffs[1]), 64),
-        "Name": "bls_pairing_bilinearity",
+        "Name": "bls_pairing_bilinearity_e(G1,G2)*e(P1,G2)*e(P1+G1,-G2)=1",
         "Expected": int_to_hex(1, 32),
         "Gas": 3 * BLS12_PAIRING_VARIABLE + BLS12_PAIRING_CONSTANT,
         "NoBenchmark": False
