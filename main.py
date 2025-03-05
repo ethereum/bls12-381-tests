@@ -702,7 +702,14 @@ def case04_mul_G2():
 
     yield 'mul_G2_bls', [
         {
-        "Input": int_to_hex(int(G2[0].coeffs[0]), 64) + int_to_hex(int(G2[0].coeffs[1]), 64) + int_to_hex(int(G2[1].coeffs[0]), 64) + int_to_hex(int(G2[1].coeffs[1]), 64) + int_to_hex(int(2), 32),
+        "Input": ""
+        # G2 point
+        + int_to_hex(int(G2[0].coeffs[0]), 64)
+        + int_to_hex(int(G2[0].coeffs[1]), 64)
+        + int_to_hex(int(G2[1].coeffs[0]), 64)
+        + int_to_hex(int(G2[1].coeffs[1]), 64)
+        # scalar 2
+        + int_to_hex(int(2), 32),
         "Name": "bls_g2mul_(g2+g2=2*g2)",
         "Expected": int_to_hex(int(result_doubling_G2[0].coeffs[0]), 64) + int_to_hex(int(result_doubling_G2[0].coeffs[1]), 64) + int_to_hex(
             int(result_doubling_G2[1].coeffs[0]), 64) + int_to_hex(int(result_doubling_G2[1].coeffs[1]), 64),
@@ -710,8 +717,14 @@ def case04_mul_G2():
         "NoBenchmark": False
         },
         {
-        "Input": int_to_hex(int(P2[0].coeffs[0]), 64) + int_to_hex(int(P2[0].coeffs[1]), 64) + int_to_hex(int(P2[1].coeffs[0]), 64) + int_to_hex(
-            int(P2[1].coeffs[1]), 64) + int_to_hex(int(2), 32),
+        "Input": ""
+            # G2 point
+            + int_to_hex(int(P2[0].coeffs[0]), 64)
+            + int_to_hex(int(P2[0].coeffs[1]), 64)
+            + int_to_hex(int(P2[1].coeffs[0]), 64)
+            + int_to_hex(int(P2[1].coeffs[1]), 64)
+            # scalar 2
+            + int_to_hex(int(2), 32),
         "Name": "bls_g2mul_(p2+p2=2*p2)",
         "Expected": int_to_hex(int(result_doubling_P2[0].coeffs[0]), 64) + int_to_hex(int(result_doubling_P2[0].coeffs[1]), 64) + int_to_hex(
             int(result_doubling_P2[1].coeffs[0]), 64) + int_to_hex(int(result_doubling_P2[1].coeffs[1]), 64),
@@ -719,42 +732,84 @@ def case04_mul_G2():
         "NoBenchmark": False
         },
         {
-        "Input": int_to_hex(int(G2[0].coeffs[0]), 64) + int_to_hex(int(G2[0].coeffs[1]), 64) + int_to_hex(int(G2[1].coeffs[0]), 64) + int_to_hex(int(G2[1].coeffs[1]), 64) + int_to_hex(int(1), 32),
+        "Input": ""
+            # G2 point
+            + int_to_hex(int(G2[0].coeffs[0]), 64)
+            + int_to_hex(int(G2[0].coeffs[1]), 64)
+            + int_to_hex(int(G2[1].coeffs[0]), 64)
+            + int_to_hex(int(G2[1].coeffs[1]), 64)
+            # unity
+            + int_to_hex(int(1), 32),
         "Name": "bls_g2mul_(1*g2=g2)",
         "Expected": int_to_hex(int(G2[0].coeffs[0]), 64) + int_to_hex(int(G2[0].coeffs[1]), 64) + int_to_hex(int(G2[1].coeffs[0]), 64) + int_to_hex(int(G2[1].coeffs[1]), 64),
         "Gas": BLS12_G2MUL_GAS,
         "NoBenchmark": False
         },
         {
-        "Input": int_to_hex(int(P2[0].coeffs[0]), 64) + int_to_hex(int(P2[0].coeffs[1]), 64) + int_to_hex(int(P2[1].coeffs[0]), 64) + int_to_hex(int(P2[1].coeffs[1]), 64) + int_to_hex(int(1), 32),
+        "Input": ""
+            # P2 point
+            + int_to_hex(int(P2[0].coeffs[0]), 64)
+            + int_to_hex(int(P2[0].coeffs[1]), 64)
+            + int_to_hex(int(P2[1].coeffs[0]), 64)
+            + int_to_hex(int(P2[1].coeffs[1]), 64)
+            # unity
+            + int_to_hex(int(1), 32),
         "Name": "bls_g2mul_(1*p2=p2)",
         "Expected": int_to_hex(int(P2[0].coeffs[0]), 64) + int_to_hex(int(P2[0].coeffs[1]), 64) + int_to_hex(int(P2[1].coeffs[0]), 64) + int_to_hex(int(P2[1].coeffs[1]), 64),
         "Gas": BLS12_G2MUL_GAS,
         "NoBenchmark": False
         },
         {
-        "Input": int_to_hex(int(G2[0].coeffs[0]), 64) + int_to_hex(int(G2[0].coeffs[1]), 64) + int_to_hex(int(G2[1].coeffs[0]), 64) + int_to_hex(int(G2[1].coeffs[1]), 64) + int_to_hex(int(0), 32),
+        "Input": ""
+            # G2 point
+            + int_to_hex(int(G2[0].coeffs[0]), 64)
+            + int_to_hex(int(G2[0].coeffs[1]), 64)
+            + int_to_hex(int(G2[1].coeffs[0]), 64)
+            + int_to_hex(int(G2[1].coeffs[1]), 64)
+            # zero
+            + int_to_hex(int(0), 32),
         "Name": "bls_g2mul_(0*g2=inf)",
         "Expected": int_to_hex(0, 64) + int_to_hex(0, 64) + int_to_hex(0, 64) + int_to_hex(0, 64),
         "Gas": BLS12_G2MUL_GAS,
         "NoBenchmark": False
         },
         {
-        "Input": int_to_hex(int(P2[0].coeffs[0]), 64) + int_to_hex(int(P2[0].coeffs[1]), 64) + int_to_hex(int(P2[1].coeffs[0]), 64) + int_to_hex(int(P2[1].coeffs[1]), 64) + int_to_hex(int(0), 32),
+        "Input": ""
+            # P2 point
+            + int_to_hex(int(P2[0].coeffs[0]), 64)
+            + int_to_hex(int(P2[0].coeffs[1]), 64)
+            + int_to_hex(int(P2[1].coeffs[0]), 64)
+            + int_to_hex(int(P2[1].coeffs[1]), 64)
+            # zero
+            + int_to_hex(int(0), 32),
         "Name": "bls_g2mul_(0*p2=inf)",
         "Expected": int_to_hex(0, 64) + int_to_hex(0, 64) + int_to_hex(0, 64) + int_to_hex(0, 64),
         "Gas": BLS12_G2MUL_GAS,
         "NoBenchmark": False
         },
         {
-        "Input": int_to_hex(0, 64) + int_to_hex(0, 64) + int_to_hex(0, 64) + int_to_hex(0, 64) + int_to_hex(int(17), 32),
+        "Input": ""
+            # point at infinity
+            + int_to_hex(0, 64)
+            + int_to_hex(0, 64)
+            + int_to_hex(0, 64)
+            + int_to_hex(0, 64)
+            # scalar
+            + int_to_hex(int(17), 32),
         "Name": "bls_g2mul_(x*inf=inf)",
         "Expected": int_to_hex(0, 64) + int_to_hex(0, 64) + int_to_hex(0, 64) + int_to_hex(0, 64),
         "Gas": BLS12_G2MUL_GAS,
         "NoBenchmark": False
         },
         {
-        "Input": int_to_hex(int(G2[0].coeffs[0]), 64) + int_to_hex(int(G2[0].coeffs[1]), 64) + int_to_hex(int(G2[1].coeffs[0]), 64) + int_to_hex(int(G2[1].coeffs[1]), 64) + int_to_hex(PRIVKEYS[0], 32),
+        "Input": ""
+            # G2 point
+            + int_to_hex(int(G2[0].coeffs[0]), 64)
+            + int_to_hex(int(G2[0].coeffs[1]), 64)
+            + int_to_hex(int(G2[1].coeffs[0]), 64)
+            + int_to_hex(int(G2[1].coeffs[1]), 64)
+            # random scalar
+            + int_to_hex(PRIVKEYS[0], 32),
         "Name": "bls_g2mul_random*g2",
         "Expected": int_to_hex(int(result_multiply_G2[0].coeffs[0]), 64) + int_to_hex(int(result_multiply_G2[0].coeffs[1]), 64) + int_to_hex(
             int(result_multiply_G2[1].coeffs[0]), 64) + int_to_hex(int(result_multiply_G2[1].coeffs[1]), 64),
@@ -762,7 +817,14 @@ def case04_mul_G2():
         "NoBenchmark": False
         },
         {
-        "Input": int_to_hex(int(P2[0].coeffs[0]), 64) + int_to_hex(int(P2[0].coeffs[1]), 64) + int_to_hex(int(P2[1].coeffs[0]), 64) + int_to_hex(int(P2[1].coeffs[1]), 64) + int_to_hex(PRIVKEYS[0], 32),
+        "Input": ""
+            # P2 point
+            + int_to_hex(int(P2[0].coeffs[0]), 64)
+            + int_to_hex(int(P2[0].coeffs[1]), 64)
+            + int_to_hex(int(P2[1].coeffs[0]), 64)
+            + int_to_hex(int(P2[1].coeffs[1]), 64)
+            # random scalar
+            + int_to_hex(PRIVKEYS[0], 32),
         "Name": "bls_g2mul_random*p2",
         "Expected": int_to_hex(int(result_multiply_P2[0].coeffs[0]), 64) + int_to_hex(int(result_multiply_P2[0].coeffs[1]), 64) + int_to_hex(
             int(result_multiply_P2[1].coeffs[0]), 64) + int_to_hex(int(result_multiply_P2[1].coeffs[1]), 64),
@@ -770,7 +832,14 @@ def case04_mul_G2():
         "NoBenchmark": False
         },
         {
-        "Input": int_to_hex(int(G2[0].coeffs[0]), 64) + int_to_hex(int(G2[0].coeffs[1]), 64) + int_to_hex(int(G2[1].coeffs[0]), 64) + int_to_hex(int(G2[1].coeffs[1]), 64) + int_to_hex(PRIVKEYS[0] + curve_order, 32),
+        "Input": ""
+            # G2 point
+            + int_to_hex(int(G2[0].coeffs[0]), 64)
+            + int_to_hex(int(G2[0].coeffs[1]), 64)
+            + int_to_hex(int(G2[1].coeffs[0]), 64)
+            + int_to_hex(int(G2[1].coeffs[1]), 64)
+            # unnormalized scalar
+            + int_to_hex(PRIVKEYS[0] + curve_order, 32),
         "Name": "bls_g2mul_random*g2_unnormalized_scalar",
         "Expected": int_to_hex(int(result_multiply_G2[0].coeffs[0]), 64) + int_to_hex(int(result_multiply_G2[0].coeffs[1]), 64) + int_to_hex(
             int(result_multiply_G2[1].coeffs[0]), 64) + int_to_hex(int(result_multiply_G2[1].coeffs[1]), 64),
@@ -778,7 +847,14 @@ def case04_mul_G2():
         "NoBenchmark": False
         },
         {
-        "Input": int_to_hex(int(P2[0].coeffs[0]), 64) + int_to_hex(int(P2[0].coeffs[1]), 64) + int_to_hex(int(P2[1].coeffs[0]), 64) + int_to_hex(int(P2[1].coeffs[1]), 64) + int_to_hex(PRIVKEYS[0] + curve_order, 32),
+        "Input": ""
+            # P2 point
+            + int_to_hex(int(P2[0].coeffs[0]), 64)
+            + int_to_hex(int(P2[0].coeffs[1]), 64)
+            + int_to_hex(int(P2[1].coeffs[0]), 64)
+            + int_to_hex(int(P2[1].coeffs[1]), 64)
+            # unnormalized scalar
+            + int_to_hex(PRIVKEYS[0] + curve_order, 32),
         "Name": "bls_g2mul_random*p2_unnormalized_scalar",
         "Expected": int_to_hex(int(result_multiply_P2[0].coeffs[0]), 64) + int_to_hex(int(result_multiply_P2[0].coeffs[1]), 64) + int_to_hex(
             int(result_multiply_P2[1].coeffs[0]), 64) + int_to_hex(int(result_multiply_P2[1].coeffs[1]), 64),
