@@ -2615,10 +2615,23 @@ def case18_fail_pairing_check():
         "Name": "bls_pairing_extra_data"
         },
         {
-        "Input": "10" + int_to_hex(int(G1[0]), 63) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(G2[0].coeffs[0]), 64) + int_to_hex(
-            int(G2[0].coeffs[1]), 64) + int_to_hex(int(G2[1].coeffs[0]), 64) + int_to_hex(int(G2[1].coeffs[1]), 64) + int_to_hex(
-            int(G1[0]), 64) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(neg(G2)[0].coeffs[0]), 64) + int_to_hex(
-            int(neg(G2)[0].coeffs[1]), 64) + int_to_hex(int(neg(G2)[1].coeffs[0]), 64) + int_to_hex(int(neg(G2)[1].coeffs[1]), 64),
+        # G1 point (wrong element top bytes)
+        "Input": "10"
+            + int_to_hex(int(G1[0]), 63)
+            + int_to_hex(int(G1[1]), 64)
+            # G2 point 1
+            + int_to_hex(int(G2[0].coeffs[0]), 64)
+            + int_to_hex(int(G2[0].coeffs[1]), 64)
+            + int_to_hex(int(G2[1].coeffs[0]), 64)
+            + int_to_hex(int(G2[1].coeffs[1]), 64)
+            # G1 point 2
+            + int_to_hex(int(G1[0]), 64)
+            + int_to_hex(int(G1[1]), 64)
+            # G2 point 2
+            + int_to_hex(int(neg(G2)[0].coeffs[0]), 64)
+            + int_to_hex(int(neg(G2)[0].coeffs[1]), 64)
+            + int_to_hex(int(neg(G2)[1].coeffs[0]), 64)
+            + int_to_hex(int(neg(G2)[1].coeffs[1]), 64),
         "ExpectedError": "invalid field element top bytes",
         "Name": "bls_pairing_top_bytes"
         },
