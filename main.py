@@ -1221,29 +1221,70 @@ def case07_msm_G1():
         "NoBenchmark": False
         },
         {
-        "Input": int_to_hex(int(G1[0]), 64) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(PRIVKEYS[0] + curve_order, 32),
+        "Input": ""
+            # G1 point
+            + int_to_hex(int(G1[0]), 64)
+            + int_to_hex(int(G1[1]), 64)
+            # unnormalized scalar
+            + int_to_hex(PRIVKEYS[0] + curve_order, 32),
         "Name": "bls_g1msm_random*g1_unnormalized_scalar",
         "Expected": int_to_hex(int(result_multiply_G1[0]), 64) + (int_to_hex(int(result_multiply_G1[1]), 64)),
         "Gas": int((1 * BLS12_G1MUL_GAS * BLS12_G1_MULTIEXP_DISCOUNT_TABLE[0][1]) / 1000),
         "NoBenchmark": False
         },
         {
-        "Input": int_to_hex(int(P1[0]), 64) + (int_to_hex(int(P1[1]), 64)) + int_to_hex(PRIVKEYS[0] + curve_order, 32),
+        "Input": ""
+            # P1 point
+            + int_to_hex(int(P1[0]), 64)
+            + int_to_hex(int(P1[1]), 64)
+            # unnormalized scalar
+            + int_to_hex(PRIVKEYS[0] + curve_order, 32),
         "Name": "bls_g1msm_random*p1_unnormalized_scalar",
         "Expected": int_to_hex(int(result_multiply_P1[0]), 64) + (int_to_hex(int(result_multiply_P1[1]), 64)),
         "Gas": int((1 * BLS12_G1MUL_GAS * BLS12_G1_MULTIEXP_DISCOUNT_TABLE[0][1]) / 1000),
         "NoBenchmark": False
         },
         {
-        "Input": int_to_hex(int(G1[0]), 64) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(PRIVKEYS[0], 32) + int_to_hex(int(P1[0]), 64) + (
-            int_to_hex(int(P1[1]), 64)) + int_to_hex(PRIVKEYS[1], 32) + int_to_hex(int(H1[0]), 64) + (int_to_hex(int(H1[1]), 64)) + int_to_hex(
-                PRIVKEYS[2], 32) + int_to_hex(int(H2[0]), 64) + (int_to_hex(int(H2[1]), 64)) + int_to_hex(
-                PRIVKEYS[3], 32) + int_to_hex(int(H3[0]), 64) + (int_to_hex(int(H3[1]), 64)) + int_to_hex(
-                PRIVKEYS[4], 32) + int_to_hex(int(H4[0]), 64) + (int_to_hex(int(H4[1]), 64)) + int_to_hex(
-                # Place a point at infinity in between
-                PRIVKEYS[5], 32) + int_to_hex(0, 128) + int_to_hex(0, 32) + int_to_hex(
-                int(H5[0]), 64) + (int_to_hex(int(H5[1]), 64)) + int_to_hex(
-                PRIVKEYS[6], 32),
+        "Input": ""
+            # G1 point
+            + int_to_hex(int(G1[0]), 64)
+            + int_to_hex(int(G1[1]), 64)
+            # scalar
+            + int_to_hex(PRIVKEYS[0], 32)
+            # P1 point
+            + int_to_hex(int(P1[0]), 64)
+            + int_to_hex(int(P1[1]), 64)
+            # scalar
+            + int_to_hex(PRIVKEYS[1], 32)
+            # H1 point
+            + int_to_hex(int(H1[0]), 64)
+            + int_to_hex(int(H1[1]), 64)
+            # scalar
+            + int_to_hex(PRIVKEYS[2], 32)
+            # H2 point
+            + int_to_hex(int(H2[0]), 64)
+            + int_to_hex(int(H2[1]), 64)
+            # scalar
+            + int_to_hex(PRIVKEYS[3], 32)
+            # H3point
+            + int_to_hex(int(H3[0]), 64)
+            + int_to_hex(int(H3[1]), 64)
+            # scalar
+            + int_to_hex(PRIVKEYS[4], 32)
+            # H4 point
+            + int_to_hex(int(H4[0]), 64)
+            + int_to_hex(int(H4[1]), 64)
+            # scalar
+            + int_to_hex(PRIVKEYS[5], 32)
+            # point at infinity
+            + int_to_hex(0, 128)
+            # scalar zero
+            + int_to_hex(0, 32)
+            # H5 point
+            + int_to_hex(int(H5[0]), 64)
+            + int_to_hex(int(H5[1]), 64)
+            # scalar
+            + int_to_hex(PRIVKEYS[6], 32),
         "Name": "bls_g1msm_multiple_with_point_at_infinity",
         "Expected": int_to_hex(int(g1multiexp[0]), 64) + (int_to_hex(int(g1multiexp[1]), 64)),
         "Gas": int((8 * BLS12_G1MUL_GAS * BLS12_G1_MULTIEXP_DISCOUNT_TABLE[7][1]) / 1000),
