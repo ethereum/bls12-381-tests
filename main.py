@@ -1598,14 +1598,53 @@ def case08_msm_G2():
         "NoBenchmark": False
         },
         {
-        "Input": int_to_hex(int(G2[0].coeffs[0]), 64) + int_to_hex(int(G2[0].coeffs[1]), 64) + int_to_hex(int(G2[1].coeffs[0]), 64) + int_to_hex(int(G2[1].coeffs[1]), 64) + int_to_hex(
-            PRIVKEYS[0], 32) + int_to_hex(int(P2[0].coeffs[0]), 64) + int_to_hex(int(P2[0].coeffs[1]), 64) + int_to_hex(int(P2[1].coeffs[0]), 64) + int_to_hex(int(P2[1].coeffs[1]), 64) + int_to_hex(
-                PRIVKEYS[1], 32) + int_to_hex(int(H2[0].coeffs[0]), 64) + int_to_hex(int(H2[0].coeffs[1]), 64) + int_to_hex(int(H2[1].coeffs[0]), 64) + int_to_hex(int(H2[1].coeffs[1]), 64) + int_to_hex(
-                PRIVKEYS[2], 32) + int_to_hex(int(H3[0].coeffs[0]), 64) + int_to_hex(int(H3[0].coeffs[1]), 64) + int_to_hex(int(H3[1].coeffs[0]), 64) + int_to_hex(int(H3[1].coeffs[1]), 64) + int_to_hex(
-                PRIVKEYS[3], 32) + int_to_hex(int(H4[0].coeffs[0]), 64) + int_to_hex(int(H4[0].coeffs[1]), 64) + int_to_hex(int(H4[1].coeffs[0]), 64) + int_to_hex(int(H4[1].coeffs[1]), 64) + int_to_hex(
-                # Place a point at infinity in between
-                PRIVKEYS[4], 32) + int_to_hex(0, 256) + int_to_hex(0, 32) + int_to_hex(int(H5[0].coeffs[0]), 64) + int_to_hex(int(H5[0].coeffs[1]), 64) + int_to_hex(int(H5[1].coeffs[0]), 64) + int_to_hex(int(H5[1].coeffs[1]), 64) + int_to_hex(
-                PRIVKEYS[5], 32),
+        "Input": ""
+            # G2 point
+            + int_to_hex(int(G2[0].coeffs[0]), 64)
+            + int_to_hex(int(G2[0].coeffs[1]), 64)
+            + int_to_hex(int(G2[1].coeffs[0]), 64)
+            + int_to_hex(int(G2[1].coeffs[1]), 64)
+            # scalar
+            + int_to_hex(PRIVKEYS[0], 32)
+            # P2 point
+            + int_to_hex(int(P2[0].coeffs[0]), 64)
+            + int_to_hex(int(P2[0].coeffs[1]), 64)
+            + int_to_hex(int(P2[1].coeffs[0]), 64)
+            + int_to_hex(int(P2[1].coeffs[1]), 64)
+            # scalar
+            + int_to_hex(PRIVKEYS[1], 32)
+            # H2 point
+            + int_to_hex(int(H2[0].coeffs[0]), 64)
+            + int_to_hex(int(H2[0].coeffs[1]), 64)
+            + int_to_hex(int(H2[1].coeffs[0]), 64)
+            + int_to_hex(int(H2[1].coeffs[1]), 64)
+            # scalar
+            + int_to_hex(PRIVKEYS[2], 32)
+            # H3 point
+            + int_to_hex(int(H3[0].coeffs[0]), 64)
+            + int_to_hex(int(H3[0].coeffs[1]), 64)
+            + int_to_hex(int(H3[1].coeffs[0]), 64)
+            + int_to_hex(int(H3[1].coeffs[1]), 64)
+            # scalar
+            + int_to_hex(PRIVKEYS[3], 32)
+            # H4 point
+            + int_to_hex(int(H4[0].coeffs[0]), 64)
+            + int_to_hex(int(H4[0].coeffs[1]), 64)
+            + int_to_hex(int(H4[1].coeffs[0]), 64)
+            + int_to_hex(int(H4[1].coeffs[1]), 64)
+            # scalar
+            + int_to_hex(PRIVKEYS[4], 32)
+            # point at infinity
+            + int_to_hex(0, 256)
+            # scalar zero
+            + int_to_hex(0, 32)
+            # H5 point
+            + int_to_hex(int(H5[0].coeffs[0]), 64)
+            + int_to_hex(int(H5[0].coeffs[1]), 64)
+            + int_to_hex(int(H5[1].coeffs[0]), 64)
+            + int_to_hex(int(H5[1].coeffs[1]), 64)
+            # scalar
+            + int_to_hex(PRIVKEYS[5], 32),
         "Name": "bls_g2msm_multiple_with_point_at_infinity",
         "Expected": int_to_hex(int(g2multiex[0].coeffs[0]), 64) + int_to_hex(int(g2multiex[0].coeffs[1]), 64) + int_to_hex(
             int(g2multiex[1].coeffs[0]), 64) + int_to_hex(int(g2multiex[1].coeffs[1]), 64),
