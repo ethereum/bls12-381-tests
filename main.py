@@ -1568,7 +1568,14 @@ def case08_msm_G2():
         "NoBenchmark": False
         },
         {
-        "Input": int_to_hex(int(G2[0].coeffs[0]), 64) + int_to_hex(int(G2[0].coeffs[1]), 64) + int_to_hex(int(G2[1].coeffs[0]), 64) + int_to_hex(int(G2[1].coeffs[1]), 64) + int_to_hex(PRIVKEYS[0] + curve_order, 32),
+        "Input": ""
+            # G2 point
+            + int_to_hex(int(G2[0].coeffs[0]), 64)
+            + int_to_hex(int(G2[0].coeffs[1]), 64)
+            + int_to_hex(int(G2[1].coeffs[0]), 64)
+            + int_to_hex(int(G2[1].coeffs[1]), 64)
+            # unnormalized scalar
+            + int_to_hex(PRIVKEYS[0] + curve_order, 32),
         "Name": "bls_g2msm_random*g2_unnormalized_scalar",
         "Expected": int_to_hex(int(result_multiply_G2[0].coeffs[0]), 64) + int_to_hex(int(result_multiply_G2[0].coeffs[1]), 64) + int_to_hex(
             int(result_multiply_G2[1].coeffs[0]), 64) + int_to_hex(int(result_multiply_G2[1].coeffs[1]), 64),
@@ -1576,7 +1583,14 @@ def case08_msm_G2():
         "NoBenchmark": False
         },
         {
-        "Input": int_to_hex(int(P2[0].coeffs[0]), 64) + int_to_hex(int(P2[0].coeffs[1]), 64) + int_to_hex(int(P2[1].coeffs[0]), 64) + int_to_hex(int(P2[1].coeffs[1]), 64) + int_to_hex(PRIVKEYS[0] + curve_order, 32),
+        "Input": ""
+            # P2 point
+            + int_to_hex(int(P2[0].coeffs[0]), 64)
+            + int_to_hex(int(P2[0].coeffs[1]), 64)
+            + int_to_hex(int(P2[1].coeffs[0]), 64)
+            + int_to_hex(int(P2[1].coeffs[1]), 64)
+            # unnormalized scalar
+            + int_to_hex(PRIVKEYS[0] + curve_order, 32),
         "Name": "bls_g2msm_random*p2_unnormalized_scalar",
         "Expected": int_to_hex(int(result_multiply_P2[0].coeffs[0]), 64) + int_to_hex(int(result_multiply_P2[0].coeffs[1]), 64) + int_to_hex(
             int(result_multiply_P2[1].coeffs[0]), 64) + int_to_hex(int(result_multiply_P2[1].coeffs[1]), 64),
