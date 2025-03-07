@@ -2137,32 +2137,62 @@ def case12_fail_mul_G1():
         "Name": "bls_g1mul_empty_input"
         },
         {
-        "Input": int_to_hex(int(G1[0]), 63) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(2), 32),
+        "Input": ""
+            # G1 point (short x coordinate)
+            + int_to_hex(int(G1[0]), 63)
+            + int_to_hex(int(G1[1]), 64)
+            # scalar
+            + int_to_hex(int(2), 32),
         "ExpectedError": "invalid input length",
         "Name": "bls_g1mul_short_input"
         },
         {
-        "Input": int_to_hex(int(G1[0]), 65) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(2), 32),
+        "Input": ""
+            # G1 point (long x coordinate)
+            + int_to_hex(int(G1[0]), 65)
+            + int_to_hex(int(G1[1]), 64)
+            # scalar
+            + int_to_hex(int(2), 32),
         "ExpectedError": "invalid input length",
         "Name": "bls_g1mul_large_input"
         },
         {
-        "Input": int_to_hex(int(G1[0]) + q, 64) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(2), 32),
+        "Input": ""
+            # G1 point (wrong encoding)
+            + int_to_hex(int(G1[0]) + q, 64)
+            + int_to_hex(int(G1[1]), 64)
+            # scalar
+            + int_to_hex(int(2), 32),
         "ExpectedError": "invalid fp.Element encoding",
         "Name": "bls_g1mul_invalid_field_element"
         },
         {
-        "Input": int_to_hex(int(G1[0]), 64) + (int_to_hex(int(P1[1]), 64)) + int_to_hex(int(2), 32),
+        "Input": ""
+            # G1 point (not on curve)
+            + int_to_hex(int(G1[0]), 64)
+            + int_to_hex(int(P1[1]), 64)
+            # scalar
+            + int_to_hex(int(2), 32),
         "ExpectedError": "invalid point: not on curve",
         "Name": "bls_g1mul_point_not_on_curve"
         },
         {
-        "Input": "10" + int_to_hex(int(G1[0]), 63) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(2), 32),
+        # G1 point (wrong element top bytes)
+        "Input": "10"
+            + int_to_hex(int(G1[0]), 63)
+            + int_to_hex(int(G1[1]), 64)
+            # scalar
+            + int_to_hex(int(2), 32),
         "ExpectedError": "invalid field element top bytes",
         "Name": "bls_g1mul_violate_top_bytes"
         },
         {
-        "Input": int_to_hex(int(G1_wrong_order[0]), 64) + (int_to_hex(int(G1_wrong_order[1]), 64)) + int_to_hex(int(2), 32),
+        "Input": ""
+            # G1 point (not in the correct subgroup)
+            + int_to_hex(int(G1_wrong_order[0]), 64)
+            + int_to_hex(int(G1_wrong_order[1]), 64)
+            #  scalar
+            + int_to_hex(int(2), 32),
         "ExpectedError": "g1 point is not in the correct subgroup",
         "Name": "bls_g1mul_g1_not_in_correct_subgroup"
         }
