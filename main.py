@@ -2207,32 +2207,74 @@ def case13_fail_mul_G2():
         "Name": "bls_g2mul_empty_input"
         },
         {
-        "Input": int_to_hex(int(G2[0].coeffs[0]), 63) + int_to_hex(int(G2[0].coeffs[1]), 64) + int_to_hex(int(G2[1].coeffs[0]), 64) + int_to_hex(int(G2[1].coeffs[1]), 64) + int_to_hex(int(2), 32),
+        "Input": ""
+            # G2 point (short x coordinate)
+            + int_to_hex(int(G2[0].coeffs[0]), 63)
+            + int_to_hex(int(G2[0].coeffs[1]), 64)
+            + int_to_hex(int(G2[1].coeffs[0]), 64)
+            + int_to_hex(int(G2[1].coeffs[1]), 64)
+            #  scalar
+            + int_to_hex(int(2), 32),
         "ExpectedError": "invalid input length",
         "Name": "bls_g2mul_short_input"
         },
         {
-        "Input": int_to_hex(int(G2[0].coeffs[0]), 65) + int_to_hex(int(G2[0].coeffs[1]), 64) + int_to_hex(int(G2[1].coeffs[0]), 64) + int_to_hex(int(G2[1].coeffs[1]), 64) + int_to_hex(int(2), 32),
+        "Input": ""
+            # G2 point (long x coordinate)
+            + int_to_hex(int(G2[0].coeffs[0]), 65)
+            + int_to_hex(int(G2[0].coeffs[1]), 64)
+            + int_to_hex(int(G2[1].coeffs[0]), 64)
+            + int_to_hex(int(G2[1].coeffs[1]), 64)
+            #  scalar
+            + int_to_hex(int(2), 32),
         "ExpectedError": "invalid input length",
         "Name": "bls_g2mul_large_input"
         },
         {
-        "Input": int_to_hex(int(G2[0].coeffs[0]) + q, 64) + int_to_hex(int(G2[0].coeffs[1]), 64) + int_to_hex(int(G2[1].coeffs[0]), 64) + int_to_hex(int(G2[1].coeffs[1]), 64) + int_to_hex(int(2), 32),
+        "Input": ""
+            # G2 point (wrong encoding)
+            + int_to_hex(int(G2[0].coeffs[0]) + q, 64)
+            + int_to_hex(int(G2[0].coeffs[1]), 64)
+            + int_to_hex(int(G2[1].coeffs[0]), 64)
+            + int_to_hex(int(G2[1].coeffs[1]), 64)
+            #  scalar
+            + int_to_hex(int(2), 32),
         "ExpectedError": "invalid fp.Element encoding",
         "Name": "bls_g2mul_invalid_field_element"
         },
         {
-        "Input": int_to_hex(int(G2[0].coeffs[0]), 64) + int_to_hex(int(P2[0].coeffs[1]), 64) + int_to_hex(int(G2[1].coeffs[0]), 64) + int_to_hex(int(G2[1].coeffs[1]), 64) + int_to_hex(int(2), 32),
+        "Input": ""
+            # G2 point (not on curve)
+            + int_to_hex(int(G2[0].coeffs[0]), 64)
+            + int_to_hex(int(P2[0].coeffs[1]), 64)
+            + int_to_hex(int(G2[1].coeffs[0]), 64)
+            + int_to_hex(int(G2[1].coeffs[1]), 64)
+            #  scalar
+            + int_to_hex(int(2), 32),
         "ExpectedError": "invalid point: not on curve",
         "Name": "bls_g2mul_point_not_on_curve"
         },
         {
-        "Input": "10" + int_to_hex(int(G2[0].coeffs[0]), 63) + int_to_hex(int(G2[0].coeffs[1]), 64) + int_to_hex(int(G2[1].coeffs[0]), 64) + int_to_hex(int(G2[1].coeffs[1]), 64) + int_to_hex(int(2), 32),
+        # G2 point (wrong element top bytes)
+        "Input": "10"
+            + int_to_hex(int(G2[0].coeffs[0]), 63)
+            + int_to_hex(int(G2[0].coeffs[1]), 64)
+            + int_to_hex(int(G2[1].coeffs[0]), 64)
+            + int_to_hex(int(G2[1].coeffs[1]), 64)
+            #  scalar
+            + int_to_hex(int(2), 32),
         "ExpectedError": "invalid field element top bytes",
         "Name": "bls_g2mul_violate_top_bytes"
         },
         {
-        "Input": int_to_hex(int(G2_wrong_order[0].coeffs[0]), 64) + int_to_hex(int(G2_wrong_order[0].coeffs[1]), 64) + int_to_hex(int(G2_wrong_order[1].coeffs[0]), 64) + int_to_hex(int(G2_wrong_order[1].coeffs[1]), 64) + int_to_hex(int(2), 32),
+        "Input": ""
+            # G2 point (not in the correct subgroup)
+            + int_to_hex(int(G2_wrong_order[0].coeffs[0]), 64)
+            + int_to_hex(int(G2_wrong_order[0].coeffs[1]), 64)
+            + int_to_hex(int(G2_wrong_order[1].coeffs[0]), 64)
+            + int_to_hex(int(G2_wrong_order[1].coeffs[1]), 64)
+            #  scalar
+            + int_to_hex(int(2), 32),
         "ExpectedError": "g2 point is not in the correct subgroup",
         "Name": "bls_g2mul_g2_not_in_correct_subgroup"
         }
