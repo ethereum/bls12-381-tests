@@ -2697,10 +2697,23 @@ def case18_fail_pairing_check():
         "Name": "bls_pairing_e(G1,G2_invalid_field_element)",
         },
         {
-        "Input": int_to_hex(int(G1[0]) + q, 64) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(G2[0].coeffs[0]), 64) + int_to_hex(
-            int(G2[0].coeffs[1]), 64) + int_to_hex(int(G2[1].coeffs[0]), 64) + int_to_hex(int(G2[1].coeffs[1]), 64) + int_to_hex(
-            int(G1[0]), 64) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(neg(G2)[0].coeffs[0]), 64) + int_to_hex(
-            int(neg(G2)[0].coeffs[1]), 64) + int_to_hex(int(neg(G2)[1].coeffs[0]), 64) + int_to_hex(int(neg(G2)[1].coeffs[1]), 64),
+        "Input": ""
+            # G1 point (wrong encoding)
+            + int_to_hex(int(G1[0]) + q, 64)
+            + int_to_hex(int(G1[1]), 64)
+            # G2 point 1
+            + int_to_hex(int(G2[0].coeffs[0]), 64)
+            + int_to_hex(int(G2[0].coeffs[1]), 64)
+            + int_to_hex(int(G2[1].coeffs[0]), 64)
+            + int_to_hex(int(G2[1].coeffs[1]), 64)
+            # G1 point 2
+            + int_to_hex(int(G1[0]), 64)
+            + int_to_hex(int(G1[1]), 64)
+            # G2 point 2
+            + int_to_hex(int(neg(G2)[0].coeffs[0]), 64)
+            + int_to_hex(int(neg(G2)[0].coeffs[1]), 64)
+            + int_to_hex(int(neg(G2)[1].coeffs[0]), 64)
+            + int_to_hex(int(neg(G2)[1].coeffs[1]), 64),
         "ExpectedError": "invalid fp.Element encoding",
         "Name": "bls_pairing_e(G1_invalid_field_element,-G2)=e(-G1,G2)",
         },
