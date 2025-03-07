@@ -1987,27 +1987,57 @@ def case10_fail_add_G1():
         "Name": "bls_g1add_empty_input"
         },
         {
-        "Input": int_to_hex(int(G1[0]), 63) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(P1[0]), 64) + (int_to_hex(int(P1[1]), 64)),
+        "Input": ""
+            # G1 point (short x coordinate)
+            + int_to_hex(int(G1[0]), 63)
+            + int_to_hex(int(G1[1]), 64)
+            # P1 point
+            + int_to_hex(int(P1[0]), 64)
+            + int_to_hex(int(P1[1]), 64),
         "ExpectedError": "invalid input length",
         "Name": "bls_g1add_short_input"
         },
         {
-        "Input": int_to_hex(int(G1[0]), 65) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(P1[0]), 64) + (int_to_hex(int(P1[1]), 64)),
+        "Input": ""
+            # G1 point (long x coordinate)
+            + int_to_hex(int(G1[0]), 65)
+            + int_to_hex(int(G1[1]), 64)
+            # P1 point
+            + int_to_hex(int(P1[0]), 64)
+            + int_to_hex(int(P1[1]), 64),
         "ExpectedError": "invalid input length",
         "Name": "bls_g1add_large_input"
         },
         {
-        "Input": int_to_hex(int(G1[0]), 64) + (int_to_hex(int(P1[1]), 64)) + int_to_hex(int(P1[0]), 64) + (int_to_hex(int(P1[1]), 64)),
+        "Input": ""
+            # G1 point (not on curve)
+            + int_to_hex(int(G1[0]), 64)
+            + int_to_hex(int(P1[1]), 64)
+            # P1 point
+            + int_to_hex(int(P1[0]), 64)
+            + int_to_hex(int(P1[1]), 64),
         "ExpectedError": "invalid point: not on curve",
         "Name": "bls_g1add_point_not_on_curve"
         },
         {
-        "Input": int_to_hex(int(G1[0]) + q, 64) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(P1[0]), 64) + (int_to_hex(int(P1[1]), 64)),
+        "Input": ""
+            # G1 point (wrong encoding)
+            + int_to_hex(int(G1[0]) + q, 64)
+            + (int_to_hex(int(G1[1]), 64))
+            # P1 point
+            + int_to_hex(int(P1[0]), 64)
+            + (int_to_hex(int(P1[1]), 64)),
         "ExpectedError": "invalid fp.Element encoding",
         "Name": "bls_g2add_invalid_field_element"
         },
         {
-        "Input": "10" + int_to_hex(int(G1[0]), 63) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(P1[0]), 64) + (int_to_hex(int(P1[1]), 64)),
+        # G1 point (wrong element top bytes)
+        "Input": "10"
+        + int_to_hex(int(G1[0]), 63)
+        + int_to_hex(int(G1[1]), 64)
+        # P1 point
+        + int_to_hex(int(P1[0]), 64)
+        + int_to_hex(int(P1[1]), 64),
         "ExpectedError": "invalid field element top bytes",
         "Name": "bls_g1add_violate_top_bytes"
         }
