@@ -1179,13 +1179,42 @@ def case07_msm_G1():
         "NoBenchmark": False
         },
         {
-        "Input": int_to_hex(int(G1[0]), 64) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(PRIVKEYS[0], 32) + int_to_hex(int(P1[0]), 64) + (
-            int_to_hex(int(P1[1]), 64)) + int_to_hex(PRIVKEYS[1], 32) + int_to_hex(int(H1[0]), 64) + (int_to_hex(int(H1[1]), 64)) + int_to_hex(
-                PRIVKEYS[2], 32) + int_to_hex(int(H2[0]), 64) + (int_to_hex(int(H2[1]), 64)) + int_to_hex(
-                PRIVKEYS[3], 32) + int_to_hex(int(H3[0]), 64) + (int_to_hex(int(H3[1]), 64)) + int_to_hex(
-                PRIVKEYS[4], 32) + int_to_hex(int(H4[0]), 64) + (int_to_hex(int(H4[1]), 64)) + int_to_hex(
-                PRIVKEYS[5], 32) + int_to_hex(int(H5[0]), 64) + (int_to_hex(int(H5[1]), 64)) + int_to_hex(
-                PRIVKEYS[6], 32),
+        "Input": ""
+            # G1 point
+            + int_to_hex(int(G1[0]), 64)
+            + int_to_hex(int(G1[1]), 64)
+            # scalar
+            + int_to_hex(PRIVKEYS[0], 32)
+            # P1 point
+            + int_to_hex(int(P1[0]), 64)
+            + int_to_hex(int(P1[1]), 64)
+            # scalar
+            + int_to_hex(PRIVKEYS[1], 32)
+            # H1 point
+            + int_to_hex(int(H1[0]), 64)
+            + int_to_hex(int(H1[1]), 64)
+            # scalar
+            + int_to_hex(PRIVKEYS[2], 32)
+            # H2 point
+            + int_to_hex(int(H2[0]), 64)
+            + int_to_hex(int(H2[1]), 64)
+            # scalar
+            + int_to_hex(PRIVKEYS[3], 32)
+            # H3 point
+            + int_to_hex(int(H3[0]), 64)
+            + int_to_hex(int(H3[1]), 64)
+            # scalar
+            + int_to_hex(PRIVKEYS[4], 32)
+            # H4 point
+            + int_to_hex(int(H4[0]), 64)
+            + int_to_hex(int(H4[1]), 64)
+            # scalar
+            + int_to_hex(PRIVKEYS[5], 32)
+            # H5 point
+            + int_to_hex(int(H5[0]), 64)
+            + int_to_hex(int(H5[1]), 64)
+            # scalar
+            + int_to_hex(PRIVKEYS[6], 32),
         "Name": "bls_g1msm_multiple",
         "Expected": int_to_hex(int(g1multiexp[0]), 64) + (int_to_hex(int(g1multiexp[1]), 64)),
         "Gas": int((7 * BLS12_G1MUL_GAS * BLS12_G1_MULTIEXP_DISCOUNT_TABLE[6][1]) / 1000),
