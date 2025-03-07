@@ -2052,37 +2052,77 @@ def case11_fail_add_G2():
         "Name": "bls_g2add_empty_input"
         },
         {
-        "Input": int_to_hex(int(G2[0].coeffs[0]), 63) + int_to_hex(int(G2[0].coeffs[1]), 64) + int_to_hex(int(G2[1].coeffs[0]), 64) + int_to_hex(
-            int(G2[1].coeffs[1]), 64) + int_to_hex(int(P2[0].coeffs[0]), 64) + int_to_hex(int(P2[0].coeffs[1]), 64) + int_to_hex(
-                int(P2[1].coeffs[0]), 64) + int_to_hex(int(P2[1].coeffs[1]), 64),
+        "Input": ""
+            # G2 point (short x coordinate)
+            + int_to_hex(int(G2[0].coeffs[0]), 63)
+            + int_to_hex(int(G2[0].coeffs[1]), 64)
+            + int_to_hex(int(G2[1].coeffs[0]), 64)
+            + int_to_hex(int(G2[1].coeffs[1]), 64)
+            # P2 point
+            + int_to_hex(int(P2[0].coeffs[0]), 64)
+            + int_to_hex(int(P2[0].coeffs[1]), 64)
+            + int_to_hex(int(P2[1].coeffs[0]), 64)
+            + int_to_hex(int(P2[1].coeffs[1]), 64),
         "ExpectedError": "invalid input length",
         "Name": "bls_g2add_short_input"
         },
         {
-        "Input": int_to_hex(int(G2[0].coeffs[0]), 65) + int_to_hex(int(G2[0].coeffs[1]), 64) + int_to_hex(int(G2[1].coeffs[0]), 64) + int_to_hex(
-            int(G2[1].coeffs[1]), 64) + int_to_hex(int(P2[0].coeffs[0]), 64) + int_to_hex(int(P2[0].coeffs[1]), 64) + int_to_hex(
-                int(P2[1].coeffs[0]), 64) + int_to_hex(int(P2[1].coeffs[1]), 64),
+        "Input": ""
+            # G2 point (long x coordinate)
+            + int_to_hex(int(G2[0].coeffs[0]), 65)
+            + int_to_hex(int(G2[0].coeffs[1]), 64)
+            + int_to_hex(int(G2[1].coeffs[0]), 64)
+            + int_to_hex(int(G2[1].coeffs[1]), 64)
+            # P2 point
+            + int_to_hex(int(P2[0].coeffs[0]), 64)
+            + int_to_hex(int(P2[0].coeffs[1]), 64)
+            + int_to_hex(int(P2[1].coeffs[0]), 64)
+            + int_to_hex(int(P2[1].coeffs[1]), 64),
         "ExpectedError": "invalid input length",
         "Name": "bls_g2add_long_input"
         },
         {
-        "Input": int_to_hex(int(G2[0].coeffs[0]), 64) + int_to_hex(int(P2[0].coeffs[1]), 64) + int_to_hex(int(G2[1].coeffs[0]), 64) + int_to_hex(
-            int(G2[1].coeffs[1]), 64) + int_to_hex(int(P2[0].coeffs[0]), 64) + int_to_hex(int(P2[0].coeffs[1]), 64) + int_to_hex(
-                int(P2[1].coeffs[0]), 64) + int_to_hex(int(P2[1].coeffs[1]), 64),
+        "Input": ""
+            # G2 point (not on curve)
+            + int_to_hex(int(G2[0].coeffs[0]), 64)
+            + int_to_hex(int(P2[0].coeffs[1]), 64)
+            + int_to_hex(int(G2[1].coeffs[0]), 64)
+            + int_to_hex(int(G2[1].coeffs[1]), 64)
+            # P2 point
+            + int_to_hex(int(P2[0].coeffs[0]), 64)
+            + int_to_hex(int(P2[0].coeffs[1]), 64)
+            + int_to_hex(int(P2[1].coeffs[0]), 64)
+            + int_to_hex(int(P2[1].coeffs[1]), 64),
         "ExpectedError": "invalid point: not on curve",
         "Name": "bls_g2add_point_not_on_curve"
         },
         {
-        "Input": int_to_hex(int(G2[0].coeffs[0]) + q, 64) + int_to_hex(int(G2[0].coeffs[1]), 64) + int_to_hex(int(G2[1].coeffs[0]), 64) + int_to_hex(
-            int(G2[1].coeffs[1]), 64) + int_to_hex(int(P2[0].coeffs[0]), 64) + int_to_hex(int(P2[0].coeffs[1]), 64) + int_to_hex(
-                int(P2[1].coeffs[0]), 64) + int_to_hex(int(P2[1].coeffs[1]), 64),
+        "Input": ""
+            # G2 point (wrong encoding)
+            + int_to_hex(int(G2[0].coeffs[0]) + q, 64)
+            + int_to_hex(int(G2[0].coeffs[1]), 64)
+            + int_to_hex(int(G2[1].coeffs[0]), 64)
+            + int_to_hex(int(G2[1].coeffs[1]), 64)
+            # P2 point
+            + int_to_hex(int(P2[0].coeffs[0]), 64)
+            + int_to_hex(int(P2[0].coeffs[1]), 64)
+            + int_to_hex(int(P2[1].coeffs[0]), 64)
+            + int_to_hex(int(P2[1].coeffs[1]), 64),
         "ExpectedError": "invalid fp.Element encoding",
         "Name": "bls_g2add_invalid_field_element"
         },
         {
-        "Input": "10" + int_to_hex(int(G2[0].coeffs[0]), 63) + int_to_hex(int(G2[0].coeffs[1]), 64) + int_to_hex(int(G2[1].coeffs[0]), 64) + int_to_hex(
-            int(G2[1].coeffs[1]), 64) + int_to_hex(int(P2[0].coeffs[0]), 64) + int_to_hex(int(P2[0].coeffs[1]), 64) + int_to_hex(
-                int(P2[1].coeffs[0]), 64) + int_to_hex(int(P2[1].coeffs[1]), 64),
+        # G2 point (wrong element top bytes)
+        "Input": "10"
+            + int_to_hex(int(G2[0].coeffs[0]), 63)
+            + int_to_hex(int(G2[0].coeffs[1]), 64)
+            + int_to_hex(int(G2[1].coeffs[0]), 64)
+            + int_to_hex(int(G2[1].coeffs[1]), 64)
+            # P2 point
+            + int_to_hex(int(P2[0].coeffs[0]), 64)
+            + int_to_hex(int(P2[0].coeffs[1]), 64)
+            + int_to_hex(int(P2[1].coeffs[0]), 64)
+            + int_to_hex(int(P2[1].coeffs[1]), 64),
         "ExpectedError": "invalid field element top bytes",
         "Name": "bls_g2add_violate_top_bytes"
         }
