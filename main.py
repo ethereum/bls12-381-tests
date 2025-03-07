@@ -1145,14 +1145,34 @@ def case07_msm_G1():
         "NoBenchmark": False
         },
         {
-        "Input": int_to_hex(int(G1[0]), 64) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(0), 32) + int_to_hex(int(G1[0]), 64) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(0), 32),
+        "Input": ""
+            # G1 point
+            + int_to_hex(int(G1[0]), 64)
+            + int_to_hex(int(G1[1]), 64)
+            # zero
+            + int_to_hex(int(0), 32)
+            # G1 point
+            + int_to_hex(int(G1[0]), 64)
+            + int_to_hex(int(G1[1]), 64)
+            # zero
+            + int_to_hex(int(0), 32),
         "Name": "bls_g1msm_(inf+inf)",
         "Expected": int_to_hex(0, 64) + int_to_hex(0, 64),
         "Gas": int((2 * BLS12_G1MUL_GAS * BLS12_G1_MULTIEXP_DISCOUNT_TABLE[1][1]) / 1000),
         "NoBenchmark": False
         },
         {
-        "Input": int_to_hex(int(G1[0]), 64) + (int_to_hex(int(G1[1]), 64)) + int_to_hex(int(2), 32) + int_to_hex(int(P1[0]), 64) + (int_to_hex(int(P1[1]), 64)) + int_to_hex(int(2), 32),
+        "Input": ""
+        # G1 point
+        + int_to_hex(int(G1[0]), 64)
+        + int_to_hex(int(G1[1]), 64)
+        # scalar
+        + int_to_hex(int(2), 32)
+        # P1 point
+        + int_to_hex(int(P1[0]), 64)
+        + int_to_hex(int(P1[1]), 64)
+        # scalar
+        + int_to_hex(int(2), 32),
         "Name": "bls_g1msm_(2g1+2p1)",
         "Expected": int_to_hex(int(doubleP1G1[0]), 64) + (int_to_hex(int(doubleP1G1[1]), 64)),
         "Gas": int((2 * BLS12_G1MUL_GAS * BLS12_G1_MULTIEXP_DISCOUNT_TABLE[1][1]) / 1000),
