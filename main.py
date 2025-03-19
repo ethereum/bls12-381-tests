@@ -1134,11 +1134,11 @@ def case07_msm_G1():
             + int_to_hex(int(G1[1]), 64)
             # scalar
             + int_to_hex(int(2), 32)
-            # G1 point
-            + int_to_hex(int(G1[0]), 64)
-            + int_to_hex(int(G1[1]), 64)
-            # zero
-            + int_to_hex(int(0), 32),
+            # point at infinity
+            + int_to_hex(0, 64)
+            + int_to_hex(0, 64)
+            # scalar
+            + int_to_hex(int(2), 32),
         "Name": "bls_g1msm_(2g1+inf)",
         "Expected": int_to_hex(int(result_doubling_G1[0]), 64) + (int_to_hex(int(result_doubling_G1[1]), 64)),
         "Gas": int((2 * BLS12_G1MUL_GAS * BLS12_G1_MULTIEXP_DISCOUNT_TABLE[1][1]) / 1000),
