@@ -2159,6 +2159,21 @@ def case11_fail_add_G2():
             + int_to_hex(int(P2[1].coeffs[1]), 64),
         "ExpectedError": "invalid field element top bytes",
         "Name": "bls_g2add_violate_top_bytes"
+        },
+        {
+        "Input": ""
+            # G2 point (not in correct subgroup but invalid curve)
+            + int_to_hex(int(G2_in_correct_subgroup_invalid_curve[0].coeffs[0]), 64)
+            + int_to_hex(int(G2_in_correct_subgroup_invalid_curve[0].coeffs[1]), 64)
+            + int_to_hex(int(G2_in_correct_subgroup_invalid_curve[1].coeffs[0]), 64)
+            + int_to_hex(int(G2_in_correct_subgroup_invalid_curve[1].coeffs[1]), 64)
+            # P2 point
+            + int_to_hex(int(P2[0].coeffs[0]), 64)
+            + int_to_hex(int(P2[0].coeffs[1]), 64)
+            + int_to_hex(int(P2[1].coeffs[0]), 64)
+            + int_to_hex(int(P2[1].coeffs[1]), 64),
+        "ExpectedError": "invalid point: not on curve",
+        "Name": "bls_g2add_point_in_correct_subgroup_invalid_curve"
         }
     ]
 
@@ -2324,7 +2339,7 @@ def case13_fail_mul_G2():
         },
         {
         "Input": ""
-            # G2 point (not on curve)
+            # G2 point (not in correct subgroup but invalid curve)
             + int_to_hex(int(G2_in_correct_subgroup_invalid_curve[0].coeffs[0]), 64)
             + int_to_hex(int(G2_in_correct_subgroup_invalid_curve[0].coeffs[1]), 64)
             + int_to_hex(int(G2_in_correct_subgroup_invalid_curve[1].coeffs[0]), 64)
