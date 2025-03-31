@@ -188,7 +188,7 @@ P2 = (
 
 # Point not in subgroup
 # (order 11 * 10177 * 859267 * 52437899 * 52435875175126190479447740508185965837690552500527637822603658699938581184513) for curve over FQ
-G1_wrong_order = (
+G1_not_in_correct_subgroup = (
     FQ(175120027539531016442854006573889751122153014990298010045047409866982914293422983043097473453160715743839524736495),
     FQ(3886161143382294459707944199964771025143673781268592314417728386394555910678469538674068117321209145872489588747338)
 )
@@ -285,7 +285,7 @@ def case01_add_G1():
     result_comm1 = add(G1, P1)
     result_comm2 = add(P1, G1)
     assert result_comm1 == result_comm2
-    result_add_wrong_order = add(G1_wrong_order, G1)
+    result_add_not_in_correct_subgroup = add(G1_not_in_correct_subgroup, G1)
     # Identity element
     result_identity_G1 = add(G1, None)
     assert G1 == result_identity_G1
@@ -332,13 +332,13 @@ def case01_add_G1():
         {
         "Input": ""
             # G1 point (wrong order)
-            + int_to_hex(int(G1_wrong_order[0]), 64)
-            + int_to_hex(int(G1_wrong_order[1]), 64)
+            + int_to_hex(int(G1_not_in_correct_subgroup[0]), 64)
+            + int_to_hex(int(G1_not_in_correct_subgroup[1]), 64)
             # G1 point
             + int_to_hex(int(G1[0]), 64)
             + int_to_hex(int(G1[1]), 64),
-        "Name": "bls_g1add_g1_wrong_order+g1",
-        "Expected": int_to_hex(int(result_add_wrong_order[0]), 64) + (int_to_hex(int(result_add_wrong_order[1]), 64)),
+        "Name": "bls_g1add_g1_not_in_correct_subgroup+g1",
+        "Expected": int_to_hex(int(result_add_not_in_correct_subgroup[0]), 64) + (int_to_hex(int(result_add_not_in_correct_subgroup[1]), 64)),
         "Gas": BLS12_G1ADD_GAS,
         "NoBenchmark": False
         },
@@ -2189,8 +2189,8 @@ def case12_fail_mul_G1():
         {
         "Input": ""
             # G1 point (not in the correct subgroup)
-            + int_to_hex(int(G1_wrong_order[0]), 64)
-            + int_to_hex(int(G1_wrong_order[1]), 64)
+            + int_to_hex(int(G1_not_in_correct_subgroup[0]), 64)
+            + int_to_hex(int(G1_not_in_correct_subgroup[1]), 64)
             #  scalar
             + int_to_hex(int(2), 32),
         "ExpectedError": "g1 point is not in the correct subgroup",
@@ -2426,8 +2426,8 @@ def case16_fail_msm_G1():
         {
         "Input": ""
             # G1 point (not in the correct subgroup)
-            + int_to_hex(int(G1_wrong_order[0]), 64)
-            + int_to_hex(int(G1_wrong_order[1]), 64)
+            + int_to_hex(int(G1_not_in_correct_subgroup[0]), 64)
+            + int_to_hex(int(G1_not_in_correct_subgroup[1]), 64)
             # scalar
             + int_to_hex(int(2), 32)
             # P1 point
@@ -2831,8 +2831,8 @@ def case18_fail_pairing_check():
         {
         "Input": ""
             # G1 point (not on curve)
-            + int_to_hex(int(G1_wrong_order[0]), 64)
-            + int_to_hex(int(G1_wrong_order[1]), 64)
+            + int_to_hex(int(G1_not_in_correct_subgroup[0]), 64)
+            + int_to_hex(int(G1_not_in_correct_subgroup[1]), 64)
             # G2 point (point at infinity)
             + int_to_hex(0, 256),
         "ExpectedError": "g1 point is not in the correct subgroup",
@@ -2853,8 +2853,8 @@ def case18_fail_pairing_check():
         {
         "Input": ""
             # G1 point (not on curve)
-            + int_to_hex(int(G1_wrong_order[0]), 64)
-            + int_to_hex(int(G1_wrong_order[1]), 64)
+            + int_to_hex(int(G1_not_in_correct_subgroup[0]), 64)
+            + int_to_hex(int(G1_not_in_correct_subgroup[1]), 64)
             # G2 point
             + int_to_hex(int(G2[0].coeffs[0]), 64)
             + int_to_hex(int(G2[0].coeffs[1]), 64)
@@ -2879,8 +2879,8 @@ def case18_fail_pairing_check():
         {
         "Input": ""
             # G1 point 1 (not in the correct subgroup)
-            + int_to_hex(int(G1_wrong_order[0]), 64)
-            + int_to_hex(int(G1_wrong_order[1]), 64)
+            + int_to_hex(int(G1_not_in_correct_subgroup[0]), 64)
+            + int_to_hex(int(G1_not_in_correct_subgroup[1]), 64)
             # G2 point 1
             + int_to_hex(int(G2[0].coeffs[0]), 64)
             + int_to_hex(int(G2[0].coeffs[1]), 64)
