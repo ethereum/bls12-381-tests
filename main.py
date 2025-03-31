@@ -331,7 +331,7 @@ def case01_add_G1():
         },
         {
         "Input": ""
-            # G1 point (wrong order)
+            # G1 point (not in correct subgroup)
             + int_to_hex(int(G1_not_in_correct_subgroup[0]), 64)
             + int_to_hex(int(G1_not_in_correct_subgroup[1]), 64)
             # G1 point
@@ -481,7 +481,7 @@ def case02_add_G2():
         },
         {
         "Input": ""
-            # G2 point (wrong order)
+            # G2 point (not in correct subgroup)
             + int_to_hex(int(G2_not_in_correct_subgroup[0].coeffs[0]), 64)
             + int_to_hex(int(G2_not_in_correct_subgroup[0].coeffs[1]), 64)
             + int_to_hex(int(G2_not_in_correct_subgroup[1].coeffs[0]), 64)
