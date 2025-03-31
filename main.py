@@ -206,6 +206,13 @@ G2_not_in_correct_subgroup = (
     ])
 )
 
+# Point in the correct subgroup but in the wrong curve
+# (isomorphic curve y^2 = x^3 + 24)
+G1_in_correct_subgroup_invalid_curve = (
+    FQ(1563311815873081220285993675342141245310974220297818772030154712466505762317169118162528189777729008132203959344556),
+    FQ(3236674100890915460738904118849163307977137634186030159846763358736164886129980111795846993376080270444574334963907)
+)
+
 
 PRIVKEYS = [
     hex_to_int('0x00000000000000000000000000000000263dbd792f5b1be47ed85f8938c0f29586af0d3ac7b977f21c278fe1462040e3'),
@@ -2195,6 +2202,16 @@ def case12_fail_mul_G1():
             + int_to_hex(int(2), 32),
         "ExpectedError": "g1 point is not in the correct subgroup",
         "Name": "bls_g1mul_g1_not_in_correct_subgroup"
+        },
+        {
+        "Input": ""
+            # G1 point (not in the correct subgroup)
+            + int_to_hex(int(G1_in_correct_subgroup_invalid_curve[0]), 64)
+            + int_to_hex(int(G1_in_correct_subgroup_invalid_curve[1]), 64)
+            #  scalar
+            + int_to_hex(int(2), 32),
+        "ExpectedError": "invalid point: not on curve",
+        "Name": "bls_g1mul_g1_in_correct_subgroup_invalid_curve"
         }
     ]
 
