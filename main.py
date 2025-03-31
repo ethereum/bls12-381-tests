@@ -3035,6 +3035,19 @@ def case18_fail_pairing_check():
             + int_to_hex(int(G2[1].coeffs[1]), 64),
         "ExpectedError": "invalid point: not on curve",
         "Name": "bls_pairing_e(G1_in_correct_subgroup_invalid_curve,G2)",
+        },
+        {
+        "Input": ""
+            # G1 point
+            + int_to_hex(int(G1[0]), 64)
+            + int_to_hex(int(G1[1]), 64)
+            # G2 point (not in correct subgroup but invalid curve)
+            + int_to_hex(int(G2_in_correct_subgroup_invalid_curve[0].coeffs[0]), 64)
+            + int_to_hex(int(G2_in_correct_subgroup_invalid_curve[0].coeffs[1]), 64)
+            + int_to_hex(int(G2_in_correct_subgroup_invalid_curve[1].coeffs[0]), 64)
+            + int_to_hex(int(G2_in_correct_subgroup_invalid_curve[1].coeffs[1]), 64),
+        "ExpectedError": "invalid point: not on curve",
+        "Name": "bls_pairing_e(G1,G2_in_correct_subgroup_invalid_curve)",
         }
     ]
 
