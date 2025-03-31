@@ -206,7 +206,7 @@ G2_not_in_correct_subgroup = (
     ])
 )
 
-# Point in the correct subgroup but in the wrong curve
+# Point in the correct subgroup but in the invalid curve
 # (isomorphic curve y^2 = x^3 + 24)
 G1_in_correct_subgroup_invalid_curve = (
     FQ(1563311815873081220285993675342141245310974220297818772030154712466505762317169118162528189777729008132203959344556),
@@ -2047,7 +2047,18 @@ def case10_fail_add_G1():
         + int_to_hex(int(P1[1]), 64),
         "ExpectedError": "invalid field element top bytes",
         "Name": "bls_g1add_violate_top_bytes"
-        }
+        },
+        {
+        "Input": ""
+            # G1 point (not in correct subgroup but invalid curve)
+            + int_to_hex(int(G1_in_correct_subgroup_invalid_curve[0]), 64)
+            + int_to_hex(int(G1_in_correct_subgroup_invalid_curve[1]), 64)
+            # P1 point
+            + int_to_hex(int(P1[0]), 64)
+            + int_to_hex(int(P1[1]), 64),
+        "ExpectedError": "invalid point: not on curve",
+        "Name": "bls_g1add_point_in_correct_subgroup_invalid_curve"
+        },
     ]
 
 
@@ -2205,7 +2216,7 @@ def case12_fail_mul_G1():
         },
         {
         "Input": ""
-            # G1 point (not in the correct subgroup)
+            # G1 point (not in correct subgroup but invalid curve)
             + int_to_hex(int(G1_in_correct_subgroup_invalid_curve[0]), 64)
             + int_to_hex(int(G1_in_correct_subgroup_invalid_curve[1]), 64)
             #  scalar
