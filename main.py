@@ -2321,6 +2321,18 @@ def case13_fail_mul_G2():
             + int_to_hex(int(2), 32),
         "ExpectedError": "g2 point is not in the correct subgroup",
         "Name": "bls_g2mul_g2_not_in_correct_subgroup"
+        },
+        {
+        "Input": ""
+            # G2 point (not on curve)
+            + int_to_hex(int(G2_in_correct_subgroup_invalid_curve[0].coeffs[0]), 64)
+            + int_to_hex(int(G2_in_correct_subgroup_invalid_curve[0].coeffs[1]), 64)
+            + int_to_hex(int(G2_in_correct_subgroup_invalid_curve[1].coeffs[0]), 64)
+            + int_to_hex(int(G2_in_correct_subgroup_invalid_curve[1].coeffs[1]), 64)
+            #  scalar
+            + int_to_hex(int(2), 32),
+        "ExpectedError": "invalid point: not on curve",
+        "Name": "bls_g2mul_g2_in_correct_subgroup_invalid_curve"
         }
     ]
 
