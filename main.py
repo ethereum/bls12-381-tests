@@ -195,7 +195,7 @@ G1_not_in_correct_subgroup = (
 
 
 # Point not in subgroup (order 13) for curve over FQ2
-G2_wrong_order = (
+G2_not_in_correct_subgroup = (
     FQ2([
         3922397287649913227621058437622997108794641953057758105879357683864299671651819357275859520733535654147680406731276,
         3741137028670202333708729730342450399205516524855163427388600406129033394826520864962370018146369072778910602014330
@@ -428,7 +428,7 @@ def case02_add_G2():
     result_comm1 = add(G2, P2)
     result_comm2 = add(P2, G2)
     assert result_comm1 == result_comm2
-    result_add_wrong_order = add(G2_wrong_order, G2)
+    result_add_not_in_correct_subgroup = add(G2_not_in_correct_subgroup, G2)
     # Identity element
     result_identity_G2 = add(G2, None)
     assert G2 == result_identity_G2
@@ -482,17 +482,17 @@ def case02_add_G2():
         {
         "Input": ""
             # G2 point (wrong order)
-            + int_to_hex(int(G2_wrong_order[0].coeffs[0]), 64)
-            + int_to_hex(int(G2_wrong_order[0].coeffs[1]), 64)
-            + int_to_hex(int(G2_wrong_order[1].coeffs[0]), 64)
-            + int_to_hex(int(G2_wrong_order[1].coeffs[1]), 64)
+            + int_to_hex(int(G2_not_in_correct_subgroup[0].coeffs[0]), 64)
+            + int_to_hex(int(G2_not_in_correct_subgroup[0].coeffs[1]), 64)
+            + int_to_hex(int(G2_not_in_correct_subgroup[1].coeffs[0]), 64)
+            + int_to_hex(int(G2_not_in_correct_subgroup[1].coeffs[1]), 64)
             # G2 point
             + int_to_hex(int(G2[0].coeffs[0]), 64)
             + int_to_hex(int(G2[0].coeffs[1]), 64)
             + int_to_hex(int(G2[1].coeffs[0]), 64)
             + int_to_hex(int(G2[1].coeffs[1]), 64),
-        "Name": "bls_g2add_g2_wrong_order+g2",
-        "Expected": int_to_hex(int(result_add_wrong_order[0].coeffs[0]), 64) + int_to_hex(int(result_add_wrong_order[0].coeffs[1]), 64) + int_to_hex(int(result_add_wrong_order[1].coeffs[0]), 64) + int_to_hex(int(result_add_wrong_order[1].coeffs[1]), 64),
+        "Name": "bls_g2add_g2_not_in_correct_subgroup+g2",
+        "Expected": int_to_hex(int(result_add_not_in_correct_subgroup[0].coeffs[0]), 64) + int_to_hex(int(result_add_not_in_correct_subgroup[0].coeffs[1]), 64) + int_to_hex(int(result_add_not_in_correct_subgroup[1].coeffs[0]), 64) + int_to_hex(int(result_add_not_in_correct_subgroup[1].coeffs[1]), 64),
         "Gas": BLS12_G2ADD_GAS,
         "NoBenchmark": False
         },
@@ -2269,10 +2269,10 @@ def case13_fail_mul_G2():
         {
         "Input": ""
             # G2 point (not in the correct subgroup)
-            + int_to_hex(int(G2_wrong_order[0].coeffs[0]), 64)
-            + int_to_hex(int(G2_wrong_order[0].coeffs[1]), 64)
-            + int_to_hex(int(G2_wrong_order[1].coeffs[0]), 64)
-            + int_to_hex(int(G2_wrong_order[1].coeffs[1]), 64)
+            + int_to_hex(int(G2_not_in_correct_subgroup[0].coeffs[0]), 64)
+            + int_to_hex(int(G2_not_in_correct_subgroup[0].coeffs[1]), 64)
+            + int_to_hex(int(G2_not_in_correct_subgroup[1].coeffs[0]), 64)
+            + int_to_hex(int(G2_not_in_correct_subgroup[1].coeffs[1]), 64)
             #  scalar
             + int_to_hex(int(2), 32),
         "ExpectedError": "g2 point is not in the correct subgroup",
@@ -2546,10 +2546,10 @@ def case17_fail_msm_G2():
         {
         "Input": ""
             # G2 point (not in the correct subgroup)
-            + int_to_hex(int(G2_wrong_order[0].coeffs[0]), 64)
-            + int_to_hex(int(G2_wrong_order[0].coeffs[1]), 64)
-            + int_to_hex(int(G2_wrong_order[1].coeffs[0]), 64)
-            + int_to_hex(int(G2_wrong_order[1].coeffs[1]), 64)
+            + int_to_hex(int(G2_not_in_correct_subgroup[0].coeffs[0]), 64)
+            + int_to_hex(int(G2_not_in_correct_subgroup[0].coeffs[1]), 64)
+            + int_to_hex(int(G2_not_in_correct_subgroup[1].coeffs[0]), 64)
+            + int_to_hex(int(G2_not_in_correct_subgroup[1].coeffs[1]), 64)
             #  scalar
             + int_to_hex(int(2), 32)
             # P2 point
@@ -2843,10 +2843,10 @@ def case18_fail_pairing_check():
             # G1 point (point at infinity)
             + int_to_hex(0, 128)
             # G2 point (not on curve)
-            + int_to_hex(int(G2_wrong_order[0].coeffs[0]), 64)
-            + int_to_hex(int(G2_wrong_order[0].coeffs[1]), 64)
-            + int_to_hex(int(G2_wrong_order[1].coeffs[0]), 64)
-            + int_to_hex(int(G2_wrong_order[1].coeffs[1]), 64),
+            + int_to_hex(int(G2_not_in_correct_subgroup[0].coeffs[0]), 64)
+            + int_to_hex(int(G2_not_in_correct_subgroup[0].coeffs[1]), 64)
+            + int_to_hex(int(G2_not_in_correct_subgroup[1].coeffs[0]), 64)
+            + int_to_hex(int(G2_not_in_correct_subgroup[1].coeffs[1]), 64),
         "ExpectedError": "g2 point is not in the correct subgroup",
         "Name": "bls_pairing_e(0,G2_not_in_correct_subgroup)",
         },
@@ -2869,10 +2869,10 @@ def case18_fail_pairing_check():
             + int_to_hex(int(G1[0]), 64)
             + int_to_hex(int(G1[1]), 64)
             # G2 point (not on curve)
-            + int_to_hex(int(G2_wrong_order[0].coeffs[0]), 64)
-            + int_to_hex(int(G2_wrong_order[0].coeffs[1]), 64)
-            + int_to_hex(int(G2_wrong_order[1].coeffs[0]), 64)
-            + int_to_hex(int(G2_wrong_order[1].coeffs[1]), 64),
+            + int_to_hex(int(G2_not_in_correct_subgroup[0].coeffs[0]), 64)
+            + int_to_hex(int(G2_not_in_correct_subgroup[0].coeffs[1]), 64)
+            + int_to_hex(int(G2_not_in_correct_subgroup[1].coeffs[0]), 64)
+            + int_to_hex(int(G2_not_in_correct_subgroup[1].coeffs[1]), 64),
         "ExpectedError": "g2 point is not in the correct subgroup",
         "Name": "bls_pairing_e(G1,G2_not_in_correct_subgroup)",
         },
@@ -2903,10 +2903,10 @@ def case18_fail_pairing_check():
             + int_to_hex(int(G1[0]), 64)
             + int_to_hex(int(G1[1]), 64)
             # G2 point 1 (not in the correct subgroup)
-            + int_to_hex(int(G2_wrong_order[0].coeffs[0]), 64)
-            + int_to_hex(int(G2_wrong_order[0].coeffs[1]), 64)
-            + int_to_hex(int(G2_wrong_order[1].coeffs[0]), 64)
-            + int_to_hex(int(G2_wrong_order[1].coeffs[1]), 64)
+            + int_to_hex(int(G2_not_in_correct_subgroup[0].coeffs[0]), 64)
+            + int_to_hex(int(G2_not_in_correct_subgroup[0].coeffs[1]), 64)
+            + int_to_hex(int(G2_not_in_correct_subgroup[1].coeffs[0]), 64)
+            + int_to_hex(int(G2_not_in_correct_subgroup[1].coeffs[1]), 64)
             # G1 point 2
             + int_to_hex(int(G1[0]), 64)
             + int_to_hex(int(G1[1]), 64)
