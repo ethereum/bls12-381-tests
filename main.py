@@ -2465,6 +2465,21 @@ def case16_fail_msm_G1():
             + int_to_hex(int(2), 32),
         "ExpectedError": "g1 point is not in the correct subgroup",
         "Name": "bls_g1msm_g1_not_in_correct_subgroup"
+        },
+        {
+        "Input": ""
+            # G1 point (not in correct subgroup but invalid curve)
+            + int_to_hex(int(G1_in_correct_subgroup_invalid_curve[0]), 64)
+            + int_to_hex(int(G1_in_correct_subgroup_invalid_curve[1]), 64)
+            # scalar
+            + int_to_hex(int(2), 32)
+            # P1 point
+            + int_to_hex(int(P1[0]), 64)
+            + int_to_hex(int(P1[1]), 64)
+            # scalar
+            + int_to_hex(int(2), 32),
+        "ExpectedError": "invalid point: not on curve",
+        "Name": "bls_g1msm_point_in_correct_subgroup_invalid_curve"
         }
     ]
 
