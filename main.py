@@ -17,6 +17,7 @@ from py_ecc.bls import G2ProofOfPossession as bls
 
 from py_ecc.optimized_bls12_381 import (
     FQ2,
+    curve_order,
     neg
 )
 
@@ -371,6 +372,23 @@ def case04_fast_aggregate_verify():
         'output': False,
     }
 
+    # Invalid pubkeys and signature -- pubkeys add up to the point at infinity
+    privkeys = [PRIVKEYS[0], curve_order - PRIVKEYS[0]]
+    pubkeys = [bls.SkToPk(privkey) for privkey in privkeys]
+    aggregate_signature = bls.Aggregate(
+        [bls.Sign(privkey, SAMPLE_MESSAGE) for privkey in privkeys])
+    assert aggregate_signature == Z2_SIGNATURE
+    assert not bls.FastAggregateVerify(pubkeys, SAMPLE_MESSAGE, aggregate_signature)
+    assert not milagro_bls.FastAggregateVerify(pubkeys, SAMPLE_MESSAGE, aggregate_signature)
+    yield 'fast_aggregate_verify_infinity_aggregate_pubkey', {
+        'input': {
+            'pubkeys': [encode_hex(pubkey) for pubkey in pubkeys],
+            'message': encode_hex(SAMPLE_MESSAGE),
+            'signature': encode_hex(aggregate_signature),
+        },
+        'output': False,
+    }
+
 
 def case05_aggregate_verify():
     pubkeys = []
@@ -611,6 +629,39 @@ def case06_batch_verify():
     sigs_serial.append(encode_hex(sig1))
     sigs_serial.append(encode_hex(Z2_SIGNATURE))
     yield 'batch_verify_invalid_infinity_signature_set', {
+        'input': {
+            'pubkeys': pubkeys_serial,
+            'messages': messages_serial,
+            'signatures': sigs_serial
+        },
+        'output': False
+    }
+
+    # Invalid multiple signatures containing point at infinity, for the same message
+    signature_set = [
+        (
+            sig1,
+            PUBKEYS[0],
+            MESSAGES[0]
+        ),
+        (
+            Z2_SIGNATURE,
+            Z1_PUBKEY,
+            MESSAGES[0]
+        )
+    ]
+    assert not milagro_bls.VerifyMultipleAggregateSignatures(signature_set)
+
+    pubkeys_serial = []
+    messages_serial = []
+    sigs_serial = []
+    pubkeys_serial.append(encode_hex(PUBKEYS[0]))
+    pubkeys_serial.append(encode_hex(Z1_PUBKEY))
+    messages_serial.append(encode_hex(MESSAGES[0]))
+    messages_serial.append(encode_hex(MESSAGES[0]))
+    sigs_serial.append(encode_hex(sig1))
+    sigs_serial.append(encode_hex(Z2_SIGNATURE))
+    yield 'batch_verify_invalid_infinity_signature_set_same_message', {
         'input': {
             'pubkeys': pubkeys_serial,
             'messages': messages_serial,
